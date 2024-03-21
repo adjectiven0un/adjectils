@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+  <html>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <body onload="updatePage()">
+  <title>adjectils - Home Page</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "Utilities for Hypixel Skyblock">
+  <meta name = "author" content = "adjective_n0un">
+  <span class = header>adjectils: home page</span><br>
+    
+    <div style = "width: 604px">
+      <div style = "float:left; width:200px"><a href = "spider.html">Spider's Den</a></div><div style = "float:left;width:200px; text-align: center;"><a href = "park.html">The Park</a></div><div style = "float:right; width:200px; text-align: right;"><a href = "dungeons">Dungeon Hub</a></div>
+      </div><br>
+      <div class = "hub_block" style = "width: 1300px; height:550px;", id = "box2">
+        <div style = "text-align:center">
+          <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
+          
+        </div><br>
+        <div class = "hub_block" style = "width:600px; height:450px; float:left">
+        <span class = hubheader>Revenant Horror</span><br>
+        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentz value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <form action = "#">
+            <label>Selected meter item: </label>
+            <select id = selecteddropz onchange = updateAllChances()>
+                <option value = null>None</option>
+                <option value = foulflesh>Foul Flesh</option>
+                <option value = viscera>Revenant Viscera</option>
+                <option value = catalyst_undead>Undead Catalyst</option>
+                <option value = catalyst_revenant>Revenant Catalyst</option>
+                <option value = book_smite6>Smite VI book</option>
+                <option value = beheaded>Beheaded Horror</option>
+                <option value = scythe_blade>Scythe Blade</option>
+                <option value = shard_shred>Shard of the Shredded</option>
+                <option value = book_smite7>Smite VII book</option>
+                <option value = warden>Warden Heart</option>
+                <option value = rune_pestilence>Pestilence Rune I</option>
+                <option value = rune_snake>Snake Rune I</option>
+
+            </select>
+        </form>
+        <span class = fineprint>Note: This calculator only provides the chances for tier 5.</span>   
+        <table id = loottable_zombie>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = basictext>Chance of Foul Flesh: </span></td><td><span style = "text-align: right" class = basictext id = chance_foulflesh></span></td></tr>
+        <tr><td><span class = basictext>Chance of Revenant Viscera: </span></td><td><span style = "text-align: right" class = basictext id = chance_viscera></span></td></tr>
+        <tr><td><span class = basictext>Chance of Undead Catalyst: </span></td><td><span style = "text-align: right" class = basictext id = chance_catalyst_undead></span></td></tr>
+        <tr><td><span class = basictext>Chance of Revenant Catalyst: </span></td><td><span style = "text-align: right" class = basictext id = chance_catalyst_revenant></span></td></tr>
+        <tr><td><span class = basictext>Chance of Smite VI book: </span></td><td><span style = "text-align: right" class = basictext id = chance_book_smite6></span></td></tr>
+        <tr><td><span class = basictext>Chance of Beheaded Horror: </span></td><td><span style = "text-align: right" class = basictext id = chance_beheaded></span></td></tr>
+        <tr><td><span class = basictext>Chance of Scythe Blade: </span></td><td><span style = "text-align: right" class = basictext id = chance_scythe_blade></span></td></tr>
+        <tr><td><span class = basictext>Chance of Shard of the Shredded: </span></td><td><span style = "text-align: right" class = basictext id = chance_shard_shred></span></td></tr>
+        <tr><td><span class = basictext>Chance of Smite VII book: </span></td><td><span style = "text-align: right" class = basictext id = chance_book_smite7></span></td></tr>
+        <tr><td><span class = basictext>Chance of Warden Heart: </span></td><td><span style = "text-align: right" class = basictext id = chance_warden></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = fineprint>The following drops may be obtained in addition to the primary drop.</span></td></tr>
+        <tr><td><span class = basictext>Chance of Pestilence Rune: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_pestilence></span></td></tr>
+        <tr><td><span class = basictext>Chance of Snake Rune: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_snake></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        </table>
+      </div>
+      <div class = "hub_block" style = "width:600px; height:450px; float:right">
+        <span class = hubheader>Sven Packmaster</span><br>
+        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentw value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <form action = "#">
+            <label>Selected meter item: </label>
+            <select id = selecteddropw onchange = updateAllChances()>
+                <option value = null>None</option>
+                <option value = wheel>Hamster Wheel</option>
+                <option value = furball>Furball</option>
+                <option value = book_critical>Critical VI book</option>
+                <option value = redclaw>Red Claw Egg</option>
+                <option value = grizzly>Grizzly Salmon</option>
+                <option value = overflux>Overflux Capacitor</option>
+                <option value = rune_spirit>Spirit Rune</option>
+                <option value = rune_couture>Couture Rune</option>
+            </select>
+        </form>
+        <span class = fineprint>Note: This calculator only provides the chances for tier 4.</span>   
+        <table id = loottable_wolf>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = basictext>Chance of Hamster Wheel: </span></td><td><span style = "text-align: right" class = basictext id = chance_wheel></span></td></tr>
+        <tr><td><span class = basictext>Chance of Furball: </span></td><td><span style = "text-align: right" class = basictext id = chance_furball></span></td></tr>
+        <tr><td><span class = basictext>Chance of Critical VI book: </span></td><td><span style = "text-align: right" class = basictext id = chance_book_critical></span></td></tr>
+        <tr><td><span class = basictext>Chance of Red Claw Egg: </span></td><td><span style = "text-align: right" class = basictext id = chance_redclaw></span></td></tr>
+        <tr><td><span class = basictext>Chance of Grizzly Salmon: </span></td><td><span style = "text-align: right" class = basictext id = chance_grizzly></span></td></tr>
+        <tr><td><span class = basictext>Chance of Overflux Capacitor: </span></td><td><span style = "text-align: right" class = basictext id = chance_overflux></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = fineprint>The following drops may be obtained in addition to the primary drop.</span></td></tr>
+        <tr><td><span class = basictext>Chance of Spirit Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_spirit></span></td></tr>
+        <tr><td><span class = basictext>Chance of Couture Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_couture></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        </table>
+      </div>
+      </div>
+
+  </body>
+  <script>
+    function updateAllChances(){
+            var weightsz = {
+                "foulflesh": 2000,
+                "viscera": 2000,
+                "catalyst_undead": 250,
+                "catalyst_revenant": 125,
+                "book_smite6": 100,
+                "beheaded": 20,
+                "scythe_blade": 15,
+                "shard_shred": 8,
+                "book_smite7": 7,
+                "warden": 2,
+                
+            }
+            var weightsw = {
+              "wheel": 2000,
+                "furball": 200,
+                "book_critical": 100,
+                "redclaw": 15,
+                "grizzly": 7,
+                "overflux": 5,
+            }
+            var extraweightsz = {
+                "rune_pestilence": 833,
+                "rune_snake": 20,
+            }
+            var extraweightsw = {
+              "rune_spirit": 833,
+                "rune_couture": 30,
+            }
+            if (slayermagicfind.value > 900){
+                mf = 900;
+                document.getElementById("slayermagicfind").value = 900;
+            }
+            if (slayermagicfind.value < 0 || isNaN(slayermagicfind.value) || slayermagicfind.value == ""){
+                mf = 0;
+                document.getElementById("slayermagicfind").value = 0;
+            }
+            if (rngmeterpercentz.value > 100) {
+                document.getElementById("rngmeterpercentz").value = 100;
+                var rmcz = 3;
+            } 
+            else if (rngmeterpercentz.value < 0 || isNaN(rngmeterpercentz.value)){
+                document.getElementById("rngmeterpercentz").value = 0;
+                var rmcz = 1;
+            } else {
+                var rmcz = (rngmeterpercentz.value / 50) + 1;
+            }
+            if (rngmeterpercentw.value > 100) {
+                document.getElementById("rngmeterpercentw").value = 100;
+                var rmcw = 3;
+            } 
+            else if (rngmeterpercentw.value < 0 || isNaN(rngmeterpercentw.value)){
+                document.getElementById("rngmeterpercentw").value = 0;
+                var rmcw = 1;
+            } else {
+                var rmcw = (rngmeterpercentw.value / 50) + 1;
+            }
+            console.log(rmcz);
+            console.log(rmcw);
+            var mfc = 1 + (slayermagicfind.value/100);
+            console.log("Calcing chances for " + mfc + " coefficient");
+            var standardweight = 10000;
+            //Calculate total standard weight
+            for (var key in weightsz){
+                if (key != selecteddropz.value && key != selecteddropw.value){
+                standardweight += weightsz[key];
+                document.getElementById("chance_" + key).className = "basictext";
+                } else if (key == selecteddropz.value){
+                weightsz[key] = weightsz[key] * rmcz;
+                standardweight += weightsz[key];
+                document.getElementById("chance_" + key).className = "metereditem";
+                } 
+            }
+            console.log("Standard weight: " + standardweight);
+            var mfweight = standardweight;
+            //Update weights for standard items
+            for (var key in weightsz){
+                if (weightsz[key] / standardweight < 0.05){
+                mfweight += (weightsz[key] * mfc) - weightsz[key];
+                weightsz[key] = weightsz[key] * mfc;
+                } 
+            }
+            console.log("Modded weight: " + mfweight);
+            //Update chances for standard items
+            for (var key in weightsz){
+                var chance = (weightsz[key] / mfweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+            //Update standard weight with extra weights
+            for (var key in extraweightsz){
+                if (key != selecteddropz.value && key != selecteddropw.value){
+                    standardweight += extraweightsz[key];
+                    mfweight += extraweightsz[key];
+                    document.getElementById("chance_" + key).className = "basictext";
+                } else if (key == selecteddropz.value){
+                    extraweightsz[key] = extraweightsz[key] * rmcz;
+                    standardweight += extraweightsz[key];
+                    mfweight += extraweightsz[key];
+                    document.getElementById("chance_" + key).className = "metereditem";
+                } 
+            }
+            var mfextraweight = standardweight;
+            //Update weights for extra items
+            for (var key in extraweightsz){
+                if ( (extraweightsz[key] / standardweight) < 0.05){
+                    mfextraweight += (extraweightsz[key] * mfc) - extraweightsz[key];
+                    extraweightsz[key] = extraweightsz[key] * mfc;
+                } 
+            }
+            //Update chances for extra items
+            for (var key in extraweightsz){
+                var chance = (extraweightsz[key] / mfextraweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+            standardweight = 10000;
+            //Calculate total standard weight
+            for (var key in weightsw){
+                if (key != selecteddropz.value && key != selecteddropw.value){
+                standardweight += weightsw[key];
+                document.getElementById("chance_" + key).className = "basictext";
+                } else if (key == selecteddropw.value){
+                weightsw[key] = weightsw[key] * rmcw;
+                standardweight += weightsw[key];
+                document.getElementById("chance_" + key).className = "metereditem";
+                } 
+            }
+            console.log("Standard weight: " + standardweight);
+            var mfweight = standardweight;
+            //Update weights for standard items
+            for (var key in weightsw){
+                if (weightsw[key] / standardweight < 0.05){
+                mfweight += (weightsw[key] * mfc) - weightsw[key];
+                weightsw[key] = weightsw[key] * mfc;
+                } 
+            }
+            console.log("Modded weight: " + mfweight);
+            //Update chances for standard items
+            for (var key in weightsw){
+                var chance = (weightsw[key] / mfweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+            //Update standard weight with extra weights
+            for (var key in extraweightsw){
+                if (key != selecteddropz.value && key != selecteddropw.value){
+                    standardweight += extraweightsw[key];
+                    mfweight += extraweightsw[key];
+                    document.getElementById("chance_" + key).className = "basictext";
+                } else if (key == selecteddropw.value){
+                    extraweightsw[key] = extraweightsw[key] * rmcw;
+                    standardweight += extraweightsw[key];
+                    mfweight += extraweightsw[key];
+                    document.getElementById("chance_" + key).className = "metereditem";
+                } 
+            }
+            var mfextraweight = standardweight;
+            //Update weights for extra items
+            for (var key in extraweightsw){
+                if ( (extraweightsw[key] / standardweight) < 0.05){
+                    mfextraweight += (extraweightsw[key] * mfc) - extraweightsw[key];
+                    extraweightsw[key] = extraweightsw[key] * mfc;
+                } 
+            }
+            //Update chances for extra items
+            for (var key in extraweightsw){
+                var chance = (extraweightsw[key] / mfextraweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+        }
+        function updatePage(){
+            console.log("Initializing...");
+            updateAllChances();
+        }
+  </script>

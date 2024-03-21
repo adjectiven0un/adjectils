@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <html>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <body onload="updatePage()">
+  <title>adjective's external utilities</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "External utilities for Hypixel Skyblock">
+  <meta name = "author" content = "adjective_n0un">
+  <span class = header>adjectils: environmental data and widgets</span><br>
+  <span class = utility id = 'yearnow'>Current year: Checking...</span><br>
+  <span class = utility id = 'mayor'>Current mayor: Checking...</span>
+  <span class = utility id = 'nextmayor'>Next mayor: Checking...</span>
+  <div class = region>Filler text</div>
+  </body>
+
+  <script>
+    function updatePage(){
+        console.log("Updating...");
+        $.getJSON(
+        "https://api.hypixel.net/resources/skyblock/election",
+        function (data) {
+            try {
+                var year = (data.mayor.election.year);
+                console.log("Current year found: " + year);
+            } catch {
+                document.getElementById('yearnow').innerText = 'Huh. Don\'t know what year it is...';
+                canproceed = false;
+                console.log("Error: Can't find what year it is! Did the election cycle fail?");
+            }
+            document.getElementById('yearnow').innerText = 'Current year: ' + year + ' ';
+            var mayor = (data.mayor.name);
+            document.getElementById('mayor').innerText = 'Current mayor: ' + mayor + ' ';
+            try{
+                var nextmayor = (data.current.candidates[0].name);
+                document.getElementById('nextmayor').innerText = 'Next mayor: ' + nextmayor + ' ';
+            } catch {
+                console.log("No next mayor found - Is the cycle on cooldown?");
+                document.getElementById('nextmayor').innerText = 'Next mayor: Waiting for election cycle...';
+            }
+            
+            var currenttime = data.lastUpdated;
+            var epoch = 156027570000;
+            var calctime = (currenttime - epoch) % 446400000;
+            console.log(calctime);
+        }
+        )
+        
+    }
+  </script>

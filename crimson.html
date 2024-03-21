@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+  <html>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <body onload="updatePage()">
+  <title>adjectils - Crimson Isle</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "Infernal utilities for Hypixel Skyblock">
+  <meta name = "author" content = "adjective_n0un">
+  <span class = header>adjectils: crimson isle</span><br>
+  <div style = "width: 604px">
+  <div style = "float:left; width:200px"><a href = "spider.html">Spider's Den</a></div><div style = "float:left;width:200px; text-align: center;"><a href = ""></a></div><div style = "float:right; width:200px; text-align: right;"><a href = ""></a></div>
+  </div><br>
+    <div class = "blaze_block" style = "width: 600px", id = "box2">
+        <span class = blazeheader>Inferno Demonlord</span><br>
+        <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
+        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <form action = "#">
+            <label>Selected meter item: </label>
+            <select id = selecteddrop onchange = updateAllChances()>
+                <option value = null>None</option>
+                <option value = arrows_magma>Bundle of Magma Arrows</option>
+                <option value = distillate_gool>Gabagool Distillate</option>
+                <option value = disintegrator>Mana Disintegrator</option>
+                <option value = distillate_blaze>Blaze Rod Distillate</option>
+                <option value = distillate_glowstone>Glowstone Distillate</option>
+                <option value = distillate_magma>Magma Cream Distillate</option>
+                <option value = distillate_wart>Nether Wart Distillate</option>
+                <option value = scorched_crystal>Scorched Power Crystal</option>
+                <option value = gemstone_opal>Flawed Opal Gemstones</option>
+                <option value = wispwater>Wisp's Ice-Flavored Water</option>
+                <option value = inverter_kelvin>Kelvin Inverter</option>
+                <option value = scorched_books>Scorched_Books</option>
+                <option value = book_reiterate>Duplex I book</option>
+                <option value = book_fire>Fire Aspect III book</option>
+                <option value = dice_archfiend>Archfiend Dice</option>
+                <option value = wilsons>Wilson's Engineering Plans</option>
+                <option value = inverter_subzero>Subzero Inverter</option>
+                <option value = powder>Enchanted Blaze Powder</option>
+                <option value = rune_tears>Lavatears Rune I</option>
+                <option value = dice_high>High Class Archfiend Dice</option>
+                <option value = rune_burst>Fiery Burst Rune I</option>
+            </select>
+        </form>
+        <span class = fineprint>Note: This calculator only provides the chances for tier 4.</span>   
+        <table id = loottable_blaze>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = basictext>Chance of Bundle of Magma Arrows: </span></td><td><span style = "text-align: right" class = basictext id = chance_arrows_magma></span></td></tr>
+        <tr><td><span class = basictext>Chance of Gabagool Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_gool></span></td></tr>
+        <tr><td><span class = basictext>Chance of Mana Disintegrator: </span></td><td><span style = "text-align: right" class = basictext id = chance_disintegrator></span></td></tr>
+        <tr><td><span class = basictext>Chance of Blaze Rod Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_blaze></span></td></tr>
+        <tr><td><span class = basictext>Chance of Glowstone Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_glowstone></span></td></tr>
+        <tr><td><span class = basictext>Chance of Magma Cream Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_magma></span></td></tr>
+        <tr><td><span class = basictext>Chance of Nether Wart Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_wart></span></td></tr>
+        <tr><td><span class = basictext>Chance of Scorched Power Crystal: </span></td><td><span style = "text-align: right" class = basictext id = chance_scorched_crystal></span></td></tr>
+        <tr><td><span class = basictext>Chance of Flawed Opal Gemstones: </span></td><td><span style = "text-align: right" class = basictext id = chance_gemstone_opal></span></td></tr>
+        <tr><td><span class = basictext>Chance of Wisp's Ice-Flavored Water: </span></td><td><span style = "text-align: right" class = basictext id = chance_wisp_water></span></td></tr>
+        <tr><td><span class = basictext>Chance of Kelvin Inverter: </span></td><td><span style = "text-align: right" class = basictext id = chance_inverter_kelvin></span></td></tr>
+        <tr><td><span class = basictext>Chance of Scorched Books: </span></td><td><span style = "text-align: right" class = basictext id = chance_scorched_books></span></td></tr>
+        <tr><td><span class = basictext>Chance of Duplex I book: </span></td><td><span style = "text-align: right" class = basictext id = chance_book_reiterate></span></td></tr>
+        <tr><td><span class = basictext>Chance of Fire Aspect III book: </span></td><td><span style = "text-align: right" class = basictext id = chance_book_fire></span></td></tr>
+        <tr><td><span class = basictext>Chance of Archfiend Dice: </span></td><td><span style = "text-align: right" class = basictext id = chance_dice_archfiend></span></td></tr>
+        <tr><td><span class = basictext>Chance of Wilson's Engineering Plans: </span></td><td><span style = "text-align: right" class = basictext id = chance_wilsons></span></td></tr>
+        <tr><td><span class = basictext>Chance of Subzero Inverter: </span></td><td><span style = "text-align: right" class = basictext id = chance_inverter_subzero></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        <tr><td><span class = fineprint>The following drops may be obtained in addition to the primary drop.</span></td></tr>
+        <tr><td><span class = basictext>Chance of Enchanted Blaze Powder: </span></td><td><span class = basictext id = chance_powder></span></td></tr>
+        <tr><td><span class = basictext>Chance of Lavatears Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_tears></span></td></tr>
+        <tr><td><span class = basictext>Chance of High Class Archfiend Dice: </span></td><td><span style = "text-align: right" class = basictext id = chance_dice_high></span></td></tr>
+        <tr><td><span class = basictext>Chance of Fiery Burst Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_burst></span></td></tr>
+        <tr><td><hr class = solid></td></tr>
+        </table>
+      </div>
+      </body>  
+      <script>
+        function updateAllChances(){
+            var weights = {
+                "arrows_magma": 1500,
+                "distillate_gool": 1400,
+                "disintegrator": 700,
+                "distillate_blaze": 700,
+                "distillate_glowstone": 700,
+                "distillate_magma": 700,
+                "distillate_wart": 700,
+                "scorched_crystal": 600,
+                "gemstone_opal": 550,
+                "wisp_water": 500,
+                "inverter_kelvin": 500,
+                "scorched_books": 400,
+                "book_reiterate": 350,
+                "book_fire": 250,
+                "dice_archfiend": 200,
+                "wilsons": 17,
+                "inverter_subzero": 17,
+            }
+            var extraweights = {
+                "powder": 2700,
+                "rune_tears": 450,
+                "dice_high": 50,
+                "rune_burst": 40,
+            }
+            if (slayermagicfind.value > 900){
+                mf = 900;
+                document.getElementById("slayermagicfind").value = 900;
+            }
+            if (slayermagicfind.value < 0 || isNaN(slayermagicfind.value) || slayermagicfind.value == ""){
+                mf = 0;
+                document.getElementById("slayermagicfind").value = 0;
+            }
+            if (rngmeterpercent.value > 100) {
+                document.getElementById("rngmeterpercent").value = 100;
+                rmc = 3;
+            } 
+            else if (rngmeterpercent.value < 0 || isNaN(rngmeterpercent.value)){
+                document.getElementById("rngmeterpercent").value = 0;
+                rmc = 1;
+            } else {
+                rmc = (rngmeterpercent.value / 50) + 1;
+            }
+            var mfc = 1 + (slayermagicfind.value/100);
+            console.log("Calcing chances for " + mfc + " coefficient");
+            var standardweight = 10000;
+            //Calculate total standard weight
+            for (var key in weights){
+                if (key != selecteddrop.value){
+                standardweight += weights[key];
+                document.getElementById("chance_" + key).className = "basictext";
+                } else {
+                weights[key] = weights[key] * rmc;
+                standardweight += weights[key];
+                document.getElementById("chance_" + key).className = "metereditem";
+                }
+            }
+            console.log("Standard weight: " + standardweight);
+            var mfweight = standardweight;
+            //Update weights for standard items
+            for (var key in weights){
+                if (weights[key] / standardweight < 0.05){
+                mfweight += (weights[key] * mfc) - weights[key];
+                weights[key] = weights[key] * mfc;
+                } 
+            }
+            console.log("Modded weight: " + mfweight);
+            //Update chances for standard items
+            for (var key in weights){
+                var chance = (weights[key] / mfweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+            //Update standard weight with extra weights
+            for (var key in extraweights){
+                if (key != selecteddrop.value){
+                    standardweight += extraweights[key];
+                    mfweight += extraweights[key];
+                    document.getElementById("chance_" + key).className = "basictext";
+                } else {
+                    extraweights[key] = extraweights[key] * rmc;
+                    standardweight += extraweights[key];
+                    mfweight += extraweights[key];
+                    document.getElementById("chance_" + key).className = "metereditem";
+                }
+            }
+            var mfextraweight = standardweight;
+            //Update weights for extra items
+            for (var key in extraweights){
+                if ( (extraweights[key] / standardweight) < 0.05){
+                    mfextraweight += (extraweights[key] * mfc) - extraweights[key];
+                    extraweights[key] = extraweights[key] * mfc;
+                } 
+            }
+            //Update chances for extra items
+            for (var key in extraweights){
+                var chance = (extraweights[key] / mfextraweight) * 100;
+                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            }
+        }
+        function updatePage(){
+            console.log("Initializing...");
+            updateAllChances();
+        }
+      </script>
