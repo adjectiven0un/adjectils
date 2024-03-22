@@ -10,7 +10,8 @@
   <div style = "width: 604px">
   <div style = "float:left; width:200px"><a href = "index.html">Skyblock Hub</a></div><div style = "float:left;width:200px; text-align: center;"><a href = "end.html">The End</a></div><div style = "float:right; width:200px; text-align: right;"><a href = "crimson.html">Crimson Isle</a></div>
   </div><br>
-    <div class = "spider_block" style = "width: 600px; display: inline-block", id = "box2">
+  <div style = "width:1050px">
+    <div class = "spider_block" style = "width: 600px", id = "box2">
         <span class = spiderheader>Tarantula Broodfather</span><br>
         <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
         <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
@@ -43,16 +44,19 @@
         </table>
         
       </div>
-      <div class = spider_block style = "width:400px; display:inline-block">
+      <div class = spider_block style = "width:400px">
+        <span class = spiderheader>Weather</span><br>
+        <hr class = solid>
         <table id = raintable>
-            <span class = spiderheader>Weather</span><br>
-            <tr><td>Current weather: <span id = weather></span> for &nbsp;</td><td><span id = weathertime style = "text-align:right"></span></td></tr>
-            <tr><td>Time until thunder: &nbsp;<wbr></td><td><span id = untilthunder style = "text-align:right;"></span></td></tr>
+            <tr><td><span id = weather>Loading...</span> for &nbsp;</td><td><span id = weathertime style = "text-align:right">00:00</span></td></tr>
+            <tr><td>Time until thunder: &nbsp;&nbsp;&nbsp;<wbr></td><td><span id = untilthunder style = "text-align:right;">00:00</span></td></tr>
         </table>
+        <hr class = solid>
         <div style = "font-size: 16px">
             <span style = "margin:0; position: relative; left:0px" id = pointer>↓</span><br>
             <span style = "margin:0" id = meter1 class = spiderclear>||||||||</span><span style = "margin:0" id = meter2 class = spiderrain>||||</span><span style = "margin:0" id = meter3 class = spiderclear>||||||||</span><span style = "margin:0" id = meter4 class = spiderrain>||||</span><span style = "margin:0" id = meter5 class = spiderclear>||||||||</span><span style = "margin:0" id = meter6 class = spiderthunder>||||</span>
         </div>
+      </div>
       </div>
       </body>  
       <script>
