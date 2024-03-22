@@ -66,4 +66,16 @@ body {
   .basictext{
     color: #000000;
   }
+  .meter{
+    font-family: Arial, sans-serif;
+  }
+  .spiderclear{
+    color:#48bbff
+  }
+  .spiderrain{
+    color: #475990;
+  }
+  .spiderthunder{
+    color: #c0b836;
+  }
   

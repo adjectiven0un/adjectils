@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <body onload="updatePage()">
+  <body onload="updatePage(), updatetimer">
   <title>adjectils - Spider's Den</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Arachnid utilities for Hypixel Skyblock">
@@ -10,7 +10,7 @@
   <div style = "width: 604px">
   <div style = "float:left; width:200px"><a href = "index.html">Skyblock Hub</a></div><div style = "float:left;width:200px; text-align: center;"><a href = "end.html">The End</a></div><div style = "float:right; width:200px; text-align: right;"><a href = "crimson.html">Crimson Isle</a></div>
   </div><br>
-    <div class = "spider_block" style = "width: 600px", id = "box2">
+    <div class = "spider_block" style = "width: 600px; display: inline-block", id = "box2">
         <span class = spiderheader>Tarantula Broodfather</span><br>
         <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
         <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
@@ -42,6 +42,17 @@
         <tr><td><hr class = solid></td></tr>
         </table>
         
+      </div>
+      <div class = spider_block style = "width:400px; display:inline-block">
+        <table id = raintable>
+            <span class = spiderheader>Weather</span><br>
+            <tr><td>Current weather: <span id = weather></span> for &nbsp;</td><td><span id = weathertime style = "text-align:right"></span></td></tr>
+            <tr><td>Time until thunder: &nbsp;<wbr></td><td><span id = untilthunder style = "text-align:right;"></span></td></tr>
+        </table>
+        <div style = "font-size: 16px">
+            <span style = "margin:0; position: relative; left:0px" id = pointer>↓</span><br>
+            <span style = "margin:0" id = meter1 class = spiderclear>||||||||</span><span style = "margin:0" id = meter2 class = spiderrain>||||</span><span style = "margin:0" id = meter3 class = spiderclear>||||||||</span><span style = "margin:0" id = meter4 class = spiderrain>||||</span><span style = "margin:0" id = meter5 class = spiderclear>||||||||</span><span style = "margin:0" id = meter6 class = spiderthunder>||||</span>
+        </div>
       </div>
       </body>  
       <script>
@@ -135,4 +146,53 @@
             console.log("Initializing...");
             updateAllChances();
         }
+        function updatetimer(){
+            var starttime = 1711079700;
+            var currenttime = Math.floor(Date.now()/1000);
+            var timediff = currenttime - starttime;
+            var daycycle = (timediff % 10800);
+            var weather = "Clear";
+            if (daycycle < 2400 || (daycycle >= 3600 && daycycle < 6000) || (daycycle >= 7200 && daycycle < 9600)){
+                weather = "Clear";
+                document.getElementById("weather").className = "spiderclear";
+                document.getElementById("weathertime").innerText = timeToMinutes(2400 - daycycle % 3600);
+                document.getElementById("untilthunder").innerText = timeToMinutes(9600 - daycycle);
+                
+            } else if ((daycycle >= 2400 && daycycle < 3600) || (daycycle >= 6000 && daycycle < 7200)){
+                weather = "Raining";
+                document.getElementById("weather").className = "spiderrain";
+                document.getElementById("weathertime").innerText = timeToMinutes(3600 - daycycle % 3600);
+                document.getElementById("untilthunder").innerText = timeToMinutes(9600 - daycycle);
+            } else if ((daycycle >= 9600)){
+                weather = "Thunderstorm";
+                document.getElementById("weather").className = "spiderthunder";
+                document.getElementById("weathertime").innerText = timeToMinutes(10800 - daycycle);
+                document.getElementById("untilthunder").innerText = "ACTIVE";
+            }
+            
+            document.getElementById("weather").innerText = weather;
+            updateRainMeter(daycycle);
+        }
+        function timeToMinutes(seconds){
+            var minutes = Math.floor(seconds/60);
+            var second = seconds % 60;
+            if (minutes < 10){
+                minutes = "0" + minutes;
+            }
+            if (second < 10){
+                second = "0" + second;
+            }
+            if (minutes > 60){
+                var hours = Math.floor(minutes / 60);
+                minutes -= hours * 60;
+                return(hours + ":" + minutes + ":" + second);
+            }
+            return (minutes + ":" + second);
+        }
+        function updateRainMeter(daycycle){
+            console.log("Updating cycle");
+            var ticks = daycycle / 300;
+            document.getElementById("pointer").style.left = 8.8 * ticks + "px";
+        }
+        setInterval(updatetimer, 1000);
       </script>
