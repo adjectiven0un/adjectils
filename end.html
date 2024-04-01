@@ -6,13 +6,10 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Ender utilities for Hypixel Skyblock">
   <meta name = "author" content = "adjective_n0un">
-  <span class = header>adjectils: the end</span><br>
-  <div style = "width: 600px">
-    <div style = "float:left; width:200px"><a href = "spider.html">Spider's Den</a></div><div width = 200px><span> </span></div><div style = "float:right; width:200px; text-align: right;"><a href = ""></a></div>
-    </div><br>
+  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = endheader>The End</span><br>
   <div id = page class = "end_block" style = "width: 1078px; height: 640px">
   <div class = "end_block" style = "width: 400px; float: left;", id = "box1">
-    <span class = endheader>Dragons & Golems</span><br>  
+    <span class = voidheader>Dragons & Golems</span><br>  
     <span class = basictext>User's Magic Find: </span><input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input><br>
     <span class = basictext>User's Pet Luck: </span><input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input><br>
     <span class = basictext>Eyes placed: </span><input type = "number" inputmode = "numeric" id = "summoningeye" min = 0 max = 8 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 4></input><br>
@@ -29,7 +26,7 @@
 
   </div>
   <div class = "end_block" style = "float:right; width: 600px", id = "box2">
-    <span class = endheader>Voidgloom Seraph</span><br>
+    <span class = voidheader>Voidgloom Seraph</span><br>
     <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input><br>
     <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input><span>%</span><br>
     <form action = "#">
@@ -86,6 +83,7 @@
   </div>
   </div>
   </body>
+  <script src = "slayercalc.js"></script>
   <script>
     function updateDragonChance(m, p, s){
         if (m > 900){
@@ -142,7 +140,8 @@
     var weight_skin_void = 25;
     var weight_rune_enchant = 7;
     //var totalweight = weight_twilight + weight_eye + weight_book_mana + weight_tuner + weight_atom + weight_hazmat + weight_depresso + weight_book_intel + weight_chalice + weight_dice + weight_longname + weight_merger + weight_core + weight_book_ender + weight_rune_esnake + weight_rune_end + weight_skin_void + weight_rune_enchant;
-    function updateAllChances(mf){
+    
+    function updateAllChances(){
       var weights = {
         "twilight": 1800,
         "eye": 80,
@@ -165,83 +164,8 @@
         "skin_void": 25,
         "rune_enchant": 7,
       }
-      if (mf > 900){
-          mf = 900;
-          document.getElementById("slayermagicfind").value = 900;
-      }
-      if (mf < 0 || isNaN (mf) || mf == ""){
-          mf = 0;
-          document.getElementById("slayermagicfind").value = 0;
-      }
-      var rmc = 0;
-      //whimsical placement!! arent you excited and not in pain right now
-      if (rngmeterpercent.value > 100) {
-        document.getElementById("rngmeterpercent").value = 100;
-        rmc = 3;
-      } 
-      else if (rngmeterpercent.value < 0 || isNaN(rngmeterpercent.value)){
-        document.getElementById("rngmeterpercent").value = 0;
-        rmc = 1;
-      } else {
-        rmc = (rngmeterpercent.value / 50) + 1;
-      }
-      var mfc = 1 + (mf/100);
-      console.log("Calcing chances for " + mfc + " coefficient");
-      var standardweight = 10000;
-      //Calculate total standard weight
-      for (var key in weights){
-        if (key != selecteddrop.value){
-          standardweight += weights[key];
-          document.getElementById("chance_" + key).className = "basictext";
-        } else {
-          weights[key] = weights[key] * rmc;
-          standardweight += weights[key];
-          document.getElementById("chance_" + key).className = "metereditem";
-        }
-      }
-      console.log("Standard weight: " + standardweight);
-      var mfweight = standardweight;
-      //Update weights for standard items
-      for (var key in weights){
-        if (weights[key] / standardweight < 0.05){
-          mfweight += (weights[key] * mfc) - weights[key];
-          weights[key] = weights[key] * mfc;
-        } 
-      }
-      console.log("Modded weight: " + mfweight);
-      //Update chances for standard items
-      for (var key in weights){
-        var chance = (weights[key] / mfweight) * 100;
-        document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
-      }
-
-      //Update standard weight with extra weights
-      for (var key in extraweights){
-        if (key != selecteddrop.value){
-          standardweight += extraweights[key];
-          mfweight += extraweights[key];
-          document.getElementById("chance_" + key).className = "basictext";
-        } else {
-          extraweights[key] = extraweights[key] * rmc;
-          standardweight += extraweights[key];
-          mfweight += extraweights[key];
-          document.getElementById("chance_" + key).className = "metereditem";
-        }
-      }
-      var mfextraweight = standardweight;
-      //Update weights for extra items
-      for (var key in extraweights){
-        if ( (extraweights[key] / standardweight) < 0.05){
-          mfextraweight += (extraweights[key] * mfc) - extraweights[key];
-          extraweights[key] = extraweights[key] * mfc;
-        } 
-      }
-      //Update chances for extra items
-      for (var key in extraweights){
-        var chance = (extraweights[key] / mfextraweight) * 100;
-        document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
-      }
-      
+      //see slayercalc.js
+      updateChances(weights, extraweights);
     }
     
 

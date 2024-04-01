@@ -7,6 +7,29 @@ body {
     background-size: cover;
   }
   /*
+  title colors
+  */
+  .adjheader{
+    font-size: 24px;
+    color: #808080;
+  }
+  .header{
+    font-size:24px;
+    color: #000000;
+  }
+  .crimsonheader{
+    font-size:24px;
+    color: #722525;
+  }
+  .endheader{
+    font-size:24px;
+    color: #9448a5;
+  }
+  .denheader{
+    font-size:24px;
+    color: #602438;
+  }
+  /*
   blocktypes
   */
   .end_block{
@@ -25,7 +48,7 @@ body {
   }
   .blaze_block{
     border-style: solid;
-    border-color: #f0d000;
+    border-color: #bd400e;
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
@@ -40,8 +63,9 @@ body {
   /*
   text
   */
-  .endheader{
+  .voidheader{
     font-size:24px;
+    color:#603070;
   }
   .spiderheader{
     font-size:24px;
@@ -78,4 +102,5 @@ body {
   .spiderthunder{
     color: #c0b836;
   }
+
   
