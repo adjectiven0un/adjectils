@@ -6,10 +6,14 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Infernal utilities for Hypixel Skyblock">
   <meta name = "author" content = "adjective_n0un">
+  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
   <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = crimsonheader>Crimson Isle</span><br>
-  <div style = "width: 604px">
-  <div style = "float:left; width:200px"><a href = "spider.html">Spider's Den</a></div><div style = "float:left;width:200px; text-align: center;"><a href = ""></a></div><div style = "float:right; width:200px; text-align: right;"><a href = ""></a></div>
-  </div><br>
+  
     <div class = "blaze_block" style = "width: 600px", id = "box2">
         <span class = blazeheader>Inferno Demonlord</span><br>
         <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
