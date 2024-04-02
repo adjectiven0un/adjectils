@@ -1,11 +1,19 @@
 <!DOCTYPE html>
   <html>
+  <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
   <body onload="updatePage(), updatetimer">
   <title>adjectils - Spider's Den</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Arachnal utilities for Hypixel Skyblock">
   <meta name = "author" content = "adjective_n0un">
+  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
+  </head>
   <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = denheader>Spider's Den</span><br>
   
   <div style = "width:1050px">
@@ -56,7 +64,7 @@
         </div>
       </div>
       </div>
-      <div id = "nav"></div>
+      <div id = "nav" class = "spider_block" style = "width:600px;"></div>
       </body>  
       <script src = "slayercalc.js"></script>
       <script>
@@ -132,9 +140,4 @@
         }
         setInterval(updatetimer, 1000);
       </script>
-      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
-      <script>
-      $(function(){
-        $("#nav").load("nav.html"); 
-      });
-      </script>
+      

@@ -60,6 +60,11 @@ body {
     border-spacing: 5px;
     padding: 10px;
   }
+  .navblock{
+    text-align:center;
+    font-size:12px;
+    
+  }
   /*
   text
   */
