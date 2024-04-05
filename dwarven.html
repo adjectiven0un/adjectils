@@ -1,12 +1,131 @@
 <!DOCTYPE html>
   <html>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <body onload="updatePage(), updatetimer">
+  <body onload="">
   <title>adjectils - Dwarven Mines</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Dwarven utilities for Hypixel Skyblock">
   <meta name = "author" content = "adjective_n0un">
-  <span class = header>adjectils: dwarven mines</span><br>
+  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
+  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
+  <input type = "text" onchange = updateForges(value)><br>
+  <span id = "status">Enter a username to continue.</span><br>
+  <div class = "dwarven_block" style = "width:800px">
+    <span class = minesheader>Forge timers</span><br><br>
+    <span class = errored>THIS WIDGET IS INCOMPLETE! Come back later...</span><br>
+    <div id = "item1">
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img style = "width:40px; height:40px" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span style = "font-size:18px">Slot 1: </span><span id = "forgeitem_1" style = "font-size:18px">Loading...</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><span id = time1>Loading...</span><br>
+        <span>&nbsp;Expected completion time:&nbsp;</span><span id = finish1>Loading...</span>
+      </div>
+    </div>
+    <div id = "item2">
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img style = "width:40px; height:40px" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span style = "font-size:18px">Slot 2: </span><span id = "forgeitem_2" style = "font-size:18px">Loading...</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><span id = time2>Loading...</span><br>
+        <span>&nbsp;Expected completion time:&nbsp;</span><span id = finish2>Loading...</span>
+      </div>
+    </div>
+    <div id = "item3">
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img style = "width:40px; height:40px" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span style = "font-size:18px">Slot 3: </span><span id = "forgeitem_3" style = "font-size:18px">Loading...</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter3>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><span id = time3>Loading...</span><br>
+        <span>&nbsp;Expected completion time:&nbsp;</span><span id = finish3>Loading...</span>
+      </div>
+    </div>
+    <div id = "item4">
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img style = "width:40px; height:40px" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span style = "font-size:18px">Slot 4: </span><span id = "forgeitem_4" style = "font-size:18px">Loading...</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter4>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><span id = time4>Loading...</span><br>
+        <span>&nbsp;Expected completion time:&nbsp;</span><span id = finish4>Loading...</span>
+      </div>
+    </div>
+    <div id = "item5">
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img style = "width:40px; height:40px" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span style = "font-size:18px">Slot 5: </span><span id = "forgeitem_5" style = "font-size:18px">Loading...</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter5>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><span id = time5>Loading...</span><br>
+        <span>&nbsp;Expected completion time:&nbsp;</span><span id = finish5>Loading...</span>
+      </div>
+    </div>
+      
+  </div>
   
+  <div id = "nav" class = "dwarven_block" style = "width:600px"></div>
   </body>
+  <script src = "getUUID.js"></script>
+  <script>
+    var translations = {
+      //todo: finish this
+      "REFINED_DIAMOND": "Refined Diamond",
+      "REFINED_MITHRIL": "Refined Mithril",
+      "REFINED_TITANIUM": "Refined Titanium",
+      "FUEL_TANK": "Fuel Tank",
+      "BEJEWELED_HANDLE": "Bejeweled Handle",
+      "BEJEWELED_COLLAR": "Bejeweled Collar",
+      "DRILL_ENGINE": "Drill Engine",
+      "GOLDEN_PLATE": "Golden Plate",
+      "MITHRIL_PLATE": "Mithril Plate",
+      "GEMSTONE_MIXTURE": "Gemstone Mixture",
+
+    }
+    async function updateForges(name){
+      var UUID = await getUUIDbyName(name);
+      //try {
+        const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
+        if (!apicall.ok){
+          console.log("Api call error");
+        }
+        const data = await apicall.json();
+        var forgelog = (data.profiles[data.profiles.length - 1].members[UUID].forge.forge_processes.forge_1);
+        console.log(forgelog[1].id + ", started at " + forgelog[1].startTime);
+        console.log(forgelog[2].id + ", started at " + forgelog[2].startTime);
+        console.log(forgelog[3].id + ", started at " + forgelog[3].startTime);
+        console.log(forgelog[4].id + ", started at " + forgelog[4].startTime);
+        console.log(forgelog[5].id + ", started at " + forgelog[5].startTime);
+        for (var i = 1; i <= 5; i++){
+          document.getElementById("forgeitem_" + i).innerText = translations[forgelog[i].id];
+        }
+      //} catch (error) {
+        //console.log("UUID returned caused an error. That can't be good...");
+      //}
+      
+    }
+  </script>
   </html>
+  

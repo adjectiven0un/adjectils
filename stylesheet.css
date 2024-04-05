@@ -65,6 +65,13 @@ body {
     font-size:12px;
     
   }
+  .dwarven_block{
+    border-style: solid;
+    border-color: #a0a0a0;
+    margin: 5px;
+    border-spacing: 5px;
+    padding: 10px;
+  }
   /*
   text
   */
@@ -83,6 +90,10 @@ body {
   .hubheader{
     font-size:24px;
     color:#606060;
+  }
+  .minesheader{
+    font-size:24px;
+    color:#3890b6;
   }
   .fineprint{
     font-size:12px;
@@ -106,6 +117,12 @@ body {
   }
   .spiderthunder{
     color: #c0b836;
+  }
+  .success{
+    color: #488448;
+  }
+  .errored{
+    color: #a40000;
   }
 
   
