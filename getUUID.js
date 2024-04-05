@@ -11,7 +11,7 @@ async function getUUIDbyName(name){
        document.getElementById("status").innerHTML = "<span class = success>Found player! Data loaded</span>";
        return activeid;
     } catch (error) {
-      document.getElementById("status").innerHTML = "<span class = errored>Error - Check your internet connection and try again</span>";
+      document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
     }
   }
   
