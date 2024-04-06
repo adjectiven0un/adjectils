@@ -171,6 +171,12 @@
     async function updateTimers(qfm, forgelog){
       var actives = [1, 1, 1, 1, 1];
       if (forgelog == "Empty"){
+        for (var i = 1; i <= 5; i++){
+          document.getElementById("time" + i).innerText = "Loading...";
+          document.getElementById("forgeunmeter" + i).innerText = "";
+          document.getElementById("forgemeter" + i).style.color = "#000000";
+          document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+        }
         console.log("No items found");
         clearInterval(intervalID[0]);
         intervalID.length = 0;
