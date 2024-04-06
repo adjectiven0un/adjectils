@@ -18,13 +18,14 @@
   <div class = "dwarven_block" style = "width:800px">
     <span class = minesheader>Forge timers</span><br><br>
     <span class = errored>THIS WIDGET IS INCOMPLETE! Come back later...</span><br>
+    <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
     <div id = "item1">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img style = "width:40px; height:40px" src = "./images/filler.png">
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span style = "font-size:18px">Slot 1: </span><span id = "forgeitem_1" style = "font-size:16px">None</span><br>
-        <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+        <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter1></span><span class = meter>]</span>
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
@@ -41,7 +42,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span style = "font-size:18px">Slot 2: </span><span id = "forgeitem_2" style = "font-size:16px">None</span><br>
-        <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+        <span class = meter>[</span><span class = meter id = forgemeter2>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter2></span><span class = meter>]</span>
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
@@ -58,7 +59,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span style = "font-size:18px">Slot 3: </span><span id = "forgeitem_3" style = "font-size:16px">None</span><br>
-        <span class = meter>[</span><span class = meter id = forgemeter3>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+        <span class = meter>[</span><span class = meter id = forgemeter3>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter3></span><span class = meter>]</span>
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
@@ -75,13 +76,13 @@
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span style = "font-size:18px">Slot 4: </span><span id = "forgeitem_4" style = "font-size:16px">None</span><br>
-        <span class = meter>[</span><span class = meter id = forgemeter4>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+        <span class = meter>[</span><span class = meter id = forgemeter4>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter4></span><span class = meter>]</span>
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Expected completion time:&nbsp;</span>
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px;">
         <span id = time4>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish4>&ndash;&ndash;:&ndash;&ndash;</span>
       </div>
@@ -92,7 +93,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span style = "font-size:18px">Slot 5: </span><span id = "forgeitem_5" style = "font-size:16px">None</span><br>
-        <span class = meter>[</span><span class = meter id = forgemeter5>||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter>]</span>
+        <span class = meter>[</span><span class = meter id = forgemeter5>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter5></span><span class = meter>]</span>
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
@@ -115,7 +116,10 @@
     const intervalID = [];
     async function updateForges(name){
       for (var i = 1; i <= 5; i++){
-        document.getElementById("time" + i).innerText = "––:––";
+        document.getElementById("time" + i).innerText = "Loading...";
+        document.getElementById("forgeunmeter" + i).innerText = "";
+        document.getElementById("forgemeter" + i).style.color = "#000000";
+        document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
       }
       clearInterval(intervalID[0]);
       intervalID.length = 0;
@@ -142,9 +146,8 @@
         if (quickforge == undefined){
           quickforge = 0;
         }
-        console.log("Quick forge original: ");
         var qfm = quickforgetimes[quickforge];
-        console.log("Quick forge multiplier: " + qfm);
+        document.getElementById("quickforgelevel").innerText = quickforge;
         for (var i = 1; i <= 5; i++){
           try {
             if (forgelog[i].id != undefined){
@@ -167,7 +170,6 @@
 
     async function updateTimers(qfm, forgelog){
       var actives = [1, 1, 1, 1, 1];
-      console.log("Started update");
       if (forgelog == "Empty"){
         console.log("No items found");
         clearInterval(intervalID[0]);
@@ -178,13 +180,15 @@
             var timeelapsed = ((Date.now() - forgelog[i].startTime)/1000);
             
             var maxtime = qfm * times[forgelog[i].id];
-            
+            if (timeelapsed > maxtime){
+              timeelapsed = maxtime;
+            }
             var timeremaining = (maxtime - timeelapsed).toFixed(0);
-
+            var ticks = ((timeelapsed / maxtime) * 60).toFixed(0);
+            
             if (timeremaining <= 0){
               timeremaining = 0;
             }
-            console.log("Time remaining for item " + i + " is " + timeremaining + " seconds");
             if (timeremaining == 0){
               actives[i - 1] = 0;
               document.getElementById("time" + i).innerText = "Finished!";
@@ -192,7 +196,37 @@
               document.getElementById("time" + i).innerText = timeToMinutes(timeremaining);
             }
             
-
+            var chunk1 = "";
+            var chunk2 = "";
+            for (var j = 0; j < ticks; j++){
+              chunk1 = chunk1 + "|";
+            }
+            for (var j = ticks; j < 60; j++){
+              chunk2 = chunk2 + "|";
+            }
+            var redhex = (60-ticks) * 4;
+            
+            var greenhex = (ticks) * 4;
+            if (redhex % 16 == 0){
+              redhex = redhex.toString(16) + "0";
+            } else if (redhex < 16){
+              redhex = "0" + redhex.toString(16);
+            } else {
+              redhex = redhex.toString(16);
+            }
+            
+            if (greenhex % 16 == 0){
+              greenhex = greenhex.toString(16) + "0";
+            } else if (greenhex < 16){
+              greenhex = "0" + greenhex.toString(16);
+            }else {
+              greenhex = greenhex.toString(16);
+            }
+            var hexcolor = "";
+            hexcolor = "#" + hexcolor + redhex + greenhex + "00";
+            document.getElementById("forgemeter" + i).style.color = hexcolor;
+            document.getElementById("forgemeter" + i).innerText = chunk1;
+            document.getElementById("forgeunmeter" + i).innerText = chunk2;
           } catch (TypeError) {
             console.log("No item in slot " + i);
             actives[i - 1] = 0;
