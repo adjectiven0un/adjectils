@@ -134,6 +134,12 @@
         try {
           forgelog = (data.profiles[data.profiles.length - 1].members[UUID].forge.forge_processes.forge_1);
         } catch (TypeError){
+          for (var i = 1; i <= 5; i++){
+            document.getElementById("time" + i).innerText = "––:––";
+            document.getElementById("forgeunmeter" + i).innerText = "";
+            document.getElementById("forgemeter" + i).style.color = "#000000";
+            document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+          }
           console.log("No active forges");
           forgelog = "Empty";
         }
@@ -172,7 +178,7 @@
       var actives = [1, 1, 1, 1, 1];
       if (forgelog == "Empty"){
         for (var i = 1; i <= 5; i++){
-          document.getElementById("time" + i).innerText = "Loading...";
+          document.getElementById("time" + i).innerText = "––:––";
           document.getElementById("forgeunmeter" + i).innerText = "";
           document.getElementById("forgemeter" + i).style.color = "#000000";
           document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
