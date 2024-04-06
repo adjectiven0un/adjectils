@@ -205,21 +205,24 @@
               chunk2 = chunk2 + "|";
             }
             var redhex = (60-ticks) * 4;
-            
             var greenhex = (ticks) * 4;
-            if (redhex % 16 == 0){
-              redhex = redhex.toString(16);
+            if (redhex == 0){
+              redhex = "00";
             } else if (redhex < 16){
               redhex = "0" + redhex.toString(16);
+            } else if (redhex % 16 == 0){
+              redhex = redhex.toString(16);
             } else {
               redhex = redhex.toString(16);
             }
             
-            if (greenhex % 16 == 0){
-              greenhex = greenhex.toString(16);
+            if (greenhex == 0){
+              greenhex = "00";
             } else if (greenhex < 16){
               greenhex = "0" + greenhex.toString(16);
-            }else {
+            } else if (greenhex % 16 == 0){
+              greenhex = greenhex.toString(16);
+            } else {
               greenhex = greenhex.toString(16);
             }
             var hexcolor = "";
@@ -227,7 +230,6 @@
             document.getElementById("forgemeter" + i).style.color = hexcolor;
             document.getElementById("forgemeter" + i).innerText = chunk1;
             document.getElementById("forgeunmeter" + i).innerText = chunk2;
-            console.log("Hex color: " + hexcolor);
           } catch (TypeError) {
             console.log("No item in slot " + i);
             actives[i - 1] = 0;
