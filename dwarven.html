@@ -212,7 +212,7 @@
         intervalID.length = 0;
       } else {
         for (var i = 1; i <= 5; i++){
-          //try {
+          try {
             var timeelapsed = ((Date.now() - forgelog[i].startTime)/1000);
             var maxtime = qfm * times[forgelog[i].id];
             if (timeelapsed > maxtime){
@@ -266,11 +266,11 @@
             document.getElementById("forgemeter" + i).innerText = chunk1;
             document.getElementById("forgeunmeter" + i).innerText = chunk2;
             
-          //} catch (TypeError) {
-          //  console.log("No item in slot " + i);
-          //  actives[i - 1] = 0;
-          //  document.getElementById("time" + i).innerText = "Inactive";
-         // }
+          } catch (TypeError) {
+            console.log("No item in slot " + i);
+            actives[i - 1] = 0;
+            document.getElementById("time" + i).innerText = "Inactive";
+          }
         }
         
       }
