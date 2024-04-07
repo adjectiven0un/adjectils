@@ -21,9 +21,9 @@
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
     <div id = "item1">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
-        <img style = "width:40px; height:40px" src = "./images/filler.png">
+        <img id = "img1" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
         <span style = "font-size:18px">Slot 1: </span><span id = "forgeitem_1" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter1></span><span class = meter>]</span>
       </div>
@@ -38,9 +38,9 @@
     </div>
     <div id = "item2">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
-        <img style = "width:40px; height:40px" src = "./images/filler.png">
+        <img id = "img2" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
         <span style = "font-size:18px">Slot 2: </span><span id = "forgeitem_2" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter2>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter2></span><span class = meter>]</span>
       </div>
@@ -55,9 +55,9 @@
     </div>
     <div id = "item3">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
-        <img style = "width:40px; height:40px" src = "./images/filler.png">
+        <img id = "img3" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
         <span style = "font-size:18px">Slot 3: </span><span id = "forgeitem_3" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter3>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter3></span><span class = meter>]</span>
       </div>
@@ -72,9 +72,9 @@
     </div>
     <div id = "item4">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
-        <img style = "width:40px; height:40px" src = "./images/filler.png">
+        <img id = "img4" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
         <span style = "font-size:18px">Slot 4: </span><span id = "forgeitem_4" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter4>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter4></span><span class = meter>]</span>
       </div>
@@ -89,9 +89,9 @@
     </div>
     <div id = "item5">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
-        <img style = "width:40px; height:40px" src = "./images/filler.png">
+        <img id = "img5" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
-      <div style = "display:inline-block; margin:5px; height:40px">
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
         <span style = "font-size:18px">Slot 5: </span><span id = "forgeitem_5" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter5>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter5></span><span class = meter>]</span>
       </div>
@@ -120,6 +120,8 @@
         document.getElementById("forgeunmeter" + i).innerText = "";
         document.getElementById("forgemeter" + i).style.color = "#000000";
         document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+        document.getElementById("img" + i).src = "./images/filler.png";
+        document.getElementById("img" + i).style.opacity = 0;
       }
       clearInterval(intervalID[0]);
       intervalID.length = 0;
@@ -139,6 +141,8 @@
             document.getElementById("forgeunmeter" + i).innerText = "";
             document.getElementById("forgemeter" + i).style.color = "#000000";
             document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+            document.getElementById("img" + i).src = "./images/filler.png";
+            document.getElementById("img" + i).style.opacity = 0;
           }
           console.log("No active forges");
           forgelog = "Empty";
@@ -158,6 +162,8 @@
           try {
             if (forgelog[i].id != undefined){
               document.getElementById("forgeitem_" + i).innerText = translations[forgelog[i].id];
+              document.getElementById("img" + i).src = "./images/" + forgelog[i].id + ".png";
+              document.getElementById("img" + i).style.opacity = 1;
             } else {
               
               document.getElementById("forgeitem_" + i).innerText = "None";
