@@ -17,7 +17,6 @@
   <span id = "status">Enter a username to continue.</span><br>
   <div class = "dwarven_block" style = "width:800px">
     <span class = minesheader>Forge timers</span><br><br>
-    <span class = errored>THIS WIDGET IS INCOMPLETE! Come back later...</span><br>
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
     <div id = "item1">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
@@ -29,7 +28,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
-        <span>&nbsp;Expected completion time:&nbsp;</span>
+        <span>&nbsp;Completion time:&nbsp;</span>
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time1>&ndash;&ndash;:&ndash;&ndash;</span><br>
@@ -46,7 +45,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
-        <span>&nbsp;Expected completion time:&nbsp;</span>
+        <span>&nbsp;Completion time:&nbsp;</span>
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time2>&ndash;&ndash;:&ndash;&ndash;</span><br>
@@ -63,7 +62,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
-        <span>&nbsp;Expected completion time:&nbsp;</span>
+        <span>&nbsp;Completion time:&nbsp;</span>
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time3>&ndash;&ndash;:&ndash;&ndash;</span><br>
@@ -80,7 +79,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
-        <span>&nbsp;Expected completion time:&nbsp;</span>
+        <span>&nbsp;Completion time:&nbsp;</span>
       </div>
       <div style = "display:inline-block; margin:5px; height:40px;">
         <span id = time4>&ndash;&ndash;:&ndash;&ndash;</span><br>
@@ -97,7 +96,7 @@
       </div>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
-        <span>&nbsp;Expected completion time:&nbsp;</span>
+        <span>&nbsp;Completion time:&nbsp;</span>
       </div>
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time5>&ndash;&ndash;:&ndash;&ndash;</span><br>
@@ -117,6 +116,7 @@
     async function updateForges(name){
       for (var i = 1; i <= 5; i++){
         document.getElementById("time" + i).innerText = "Loading...";
+        document.getElementById("finish" + i).innerText = "Loading...";
         document.getElementById("forgeunmeter" + i).innerText = "";
         document.getElementById("forgemeter" + i).style.color = "#000000";
         document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
@@ -138,6 +138,7 @@
         } catch (TypeError){
           for (var i = 1; i <= 5; i++){
             document.getElementById("time" + i).innerText = "––:––";
+            document.getElementById("finish" + i).innerText = "––:––";
             document.getElementById("forgeunmeter" + i).innerText = "";
             document.getElementById("forgemeter" + i).style.color = "#000000";
             document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
@@ -158,6 +159,7 @@
         }
         var qfm = quickforgetimes[quickforge];
         document.getElementById("quickforgelevel").innerText = quickforge;
+        
         for (var i = 1; i <= 5; i++){
           try {
             if (forgelog[i].id != undefined){
@@ -175,6 +177,21 @@
           }
           
         }
+        for (var i = 1; i <= 5; i++){
+          try {
+            if (forgelog[i].id != undefined){
+              var maxtime = qfm * times[forgelog[i].id];
+              var finaltime = new Date(forgelog[i].startTime + (maxtime*1000));
+              document.getElementById("finish" + i).innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + finaltime.getDate();
+            } else {
+              document.getElementById("finish" + i).innerText = "––:––";
+            }
+            
+          } catch (TypeError){
+            document.getElementById("finish" + i).innerText = "––:––";
+          }
+          
+        }
         var interval = setInterval(() => updateTimers(qfm, forgelog), 1000);
         intervalID.push(interval);
       
@@ -185,6 +202,7 @@
       if (forgelog == "Empty"){
         for (var i = 1; i <= 5; i++){
           document.getElementById("time" + i).innerText = "––:––";
+          document.getElementById("finish" + i).innerText = "––:––";
           document.getElementById("forgeunmeter" + i).innerText = "";
           document.getElementById("forgemeter" + i).style.color = "#000000";
           document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
@@ -194,9 +212,8 @@
         intervalID.length = 0;
       } else {
         for (var i = 1; i <= 5; i++){
-          try {
+          //try {
             var timeelapsed = ((Date.now() - forgelog[i].startTime)/1000);
-            
             var maxtime = qfm * times[forgelog[i].id];
             if (timeelapsed > maxtime){
               timeelapsed = maxtime;
@@ -248,11 +265,12 @@
             document.getElementById("forgemeter" + i).style.color = hexcolor;
             document.getElementById("forgemeter" + i).innerText = chunk1;
             document.getElementById("forgeunmeter" + i).innerText = chunk2;
-          } catch (TypeError) {
-            console.log("No item in slot " + i);
-            actives[i - 1] = 0;
-            document.getElementById("time" + i).innerText = "Inactive";
-          }
+            
+          //} catch (TypeError) {
+          //  console.log("No item in slot " + i);
+          //  actives[i - 1] = 0;
+          //  document.getElementById("time" + i).innerText = "Inactive";
+         // }
         }
         
       }

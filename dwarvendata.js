@@ -182,3 +182,10 @@ var translations = {
     //WHY DOES IT WORK LIKE THIS????? I DON'T FUCKING KNOW
     20: 0.7,
   }
+  var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+  function fixTime(unit){
+    if (unit < 10){
+        return "0" + unit;
+    }
+    return unit;
+  }
