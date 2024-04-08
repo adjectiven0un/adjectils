@@ -17,3 +17,10 @@ function timeToMinutes(seconds){
     }
     return (minutes + ":" + second);
 }
+function fixTime(unit){
+    if (unit < 10){
+        return "0" + unit;
+    }
+    return unit;
+}
+var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];

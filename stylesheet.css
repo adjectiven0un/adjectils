@@ -29,6 +29,10 @@ body {
     font-size:24px;
     color: #602438;
   }
+  .crystalheader{
+    font-size:24px;
+    color: #b548e8;
+  }
   /*
   blocktypes
   */
@@ -71,6 +75,13 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
+  }
+  .crystal_block{
+    border-style: solid;
+    border-color: #c2c2c2;
+    margin:5px;
+    border-spacing:5px;
+    padding:10px;
   }
   /*
   text
@@ -116,7 +127,7 @@ body {
     color: #475990;
   }
   .spiderthunder{
-    color: #c0b836;
+    color: #d0c826;
   }
   .success{
     color: #488448;
