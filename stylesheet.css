@@ -106,6 +106,10 @@ body {
     font-size:24px;
     color:#3890b6;
   }
+  .hollowheader{
+    font-size:24px;
+    color: #60b4ff;
+  }
   .fineprint{
     font-size:12px;
     color:#808080;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <body onload="">
+  <body onload="updatePage()">
   <title>adjectils - Crystal Hollows</title>
   <link rel="stylesheet" href="stylesheet.css">
   <!--You can thank Brooke for the description.-->
@@ -17,7 +17,8 @@
   <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = crystalheader>Crystal Hollows</span><br>
   <input type = "text" onchange = updatePass(value)><br>
   <span id = "status">Enter a username to continue.</span><br>
-  <div class = "crystal_block" style = "width:400px">
+  <div class = "crystal_block" style = "width:400px; height:100px">
+    <span class = hollowheader>Pass tracker</span><br><br>
     <div style = "float:left">
         <span>Pass expiration:&nbsp;</span><br>
         <span>Time remaining:&nbsp;</span>
@@ -28,15 +29,86 @@
     </div>
   </div>
   <div class = crystal_block style = "width:600px">
-    <span>User has High Roller: </span><span id = "hashighroller">False</span>
+    <span class = hollowheader>Crystal Nucleus loot</span><br><br>
+    <span>User has High Roller: </span><span id = "hashighroller">False</span><br><br>
     <table>
         <tr>
-            <td>
-                <span>Chance of item&nbsp;</span>
-            </td>
-            <td>
-                alksjrawherawherawehrahsdflkajhfa idk
-            </td>
+            <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Amethyst Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amethyst">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Jade Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jade">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Amber Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amber">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Sapphire Gemstone: &nbsp;</span></td><td><span id = "chance_fl_sapphire">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Topaz Gemstone: &nbsp;</span></td><td><span id = "chance_fl_topaz">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Bob-omb ×16: &nbsp;</span></td><td><span id = "chance_bombs">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Pickonimbus 2000: &nbsp;</span></td><td><span id = "chance_pick2k">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Oil Barrel: &nbsp;</span></td><td><span id = "chance_oil">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Divan Fragment: &nbsp;</span></td><td><span id = "chance_divan_fragment">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Prehistoric Egg: &nbsp;</span></td><td><span id = "chance_arma_egg">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Helix: &nbsp;</span></td><td><span id = "chance_helix">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Ruby Crystal: &nbsp;</span></td><td><span id = "chance_crystal_ruby">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Jasper Crystal: &nbsp;</span></td><td><span id = "chance_crystal_jasper">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Treasurite ×5: &nbsp;</span></td><td><span id = "chance_treasurite5">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Treasurite ×10: &nbsp;</span></td><td><span id = "chance_treasurite10">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Jaderald: &nbsp;</span></td><td><span id = "chance_jaderald">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Gold Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_gold">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Diamond Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_diamond">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Gemstone Mixture: &nbsp;</span></td><td><span id = "chance_gemmix">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Fortune IV book: &nbsp;</span></td><td><span id = "chance_book_fortune">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Wishing Compass ×3: &nbsp;</span></td><td><span id = "chance_compass">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Precious Pearl: &nbsp;</span></td><td><span id = "chance_preciouspearl">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Recall Potion: &nbsp;</span></td><td><span id = "chance_recall">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Quick Claw: &nbsp;</span></td><td><span id = "chance_quick_claw">Loading...</span></td>
         </tr>
     </table>
   </div>
@@ -46,6 +118,7 @@
   <script src = "getUUID.js"></script>
   <script src = "timeToMinutes.js"></script>
   <script src = "binomials.js"></script>
+  <script src = "crystaldata.js"></script>
   <script>
     const intervalID = [];
     async function updatePass(name){
@@ -54,28 +127,51 @@
         clearInterval[intervalID[0]];
         intervalID.length = 0;
         var UUID = await getUUIDbyName(name);
-        const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
+        const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + window["key"] + "&uuid=" + UUID);
         if (!apicall.ok){
           console.log("Api call error");
         }
         const data = await apicall.json();
         var purchasetime;
-        try {
-            purchasetime = data.profiles[data.profiles.length - 1].members[UUID].mining_core.greater_mines_last_access;
-        } catch {
-            document.getElementById("passexpiration").innerText = "Player has never entered the Crystal Hollows.";
+        purchasetime = data.profiles[data.profiles.length - 1].members[UUID].mining_core.greater_mines_last_access;
+        console.log(purchasetime);
+        if (purchasetime == undefined) {
+            document.getElementById("passexpiration").innerText = "N/A";
             document.getElementById("timeleft").innerText = "––:––";
-        }
-        var finaltime = new Date(purchasetime + 21600000);
-        document.getElementById("passexpiration").innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + finaltime.getDate();
-        if (Date.now() > purchasetime + 21600000){
-            document.getElementById("timeleft").innerText = "Expired";
         } else {
-            var interval = setInterval(() => updateTimers(purchasetime), 1000);
-            intervalID[0] = interval;  
+            var finaltime = new Date(purchasetime + 21600000);
+            document.getElementById("passexpiration").innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + finaltime.getDate();
+            if (Date.now() > purchasetime + 21600000){
+                document.getElementById("timeleft").innerText = "Expired";
+            } else {
+                var interval = setInterval(() => updateTimers(purchasetime), 1000);
+                intervalID[0] = interval;  
+            }
+        } 
+        const completedtasks = new Set(data.profiles[data.profiles.length - 1].members[UUID].leveling.completed_tasks);
+        var hr = 0;
+        if (completedtasks.has("DIAMOND_ESSENCE_HIGH_ROLLER_1")){
+            document.getElementById("hashighroller").innerText = "True";
+            hr = 1;
+        } else {
+            document.getElementById("hashighroller").innerText = "False";
         }
         
-        
+        for (var key in nucweights){
+            try {
+                var apxdropchance = 0;
+                for (var j = 14 + hr; j <= 20 + hr; j++){
+                    //console.log("J: " + j + " nucweights[key]: " + nucweights[key] + " Total nuc weight: " + window["totalnucweight"] + " Drop chance: " + (nucweights[key] / window["totalnucweight"]));
+                    apxdropchance += ((1/7) * binomial(j, nucweights[key]/window["totalnucweight"]));
+                }
+                document.getElementById("chance_" + key).innerText = (apxdropchance * 100).toFixed(3) + "%";
+                //console.log((apxdropchance * 100).toFixed(3) + "%");
+            } catch (ReferenceError) {
+                console.log("adj opted not to put " + key + " in the table.");
+            }
+            
+            
+        }
     }
     async function updateTimers(purchasetime){
         var timeelapsed = ((Date.now() - purchasetime)/1000).toFixed(0);
@@ -90,5 +186,8 @@
         }
         
         
+    }
+    function updatePage(){
+        updatePass("bro0ke");
     }
   </script>

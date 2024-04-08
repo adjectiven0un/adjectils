@@ -30,7 +30,6 @@ function nCr(n, r){
 //Given trials n and probability p, determine the chance that p occurs at least once.
 function binomial(n, p){
     var ret = 0;
-    console.log("Trials: " + parseInt(Math.floor(p * n) + 3));
     for (var i = 1; i <= parseInt(Math.floor(p * n)) + 3; i++){
         if (i >= n){
             break;

@@ -1,3 +1,5 @@
+var key = "3b597353-f337-414a-8857-f8521d35d8f4"
+
 async function getUUIDbyName(name){
   
     document.getElementById("status").innerText = "Checking...";
@@ -13,6 +15,5 @@ async function getUUIDbyName(name){
     } catch (error) {
       document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
     }
-  }
+}
   
-  var key = "3b597353-f337-414a-8857-f8521d35d8f4"
