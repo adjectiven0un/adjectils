@@ -61,4 +61,5 @@ var nucweights = {
     essence_gold: 750,
     essence_diamond: 750,
 }
-var totalnucweight = 305245;
+
+var totalnucweight = 300245;

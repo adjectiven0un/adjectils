@@ -30,7 +30,12 @@
   </div>
   <div class = crystal_block style = "width:600px">
     <span class = hollowheader>Crystal Nucleus loot</span><br><br>
-    <span>User has High Roller: </span><span id = "hashighroller">False</span><br><br>
+    <table>
+        <tr><td><span> User has High Roller: </span>&nbsp;&nbsp;&nbsp;</td><td><span id = "hashighroller">False</span></td></tr>
+        <tr><td><span> User has Ruby Crystal: </span>&nbsp;&nbsp;&nbsp;</td><td><span id = "hasrubycrystal">False</span></td></tr>
+        <tr><td><span> User has Jasper Crystal: </span>&nbsp;&nbsp;&nbsp;</td><td><span id = "hasjaspercrystal">False</span></td></tr>
+    </table>
+    <br>
     <table>
         <tr>
             <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
@@ -132,8 +137,32 @@
           console.log("Api call error");
         }
         const data = await apicall.json();
-        var purchasetime;
-        purchasetime = data.profiles[data.profiles.length - 1].members[UUID].mining_core.greater_mines_last_access;
+        var purchasetime = data.profiles[data.profiles.length - 1].members[UUID].mining_core.greater_mines_last_access;
+        console.log(purchasetime);
+        //identify if player has the ruby/jasper crystal
+        try {
+            var hasruby;
+            hasruby = data.profiles[data.profiles.length - 1].members[UUID].mining_core.crystals.ruby_crystal.state;
+            var hasjasper;
+            hasjasper = data.profiles[data.profiles.length - 1].members[UUID].mining_core.crystals.jasper_crystal.state;
+        } catch (TypeError) {
+            hasruby = "NOT_FOUND";
+            hasjasper = "NOT_FOUND";
+        }
+        if (hasruby == "FOUND"){
+            nucweights["crystal_ruby"] = 0;
+            document.getElementById("hasrubycrystal").innerText = "True";
+        } else {
+            nucweights["crystal_ruby"] = 2500;
+            document.getElementById("hasrubycrystal").innerText = "False";
+        }
+        if (hasjasper == "FOUND"){
+            nucweights["crystal_jasper"] = 0;
+            document.getElementById("hasjaspercrystal").innerText = "True";
+        } else {
+            nucweights["crystal_jasper"] = 2500;
+            document.getElementById("hasrubycrystal").innerText = "False";
+        }
         console.log(purchasetime);
         if (purchasetime == undefined) {
             document.getElementById("passexpiration").innerText = "N/A";
@@ -156,18 +185,20 @@
         } else {
             document.getElementById("hashighroller").innerText = "False";
         }
-        
+        var totalweight = totalnucweight + nucweights["crystal_ruby"] + nucweights["crystal_jasper"];
+        console.log("Total weight: " + totalweight);
+
         for (var key in nucweights){
             try {
                 var apxdropchance = 0;
                 for (var j = 14 + hr; j <= 20 + hr; j++){
-                    //console.log("J: " + j + " nucweights[key]: " + nucweights[key] + " Total nuc weight: " + window["totalnucweight"] + " Drop chance: " + (nucweights[key] / window["totalnucweight"]));
-                    apxdropchance += ((1/7) * binomial(j, nucweights[key]/window["totalnucweight"]));
+                    //console.log("J: " + j + " nucweights[key]: " + nucweights[key] + " Total nuc weight: " + totalweight + " Drop chance: " + (nucweights[key] / totalweight));
+                    apxdropchance += ((1/7) * binomial(j, nucweights[key]/totalweight));
                 }
                 document.getElementById("chance_" + key).innerText = (apxdropchance * 100).toFixed(3) + "%";
                 //console.log((apxdropchance * 100).toFixed(3) + "%");
             } catch (ReferenceError) {
-                console.log("adj opted not to put " + key + " in the table.");
+                //console.log("adj opted not to put " + key + " in the table.");
             }
             
             
