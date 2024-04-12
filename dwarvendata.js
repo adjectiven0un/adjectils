@@ -98,13 +98,13 @@ var translations = {
     "PET_MAMMOTH": "Mammoth Pet",
     "DWARVEN_HANDWARMERS": "Dwarven Handwarmers",
     "REINFORCED_CHISEL": "Reinforced Chisel",
-    "DWARVEN_METAL_TALISMAN": "Dwarven Metal Talisman",
+    "DWARVEN_METAL": "Dwarven Metal Talisman",
     "PORTABLE_CAMPFIRE": "Portable Campfire",
     "TUNGSTEN_KEYCHAIN": "Tungsten Keychain",
     "GLACITE_CHISEL": "Glacite Chisel",
     "PERFECT_CHISEL": "Perfect Chisel",
     "DIVAN_PENDANT": "Pendant of Divan",
-    "RELIC_OF_POWER": "Relic of Power",
+    "POWER_RELIC": "Relic of Power",
     "SKELETON_KEY": "Skeleton Key",
   }
   var times = {
@@ -197,7 +197,7 @@ var translations = {
     "UMBER_KEY": 1800,
     "TUNGSTEN_KEY": 1800,
     "REINFORCED_CHISEL": 43200,
-    "DWARVEN_METAL_TALISMAN": 86400,
+    "DWARVEN_METAL": 86400,
     "PORTABLE_CAMPFIRE": 1800,
     "TUNGSTEN_KEYCHAIN": 21600,
     "DWARVEN_HANDWARMERS": 14400,
@@ -209,7 +209,7 @@ var translations = {
     "DIVAN_PENDANT": 604800,
     "PERFECT_PLATE": 1800,
     "SKELETON_KEY": 1800,
-    "RELIC_OF_POWER": 28800,
+    "POWER_RELIC": 28800,
     "FRIGID_HUSK": 36000,
     //Pets
     //These are guesses until i can get the actual ID
