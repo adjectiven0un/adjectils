@@ -19,6 +19,19 @@
   <div style = "float:left; width:270px;">
   <span id = "status">Enter a username to continue.&nbsp;</span>
   </div>
+  <br>
+  <div style = "float:left;">
+    <form action = "#">
+      <label>Profile:</label>
+      <select id = profileid value = 4 onchange = updateForges(nameinput.value)>
+        <option id = profile0 value = 0>–––––</option>
+        <option id = profile1 value = 1>–––––</option>
+        <option id = profile2 value = 2>–––––</option>
+        <option id = profile3 value = 3>–––––</option>
+        <option id = profile4 value = 4>–––––</option>
+      </select>
+    </form>
+  </div>
   <div style = "display: inline-block;">
     
   </div>
@@ -125,7 +138,22 @@
       console.log("Attempted CD reset");
       onCD = false;
     }
+    function fullReset(forgelog){
+      for (var i = 1; i <= 5; i++){
+            document.getElementById("time" + i).innerText = "––:––";
+            document.getElementById("finish" + i).innerText = "––:––";
+            document.getElementById("forgeunmeter" + i).innerText = "";
+            document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
+            document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
+            document.getElementById("img" + i).style.opacity = 0;
+            document.getElementById("img" + i).src = "./images/filler.png";
+          }
+          console.log("No active forges");
+          
+    }
+    var lastname;
     async function updateForges(name){
+      
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -135,15 +163,7 @@
         onCD = true;
         setTimeout(() => { onCD = false }, 5000);
       }
-      for (var i = 1; i <= 5; i++){
-        document.getElementById("time" + i).innerText = "Loading...";
-        document.getElementById("finish" + i).innerText = "Loading...";
-        document.getElementById("forgeunmeter" + i).innerText = "";
-        document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
-        document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
-        document.getElementById("img" + i).src = "./images/filler.png";
-        document.getElementById("img" + i).style.opacity = 0;
-      }
+      fullReset();
       clearInterval(intervalID[0]);
       intervalID.length = 0;
       var UUID = await getUUIDbyName(name);
@@ -153,25 +173,32 @@
           console.log("Api call error");
         }
         const data = await apicall.json();
+        var profilelist;
+        try {
+          profilelist = (data.profiles);
+          for (var i = 0; i < 5; i++){
+            document.getElementById("profile" + i).innerText = "–––––";
+          }
+          for (var i = 0; i < profilelist.length; i++){
+            document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
+          }
+          if (lastname != name){
+            document.getElementById("profileid").value = profilelist.length - 1;
+            lastname = name;  
+          }
+        } catch (TypeError){
+          fullReset();
+        }
         var forgelog;
         try {
-          forgelog = (data.profiles[data.profiles.length - 1].members[UUID].forge.forge_processes.forge_1);
+          forgelog = (data.profiles[profileid.value].members[UUID].forge.forge_processes.forge_1);
         } catch (TypeError){
-          for (var i = 1; i <= 5; i++){
-            document.getElementById("time" + i).innerText = "––:––";
-            document.getElementById("finish" + i).innerText = "––:––";
-            document.getElementById("forgeunmeter" + i).innerText = "";
-            document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
-            document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
-            document.getElementById("img" + i).src = "./images/filler.png";
-            document.getElementById("img" + i).style.opacity = 0;
-          }
-          console.log("No active forges");
+          fullReset();
           forgelog = "Empty";
         }
         var quickforge;
         try {
-          quickforge = (data.profiles[data.profiles.length - 1].members[UUID].mining_core.nodes.forge_time);
+          quickforge = (data.profiles[profileid.value].members[UUID].mining_core.nodes.forge_time);
         } catch (TypeError){
           quickforge = 0;
         }
