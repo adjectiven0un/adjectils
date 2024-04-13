@@ -2,10 +2,10 @@
   <html>
   <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <body onload="updatePage(), updatetimer">
+  <body onload="updatePage(), updatetimer", style = "background-image:url(./images/spiderbg.png);background-size:10%">
   <title>adjectils - Spider's Den</title>
   <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Arachnal utilities for Hypixel Skyblock">
+  <meta name = "description" content = "Arachnal utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
@@ -14,8 +14,9 @@
       });
       </script>
   </head>
-  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = denheader>Spider's Den</span><br>
-  
+  <div id = header style = "background-color: #282828; width: 340px">
+    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = denheader>Spider's Den</span><br>
+  </div>    
   <div style = "width:1050px">
     <div class = "spider_block" style = "width: 600px", id = "box2">
         <span class = spiderheader>Tarantula Broodfather</span><br>
@@ -34,7 +35,7 @@
                 <option value = rune_bite>Bite Rune</option>
             </select>
         </form>
-        <span class = fineprint>Note: This calculator only provides the chances for tier 4.</span>   
+        <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
         <table id = loottable_spider>
         <tr><td><hr class = solid></td></tr>
         <tr><td><span class = basictext>Chance of Toxic Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_toxic></span></td><br></tr>
@@ -50,7 +51,7 @@
         </table>
         
       </div>
-      <div class = spider_block style = "width:400px">
+      <div class = spider_block style = "width:600px">
         <span class = spiderheader>Weather</span><br>
         <hr class = solid>
         <table id = raintable>

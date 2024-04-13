@@ -4,7 +4,7 @@
   <body onload="">
   <title>adjectils - Dwarven Mines</title>
   <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Dwarven utilities for Hypixel Skyblock">
+  <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
@@ -12,7 +12,9 @@
         $("#nav").load("nav.html"); 
       });
       </script>
-  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
+  <div id = header style = "background-color: #282828; width: 340px">
+    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
+  </div>  
   <input type = "text" onchange = updateForges(value)><br>
   <span id = "status">Enter a username to continue.</span><br>
   <div class = "dwarven_block" style = "width:800px">
@@ -118,7 +120,7 @@
         document.getElementById("time" + i).innerText = "Loading...";
         document.getElementById("finish" + i).innerText = "Loading...";
         document.getElementById("forgeunmeter" + i).innerText = "";
-        document.getElementById("forgemeter" + i).style.color = "#000000";
+        document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
         document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         document.getElementById("img" + i).src = "./images/filler.png";
         document.getElementById("img" + i).style.opacity = 0;
@@ -140,7 +142,7 @@
             document.getElementById("time" + i).innerText = "––:––";
             document.getElementById("finish" + i).innerText = "––:––";
             document.getElementById("forgeunmeter" + i).innerText = "";
-            document.getElementById("forgemeter" + i).style.color = "#000000";
+            document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
             document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
             document.getElementById("img" + i).src = "./images/filler.png";
             document.getElementById("img" + i).style.opacity = 0;
@@ -205,7 +207,7 @@
           document.getElementById("time" + i).innerText = "––:––";
           document.getElementById("finish" + i).innerText = "––:––";
           document.getElementById("forgeunmeter" + i).innerText = "";
-          document.getElementById("forgemeter" + i).style.color = "#000000";
+          document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
           document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         }
         console.log("No items found");

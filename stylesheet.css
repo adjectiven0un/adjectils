@@ -1,10 +1,14 @@
 body {
     font-family: Roboto, Manrope, monospace;
+    background-color: #282828;
+    color: #c0c0c0;
+    /*
     background-attachment: fixed;
     background-image: url("images/background.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    */
   }
   /*
   title colors
@@ -12,14 +16,15 @@ body {
   .adjheader{
     font-size: 24px;
     color: #808080;
+    text-decoration: none;
   }
   .header{
     font-size:24px;
-    color: #000000;
+    color: #c0c0c0;
   }
   .crimsonheader{
     font-size:24px;
-    color: #722525;
+    color: #924545;
   }
   .endheader{
     font-size:24px;
@@ -27,7 +32,7 @@ body {
   }
   .denheader{
     font-size:24px;
-    color: #602438;
+    color: #a0304a;
   }
   .crystalheader{
     font-size:24px;
@@ -37,6 +42,7 @@ body {
   blocktypes
   */
   .end_block{
+    background-color: #404040;
     border-style: solid;
     border-color: #020202;
     margin: 5px;
@@ -44,13 +50,16 @@ body {
     padding: 10px;
   }
   .spider_block{
+    background-color: #404040;
     border-style: solid;
-    border-color: #600020;
+    border-color: #601a14;
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
+    color: #c0c0c0;
   }
   .blaze_block{
+    background-color: #404040;
     border-style: solid;
     border-color: #bd400e;
     margin: 5px;
@@ -58,6 +67,7 @@ body {
     padding: 10px;
   }
   .hub_block{
+    background-color: #404040;
     border-style: solid;
     border-color: #808080;
     margin: 5px;
@@ -65,11 +75,13 @@ body {
     padding: 10px;
   }
   .navblock{
+    background-color: #404040;
     text-align:left;
     font-size:12px;
     
   }
   .dwarven_block{
+    background-color: #404040;
     border-style: solid;
     border-color: #a0a0a0;
     margin: 5px;
@@ -77,22 +89,33 @@ body {
     padding: 10px;
   }
   .crystal_block{
+    background-color: #404040;
     border-style: solid;
     border-color: #c2c2c2;
     margin:5px;
     border-spacing:5px;
     padding:10px;
   }
+  input {
+    background-color:#686868;
+    color: #c0c0c0;
+    border-color: #404040;
+  }
+  select {
+    background-color:#686868;
+    color: #c0c0c0;
+    border-color: #404040;
+  }
   /*
   text
   */
   .voidheader{
     font-size:24px;
-    color:#603070;
+    color:#a040a8;
   }
   .spiderheader{
     font-size:24px;
-    color:#501010;
+    color:#b03840;
   }
   .blazeheader{
     font-size:24px;
@@ -100,7 +123,7 @@ body {
   }
   .hubheader{
     font-size:24px;
-    color:#606060;
+    color:#35b135;
   }
   .minesheader{
     font-size:24px;
@@ -119,9 +142,10 @@ body {
     font-weight:bold;
   }
   .basictext{
-    color: #000000;
+    color: #c0c0c0;
   }
   .meter{
+    color: #c0c0c0;
     font-family: Arial, sans-serif;
   }
   .spiderclear{

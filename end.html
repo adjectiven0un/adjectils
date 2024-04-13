@@ -4,7 +4,7 @@
   <body onload="updatePage()">
   <title>adjectils - The End</title>
   <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Ender utilities for Hypixel Skyblock">
+  <meta name = "description" content = "Ender utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
@@ -12,9 +12,10 @@
         $("#nav").load("nav.html"); 
       });
       </script>
-  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = endheader>The End</span><br>
-  <div id = page class = "end_block" style = "width: 1078px; height: 640px">
-  <div class = "end_block" style = "width: 400px; float: left;", id = "box1">
+  <div id = header style = "background-color: #282828; width: 600px">
+    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = endheader>The End</span><br>
+  </div> 
+  <div class = "end_block" style = "width: 600px;", id = "box1">
     <span class = voidheader>Dragons & Golems</span><br>  
     <span class = basictext>User's Magic Find: </span><input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input><br>
     <span class = basictext>User's Pet Luck: </span><input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input><br>
@@ -30,8 +31,8 @@
       <tr><td><span class = basictext>Chance of Epic Golem pet: </span></td><td><span id = "epicgolemoutput" style = "text-align:right">0.000%</span><br></td></tr>
     </table>
 
-  </div>
-  <div class = "end_block" style = "float:right; width: 600px", id = "box2">
+  </div><br>
+  <div class = "end_block" style = " width: 600px", id = "box2">
     <span class = voidheader>Voidgloom Seraph</span><br>
     <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input><br>
     <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input><span>%</span><br>
@@ -59,7 +60,7 @@
         <option value = rune_enchant>Enchant Rune I</option>
       </select>
     </form>
-    <span class = fineprint>Note: This calculator only provides the chances for tier 4.</span>
+    <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>
     <table id = loottable_seraph>
     <tr><td><hr class = solid></td></tr>
     <tr><td><span class = basictext>Chance of Twilight Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_twilight></span></td><br></tr>
@@ -84,8 +85,6 @@
     <tr><td><span class = basictext>Chance of Enchant Rune I: </span></td><td><span class = basictext id = chance_rune_enchant></span><br></td></tr>
     <tr><td><hr class = solid></td></tr>
     </table>
-  </div>
-
   </div>
   </div>
   <div id = "nav" class = "end_block" style = "width:600px;"></div>
