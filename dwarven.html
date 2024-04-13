@@ -15,8 +15,13 @@
   <div id = header style = "background-color: #282828; width: 340px">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
   </div>  
-  <input type = "text" onchange = updateForges(value)><br>
-  <span id = "status">Enter a username to continue.</span><br>
+  <input type = "text" id = "nameinput" onchange = updateForges(value)><span>&nbsp;</span><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
+  <div style = "float:left; width:270px;">
+  <span id = "status">Enter a username to continue.&nbsp;</span>
+  </div>
+  <div style = "display: inline-block;">
+    
+  </div>
   <div class = "dwarven_block" style = "width:800px">
     <span class = minesheader>Forge timers</span><br><br>
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
@@ -115,7 +120,21 @@
   <script src = "dwarvendata.js"></script>
   <script>
     const intervalID = [];
+    var onCD = false;
+    function resetCD(){
+      console.log("Attempted CD reset");
+      onCD = false;
+    }
     async function updateForges(name){
+      if (onCD == true){
+        document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+        console.log("On cooldown!");
+        return -1;
+      } else {
+        document.getElementById("refreshstatus").innerText = "";
+        onCD = true;
+        setTimeout(() => { onCD = false }, 5000);
+      }
       for (var i = 1; i <= 5; i++){
         document.getElementById("time" + i).innerText = "Loading...";
         document.getElementById("finish" + i).innerText = "Loading...";
