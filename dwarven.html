@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
   <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <body onload="">
+  <body onload="" style = "background-image:url(./images/dwarvenbg.png); background-size:15%">
   <title>adjectils - Dwarven Mines</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
@@ -17,11 +17,11 @@
   </div>  
   <input type = "text" id = "nameinput" onchange = updateForges(value)><span>&nbsp;</span><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
   <div style = "float:left; width:270px;">
-  <span id = "status">Enter a username to continue.&nbsp;</span>
+  <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
   <br>
   <div style = "float:left;">
-    <form action = "#">
+    <form action = "#" style = "background-color: #282828;">
       <label>Profile:</label>
       <select id = profileid value = 4 onchange = updateForges(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
@@ -155,13 +155,13 @@
     async function updateForges(name){
       
       if (onCD == true){
-        document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+        document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
         console.log("On cooldown!");
         return -1;
       } else {
         document.getElementById("refreshstatus").innerText = "";
         onCD = true;
-        setTimeout(() => { onCD = false }, 5000);
+        setTimeout(() => { onCD = false }, 3000);
       }
       fullReset();
       clearInterval(intervalID[0]);
