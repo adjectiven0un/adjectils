@@ -171,6 +171,8 @@
         const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
         if (!apicall.ok){
           console.log("Api call error");
+          document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
+          return -1;
         }
         const data = await apicall.json();
         var profilelist;

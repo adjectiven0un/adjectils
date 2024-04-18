@@ -13,8 +13,11 @@
   <div class = region>Filler text</div>
   <span>What are you doing here? This page isn't finished yet...</span>
   </body>
-
+  <script src = "binomials.js"></script>
   <script>
+    console.log("Sanity check: " + (0.25 * binomial(0.00054, 5)));
+    var dropchance = (0.25 * binomial(0.00054, 5) + 0.3 * binomial(0.00054, 6) + 0.3 * binomial(0.00054, 7) + 0.3 * binomial(0.00054, 8) + 0.05 * binomial(0.00054, 9));
+    console.log("Dropchance (Decimal): " + dropchance);
     function updatePage(){
         console.log("Updating...");
         $.getJSON(
@@ -38,6 +41,7 @@
                 console.log("No next mayor found - Is the cycle on cooldown?");
                 document.getElementById('nextmayor').innerText = 'Next mayor: Waiting for election cycle...';
             }
+            
             
             var currenttime = data.lastUpdated;
             var epoch = 156027570000;
