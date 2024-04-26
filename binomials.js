@@ -34,8 +34,7 @@ function binomial(n, p){
         if (i > n){
             break;
         }
-        ret += (nCr(n, i) * (p ** i) * ((1 - p) ** (n - i))); 
-        console.log("ret = " + ret);
+        ret += (nCr(n, i) * (p ** i) * ((1 - p) ** (n - i)));
     }
     
     return ret;

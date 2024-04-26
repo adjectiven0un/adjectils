@@ -189,7 +189,7 @@ body {
     right: 0;
     bottom: 0;
     border-radius:20px;
-    background-color:#a40000;
+    background-color:#606060;
     -webkit-transition: .4s;
     transition: .4s;
     
@@ -205,7 +205,7 @@ body {
     transition: .4s;
   }
   input:checked + .switch {
-    background-color: #488448;
+    background-color: #48a448;
   }
   input:checked + .switch:before {
     -webkit-transform: translateX(24px);

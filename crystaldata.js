@@ -55,6 +55,7 @@ var nucweights = {
     treasurite10: 200,
     recall: 250,
     preciouspearl: 500,
+    claw: 500,
     gemmix: 700,
     book_fortune: 700,
     quick_claw: 50,
@@ -62,4 +63,4 @@ var nucweights = {
     essence_diamond: 750,
 }
 
-var totalnucweight = 300245;
+var totalnucweight = 300745;
