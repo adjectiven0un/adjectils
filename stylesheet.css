@@ -39,6 +39,10 @@ body {
     font-size:24px;
     color: #b548e8;
   }
+  .indexheader{
+    font-size:20px;
+    color:#d0d0d0;
+  }
   /*
   blocktypes
   */
@@ -212,6 +216,71 @@ body {
     -webkit-transform: translateX(24px);
     -ms-transform: translateX(24px);
     transform: translateX(24px);
+  }
+  .splash{
+    font-size:20px;
+    color: #f0f050;
+  }
+  .flex_box_index{
+    /*
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    */
+    flex-wrap:wrap;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction:column;
+    margin:auto;
+    width: min(calc(100% - 30px), max(600px, 70%));
+    
+  }
+  .flex_index_row{
+    /*
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    */
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    flex-direction:row;
+  }
+  .flex_index_box{
+    
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    text-justify: auto;
+    margin: 10px;
+    border-spacing: 5px;
+    padding: 10px;
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .limbo_row{
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    flex-direction:row;
+  }
+  .limbo_box{
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    margin: 5px;
+    border-spacing: 5px;
+    padding: 5px;
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    transition-duration:0.25s;
+    position:absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    justify-content: center;
   }
 
   

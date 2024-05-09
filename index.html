@@ -1,6 +1,5 @@
 <!DOCTYPE html>
   <html>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
   <body onload="updatePage()">
   <title>adjectils - Home</title>
   <link rel="stylesheet" href="stylesheet.css">
@@ -12,16 +11,158 @@
         $("#nav").load("nav.html"); 
       });
       </script>
+  <div id = header style = "text-align: center; margin: 20px">
   <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
-      <div class = "hub_block" style = "width:600px;">
-        <span>This page isn't finished yet! Come back later!</span>
+  <span class = "splash" id = "splashtext"></span>
+  </div>
+  
+  <section class = "flex_box_index">
+    <div class = "flex_index_row" style = "width:95%; height:50%;">
+      <div class = "flex_index_box"; style = "width: 64%; height:70%;" id = "election">
+        <div style = "flex-basis: 100%">
+          <span class = "indexheader">Current mayor:&nbsp;</span><span class = "indexheader" id = "currentmayor"></span><br>
+        </div>
+        
       </div>
+      <div class = "flex_index_box"; style = "width: 34%; height:70%;" id = "datetime">
+        <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
+          <span class = "indexheader" id = "sbmonth"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbseason"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbdate"></span><span class = "indexheader">, Year&nbsp;</span><span class = "indexheader" id = sbyear></span>
+        </div>
+        <div style = "display:flex;flex-basis:100%; justify-content:flex-end;">
+          <span id = "sbtime"></span>
+        </div>
+        
+      </div>
+    </div>
+    <div class = "flex_index_row" style = "width:95%; height:20%;">
+    <div class = "flex_index_box"; style = "width: 100%; height:70%;" id = "">
+      <span style = "text-align:center">Coming soon!</span>
+    </div>
+    </div>
+    <div class = "flex_index_row" style = "width:95%; height:20%;">
+    <div class = "flex_index_box"; style = "width: 100%; height:70%;" id = "">
+      <span style = "text-align:center">Coming soon!</span>
+    </div>
+    </div>
+  </div>
+      
+</section>
+<br>
 
 
-  <div id = "nav" style = "width:600px" class = "hub_block"></div>
+  <div id = "nav" style = "width:600px; margin: auto;" class = "hub_block"></div>
   </body>
   <script>
-    function updatePage(){
-        
+    var date = new Date();
+    var timeofday = "morning";
+    if (date.getHours() < 5 && date.getHours() > -1){
+      timeofday = "night";
     }
+    if (date.getHours() < 20 && date.getHours() > 12){
+      timeofday = "afternoon";
+    }
+    if (date.getHours() < 24 && date.getHours() > 19){
+      timeofday = "evening";
+    }
+    console.log(timeofday);
+    console.log(date.getHours());
+    var splashes_morning = ["Since 2024!", "BrookeAFK helped a lot!", "Also play Warlords!", "Distributing binomials!", "Also visit nadeshiko.io!", "Stalking the API!", "NOT playing Skywars!", "Now with 100% more bugs!", "<o/", "Glad you made it!", "0.02% less sugar!", "Entertaining splash texts!", "Coming soon!", "Rise and shine!", "Wait up!", "Finally awake?", "Destiny awaits!", "What do you want to be?", "Greatness begins here!", "Planned everything out?", "Stay alert!", "The early runner gets the loot!", "Wake-up call!", "Another day, another day!"];
+    var splashes_afternoon = ["Great weather today!", "Overkill!", "BrookeAFK helped a lot!", "Just add water!", "Alpha tested!", "Admin endorsed!", "About 99% truthful!", "Ok, but when do we get the wave text?", "Not contradictory!", "Side effects include being awesome!", "May cause headaches!", "Ad-free!", "Life-changing!", "Optimized!", "How about a break?", "Tap and zap!", "Best of three?", "Heart and soul!", "Stay with me!", "Get lucky!", "https://adjectiven0un.github.io/holeinthewall ?", "Tap here to do absolutely nothing!", "Geronimo!", "Until we see the end of time!", "High Intensity Discharge!"];
+    var splashes_evening = ["Better call Paul!", "BrookeAFK helped a lot!", "Can we make that a splash?", "Toasting marshmallows!", "Are we there yet?", "How was your day?", "Welcome back!", "Keep calm!", "Not scary!", "Regenerative!", "Treats boredom!", "Brevity!", "Written in notepad!", "Best viewed by candlelight!", "Hello, world?", "Traversing the Ratacombs!", "Foraging when?", "Cross my heart and hope to die!", "Watch your step!", "How many of them are there?", "Let me know how the sunset was!", "But if you close your eyes...", "Your biggest fan!", "Pit reference!", "The Champions rise!"];
+    var splashes_night = ["Time for bed, perhaps?", "BrookeAFK helped a lot!", "Burning the midnight oil!", "The stars don't shine as bright as you!", "And don't be afraid of the dark!", "Don't do hacks!", "Full of easter eggs!", "Satiable hunger!", "Suitable for all ages!", "Updated in 3-5 business days!", "Now in dark theme!", "How many of these are there?", "Three's a crowd!", "Two nights until the Coven have the Necronomicon!", "Watch the doors!", "Once upon a midnight dreary...", "NIGHT QUEST! Kill 50 players!", "Tranquil, isn't it?", "No holding back!", "-24, 198, 40", "It was here all along!", "Toil and trouble!", "Don't feed the Barbarian!", "Let me know how the sunrise looks!", "*slow guitar riff*"];
+    
+    const daylen = 1200;
+    const monthlen = 31 * daylen;
+    const seasonlen = 3 * monthlen;
+    const yearlen = 4 * seasonlen;
+    
+    
+    const tenstep = daylen / (6 * 24);
+
+    const seasons = ["Spring", "Summer", "Autumn", "Winter"];
+    const months = ["Early", "", "Late"];
+    async function updatePage(){
+        var splashindex = Math.floor(24 * Math.random());
+        console.log("Chose splash " + splashindex);
+        document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
+        updateDate();
+        setInterval(updateDate, 4167);
+        const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
+        if (!apicall.ok){
+          console.log("Api call error");
+          document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
+          return -1;
+        }
+        const mayordata = await apicall.json();
+        try {
+          var currentmayor = mayordata.mayor.name;
+          document.getElementById("currentmayor").innerText = currentmayor;
+          var perks = document.createElement("div");
+          for (var i = 0; i < mayordata.mayor.perks.length; i++){
+            var perk = document.createElement("span");
+            perk.textContent = mayordata.mayor.perks[i].name + ": " + mayordata.mayor.perks[i].description.replace(/§./g, "") + "\n";
+            perks.appendChild(perk);
+          }
+          perks.style.display = "flex";
+          perks.style.flexBasis = "100%";
+          election.appendChild(perks);
+          
+        } catch (Error){
+          document.getElementById("currentmayor").innerText = "Unexpected error occurred: ${Error}";
+          console.log("Couldn't find the current mayor! Is the API down?");
+        }
+        try {
+          var timer = document.createElement("div");
+          timer.style.display = "flex";
+          timer.style.flexBasis = "100%";
+          var text = document.createElement("span");
+        } catch (Error) {
+
+        }
+        
+        setInterval(() => updateMayors(mayordata), 1000);
+
+    }
+    const activeEvents = ["", "", "", "", "", ""];
+    function updateDate(){
+        var initial = 1560275700;
+        var currenttime = Date.now() / 1000;
+        var year = Math.floor((currenttime - initial) / yearlen);
+        document.getElementById("sbyear").innerText = year;
+        var yearcycletime = (currenttime - initial) % yearlen;
+        var season = seasons[Math.floor(yearcycletime / seasonlen)];
+        document.getElementById("sbseason").innerText = season;
+        var seasoncycletime = (yearcycletime) % seasonlen;
+        var month = months[Math.floor(seasoncycletime / monthlen)];
+        document.getElementById("sbmonth").innerText = month;
+        var monthcycletime = (seasoncycletime) % monthlen;
+        var day = Math.floor(monthcycletime / daylen);
+        document.getElementById("sbdate").innerText = day + 1;
+        var daycycletime = (monthcycletime) % daylen;
+        var segments = Math.floor(daycycletime / tenstep);
+        var minutes = segments % 6 + "0";
+        var hours = Math.floor(segments / 6);
+        var ampm = "am";
+        if (hours > 12){
+          hours -= 12;
+          ampm = "pm";
+        }
+        document.getElementById("sbtime").innerText = hours + ":" + minutes + ampm;
+    }
+    
+    function addEvent(name, color, index){
+      var event = document.createElement("span");
+      event.textContent = name;
+      event.style.color = color;
+      event.style.display = "flex";
+      event.style.justifyContent = "flex-end";
+      event.style.flexBasis = "100%";
+      activeEvents[index] = name;
+      datetime.appendChild(event);
+    }
+    function updateMayors(mayordata){
+      
+    }
+
+
   </script>

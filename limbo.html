@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+  <html>
+  <body onload="updatePage()">
+  <title>adjectils - Home</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "Adjectils' Home Page!">
+  <meta name = "author" content = "adjective_n0un">
+  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
+  <div id = header style = "text-align: center; margin: 20px">
+  <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
+  <span class = "splash">This easter egg is still in development! How the hell did you even get here?</span><br><br>
+  </div>
+  
+  <section class = "flex_index_box" style = "width:15%; height:50%; margin:auto; position: absolute">
+    
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0; text-align:center" id = "key0">
+      <span style = "text-align:center">🔑</span>
+    </div>
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key1">
+      <span style = "text-align:center">🔑</span>
+    </div>
+  
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key2">
+      <span style = "text-align:center">🔑</span>
+    </div>
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key3">
+      <span style = "text-align:center">🔑</span>
+    </div>
+  
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key4">
+      <span style = "text-align:center">🔑</span>
+    </div>
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key5">
+      <span style = "text-align:center">🔑</span>
+    </div>
+  
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key6">
+      <span style = "text-align:center">🔑</span>
+    </div>
+    <div class = "limbo_box"; style = "width: 40%; height:17%; top:0; left:0" id = "key7">
+      <span style = "text-align:center">🔑</span>
+    </div>
+  </div>
+      
+</section>
+
+
+  <div id = "nav" style = "width:600px; margin: auto;" class = "hub_block"></div>
+  </body>
+  <script>
+    var date = new Date();
+    var timeofday = "morning";
+    if (date.getHours() < 5 && date.getHours() > -1){
+      timeofday = "night";
+    }
+    if (date.getHours() < 20 && date.getHours() > 12){
+      timeofday = "afternoon";
+    }
+    if (date.getHours() < 24 && date.getHours() > 19){
+      timeofday = "evening";
+    }
+    console.log(timeofday);
+    console.log(date.getHours());
+    var splashes_morning = ["Since 2024!", "BrookeAFK helped a lot!", "Also play Warlords!", "Distributing binomials!", "Also visit nadeshiko.io!", "Stalking the API!", "NOT playing Skywars!", "Now with 100% more bugs!", "<o/", "Glad you made it!", "0.02% less sugar!", "Entertaining splash texts!", "Coming soon!", "Rise and shine!", "Wait up!", "Finally awake?", "Destiny awaits!", "What do you want to be?", "Greatness begins here!", "Planned everything out?", "Stay alert!", "The early runner gets the loot!", "Wake-up call!", "Another day, another day!"];
+    var splashes_afternoon = ["Great weather today!", "Overkill!", "BrookeAFK helped a lot!", "Just add water!", "Alpha tested!", "Admin endorsed!", "About 99% truthful!", "Ok, but when do we get the wave text?", "Not contradictory!", "Side effects include being awesome!", "May cause headaches!", "Ad-free!", "Life-changing!", "Optimized!", "How about a break?", "Tap and zap!", "Best of three?", "Heart and soul!", "Stay with me!", "Get lucky!", "https://adjectiven0un.github.io/holeinthewall ?", "Tap here to do absolutely nothing!", "Geronimo!", "Until we see the end of time!", "High Intensity Discharge!"];
+    var splashes_evening = ["Better call Paul!", "BrookeAFK helped a lot!", "Can we make that a splash?", "Toasting marshmallows!", "Are we there yet?", "How was your day?", "Welcome back!", "Keep calm!", "Not scary!", "Regenerative!", "Treats boredom!", "Brevity!", "Written in notepad!", "Best viewed by candlelight!", "Hello, world?", "Traversing the Ratacombs!", "Foraging when?", "Cross my heart and hope to die!", "Watch your step!", "How many of them are there?", "Let me know how the sunset was!", "But if you close your eyes...", "Your biggest fan!", "Pit reference!", "The Champions rise!"];
+    var splashes_night = ["Time for bed, perhaps?", "BrookeAFK helped a lot!", "Burning the midnight oil!", "The stars don't shine as bright as you!", "And don't be afraid of the dark!", "Don't do hacks!", "Full of easter eggs!", "Satiable hunger!", "Suitable for all ages!", "Updated in 3-5 business days!", "Now in dark theme!", "How many of these are there?", "Three's a crowd!", "Two nights until the Coven have the Necronomicon!", "Watch the doors!", "Once upon a midnight dreary...", "NIGHT QUEST! Kill 50 players!", "Tranquil, isn't it?", "No holding back!", "-24, 198, 40", "It was here all along!", "Toil and trouble!", "Don't feed the Barbarian!", "Let me know how the sunrise looks!", "*slow guitar riff*"];
+    
+    var slots = {
+      0: 0,
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7,
+    }
+    function slotswap (i, j){
+      const temp = slots[j];
+          slots[j] = slots[i];
+          slots[i] = temp;
+    }
+    function rotatecw(a, b, c, d){
+      // there's got to be an easier way to do this
+      const tempa = slots[a];
+      slots[a] = slots[b];
+      slots[b] = slots[c];
+      slots[c] = slots[d];
+      slots[d] = tempa;
+      
+    }
+    function rotateccw(a, b, c, d){
+      const tempa = slots[a];
+      slots[a] = slots[d];
+      slots[d] = slots[c];
+      slots[c] = slots[b];
+      slots[b] = tempa;
+    }
+    function move(){
+      for (var i = 0; i < 8; i++){
+          document.getElementById("key" + i).style.transform = "translateX(" + (120 * (slots[i] % 2)) + "px) translateY(" + (110 * (Math.floor(slots[i] / 2))) + "px)";
+      }
+    }
+    function fullrotate(a, b, c, d, e, f, g, h){
+      const tempa = slots[a];
+      slots[a] = slots[d];
+      slots[d] = slots[c];
+      slots[c] = slots[b];
+      slots[b] = tempa;
+    }
+    
+    const swaps = [
+      function() {
+        // h swap
+        //console.log("Horizontal swap started");
+        
+        console.log(slots);
+        for (var i = 0; i <= 7; i+=2){
+          slotswap(i, i + 1);
+        }
+        move();
+      },
+      function() {
+        // v swap
+        //console.log("vertical swap started");
+        
+        console.log(slots);
+        slotswap(0, 2);
+        slotswap(1, 3);
+        slotswap(4, 6);
+        slotswap(5, 7);
+        move();
+      },
+      function() {
+        // d swap
+        //console.log("diagonal swap started");
+        console.log(slots);
+        slotswap(0, 3);
+        slotswap(1, 2);
+        slotswap(4, 7);
+        slotswap(5, 6);
+        move();
+      },
+      function() {
+        // cw swap
+        //console.log("cw swap started");
+        console.log(slots);
+        rotatecw(0, 1, 3, 2);
+        rotatecw(4, 5, 7, 6);
+        move();
+      },
+      function() {
+        // ccw swap
+        //console.log("ccw swap started");
+        console.log(slots);
+        rotateccw(0, 1, 3, 2);
+        rotateccw(4, 5, 7, 6);
+        move();
+      },
+      function() {
+        // half d swap
+        //console.log("half diagonal swap started");
+        console.log(slots);
+        slotswap(1, 2);
+        slotswap(5, 6);
+        move();
+      },
+      function() {
+        // half d swap
+        //console.log("half diagonal swap started");
+        console.log(slots);
+        slotswap(0, 3);
+        slotswap(4, 7);
+        move();
+      }
+    ]
+    function updatePage(){
+        move();
+        //limbo
+
+        for (var i = 0; i < 29; i++){
+            setTimeout(swapRandomly, 2000 + (300 * i));
+            console.log("Set a timeout on swapping for " + 300 * i + " milliseconds");
+        }
+        
+
+    }
+    function swapRandomly(){
+        swaps[Math.floor(7 * Math.random())]();
+    }
+
+
+
+  </script>
