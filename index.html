@@ -15,14 +15,12 @@
   <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
   <span class = "splash" id = "splashtext"></span>
   </div>
-  
   <section class = "flex_box_index">
     <div class = "flex_index_row" style = "width:95%; height:50%;">
       <div class = "flex_index_box"; style = "width: 64%; height:70%;" id = "election">
         <div style = "flex-basis: 100%">
           <span class = "indexheader">Current mayor:&nbsp;</span><span class = "indexheader" id = "currentmayor"></span><br>
         </div>
-        
       </div>
       <div class = "flex_index_box"; style = "width: 34%; height:70%;" id = "datetime">
         <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
@@ -31,12 +29,15 @@
         <div style = "display:flex;flex-basis:100%; justify-content:flex-end;">
           <span id = "sbtime"></span>
         </div>
-        
       </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
     <div class = "flex_index_box"; style = "width: 100%; height:70%;" id = "">
-      <span style = "text-align:center">Coming soon!</span>
+      <div style = "display:flex;flex-basis:100%;">
+        <span class = header>Events</span>
+      </div>
+      <table id = "eventtable">  
+      </table>
     </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
@@ -45,13 +46,11 @@
     </div>
     </div>
   </div>
-      
 </section>
 <br>
-
-
   <div id = "nav" style = "width:600px; margin: auto;" class = "hub_block"></div>
   </body>
+  <script src = "timeToMinutes.js";></script>
   <script>
     var date = new Date();
     var timeofday = "morning";
@@ -70,27 +69,28 @@
     var splashes_afternoon = ["Great weather today!", "Overkill!", "BrookeAFK helped a lot!", "Just add water!", "Alpha tested!", "Admin endorsed!", "About 99% truthful!", "Ok, but when do we get the wave text?", "Not contradictory!", "Side effects include being awesome!", "May cause headaches!", "Ad-free!", "Life-changing!", "Optimized!", "How about a break?", "Meant to be!", "Best of three?", "Heart and soul!", "Reason enough!", "Sudden!", "https://adjectiven0un.github.io/holeinthewall ?", "Tap here to do absolutely nothing!", "Geronimo!", "Until we see the end of time!", "High Intensity Discharge!"];
     var splashes_evening = ["Better call Paul!", "BrookeAFK helped a lot!", "Can we make that a splash?", "Toasting marshmallows!", "Are we there yet?", "Were you there?", "Welcome back!", "Keep calm!", "Not scary!", "Regenerative!", "Treats boredom!", "Brevity!", "Written in notepad!", "Best viewed by candlelight!", "Hello, world?", "Traversing the Ratacombs!", "Foraging when?", "Cross my heart and hope to die!", "Watch your step!", "Full of secrets!", "Let me know how the sunset was!", "But if you close your eyes...", "Your biggest fan!", "Pit reference!", "Falling again!"];
     var splashes_night = ["Time for bed, perhaps?", "BrookeAFK helped a lot!", "Burning the midnight oil!", "The stars don't shine as bright as you!", "And don't be afraid of the dark!", "Don't do hacks!", "Full of easter eggs!", "Satiable hunger!", "Suitable for all ages!", "Updated in 3-5 business days!", "Now in dark theme!", "How many of these are there?", "Three's a crowd!", "Two nights until the Coven have the Necronomicon!", "Watch the doors!", "Once upon a midnight dreary...", "NIGHT QUEST! Kill 50 players!", "Tranquil, isn't it?", "No holding back!", "-24, 198, 40", "It was here all along!", "Toil and trouble!", "Don't feed the Barbarian!", "Let me know how the sunrise looks!", "*slow guitar riff*"];
-    
     const daylen = 1200;
     const monthlen = 31 * daylen;
     const seasonlen = 3 * monthlen;
     const yearlen = 4 * seasonlen;
-    
-    
     const tenstep = daylen / (6 * 24);
-
     const seasons = ["Spring", "Summer", "Autumn", "Winter"];
-    const months = ["Early", "", "Late"];
+    const monthlist = ["Early", "", "Late"];
+    var initial = 1560275700;
+    var currenttime = Date.now() / 1000;
+    var yearcycletime = (currenttime - initial) % yearlen;
     async function updatePage(){
-        var splashindex = Math.floor(24 * Math.random());
+        var splashindex = Math.floor(25 * Math.random());
         console.log("Chose splash " + splashindex);
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
         updateDate();
+        updateEvents();
         setInterval(updateDate, 4167);
+        setInterval(updateEvents, 1000);
         const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
         if (!apicall.ok){
           console.log("Api call error");
-          document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
+          //document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
           return -1;
         }
         const mayordata = await apicall.json();
@@ -117,23 +117,18 @@
           timer.style.flexBasis = "100%";
           var text = document.createElement("span");
         } catch (Error) {
-
+          console.log("Error making timer...");
         }
-        
-        setInterval(() => updateMayors(mayordata), 1000);
-
     }
-    const activeEvents = ["", "", "", "", "", ""];
     function updateDate(){
-        var initial = 1560275700;
-        var currenttime = Date.now() / 1000;
+        
         var year = Math.floor((currenttime - initial) / yearlen);
-        document.getElementById("sbyear").innerText = year;
+        document.getElementById("sbyear").innerText = year + 1;
         var yearcycletime = (currenttime - initial) % yearlen;
         var season = seasons[Math.floor(yearcycletime / seasonlen)];
         document.getElementById("sbseason").innerText = season;
         var seasoncycletime = (yearcycletime) % seasonlen;
-        var month = months[Math.floor(seasoncycletime / monthlen)];
+        var month = monthlist[Math.floor(seasoncycletime / monthlen)];
         document.getElementById("sbmonth").innerText = month;
         var monthcycletime = (seasoncycletime) % monthlen;
         var day = Math.floor(monthcycletime / daylen);
@@ -149,7 +144,6 @@
         }
         document.getElementById("sbtime").innerText = hours + ":" + minutes + ampm;
     }
-    
     function addEvent(name, color, index){
       var event = document.createElement("span");
       event.textContent = name;
@@ -160,9 +154,96 @@
       activeEvents[index] = name;
       datetime.appendChild(event);
     }
-    function updateMayors(mayordata){
-      
+    var eventColors = {
+        "hoppity": "#c64fbd",
+        "electionClose": "#55ffff",
+        "zoo1": "#55ff55",
+        "electionOpen": "#55ffff",
+        "spooky": "#ffaa00",
+        "zoo2": "#55ff55",
+        "winter": "#ff5555",
+        "jerry": "#ff0000",
+        "newyear": "#ff55ff",
     }
-
-
-  </script>
+    var eventNames = {
+        "hoppity": "Hoppity's Hunt",
+        "electionClose": "Election finalized",
+        "zoo1": "Traveling Zoo #1",
+        "electionOpen": "Election starts",
+        "spooky": "Spooky Festival",
+        "zoo2": "Traveling Zoo #2",
+        "winter": "Winter Island",
+        "jerry": "Season of Jerry",
+        "newyear": "New Year Celebration",
+    }
+    var previndex = -1;
+    function updateEvents(){
+      var initial = 1560275700;
+      var currenttime = Date.now() / 1000;
+      var yearcycletime = (currenttime - initial) % yearlen;
+      var indices = ["hoppity", "electionClose", "zoo1", "electionOpen",  "spooky", "zoo2", "winter", "jerry", "newyear"];
+      var timeUntil = {
+        "hoppity": yearlen - yearcycletime,
+        "electionClose": (yearlen + (2 * monthlen + 26 * daylen) - yearcycletime) % yearlen,
+        "zoo1": (yearlen + (seasonlen) - yearcycletime) % yearlen,
+        "electionOpen": (yearlen + (5 * monthlen + 26 * daylen) - yearcycletime) % yearlen,
+        "spooky": (yearlen + (7 * monthlen + 28 * daylen) - yearcycletime) % yearlen,
+        "zoo2": (yearlen + (3 * seasonlen) - yearcycletime) % yearlen, 
+        "winter": (yearlen + (3 * seasonlen + 2 * monthlen) - yearcycletime) % yearlen,
+        "jerry": (yearlen + (3 * seasonlen + 2 * monthlen + 23 * daylen) - yearcycletime) % yearlen,
+        "newyear": (yearlen + (3 * seasonlen + 2 * monthlen + 28 * daylen) - yearcycletime) % yearlen,
+    }
+      var startindex;
+      for (var i = 0; i < 9; i++){
+        if (timeUntil[indices[i]] > timeUntil[indices[(i + 1) % 9]]){
+          startindex = (i + 1) % 9;
+        }
+      }
+      if (startindex != previndex){
+        previndex = startindex;
+        for (var i = startindex; i < startindex + 9; i++){
+          var row = document.createElement("tr");
+          var data1 = document.createElement("td");
+          var namediv = document.createElement("div");
+          namediv.style.display = "flex";
+          namediv.style.flexBasis = "100%";
+          var evname = document.createElement("span");
+          evname.style = "color: " + eventColors[indices[i % 9]];
+          evname.textContent = eventNames[indices[i % 9]] + ":  ";
+          namediv.appendChild(evname);
+          data1.appendChild(namediv);
+          row.appendChild(data1);
+          var data2 = document.createElement("td");
+          var timediv = document.createElement("div");
+          timediv.style.display = "flex";
+          timediv.style.flexBasis = "100%";
+          timediv.style.justifyContent = "flex-end";
+          var evtime = document.createElement("span");
+          evtime.textContent = "e";
+          evtime.id = indices[i % 9] + "time";
+          console.log(evtime.id);
+          timediv.appendChild(evtime);
+          data2.appendChild(timediv);
+          row.appendChild(data2);
+          eventtable.appendChild(row);
+        }
+      }
+      console.log("Setting timers");
+      setEventTimer("hoppity", timeUntil["hoppity"], seasonlen);
+      document.getElementById("electionOpentime").innerText = timeToMinutes(timeUntil["electionOpen"]);
+      document.getElementById("electionClosetime").innerText = timeToMinutes(timeUntil["electionClose"]);
+      setEventTimer("spooky", timeUntil["spooky"], 3 * daylen);
+      setEventTimer("winter", timeUntil["winter"], monthlen);
+      setEventTimer("jerry", timeUntil["jerry"], 3 * daylen);
+      setEventTimer("newyear", timeUntil["newyear"], 3 * daylen);
+      setEventTimer("zoo1", timeUntil["zoo1"], 3 * daylen);
+      setEventTimer("zoo2", timeUntil["zoo2"], 3 * daylen);
+    }
+    function setEventTimer(elementname, timer, eventDuration){
+      if (timer > yearlen - eventDuration){
+        document.getElementById(elementname + "time").innerText = "Active for " + timeToMinutes(timer - (yearlen - eventDuration));
+      } else {
+        document.getElementById(elementname + "time").innerText = timeToMinutes(timer);
+      }
+    }
+</script>
