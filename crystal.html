@@ -43,27 +43,6 @@
     <br>
     <table>
         <tr>
-            <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Amethyst Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amethyst">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Jade Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jade">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Amber Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amber">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Sapphire Gemstone: &nbsp;</span></td><td><span id = "chance_fl_sapphire">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Topaz Gemstone: &nbsp;</span></td><td><span id = "chance_fl_topaz">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
-        </tr>
-        <tr>
             <td><span>Chance of Bob-omb ×16: &nbsp;</span></td><td><span id = "chance_bombs">Loading...</span></td>
         </tr>
         <tr>
@@ -122,6 +101,27 @@
         </tr>
         <tr>
             <td><span>Chance of Quick Claw: &nbsp;</span></td><td><span id = "chance_quick_claw">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Amethyst Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amethyst">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Jade Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jade">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Amber Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amber">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Sapphire Gemstone: &nbsp;</span></td><td><span id = "chance_fl_sapphire">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Topaz Gemstone: &nbsp;</span></td><td><span id = "chance_fl_topaz">Loading...</span></td>
+        </tr>
+        <tr>
+            <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
         </tr>
     </table>
   </div>
@@ -192,7 +192,7 @@
             document.getElementById("timeleft").innerText = "––:––";
         } else {
             var finaltime = new Date(purchasetime + 21600000);
-            document.getElementById("passexpiration").innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + finaltime.getDate();
+            document.getElementById("passexpiration").innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + " " + finaltime.getDate();
             if (Date.now() > purchasetime + 21600000){
                 document.getElementById("timeleft").innerText = "Expired";
             } else {
