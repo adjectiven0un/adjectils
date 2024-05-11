@@ -25,3 +25,16 @@ function fixTime(unit){
     return unit;
 }
 var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+function convertTimestamp(timestamp){
+    //Timestamp should be in milliseconds.
+    var stamp = new Date((timestamp + 1) * 1000);
+    var ampm = "am";
+        if (Math.floor(stamp.getHours() / 12) >= 1){
+          ampm = "pm";
+    }
+    if (stamp.getHours() % 12 == 0){
+        return "12:" + fixTime(stamp.getMinutes()) + ampm + " " + months[stamp.getMonth()] + " " + stamp.getDate();
+    }
+    return fixTime(stamp.getHours() % 12) + ":" + fixTime(stamp.getMinutes()) + ampm + " " + months[stamp.getMonth()] + " " + stamp.getDate();
+    
+}

@@ -203,6 +203,7 @@
         previndex = startindex;
         for (var i = startindex; i < startindex + 9; i++){
           var row = document.createElement("tr");
+          row.style.justifyContent = "space-evenly";
           var data1 = document.createElement("td");
           var namediv = document.createElement("div");
           namediv.style.display = "flex";
@@ -213,6 +214,18 @@
           namediv.appendChild(evname);
           data1.appendChild(namediv);
           row.appendChild(data1);
+
+          var spacedata = document.createElement("td");
+          var spacediv = document.createElement("div");
+          spacediv.style.display = "flex";
+          spacediv.style.flexBasis = "100%";
+          var space = document.createElement("span");
+          space.style.color = "#404040";
+          space.textContent = "||";
+          spacediv.appendChild(space);
+          spacedata.appendChild(spacediv);
+          row.appendChild(spacedata);
+          
           var data2 = document.createElement("td");
           var timediv = document.createElement("div");
           timediv.style.display = "flex";
@@ -225,13 +238,25 @@
           timediv.appendChild(evtime);
           data2.appendChild(timediv);
           row.appendChild(data2);
+          
+          var data3 = document.createElement("td");
+          var datediv = document.createElement("div");
+          datediv.style.display = "flex";
+          datediv.style.flexBasis = "100%";
+          datediv.style.justifyContent = "flex-end";
+          var datespan = document.createElement("span");
+          datespan.textContent = "e";
+          datespan.id = indices[i % 9] + "date";
+          datediv.appendChild(datespan);
+          data3.appendChild(datediv);
+          row.appendChild(data3);
           eventtable.appendChild(row);
         }
       }
       console.log("Setting timers");
       setEventTimer("hoppity", timeUntil["hoppity"], seasonlen);
-      document.getElementById("electionOpentime").innerText = timeToMinutes(timeUntil["electionOpen"]);
-      document.getElementById("electionClosetime").innerText = timeToMinutes(timeUntil["electionClose"]);
+      setEventTimer("electionOpen", timeUntil["electionOpen"], 0);
+      setEventTimer("electionClose", timeUntil["electionClose"], 0);
       setEventTimer("spooky", timeUntil["spooky"], 3 * daylen);
       setEventTimer("winter", timeUntil["winter"], monthlen);
       setEventTimer("jerry", timeUntil["jerry"], 3 * daylen);
@@ -242,8 +267,15 @@
     function setEventTimer(elementname, timer, eventDuration){
       if (timer > yearlen - eventDuration){
         document.getElementById(elementname + "time").innerText = "Active for " + timeToMinutes(timer - (yearlen - eventDuration));
+        var current = Math.floor(Date.now() / 1000);
+        var endtime = Math.floor(current - yearlen + timer + eventDuration);
+        document.getElementById(elementname + "date").innerText = "Until " + convertTimestamp(endtime);
       } else {
         document.getElementById(elementname + "time").innerText = timeToMinutes(timer);
+        var current = Math.floor(Date.now() / 1000);
+        var eventtime = Math.floor(current + timer);
+        console.log(eventtime);
+        document.getElementById(elementname + "date").innerText = "| " + convertTimestamp(eventtime);
       }
     }
 </script>
