@@ -17,12 +17,12 @@
   </div>
   <section class = "flex_box_index">
     <div class = "flex_index_row" style = "width:95%; height:50%;">
-      <div class = "flex_index_box"; style = "width: 64%; height:70%;" id = "election">
+      <div class = "flex_index_box" style = "width: 64%; height:70%;" id = "election">
         <div style = "flex-basis: 100%">
           <span class = "indexheader">Current mayor:&nbsp;</span><span class = "indexheader" id = "currentmayor"></span><br>
         </div>
       </div>
-      <div class = "flex_index_box"; style = "width: 34%; height:70%;" id = "datetime">
+      <div class = "flex_index_box" style = "width: 34%; height:70%;" id = "datetime">
         <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
           <span class = "indexheader" id = "sbmonth"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbseason"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbdate"></span><span class = "indexheader">, Year&nbsp;</span><span class = "indexheader" id = sbyear></span>
         </div>
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
-    <div class = "flex_index_box"; style = "width: 100%; height:70%;" id = "">
+    <div class = "flex_index_box" style = "width: 100%; height:70%;" id = "">
       <div style = "display:flex;flex-basis:100%;">
         <span class = header>Events</span>
       </div>
@@ -41,7 +41,7 @@
     </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
-    <div class = "flex_index_box"; style = "width: 100%; height:70%;" id = "">
+    <div class = "flex_index_box" style = "width: 100%; height:70%;" id = "">
       <span style = "text-align:center">Coming soon!</span>
     </div>
     </div>
@@ -50,7 +50,7 @@
 <br>
   <div id = "nav" style = "width:600px; margin: auto;" class = "hub_block"></div>
   </body>
-  <script src = "timeToMinutes.js";></script>
+  <script src = "timeToMinutes.js"></script>
   <script>
     var date = new Date();
     var timeofday = "morning";
@@ -121,7 +121,7 @@
         }
     }
     function updateDate(){
-        
+        currenttime = Math.floor(Date.now() / 1000);
         var year = Math.floor((currenttime - initial) / yearlen);
         document.getElementById("sbyear").innerText = year + 1;
         var yearcycletime = (currenttime - initial) % yearlen;
@@ -179,8 +179,8 @@
     var previndex = -1;
     function updateEvents(){
       var initial = 1560275700;
-      var currenttime = Date.now() / 1000;
-      var yearcycletime = (currenttime - initial) % yearlen;
+      var now = Math.floor(Date.now() / 1000);
+      var yearcycletime = (now - initial) % yearlen;
       var indices = ["hoppity", "electionClose", "zoo1", "electionOpen",  "spooky", "zoo2", "winter", "jerry", "newyear"];
       var timeUntil = {
         "hoppity": yearlen - yearcycletime,
@@ -202,7 +202,13 @@
       if (startindex != previndex){
         previndex = startindex;
         for (var i = startindex; i < startindex + 9; i++){
+          if (document.getElementById(indices[(i) % 9] + "row") != undefined){
+            console.log("Removed row with data " + indices[i % 9] + "row" + " successfully");
+            eventtable.removeChild(document.getElementById(indices[i % 9] + "row"));
+          }
           var row = document.createElement("tr");
+          row.id = indices[i % 9] + "row";
+          console.log("Added row with data " + indices[i % 9] + "row");
           row.style.justifyContent = "space-evenly";
           var data1 = document.createElement("td");
           var namediv = document.createElement("div");
@@ -210,7 +216,7 @@
           namediv.style.flexBasis = "100%";
           var evname = document.createElement("span");
           evname.style = "color: " + eventColors[indices[i % 9]];
-          evname.textContent = eventNames[indices[i % 9]] + ":  ";
+          evname.textContent = eventNames[indices[i % 9]] + ":";
           namediv.appendChild(evname);
           data1.appendChild(namediv);
           row.appendChild(data1);
@@ -234,10 +240,20 @@
           var evtime = document.createElement("span");
           evtime.textContent = "e";
           evtime.id = indices[i % 9] + "time";
-          console.log(evtime.id);
           timediv.appendChild(evtime);
           data2.appendChild(timediv);
           row.appendChild(data2);
+
+          var spacedata2 = document.createElement("td");
+          var spacediv2 = document.createElement("div");
+          spacediv2.style.display = "flex";
+          spacediv2.style.flexBasis = "100%";
+          var space2 = document.createElement("span");
+          space2.style.color = "#404040";
+          space2.textContent = "||";
+          spacediv2.appendChild(space2);
+          spacedata2.appendChild(spacediv2);
+          row.appendChild(spacedata2);
           
           var data3 = document.createElement("td");
           var datediv = document.createElement("div");
@@ -274,8 +290,7 @@
         document.getElementById(elementname + "time").innerText = timeToMinutes(timer);
         var current = Math.floor(Date.now() / 1000);
         var eventtime = Math.floor(current + timer);
-        console.log(eventtime);
-        document.getElementById(elementname + "date").innerText = "| " + convertTimestamp(eventtime);
+        document.getElementById(elementname + "date").innerText = "@ " + convertTimestamp(eventtime);
       }
     }
 </script>
