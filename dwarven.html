@@ -188,8 +188,17 @@
             document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
           }
           if (lastname != name){
-            document.getElementById("profileid").value = profilelist.length - 1;
-            lastname = name;  
+            console.log("Checking new name");
+            var profilenum = 0;
+            lastname = name;
+            for (var i = 0; i < profilelist.length; i++){
+              if (profilelist[i].selected){
+                console.log("Profile ID found: " + profilenum);
+                profilenum = i;
+                break;
+              }
+            }
+            document.getElementById("profileid").value = profilenum;
           }
         } catch (TypeError){
           fullReset();
@@ -236,7 +245,7 @@
             if (forgelog[i].id != undefined){
               var maxtime = qfm * times[forgelog[i].id];
               var finaltime = new Date(forgelog[i].startTime + (maxtime*1000));
-              document.getElementById("finish" + i).innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + finaltime.getDate();
+              document.getElementById("finish" + i).innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + " " + finaltime.getDate();
             } else {
               document.getElementById("finish" + i).innerText = "––:––";
             }
