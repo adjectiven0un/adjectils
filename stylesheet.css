@@ -195,8 +195,8 @@ body {
     bottom: 0;
     border-radius:20px;
     background-color:#606060;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
     
   }
   .switch:before {

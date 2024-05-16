@@ -5,6 +5,10 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Adjectils' Home Page!">
   <meta name = "author" content = "adjective_n0un">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
@@ -21,6 +25,9 @@
         <div style = "flex-basis: 100%">
           <span class = "indexheader">Current mayor:&nbsp;</span><span class = "indexheader" id = "currentmayor"></span><br>
         </div>
+        <table id = "electiontable">
+
+        </table>
       </div>
       <div class = "flex_index_box" style = "width: 34%; height:70%;" id = "datetime">
         <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
@@ -36,7 +43,47 @@
       <div style = "display:flex;flex-basis:100%;">
         <span class = header>Events</span>
       </div>
-      <table id = "eventtable">  
+      <div style = "display:flex;flex-basis:100%;">
+      <div>
+        <span>Notify me when events start </span><span style = "color:#404040">||</span>
+      </div>
+      <div>
+
+        <label class = "switchbox">
+          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif()>
+          <span class = "switch"></span></label>
+          </div>
+          <div>
+            <span style = "color:#404040">||</span>
+            <span id = "notifstatus">Notifications disabled</span>
+          </div>
+          <div>
+            <span style = "color:#404040">||</span>
+          </div>
+          
+      </div>
+      <div style = "display:flex;flex-basis:100%">
+        <div>
+          <form action = "#">
+            <label>Notify me </label>
+            <select id = "notibefore">
+              <option value = 60>1</option>
+              <option value = 180>3</option>
+              <option value = 300>5</option>
+              <option value = 600>10</option>
+              <option value = 900>15</option>
+              <option value = 1200>20</option>
+              <option value = 1800>30</option>
+              <option value = 2700>45</option>
+              <option value = 3600>60</option>
+            </select>
+            <label> minutes before event.</label>
+          </form>
+        </div>
+      </div>
+      <div style = "color:#404040; display:flex;flex-basis:100%;">||</div>
+      <table id = "eventtable" >  
+        
       </table>
     </div>
     </div>
@@ -79,6 +126,29 @@
     var initial = 1560275700;
     var currenttime = Date.now() / 1000;
     var yearcycletime = (currenttime - initial) % yearlen;
+    var eventNotifs = 0;
+    var notifPerms = 0;
+    function toggleEventNotif(){
+      eventNotifs = Math.abs(eventNotifs - 1);
+      if (eventNotifs == 1){
+        Notification.requestPermission().then(
+        function(permission){
+          if (permission == "granted"){
+            console.log("Notifications enabled");
+            document.getElementById("notifstatus").innerText = "Notifications enabled";
+            notifPerms = 1;
+          } else if (permission == "denied"){
+            console.log("Notification permissions denied");
+            document.getElementById("notifstatus").innerText = "Notification access denied! Please enable notifications";
+          } else {
+            console.log("Notifications not supported");
+            document.getElementById("notifstatus").innerText = "Your browser does not support notifications";
+          }
+        }
+        );
+      } 
+      
+    }
     async function updatePage(){
         var splashindex = Math.floor(25 * Math.random());
         console.log("Chose splash " + splashindex);
@@ -87,28 +157,33 @@
         updateEvents();
         setInterval(updateDate, 4167);
         setInterval(updateEvents, 1000);
-        const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
-        if (!apicall.ok){
-          console.log("Api call error");
-          //document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
-          return -1;
-        }
-        const mayordata = await apicall.json();
         try {
+          const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
+          if (!apicall.ok){
+            console.log("Api call error");
+            //document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
+            return -1;
+          }
+          const mayordata = await apicall.json();
           var currentmayor = mayordata.mayor.name;
           document.getElementById("currentmayor").innerText = currentmayor;
-          var perks = document.createElement("div");
           for (var i = 0; i < mayordata.mayor.perks.length; i++){
             var perk = document.createElement("span");
             perk.textContent = mayordata.mayor.perks[i].name + ": " + mayordata.mayor.perks[i].description.replace(/§./g, "") + "\n";
-            perks.appendChild(perk);
+            perk.style.display = "flex";
+            perk.style.flexBasis = "100%";
+            var electiontd = document.createElement("td");
+            electiontd.appendChild(perk);
+            var electiontr = document.createElement("tr");
+            electiontr.style.display = "flex";
+            electiontr.style.flexBasis = "100%";
+            electiontr.appendChild(electiontd);
+            electiontable.appendChild(electiontr);
           }
-          perks.style.display = "flex";
-          perks.style.flexBasis = "100%";
-          election.appendChild(perks);
           
-        } catch (Error){
-          document.getElementById("currentmayor").innerText = "Unexpected error occurred: ${Error}";
+          
+        } catch (NetworkError){
+          document.getElementById("currentmayor").innerText = "Couldn't connect to API!";
           console.log("Couldn't find the current mayor! Is the API down?");
         }
         try {
@@ -143,16 +218,6 @@
           ampm = "pm";
         }
         document.getElementById("sbtime").innerText = hours + ":" + minutes + ampm;
-    }
-    function addEvent(name, color, index){
-      var event = document.createElement("span");
-      event.textContent = name;
-      event.style.color = color;
-      event.style.display = "flex";
-      event.style.justifyContent = "flex-end";
-      event.style.flexBasis = "100%";
-      activeEvents[index] = name;
-      datetime.appendChild(event);
     }
     var eventColors = {
         "hoppity": "#c64fbd",
@@ -203,12 +268,10 @@
         previndex = startindex;
         for (var i = startindex; i < startindex + 9; i++){
           if (document.getElementById(indices[(i) % 9] + "row") != undefined){
-            console.log("Removed row with data " + indices[i % 9] + "row" + " successfully");
             eventtable.removeChild(document.getElementById(indices[i % 9] + "row"));
           }
           var row = document.createElement("tr");
           row.id = indices[i % 9] + "row";
-          console.log("Added row with data " + indices[i % 9] + "row");
           row.style.justifyContent = "space-evenly";
           var data1 = document.createElement("td");
           var namediv = document.createElement("div");
@@ -220,7 +283,6 @@
           namediv.appendChild(evname);
           data1.appendChild(namediv);
           row.appendChild(data1);
-
           var spacedata = document.createElement("td");
           var spacediv = document.createElement("div");
           spacediv.style.display = "flex";
@@ -231,7 +293,6 @@
           spacediv.appendChild(space);
           spacedata.appendChild(spacediv);
           row.appendChild(spacedata);
-          
           var data2 = document.createElement("td");
           var timediv = document.createElement("div");
           timediv.style.display = "flex";
@@ -243,7 +304,6 @@
           timediv.appendChild(evtime);
           data2.appendChild(timediv);
           row.appendChild(data2);
-
           var spacedata2 = document.createElement("td");
           var spacediv2 = document.createElement("div");
           spacediv2.style.display = "flex";
@@ -254,7 +314,6 @@
           spacediv2.appendChild(space2);
           spacedata2.appendChild(spacediv2);
           row.appendChild(spacedata2);
-          
           var data3 = document.createElement("td");
           var datediv = document.createElement("div");
           datediv.style.display = "flex";
@@ -269,7 +328,6 @@
           eventtable.appendChild(row);
         }
       }
-      console.log("Setting timers");
       setEventTimer("hoppity", timeUntil["hoppity"], seasonlen);
       setEventTimer("electionOpen", timeUntil["electionOpen"], 0);
       setEventTimer("electionClose", timeUntil["electionClose"], 0);
@@ -291,6 +349,13 @@
         var current = Math.floor(Date.now() / 1000);
         var eventtime = Math.floor(current + timer);
         document.getElementById(elementname + "date").innerText = "@ " + convertTimestamp(eventtime);
+        if (timer == notibefore.value && eventNotifs == 1 && notifPerms == 1){
+          var mingrammar = "minutes";
+          if (notibefore.value == 60){
+            mingrammar = "minute";
+          }
+          var notification = new Notification("adjectils", {body: eventNames[elementname] + " begins in " + Math.floor(notibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+        }
       }
     }
 </script>
