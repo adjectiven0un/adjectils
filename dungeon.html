@@ -96,7 +96,7 @@
             </td></tr>
             </table>
             <table style = "width:100%">
-            <tr><td><span class = "flex_full_row">Runs until Catacombs 50: </span></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span>Runs until Catacombs </span><input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50"><span>: </span></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Archer complete: </span></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Berserk complete: </span></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Healer complete: </span></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
@@ -201,7 +201,16 @@
             } else {
                 document.getElementById("dailyruns").innerText = 5;
             }
-            for (var i = 0; i < 50; i++){
+            
+            if (targetcata.value > 50) {
+                targetcata.value = 50;
+            }
+            if (targetcata.value < 1) {
+                targetcata.value = 1;
+            }
+            var targetcatalevel = targetcata.value;
+            var targetcataxp = 0;
+            for (var i = 0; i < targetcatalevel; i++){
                 cataxp -= classxps[i];
                 if (cataxp <= 0){
                     document.getElementById("catalevel").innerText = i;
@@ -209,8 +218,8 @@
                 }
             }
             if (cataxp > 0){
-                console.log("Failsafe triggered, congrats on being cata 50");
-                document.getElementById("catalevel").innerText = 50;
+                console.log("Failsafe triggered, congrats on being cata " + targetcatalevel);
+                document.getElementById("catalevel").innerText = targetcatalevel;
             }
             //Set the levels of the classes
             
@@ -230,7 +239,10 @@
             }
             //Get remaining xps
             cataxp = dungeons.dungeon_types.catacombs.experience;
-            var cataxpleft = Math.max(569809640 - cataxp, 0);
+            for (var i = 0; i < targetcatalevel; i++){
+                targetcataxp += classxps[i];
+            }
+            var cataxpleft = Math.max(targetcataxp - cataxp, 0);
             
             //a, b, h, m, t
             var classxpsleft = [
