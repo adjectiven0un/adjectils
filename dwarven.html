@@ -137,10 +137,6 @@
   <script>
     const intervalID = [];
     var onCD = false;
-    function resetCD(){
-      console.log("Attempted CD reset");
-      onCD = false;
-    }
     function fullReset(forgelog){
       for (var i = 1; i <= 5; i++){
             document.getElementById("time" + i).innerText = "––:––";
@@ -154,7 +150,7 @@
           console.log("No active forges");
           
     }
-    var lastname;
+    var lastname = "";
     async function updateForges(name){
       
       if (onCD == true){

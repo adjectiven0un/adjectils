@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+  <html>
+  <body onload="updatePage()">
+  <title>adjectils - Dungeons</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "Decrepit utilities for Hypixel SkyBlock">
+  <meta name = "author" content = "adjective_n0un">
+  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
+  <div style = "text-align:center">
+    <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = cataheader>Dungeons</span><br>
+  </div>
+  <br>
+  <div style = "text-align:center">
+  <span style = "color:#282828"></span><input type = "text" id = "nameinput" onchange = updateCata(value)><span>&nbsp;</span><button onclick = updateCata(nameinput.value) style = "width: 5%;  text-align:center">Refresh ⟳</button><br>
+  <span id = "refreshstatus"></span><br>
+  <span id = "status"></span><br>
+  <span id = "otherstatus"></span><br>
+  <div>
+    <form action = "#" style = "background-color: #282828;">
+      <label>Profile:</label>
+      <select id = profileid value = 4 onchange = updateCata(nameinput.value)>
+        <option id = profile0 value = 0>–––––</option>
+        <option id = profile1 value = 1>–––––</option>
+        <option id = profile2 value = 2>–––––</option>
+        <option id = profile3 value = 3>–––––</option>
+        <option id = profile4 value = 4>–––––</option>
+      </select>
+    </form>
+  </div>
+  </div>
+  <br>
+  <section class = "flex_box_cata" style = "margin:auto">
+    <div class = "flex_index_row" style = "width:95%;">
+        <div class = "flex_cata_box" style = "width:29%;">
+            <span class = header class = "flex_full_row">Current levels</span>
+            <table style = "width:100%">
+            <tr><td><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Catacombs Level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Archer Level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Berserk Level: </span></td><td><span id = "berslevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Healer Level: </span></td><td><span id = "heallevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Mage Level: </span></td><td><span id = "magelevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Tank Level: </span></td><td><span id = "tanklevel" class = "flex_align_right"></span></td></tr>
+            </table>
+            
+        </div>
+        <div class = "flex_cata_box" style = "width:69%;">
+            <span class = header class = "flex_full_row">Milestone calculations</span>
+            <span class = fineprint style = "display:flex; flex-basis:100%;">Note: For ease of calculation, it's assumed that each floor has been completed at least 25 times, and that a score of exactly 300 is reached every run.</span>
+            <table>
+            <tr><td>
+                <form action = "#">
+                    <label>Floor: </label>
+                    <select id = "selectedfloor">
+                        <option value = 324000>M7</option>
+                        <option value = 108000>M6</option>
+                        <option value = 75600>M5</option>
+                        <option value = 59400>M4</option>
+                        <option value = 36800>M3</option>
+                        <option value = 21600>M2</option>
+                        <option value = 16200>M1</option>
+                        <option value = 30240>F7</option>
+                        <option value = 5270.4>F6</option>
+                        <option value = 2592>F5</option>
+                        <option value = 1533.6>F4</option>
+                        <option value = 604.8>F3</option>
+                        <option value = 237.6>F2</option>
+                        <option value = 118.8>F1</option>
+                        <option value = 59.4>Entrance</option>
+                    </select>
+                    <label>Catacombs Expert Ring: </label>
+                    <select id = "cataexpert">
+                        <option value = 0.1>Yes</option>
+                        <option value = 0>No</option>
+                    </select>
+                    <label>Hecatomb Level: </label>
+                    <select id = "hecatomb">
+                        <option value = 0.02>X</option>
+                        <option value = 0.0184>IX</option>
+                        <option value = 0.0168>VIII</option>
+                        <option value = 0.0152>VII</option>
+                        <option value = 0.0136>VI</option>
+                        <option value = 0.012>V</option>
+                        <option value = 0.0104>IV</option>
+                        <option value = 0.0088>III</option>
+                        <option value = 0.0072>II</option>
+                        <option value = 0.0056>I</option>
+                        <option value = 0>0</option>
+                    </select>
+                </form>
+            </td></tr>
+            </table>
+            <table style = "width:100%">
+            <tr><td><span class = "flex_full_row">Runs until Catacombs 50: </span></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Archer complete: </span></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Berserk complete: </span></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Healer complete: </span></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Mage complete: </span></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Tank complete: </span></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><button onclick = copyText() style = "width: 40%;">Copy!</button></td></tr>
+            </table>
+        </div>
+    </div>
+  </section>
+
+  <div id = "nav" style = "width:600px; margin:auto" class = "hub_block"></div>
+  </body>
+  <script src = "getUUID.js"></script>
+  <script>
+    const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000];
+    const classes = ["archer", "berserk", "healer", "mage", "tank"];
+    const classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
+    const totalxp = 569809640;
+    var copyabletext = "";
+    function updatePage(){
+        
+    }
+    var data;
+    var onCD = false;
+    var profilelist;
+    var UUID;
+    function resetStatuses(){
+      document.getElementById("dailyruns").innerText = "0";
+      document.getElementById("status").innerText = "";
+      document.getElementById("otherstatus").innerText = "";
+      document.getElementById("catalevel").innerText = "...";
+      document.getElementById("archlevel").innerText = "...";
+      document.getElementById("berslevel").innerText = "...";
+      document.getElementById("heallevel").innerText = "...";
+      document.getElementById("magelevel").innerText = "...";
+      document.getElementById("tanklevel").innerText = "...";
+      document.getElementById("cataruns").innerText = "...";
+      document.getElementById("archruns").innerText = "...";
+      document.getElementById("bersruns").innerText = "...";
+      document.getElementById("healruns").innerText = "...";
+      document.getElementById("mageruns").innerText = "...";
+      document.getElementById("tankruns").innerText = "...";
+      document.getElementById("totalruns").innerText = "...";
+    }
+    var lastname = "";
+    async function updateCata(name){
+        resetStatuses();
+        if (lastname != name){
+            console.log("Last name: " + lastname + " New name: " + name);
+            if (onCD == true){
+                document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+                console.log("On cooldown!");
+                return -1;
+            } else {
+                document.getElementById("refreshstatus").innerText = "";
+                onCD = true;
+                setTimeout(() => { onCD = false }, 5000);
+            }
+            UUID = await getUUIDbyName(name);
+            const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
+            if (!apicall.ok){
+                console.log("Api call error");
+                document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
+                return -1;
+            }
+            data = await apicall.json();
+            try {
+                profilelist = (data.profiles);
+                for (var i = 0; i < 5; i++){
+                    document.getElementById("profile" + i).innerText = "–––––";
+                }
+                for (var i = 0; i < profilelist.length; i++){
+                    document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
+                }
+          
+                console.log("Checking new name");
+                var profilenum = 0;
+                lastname = name;
+                for (var i = 0; i < profilelist.length; i++){
+                    if (profilelist[i].selected){
+                        console.log("Profile ID found: " + profilenum);
+                        profilenum = i;
+                        break;
+                    }
+                }
+                document.getElementById("profileid").value = profilenum;    
+            } catch (TypeError){
+                document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
+            }
+            lastname = name;
+        }
+        try {
+            var dungeons = data.profiles[profileid.value].members[UUID].dungeons;
+            var cataxp =  dungeons.dungeon_types.catacombs.experience;
+            var time = Math.floor(Date.now()/1000);
+            var realdaylen = 86400;
+            var realdaystamp = Math.floor(time / realdaylen);
+            if (dungeons.daily_runs.current_day_stamp == realdaystamp){
+                document.getElementById("dailyruns").innerText = Math.max(0, 5 - (dungeons.daily_runs.completed_runs_count));
+            } else {
+                document.getElementById("dailyruns").innerText = 5;
+            }
+            for (var i = 0; i < 50; i++){
+                cataxp -= classxps[i];
+                if (cataxp <= 0){
+                    document.getElementById("catalevel").innerText = i;
+                    break;
+                }
+            }
+            if (cataxp > 0){
+                console.log("Failsafe triggered, congrats on being cata 50");
+                document.getElementById("catalevel").innerText = 50;
+            }
+            //Set the levels of the classes
+            
+            for (var i = 0; i < 5; i++){
+                var xp = dungeons.player_classes[classes[i]].experience;
+                for (var j = 0; j < 50; j++){
+                    xp -= classxps[j];
+                    if (xp <= 0){
+                        document.getElementById(classesabbrev[i] + "level").innerText = j;
+                        break;
+                    }
+                }
+                if (xp > 0){
+                    console.log("Failsafe triggered, congrats on being " + classesabbrev[i] + " 50");
+                    document.getElementById(classesabbrev[i] + "level").innerText = 50;
+                }
+            }
+            //Get remaining xps
+            cataxp = dungeons.dungeon_types.catacombs.experience;
+            var cataxpleft = Math.max(569809640 - cataxp, 0);
+            
+            //a, b, h, m, t
+            var classxpsleft = [
+                Math.max(569809640 - dungeons.player_classes[classes[0]].experience, 0),
+                Math.max(569809640 - dungeons.player_classes[classes[1]].experience, 0),
+                Math.max(569809640 - dungeons.player_classes[classes[2]].experience, 0),
+                Math.max(569809640 - dungeons.player_classes[classes[3]].experience, 0),
+                Math.max(569809640 - dungeons.player_classes[classes[4]].experience, 0),
+            ]   
+            console.log(classxpsleft);
+
+            //Solve the class average problem
+            //I could probably merge this with the previous loop somehow but im too lazy right now
+            //O(n) solution, there is probably a O(1) solution somewhere but brooke is rushing me right now
+            var cataperrun = selectedfloor.value * 1.38888888;
+            cataperrun *= (1 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value));
+            cataperrun = Math.ceil(cataperrun);
+            catarunsleft = Math.ceil(cataxpleft/cataperrun);
+            classperrun = Math.ceil(cataperrun * (1/1.4));
+            console.log(classxpsleft);
+            
+            document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
+            var runstoca50 = [0, 0, 0, 0, 0];   
+            while (true){
+                var allnegative = true;
+                for (var i = 0; i < 5; i++){
+                    if (classxpsleft[i] > 0){
+                        allnegative = false;
+                    }
+                }
+                if (allnegative){
+                    break;
+                }
+                var maxval = -1;
+                var maxindex = -1;
+                //get which class is currently lowest
+                for (var i = 0; i < 5; i++){
+                    if (classxpsleft[i] > maxval) {
+                        maxval = classxpsleft[i];
+                        maxindex = i;
+                    }
+                }
+
+                for (var i = 0; i < 5; i++){
+                    if (i == maxindex){
+                        classxpsleft[i] -= classperrun;
+                        runstoca50[i] += 1;
+                    } else {
+                        classxpsleft[i] -= (classperrun/4);
+                    }
+                }
+                
+                
+            }
+            console.log("Runs to CA 50: " + runstoca50);
+            var total = 0;
+            for (var i = 0; i < 5; i++){
+                var runs = runstoca50[i];
+                runs = runs.toLocaleString();
+                document.getElementById(classesabbrev[i] + "runs").innerText = runs;
+                total += runstoca50[i];
+            }
+            if (total != 0){
+                document.getElementById("totalruns").innerText = total.toLocaleString();
+            } else {
+                document.getElementById("totalruns").innerText = "0, gg :)";
+            }
+            copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " archer, " + runstoca50[1].toLocaleString() + " berserk, "  + runstoca50[2].toLocaleString() + " healer, " + runstoca50[3].toLocaleString() + " mage, " + runstoca50[4].toLocaleString() + " tank)";
+            
+            
+        } catch (TypeError){ 
+            console.log("Type error...");
+            document.getElementById("otherstatus").innerText = "This profile has no Dungeons stats!";
+        }
+        
+    }
+    function copyText(){
+        if (copyabletext != ""){
+            const textarea = document.createElement("textarea");
+            textarea.value = copyabletext;
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textarea.value);
+        }
+    }
+  </script>

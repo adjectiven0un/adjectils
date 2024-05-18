@@ -43,6 +43,10 @@ body {
     font-size:20px;
     color:#d0d0d0;
   }
+  .cataheader {
+    font-size:24px;
+    color: #704030;
+  }
   /*
   blocktypes
   */
@@ -141,6 +145,7 @@ body {
   .fineprint{
     font-size:12px;
     color:#808080;
+    margin-bottom:3.5px;
   }
   .metereditem{
     color: #c64fbd;
@@ -167,6 +172,14 @@ body {
   }
   .errored{
     color: #a40000;
+  }
+  .flex_align_right{
+    display:flex;
+    justify-content: flex-end;
+  }
+  .flex_full_row{
+    display:flex;
+    flex-basis:100%;
   }
   /*
   Slider logic
@@ -248,12 +261,38 @@ body {
     flex-direction:row;
   }
   .flex_index_box{
-    
     background-color: #404040;
     border-style: solid;
     border-color: #808080;
     text-justify: auto;
     margin: 10px;
+    border-spacing: 5px;
+    padding: 10px;
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .flex_box_cata{
+    /*
+    background-color: #504030;
+    border-style: solid;
+    border-color: #808080;
+    */
+    flex-wrap:wrap;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction:column;
+    margin:auto;
+    width: min(calc(100% - 30px), max(600px, 70%));
+    
+  }
+  .flex_cata_box{
+    min-height:280px;
+    background-color: #503020;
+    border-style: solid;
+    border-color: #808080;
+    text-justify: auto;
+    margin: 5px;
     border-spacing: 5px;
     padding: 10px;
     display:flex;
