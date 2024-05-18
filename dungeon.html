@@ -295,10 +295,11 @@
             }
             if (total != 0){
                 document.getElementById("totalruns").innerText = total.toLocaleString();
+                copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " archer, " + runstoca50[1].toLocaleString() + " berserk, "  + runstoca50[2].toLocaleString() + " healer, " + runstoca50[3].toLocaleString() + " mage, " + runstoca50[4].toLocaleString() + " tank)";
             } else {
                 document.getElementById("totalruns").innerText = "0, gg :)";
+                copyabletext = "[adjectils] " + selectedfloor.options[selectedfloor.selectedIndex].text + " is Class Average 50, gg :)";
             }
-            copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " archer, " + runstoca50[1].toLocaleString() + " berserk, "  + runstoca50[2].toLocaleString() + " healer, " + runstoca50[3].toLocaleString() + " mage, " + runstoca50[4].toLocaleString() + " tank)";
             
             
         } catch (TypeError){ 
