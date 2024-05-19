@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Decrepit utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
-  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+  <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
         $("#nav").load("nav.html"); 
@@ -56,7 +56,7 @@
             <tr><td>
                 <form action = "#">
                     <label>Floor: </label>
-                    <select id = "selectedfloor">
+                    <select id = "selectedfloor" onchange = updateCata(nameinput.value)>
                         <option value = 324000>M7</option>
                         <option value = 108000>M6</option>
                         <option value = 75600>M5</option>
@@ -74,12 +74,12 @@
                         <option value = 59.4>Entrance</option>
                     </select>
                     <label>Catacombs Expert Ring: </label>
-                    <select id = "cataexpert">
+                    <select id = "cataexpert" onchange = updateCata(nameinput.value)>
                         <option value = 0.1>Yes</option>
                         <option value = 0>No</option>
                     </select>
                     <label>Hecatomb Level: </label>
-                    <select id = "hecatomb">
+                    <select id = "hecatomb" onchange = updateCata(nameinput.value)>
                         <option value = 0.02>X</option>
                         <option value = 0.0184>IX</option>
                         <option value = 0.0168>VIII</option>
@@ -96,7 +96,7 @@
             </td></tr>
             </table>
             <table style = "width:100%">
-            <tr><td><span>Runs until Catacombs </span><input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50"><span>: </span></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span>Runs until Catacombs </span><input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)><span>: </span></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Archer complete: </span></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Berserk complete: </span></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Healer complete: </span></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
@@ -114,8 +114,8 @@
   <script src = "getUUID.js"></script>
   <script>
     const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000];
-    const classes = ["archer", "berserk", "healer", "mage", "tank"];
-    const classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
+    var classes = ["archer", "berserk", "healer", "mage", "tank"];
+    var classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
     const totalxp = 569809640;
     var copyabletext = "";
     function updatePage(){
@@ -161,7 +161,7 @@
             const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
             if (!apicall.ok){
                 console.log("Api call error");
-                document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
+                document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
                 return -1;
             }
             data = await apicall.json();
@@ -253,6 +253,24 @@
                 Math.max(569809640 - dungeons.player_classes[classes[4]].experience, 0),
             ]   
             console.log(classxpsleft);
+            //Sorts arrays into decreasing order - if i ever get back to optimizing this, i'll use this
+            /*
+            for (var i = 1; i < 5; i++){
+                var key1 = classxpsleft[i];
+                var key2 = classesabbrev[i];
+                var key3 = classes[i];
+                var j = i - 1;
+                while (j >= 0 && classxpsleft[j] < key1){
+                    classxpsleft[j + 1] = classxpsleft[j];
+                    classesabbrev[j + 1] = classesabbrev[j];
+                    classes[j + 1] = classes[j];
+                    j--;
+                }
+                classxpsleft[j + 1] = key1;
+                classesabbrev[j + 1] = key2;
+                classes[j + 1] = key3;
+            }
+            */
 
             //Solve the class average problem
             //I could probably merge this with the previous loop somehow but im too lazy right now
@@ -263,9 +281,19 @@
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             classperrun = Math.ceil(cataperrun * (1/1.4));
             console.log(classxpsleft);
+            console.log(classesabbrev);
             
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
-            var runstoca50 = [0, 0, 0, 0, 0];   
+            var runstoca50 = [0, 0, 0, 0, 0];  
+            /* 
+            var runsToEnd = [0, 0, 0, 0, 0];
+            for (var i = 0; i < 5; i++){
+                var toNext = classxpsleft[i] - classxpsleft[i + 1];
+                runsToEnd[i] = Math.ceil(classxpsleft[i] / classperrun);
+            }
+            console.log(runsToEnd);
+            */
+
             while (true){
                 var allnegative = true;
                 for (var i = 0; i < 5; i++){
@@ -276,6 +304,8 @@
                 if (allnegative){
                     break;
                 }
+
+                
                 var maxval = -1;
                 var maxindex = -1;
                 //get which class is currently lowest
@@ -296,7 +326,11 @@
                 }
                 
                 
+                
             }
+
+            
+            
             console.log("Runs to CA 50: " + runstoca50);
             var total = 0;
             for (var i = 0; i < 5; i++){
