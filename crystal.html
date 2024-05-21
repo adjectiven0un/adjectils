@@ -193,7 +193,7 @@
                 setTimeout(() => { onCD = false }, 3000);
             }
             UUID = await getUUIDbyName(name);
-            const apicall = await fetch("https://api.hypixel.net/skyblock/profiles?key=" + key + "&uuid=" + UUID);
+            const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/skyblock/profiles?uuid=" + UUID);
             if (!apicall.ok){
                 console.log("Api call error");
                 document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";

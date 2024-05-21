@@ -1,5 +1,3 @@
-var key = "3b597353-f337-414a-8857-f8521d35d8f4";
-
 async function getUUIDbyName(name){
   
     document.getElementById("status").innerText = "Checking...";
