@@ -43,9 +43,9 @@
       <div style = "display:flex;flex-basis:100%;">
         <span class = header>Events</span>
       </div>
-      <div style = "display:flex;flex-basis:100%;">
+      <div style = "display:flex;flex-basis:60%; justify-content: space-between;">
       <div>
-        <span>Notify me when events start </span><span style = "color:#404040">||</span>
+        Notify me when events start
       </div>
       <div>
 
@@ -54,11 +54,9 @@
           <span class = "switch"></span></label>
           </div>
           <div>
-            <span style = "color:#404040">||</span>
             <span id = "notifstatus">Notifications disabled</span>
           </div>
           <div>
-            <span style = "color:#404040">||</span>
           </div>
           
       </div>
@@ -81,8 +79,7 @@
           </form>
         </div>
       </div>
-      <div style = "color:#404040; display:flex;flex-basis:100%;">||</div>
-      <table id = "eventtable" >  
+      <table id = "eventtable" style = "flex-basis:55%">  
         
       </table>
     </div>
@@ -276,31 +273,26 @@
           var row = document.createElement("tr");
           row.id = indices[i % 9] + "row";
           row.style.justifyContent = "space-evenly";
+          row.style.width = "80%";
           var data1 = document.createElement("td");
           var namediv = document.createElement("div");
+          
           namediv.style.display = "flex";
           namediv.style.flexBasis = "100%";
+          namediv.style.width = "100%";
           var evname = document.createElement("span");
           evname.style = "color: " + eventColors[indices[i % 9]];
           evname.textContent = eventNames[indices[i % 9]] + ":";
           namediv.appendChild(evname);
           data1.appendChild(namediv);
           row.appendChild(data1);
-          var spacedata = document.createElement("td");
-          var spacediv = document.createElement("div");
-          spacediv.style.display = "flex";
-          spacediv.style.flexBasis = "100%";
-          var space = document.createElement("span");
-          space.style.color = "#404040";
-          space.textContent = "||";
-          spacediv.appendChild(space);
-          spacedata.appendChild(spacediv);
-          row.appendChild(spacedata);
+          
           var data2 = document.createElement("td");
           var timediv = document.createElement("div");
           timediv.style.display = "flex";
           timediv.style.flexBasis = "100%";
           timediv.style.justifyContent = "flex-end";
+          timediv.style.paddingRight = "10%";
           var evtime = document.createElement("span");
           evtime.textContent = "e";
           evtime.id = indices[i % 9] + "time";
@@ -309,14 +301,7 @@
           row.appendChild(data2);
           var spacedata2 = document.createElement("td");
           var spacediv2 = document.createElement("div");
-          spacediv2.style.display = "flex";
-          spacediv2.style.flexBasis = "100%";
-          var space2 = document.createElement("span");
-          space2.style.color = "#404040";
-          space2.textContent = "||";
-          spacediv2.appendChild(space2);
-          spacedata2.appendChild(spacediv2);
-          row.appendChild(spacedata2);
+          
           var data3 = document.createElement("td");
           var datediv = document.createElement("div");
           datediv.style.display = "flex";
