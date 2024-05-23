@@ -50,6 +50,13 @@
                 <option value = rune_burst>Fiery Burst Rune I</option>
             </select>
         </form>
+        <form action = "#">
+          <label>Display: </label>
+          <select id = frac onchange = updateAllChances(slayermagicfind.value)>
+            <option value = 0>Percentage</option>
+            <option value = 1>Fraction</option>
+          </select>
+        </form>
         <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
         <table id = loottable_blaze>
         <tr><td><hr class = solid></td></tr>

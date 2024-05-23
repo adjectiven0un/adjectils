@@ -1,6 +1,6 @@
 <!DOCTYPE html>
   <html>
-  <body onload="updatePage()">
+  <body onload="updateAllChances()">
   <title>adjectils - Home Page</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Utilities for Hypixel SkyBlock">
@@ -20,7 +20,13 @@
         </div>  
         
           <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
-
+          <form action = "#">
+            <label>Display: </label>
+            <select id = frac onchange = updateAllChances()>
+              <option value = 0>Percentage</option>
+              <option value = 1>Fraction</option>
+            </select>
+          </form>
         <div class = "hub_block" style = "width:600px; float:left">
         <span class = hubheader>Revenant Horror</span><br>
         <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentz value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
@@ -180,16 +186,25 @@
             //Update weights for standard items
             for (var key in weightsz){
                 if (weightsz[key] / standardweight < 0.05){
-                mfweight += (weightsz[key] * mfc) - weightsz[key];
-                weightsz[key] = weightsz[key] * mfc;
+                    mfweight += (weightsz[key] * mfc) - weightsz[key];
+                    weightsz[key] = weightsz[key] * mfc;
                 } 
             }
             console.log("Modded weight: " + mfweight);
             //Update chances for standard items
-            for (var key in weightsz){
-                var chance = (weightsz[key] / mfweight) * 100;
-                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            if (frac.value == 0){
+                for (var key in weightsz){
+                    var chance = (weightsz[key] / mfweight) * 100;
+                    document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+                } 
+            } else {
+                for (var key in weightsz){
+                    var chance = (weightsz[key] / mfweight);
+                    var denom = Math.ceil(1/chance);
+                    document.getElementById("chance_" + key).innerText = "1/" + denom;
+                } 
             }
+            
             //Update standard weight with extra weights
             for (var key in extraweightsz){
                 if (key != selecteddropz.value && key != selecteddropw.value){
@@ -212,10 +227,19 @@
                 } 
             }
             //Update chances for extra items
-            for (var key in extraweightsz){
-                var chance = (extraweightsz[key] / mfextraweight) * 100;
-                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            if (frac.value == 0){
+                for (var key in extraweightsz){
+                    var chance = (extraweightsz[key] / mfextraweight) * 100;
+                    document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+                }
+            } else {
+                for (var key in extraweightsz){
+                    var chance = (extraweightsz[key] / mfextraweight);
+                    var denom = Math.ceil(1/chance);
+                    document.getElementById("chance_" + key).innerText = "1/" + denom;
+                }
             }
+            
             standardweight = 10000;
             //Calculate total standard weight
             for (var key in weightsw){
@@ -239,10 +263,19 @@
             }
             console.log("Modded weight: " + mfweight);
             //Update chances for standard items
-            for (var key in weightsw){
-                var chance = (weightsw[key] / mfweight) * 100;
-                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            if (frac.value == 0){
+                for (var key in weightsw){
+                    var chance = (weightsw[key] / mfweight) * 100;
+                    document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+                }
+            } else {
+                for (var key in weightsw){
+                    var chance = (weightsw[key] / mfweight);
+                    var denom = Math.ceil(1/chance);
+                    document.getElementById("chance_" + key).innerText = "1/" + denom;
+                }
             }
+            
             //Update standard weight with extra weights
             for (var key in extraweightsw){
                 if (key != selecteddropz.value && key != selecteddropw.value){
@@ -265,13 +298,22 @@
                 } 
             }
             //Update chances for extra items
-            for (var key in extraweightsw){
-                var chance = (extraweightsw[key] / mfextraweight) * 100;
-                document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+            if (frac.value == 0){
+                for (var key in extraweightsw){
+                    var chance = (extraweightsw[key] / mfextraweight) * 100;
+                    document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+                }
+            } else {
+                for (var key in extraweightsw){
+                    var chance = (extraweightsw[key] / mfweight);
+                    var denom = Math.ceil(1/chance);
+                    document.getElementById("chance_" + key).innerText = "1/" + denom;
             }
+            
         }
         function updatePage(){
             console.log("Initializing...");
             updateAllChances();
         }
+    }
   </script>

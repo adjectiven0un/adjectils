@@ -42,10 +42,19 @@ function updateChances(weights, extraweights){
     }
     console.log("Modded weight: " + mfweight);
     //Update chances for standard items
-    for (var key in weights){
-        var chance = (weights[key] / mfweight) * 100;
-        document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+    if (frac.value == 0){
+        for (var key in weights){
+            var chance = (weights[key] / mfweight) * 100;
+            document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+        }
+    } else {
+        for (var key in weights){
+            var chance = (weights[key] / mfweight);
+            var denom = Math.ceil(1/chance);
+            document.getElementById("chance_" + key).innerText = "1/" + denom;
+        }
     }
+    
     //Update standard weight with extra weights
     for (var key in extraweights){
         if (key != selecteddrop.value){
@@ -68,8 +77,22 @@ function updateChances(weights, extraweights){
         } 
     }
     //Update chances for extra items
-    for (var key in extraweights){
-        var chance = (extraweights[key] / mfextraweight) * 100;
-        document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+    if (frac.value == 0){
+        for (var key in extraweights){
+            var chance = (extraweights[key] / mfextraweight) * 100;
+            document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
+        }
+    } else {
+        for (var key in extraweights){
+            var chance = (extraweights[key] / mfextraweight);
+            var denom = Math.ceil(1/chance);
+            document.getElementById("chance_" + key).innerText = "1/" + denom;
+        }
     }
+    
+}
+
+function gcd(a, b){
+    if (!b) return a;
+    return gcd (b, a % b);
 }
