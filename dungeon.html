@@ -12,7 +12,7 @@
       });
       </script>
   <div style = "text-align:center">
-    <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = cataheader>Dungeons</span><br>
+    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = cataheader>Dungeons</span><br>
   </div>
   <br>
   <div style = "text-align:center">
@@ -35,18 +35,24 @@
   </div>
   <br>
   <section class = "flex_box_cata" style = "margin:auto">
-    <div class = "flex_index_row" style = "width:95%;">
+    <div class = "flex_index_row" style = "width:95%; align-items: stretch;">
         <div class = "flex_cata_box" style = "width:29%;">
-            <span class = header class = "flex_full_row">Current levels</span>
+            <span class = header class = "flex_full_row" style = "margin-bottom: 20px;">Current levels</span>
             <table style = "width:100%">
-            <tr><td><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Catacombs Level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row" style = "margin-bottom: 18px;"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right" style = "margin-bottom:18px"></span></td></tr>
+            <tr><td class = "flex_full_row"><span class = "flex_full_row">Catacombs Level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "catapercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Archer Level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "archpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Berserk Level: </span></td><td><span id = "berslevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "berspercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Healer Level: </span></td><td><span id = "heallevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "healpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Mage Level: </span></td><td><span id = "magelevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "magepercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Tank Level: </span></td><td><span id = "tanklevel" class = "flex_align_right"></span></td></tr>
-            </table>
+            <tr><td class = "flex_full_row"></td><td><span id = "tankpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
+        </table>
             
         </div>
         <div class = "flex_cata_box" style = "width:69%;">
@@ -97,11 +103,11 @@
             </table>
             <table style = "width:100%">
             <tr><td><span>Runs until Catacombs </span><input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)><span>: </span></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Archer complete: </span></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Berserk complete: </span></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Healer complete: </span></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Mage complete: </span></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Tank complete: </span></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><button onclick = copyText() style = "width: 40%;">Copy!</button></td></tr>
             </table>
@@ -144,6 +150,16 @@
       document.getElementById("totalruns").innerText = "...";
     }
     var lastname = "";
+    function abbreviate(input){
+        if (input > 1000){
+            if (input > 1000000){
+                input = (input / 1000000).toFixed(1) + "M";
+            } else {
+                input = (input / 1000000).toFixed(1) + "K";
+            }
+        }
+        return input;
+    }
     async function updateCata(name){
         resetStatuses();
         if (lastname != name){
@@ -213,13 +229,17 @@
             for (var i = 0; i < targetcatalevel; i++){
                 cataxp -= classxps[i];
                 if (cataxp <= 0){
+                    cataxp += (classxps[i]);
+                    cataxp = Math.floor(cataxp);
                     document.getElementById("catalevel").innerText = i;
+                    document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
                     break;
                 }
             }
-            if (cataxp > 0){
+            if (i == 50){
                 console.log("Failsafe triggered, congrats on being cata " + targetcatalevel);
                 document.getElementById("catalevel").innerText = targetcatalevel;
+                document.getElementById("catapercent").innerText = "Congrats!";
             }
             //Set the levels of the classes
             
@@ -228,13 +248,19 @@
                 for (var j = 0; j < 50; j++){
                     xp -= classxps[j];
                     if (xp <= 0){
+                        xp += (classxps[j]);
+                        xp = Math.floor(xp);
+                        //this is to avoid floating point rounding errors
+                        var xppercent = Math.floor((xp/classxps[j]).toFixed(4) * 10000) / 100;
                         document.getElementById(classesabbrev[i] + "level").innerText = j;
+                        document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
                         break;
                     }
                 }
-                if (xp > 0){
+                if (j == 50){
                     console.log("Failsafe triggered, congrats on being " + classesabbrev[i] + " 50");
                     document.getElementById(classesabbrev[i] + "level").innerText = 50;
+                    document.getElementById(classesabbrev[i] + "percent").innerText = "Congrats!";
                 }
             }
             //Get remaining xps
@@ -341,7 +367,7 @@
             }
             if (total != 0){
                 document.getElementById("totalruns").innerText = total.toLocaleString();
-                copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " archer, " + runstoca50[1].toLocaleString() + " berserk, "  + runstoca50[2].toLocaleString() + " healer, " + runstoca50[3].toLocaleString() + " mage, " + runstoca50[4].toLocaleString() + " tank)";
+                copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " Archer, " + runstoca50[1].toLocaleString() + " Berserk, "  + runstoca50[2].toLocaleString() + " Healer, " + runstoca50[3].toLocaleString() + " Mage, " + runstoca50[4].toLocaleString() + " Tank)";
             } else {
                 document.getElementById("totalruns").innerText = "0, gg :)";
                 copyabletext = "[adjectils] " + name + " is Class Average 50, gg :)";

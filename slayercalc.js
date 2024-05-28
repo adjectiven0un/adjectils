@@ -23,12 +23,12 @@ function updateChances(weights, extraweights){
     //Calculate total standard weight
     for (var key in weights){
         if (key != selecteddrop.value){
-        standardweight += weights[key];
-        document.getElementById("chance_" + key).className = "basictext";
+            standardweight += weights[key];
+            document.getElementById("chance_" + key).className = "basictext";
         } else {
-        weights[key] = weights[key] * rmc;
-        standardweight += weights[key];
-        document.getElementById("chance_" + key).className = "metereditem";
+            weights[key] = weights[key] * rmc;
+            standardweight += weights[key];
+            document.getElementById("chance_" + key).className = "metereditem";
         }
     }
     console.log("Standard weight: " + standardweight);

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+  <html>
+  <body onload="updatePage()">
+  <title>adjectils - The Rift</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <meta name = "description" content = "Outlandish utilities for Hypixel SkyBlock">
+  <meta name = "author" content = "adjective_n0un">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
+  <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+      });
+      </script>
+<div style = "text-align:center">
+  <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = riftheader>The Rift</span><br>
+</div>
+  <section class = "flex_box_index" style = "width:70%">
+    <div class = "flex_index_row" style = "align-items:stretch">
+        
+    <div class = "flex_index_box rift_box" style = "width:63%; flex-basis:63%;color: #b070ff;">
+        <span class = "flex_full_row" style = "font-size: 24px; color: #d22b55;">Riftstalker Bloodfiend</span>
+        <div class = "flex_full_row" style = "margin-top:10px">User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 20 min = 0 max = 28 onchange = updateAllChances()></input></div>
+        <div class = "flex_full_row">RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span></div>
+        <form action = "#" class = "flex_full_row">
+            <label>Selected meter item: </label>
+            <select id = selecteddrop onchange = updateAllChances()>
+                <option value = null>None</option>
+                <option value = book_quantum>Quantum III Book Bundle</option>
+                <option value = blister>Bubba Blister</option>
+                <option value = lucky_block>Guardian Lucky Block</option>
+                <option value = burger>McGrubber's Burger</option>
+                <option value = vampire_gum>Unfanged Vampire Part</option>
+                <option value = book_theone>The One IV Book Bundle</option>
+                <option value = rune_soultwist>Soultwist Rune I</option>
+            </select>
+        </form>
+        <form action = "#" class = "flex_full_row">
+          <label>Display: </label>
+          <select id = frac onchange = updateAllChances()>
+            <option value = 0>Percentage</option>
+            <option value = 1>Fraction</option>
+          </select>
+        </form>
+        <form action = "#" class = "flex_full_row">
+            <label>Tier: </label>
+            <select id = vamptier onchange = updateAllChances()>
+              <option value = 0 style = "color: #AA0000">IV</option>
+              <option value = 1 style = "color: #AA00AA">V</option>
+            </select>
+          </form>
+          <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: This calculator only provides the chances for tiers IV and V.</span>
+          <table id = loottable_vamp >
+          <tr><td><hr class = solid></td></tr>
+          <tr><td>Chance of Quantum III Book Bundle: </td><td><span style = "text-align: right" class = basictext id = chance_book_quantum></span></td></tr>
+          <tr><td>Chance of Bubba Blister: </td><td><span style = "text-align: right" class = basictext id = chance_blister></span></td></tr>
+          <tr><td>Chance of Fang-tastic Chocolate Chip: </td><td><span style = "text-align: right" class = basictext id = chance_cookie></span></td></tr>
+          <tr><td>Chance of Guardian Lucky Block: </td><td><span style = "text-align: right" class = basictext id = chance_lucky_block></span></td></tr>
+          <tr><td>Chance of McGrubber's Burger: </td><td><span style = "text-align: right" class = basictext id = chance_burger></span></td></tr>
+          <tr><td>Chance of Unfanged Vampire Part: </td><td><span style = "text-align: right" class = basictext id = chance_vampire_gum></span></td></tr>
+          <tr><td>Chance of The One IV Book Bundle: </td><td><span style = "text-align: right" class = basictext id = chance_book_theone></span></td></tr>
+          <tr><td><hr class = solid></td></tr>  
+          <tr><td><span class = "fineprint flex_full_row">The following drops may be obtained in addition to the primary drop.</span></td></tr>
+          <tr><td>Chance of Soultwist Rune I: </td><td><span style = "text-align: right" class = basictext id = chance_rune_soultwist></span></td></tr>
+        </table>
+    </div>
+    
+    <div class = "flex_index_box rift_box" style = "width:36%;flex-basis:36%;">
+        <span class = "flex_full_row" style = "font-size: 24px; color: #ff00ff;">Motes</span>
+        <div class = "flex_full_row" style = "margin-top:10px">Target motes: <input type = "number" inputmode = "numeric" id = targetmotes value = 7500000 min = 0 max = 100000000 onchange = updateMotes()></input></div>
+        <form action = "#" class = "flex_full_row">
+            <label>Grubber stacks: </label>
+            <select id = grubberstacks onchange = updateMotes()>
+                <option value = 1.25>5</option>
+                <option value = 1.2>4</option>
+                <option value = 1.15>3</option>
+                <option value = 1.1>2</option>
+                <option value = 1.05>1</option>
+                <option value = 1>0</option>
+            </select>
+        </form>
+        <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: It is assumed that the user crafts Vampiric Melons into Enchanted Vampiric Melons before selling them to the Motes Grubber.</span>
+        <table style = "margin-top:10px; margin-bottom:65%; width:100%">
+        <tr><td style = "width:50%">Thrall kills: </td><td><span class = "flex_full_row" id = "thrallkillsneeded"></span></td></tr>
+        <tr><td style = "width:50%">Fledgling kills: </td><td><span class = "flex_full_row" id = "fledgekillsneeded"></span></td></tr>
+        </table>
+    </div>
+    </div>
+  </section><br>
+
+
+
+  <div id = "nav" style = "width:600px; margin: auto" class = "hub_block"></div>
+  </body>
+  <script src = "slayercalc.js"></script>
+  <script>
+    var weights = {
+        "book_quantum": 2000,
+        "blister": 1500,
+        "cookie": 1500,
+        "lucky_block": 1000,
+        "burger": 200,
+        "vampire_gum": 200,
+        "book_theone": 0,
+    }
+    var extraweights = {
+        "rune_soultwist": 2000,
+    }
+    function updateAllChances(){
+        weights = {
+            "book_quantum": 2000,
+            "blister": 1500,
+            "cookie": 1500,
+            "lucky_block": 1000,
+            "burger": 200,
+            "vampire_gum": 200,
+            "book_theone": 300 * vamptier.value,
+        }
+        var extraweights = {
+            "rune_soultwist": 2000,
+        }
+        console.log("Refreshing...");
+        if (slayermagicfind.value > 28){
+            document.getElementById("slayermagicfind").value = 28;
+        }
+        if (slayermagicfind.value < 0 || isNaN(slayermagicfind.value) || slayermagicfind.value == ""){
+            document.getElementById("slayermagicfind").value = 0;
+        }
+        updateChances(weights, extraweights);
+    }
+    async function updatePage(){
+        updateAllChances();
+        updateMotes();
+    }
+    function updateMotes(){
+        if (targetmotes.value > 1000000000){
+            document.getElementById("slayermagicfind").value = 1000000000;
+        }
+        if (targetmotes.value < 0 || isNaN(targetmotes.value) || targetmotes.value == ""){
+            document.getElementById("slayermagicfind").value = 0;
+        }
+        var motesperthrall = 200 + 131.25 * grubberstacks.value;
+        var motesperfledge = 250 + 131.25 * grubberstacks.value;
+        document.getElementById("thrallkillsneeded").innerText = Math.ceil(targetmotes.value / motesperthrall);
+        document.getElementById("fledgekillsneeded").innerText = Math.ceil(targetmotes.value / motesperfledge);
+    }
+  </script>

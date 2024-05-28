@@ -46,6 +46,10 @@ body {
   .cataheader {
     font-size:24px;
     color: #704030;
+  } 
+  .riftheader {
+    font-size:24px;
+    color: #6832c0;
   }
   /*
   blocktypes
@@ -298,6 +302,11 @@ body {
     display:flex;
     flex-wrap:wrap;
   }
+  .rift_box{
+    background-color: #38285c;
+    border-style: solid;
+    border-color: #5e15a8;
+  }
   .limbo_row{
     display:flex;
     align-items:center;
@@ -320,6 +329,49 @@ body {
     left: 0;
     text-align: center;
     justify-content: center;
+  }
+  /* I stole this from BrookeAFK */
+  .tip {
+    position: relative;
+    border-bottom: 1px dotted #ffffff88;
+    cursor: help;
+  }
+  
+  .tip .tiptext {
+    visibility: hidden;
+    word-wrap: break-word;
+    width: 160px;
+    background-color: #000000cc;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: -85px;
+    padding: 10px;
+    font-weight: 400;
+    font-style: oblique;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .tip .tiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #00000088 transparent transparent transparent;
+  }
+  .tip:hover .tiptext, .tip:active .tiptext {
+    visibility: visible;
+  }
+  
+  .tip:hover .tiptext {
+    opacity: 1;
   }
 
   
