@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Adjectils' Home Page!">
   <meta name = "author" content = "adjective_n0un">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -21,8 +22,8 @@
   <span class = "splash" id = "splashtext"></span>
   </div>
   <section class = "flex_box_index">
-    <div class = "flex_index_row" style = "width:95%;height:50%;">
-      <div class = "flex_index_box" style = "width: 64%; height:70%;" id = "election">
+    <div class = "flex_index_row" style = "width:95%;height:50%; align-items: stretch;">
+      <div class = "flex_index_box" style = "width: 64%" id = "election">
         <div style = "flex-basis: 100%">
           <span class = "indexheader">Current mayor:&nbsp;</span><span class = "indexheader" id = "currentmayor"></span><br>
         </div>
@@ -30,13 +31,17 @@
 
         </table>
       </div>
-      <div class = "flex_index_box" style = "width: 34%; height:70%;" id = "datetime">
+      <div class = "flex_index_box" style = "width: 34%; flex:1" id = "datetime">
         <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
-          <span class = "indexheader" id = "sbmonth"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbseason"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbdate"></span><span class = "indexheader">, Year&nbsp;</span><span class = "indexheader" id = sbyear></span>
+          <span class = "indexheader" id = "sbmonth"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbseason"></span><span class = "indexheader">&nbsp;</span><span class = "indexheader" id = "sbdate"></span>
+        </div>
+        <div style = "display:flex; flex-basis:100%; justify-content:flex-end;">
+          <span style = "font-size: 20px;">Year&nbsp;</span><span style = "font-size:20px" id = sbyear></span>
         </div>
         <div style = "display:flex;flex-basis:100%; justify-content:flex-end;">
           <span id = "sbtime"></span>
         </div>
+        <div style = "display:flex; flex-basis:100%; height:70%"></div>
       </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
@@ -44,24 +49,21 @@
       <div style = "display:flex;flex-basis:100%;">
         <span class = header>Events</span>
       </div>
-      <div style = "display:flex;flex-basis:60%; justify-content: space-between;">
-      <div>
-        Notify me when events start
-      </div>
+      <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%)) ; flex-direction: row;">
+      <span style = "margin-right:20px">Notify me when events start</span>
       <div>
 
         <label class = "switchbox">
           <input type = "checkbox"  id = "notify" onchange = toggleEventNotif()>
           <span class = "switch"></span></label>
-          </div>
-          <div>
-            <span id = "notifstatus">Notifications disabled</span>
-          </div>
-          <div>
-          </div>
-          
       </div>
-      <div style = "display:flex;flex-basis:100%">
+      <div>
+      </div>
+      </div>
+      <div class = "flex_full_row">
+        <span id = "notifstatus">(Notifications disabled)</span>
+      </div>
+      <div class = "flex_full_row">
         <div>
           <form action = "#">
             <label>Notify me </label>
@@ -80,7 +82,7 @@
           </form>
         </div>
       </div>
-      <table id = "eventtable" style = "flex-basis:65%">  
+      <table id = "eventtable" style = "flex-basis: min(calc(100% - 30px), max(600px, 65%));">  
         
       </table>
     </div>
@@ -96,7 +98,7 @@
   </div>
 </section>
 <br>
-  <div id = "nav" style = "width:600px; margin: auto;" class = "hub_block"></div>
+  <div id = "nav" style = "width:min(83.3%, 600px); margin: auto;" class = "hub_block"></div>
   </body>
   <script>
     var date = new Date();
@@ -135,20 +137,20 @@
         function(permission){
           if (permission == "granted"){
             console.log("Notifications enabled");
-            document.getElementById("notifstatus").innerText = "Notifications enabled";
+            document.getElementById("notifstatus").innerText = "(Notifications enabled)";
             notifPerms = 1;
           } else if (permission == "denied"){
             console.log("Notification permissions denied");
-            document.getElementById("notifstatus").innerText = "Notification access denied! Please enable notifications";
+            document.getElementById("notifstatus").innerText = "(Notification access denied! Please enable notifications)";
           } else {
             console.log("Notifications not supported");
-            document.getElementById("notifstatus").innerText = "Your browser does not support notifications";
+            document.getElementById("notifstatus").innerText = "(Your browser does not support notifications)";
           }
         }
         );
       } else {
         console.log("Notifications disabled");
-        document.getElementById("notifstatus").innerText = "Notifications disabled";
+        document.getElementById("notifstatus").innerText = "(Notifications disabled)";
       }
       
     }
