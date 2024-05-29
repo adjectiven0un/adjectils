@@ -244,7 +244,6 @@ body {
     border-style: solid;
     border-color: #808080;
     */
-    flex-wrap:wrap;
     display:flex;
     align-items:center;
     justify-content: center;
@@ -263,8 +262,31 @@ body {
     align-items:center;
     justify-content: space-evenly;
     flex-direction:row;
+    
   }
   .flex_index_box{
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    text-justify: auto;
+    margin: 10px;
+    border-spacing: 5px;
+    padding: 10px;
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .flex_index_box_big {
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    text-justify: auto;
+    margin: 10px;
+    border-spacing: 5px;
+    padding: 10px;
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .flex_index_box_small {
     background-color: #404040;
     border-style: solid;
     border-color: #808080;

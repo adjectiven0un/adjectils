@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Outlandish utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
+  <meta name="viewport" content="width=device-width, initial-scale=0.6">
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -18,10 +19,10 @@
 <div style = "text-align:center">
   <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = riftheader>The Rift</span><br>
 </div>
-  <section class = "flex_box_index" style = "width:70%">
-    <div class = "flex_index_row" style = "align-items:stretch">
+  <section class = "flex_box_index" style = "flex-basis: min(calc(100% - 30px), max(756px, 70%)); ">
+    <div class = "flex_index_row" style = "align-items:stretch;" id = "riftrow1">
         
-    <div class = "flex_index_box rift_box" style = "width:63%; flex-basis:63%;color: #b070ff;">
+    <div class = "flex_index_box_big rift_box" style = "color: #b070ff;" id = "vampbox">
         <span class = "flex_full_row" style = "font-size: 24px; color: #d22b55;">Riftstalker Bloodfiend</span>
         <div class = "flex_full_row" style = "margin-top:10px">User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 20 min = 0 max = 28 onchange = updateAllChances()></input></div>
         <div class = "flex_full_row">RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span></div>
@@ -53,7 +54,7 @@
             </select>
           </form>
           <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: This calculator only provides the chances for tiers IV and V.</span>
-          <table id = loottable_vamp >
+          <table id = loottable_vamp>
           <tr><td><hr class = solid></td></tr>
           <tr><td>Chance of Quantum III Book Bundle: </td><td><span style = "text-align: right" class = basictext id = chance_book_quantum></span></td></tr>
           <tr><td>Chance of Bubba Blister: </td><td><span style = "text-align: right" class = basictext id = chance_blister></span></td></tr>
@@ -68,7 +69,7 @@
         </table>
     </div>
     
-    <div class = "flex_index_box rift_box" style = "width:36%;flex-basis:36%;">
+    <div class = "flex_index_box_small rift_box" id = motesbox>
         <span class = "flex_full_row" style = "font-size: 24px; color: #ff00ff;">Motes</span>
         <div class = "flex_full_row" style = "margin-top:10px">Target motes: <input type = "number" inputmode = "numeric" id = targetmotes value = 7500000 min = 0 max = 100000000 onchange = updateMotes()></input></div>
         <form action = "#" class = "flex_full_row">
@@ -83,7 +84,7 @@
             </select>
         </form>
         <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: It is assumed that the user crafts Vampiric Melons into Enchanted Vampiric Melons before selling them to the Motes Grubber.</span>
-        <table style = "margin-top:10px; margin-bottom:65%; width:100%">
+        <table id = "killstable" style = "margin-top:10px; width:100%; margin-bottom: 65%;">
         <tr><td style = "width:50%">Thrall kills: </td><td><span class = "flex_full_row" id = "thrallkillsneeded"></span></td></tr>
         <tr><td style = "width:50%">Fledgling kills: </td><td><span class = "flex_full_row" id = "fledgekillsneeded"></span></td></tr>
         </table>
@@ -93,10 +94,11 @@
 
 
 
-  <div id = "nav" style = "width:600px; margin: auto" class = "hub_block"></div>
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
   </body>
   <script src = "slayercalc.js"></script>
   <script>
+    window.addEventListener('resize', updateSizes);
     var weights = {
         "book_quantum": 2000,
         "blister": 1500,
@@ -134,8 +136,10 @@
     async function updatePage(){
         updateAllChances();
         updateMotes();
+        updateSizes();
     }
     function updateMotes(){
+
         if (targetmotes.value > 1000000000){
             document.getElementById("slayermagicfind").value = 1000000000;
         }
@@ -146,5 +150,27 @@
         var motesperfledge = 250 + 131.25 * grubberstacks.value;
         document.getElementById("thrallkillsneeded").innerText = Math.ceil(targetmotes.value / motesperthrall);
         document.getElementById("fledgekillsneeded").innerText = Math.ceil(targetmotes.value / motesperfledge);
+    }
+    function updateSizes(){
+      console.log("Current width: " + window.innerWidth);
+      if (window.innerWidth >= 768 * (5/3)) {
+          console.log("Desktop mode...");
+          document.getElementById("killstable").style.marginBottom = "65%";
+          document.getElementById("riftrow1").style.flexWrap = "no-wrap";
+          document.getElementById("vampbox").style.flexBasis = "min(calc(100% - 30px), max(500px, 60%))";
+          document.getElementById("motesbox").style.flexBasis = "min(calc(100% - 30px), max(250px, 30%))";
+          document.getElementById("vampbox").style.width = "min(calc(100% - 30px), max(600px, 60%))";
+          document.getElementById("motesbox").style.width = "min(calc(100% - 30px), max(300px, 30%))";
+          
+        } else {
+          console.log("Mobile mode...");
+          document.getElementById("riftrow1").style.flexWrap = "wrap";
+          document.getElementById("killstable").style.marginBottom = "0%";
+          document.getElementById("vampbox").style.flexBasis = "100%";
+          document.getElementById("motesbox").style.flexBasis = "100%";
+          document.getElementById("vampbox").style.width = "100%";
+          document.getElementById("motesbox").style.width = "100%";
+          
+        }
     }
   </script>
