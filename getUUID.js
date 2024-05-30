@@ -14,4 +14,15 @@ async function getUUIDbyName(name){
       document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
     }
 }
+
+async function getAPIdata(UUID){
+  console.log("API call attempted");
+  const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/skyblock/profiles?uuid=" + UUID);
+  if (!apicall.ok){
+      console.log("Api call error");
+      document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
+      return -1;
+  }
+  return await apicall.json();
+}
   

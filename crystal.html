@@ -22,7 +22,7 @@
     <div id = header>
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = crystalheader>Crystal Hollows</span><br>
   </div>
-  <input type = "text" onchange = updatePass(value) id = "nameinput"><br>
+  <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button><br>
   <span id = "status">Enter a username to continue.</span><br>
   <span id = "refreshstatus"></span><br>
   <div>
@@ -161,7 +161,7 @@
   <div id = "nav" style = "width:600px" class = "crystal_block"></div>
   </body>
   <script>
-    var storedname = "";
+    var lastname = "";
     var hr = 0;
     var mole = 0;
     var hasruby = 0;
@@ -169,38 +169,35 @@
     var onCD = false;
     var data;
     var purchasetime;
+    var fasttrack = false;
     var intervalID = [""];
     function resetStatuses(){
         document.getElementById("passexpiration").innerText = "N/A";
         document.getElementById("timeleft").innerText = "––:––";
     }
     async function updatePass(name){
+        if (onCD == true){
+            document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+            console.log("On cooldown!");
+            return -1;
+        } else {
+            document.getElementById("refreshstatus").innerText = "";
+            onCD = true;
+            setTimeout(() => { onCD = false }, 3000);
+        }
         purchasetime = 0;
         console.log(intervalID);
         document.getElementById("passexpiration").innerText = "––:––";
         document.getElementById("timeleft").innerText = "––:––";
         clearInterval[intervalID[0]];
         //intervalID[0] = "";
-        if (name != storedname){
-            console.log("Last name: " + storedname + " New name: " + name);
-            if (onCD == true){
-                document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
-                console.log("On cooldown!");
-                return -1;
-            } else {
-                document.getElementById("refreshstatus").innerText = "";
-                onCD = true;
-                setTimeout(() => { onCD = false }, 3000);
-            }
-            UUID = await getUUIDbyName(name);
-            const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/skyblock/profiles?uuid=" + UUID);
-            if (!apicall.ok){
-                console.log("Api call error");
-                document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-                return -1;
-            }
-            data = await apicall.json();
-            try {
+        UUID = await getUUIDbyName(name);
+        if (!fasttrack){
+            data = await getAPIdata(UUID);
+        }
+        fasttrack = false;
+        
+        try {
                 profilelist = (data.profiles);
                 for (var i = 0; i < 5; i++){
                     document.getElementById("profile" + i).innerText = "–––––";
@@ -211,7 +208,6 @@
           
                 console.log("Checking new name");
                 var profilenum = 0;
-                storedname = name;
                 for (var i = 0; i < profilelist.length; i++){
                     if (profilelist[i].selected){
                         console.log("Profile ID found: " + profilenum);
@@ -223,9 +219,12 @@
             } catch (TypeError){
                 document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
             }
+            console.log("Last name: " + lastname + " New name: " + name);
             lastname = name;
-            
-        }
+            localStorage.setItem("storedname", name);
+            localStorage.setItem("storeddata", JSON.stringify(data));
+            fasttrack = false;
+        
         try {
             purchasetime = data.profiles[profileid.value].members[UUID].mining_core.greater_mines_last_access;
             console.log(purchasetime);
@@ -244,8 +243,8 @@
                 }
             } 
         } catch (TypeError) {
-            console.log("No data found");
-            document.getElementById("status").innerText = "This profile has no Crystal Hollows data!";
+            //console.log("No data found");
+            //document.getElementById("status").innerText = "This profile has no Crystal Hollows data!";
         }
         
     }
@@ -313,6 +312,16 @@
     }
     function updatePage(){
         updateChances();
+        console.log("Stored a name: " + localStorage.getItem("storedname"));
+        if (localStorage.getItem("storedname") != null && localStorage.getItem("storeddata") != null){
+            console.log("Found a previous name and data! Loading...");
+            console.log("Previous name: " + localStorage.getItem("storedname"));
+            console.log("Previous data: " + localStorage.getItem("storeddata"));
+            document.getElementById("nameinput").value = localStorage.getItem("storedname");
+            data = JSON.parse(localStorage.getItem("storeddata"));
+            fasttrack = true;
+            updatePass(localStorage.getItem("storedname"));
+        }
     }
     
   </script>

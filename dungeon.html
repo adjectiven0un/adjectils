@@ -125,9 +125,17 @@
     const totalxp = 569809640;
     var copyabletext = "";
     function updatePage(){
-        
+        if (localStorage.getItem("storedname") != null){
+            console.log("Found a previous name and data! Loading...");
+            console.log("Previous name: " + localStorage.getItem("storedname"));
+            console.log("Previous data: " + localStorage.getItem("storeddata"));
+            document.getElementById("nameinput").value = localStorage.getItem("storedname");
+            data = JSON.parse(localStorage.getItem("storeddata"));
+            fasttrack = true;
+            updateCata(localStorage.getItem("storedname"));
+        }
     }
-    var data;
+    var data = undefined;
     var onCD = false;
     var profilelist;
     var UUID;
@@ -160,28 +168,27 @@
         }
         return input;
     }
+    var fasttrack = false;
+    
     async function updateCata(name){
         resetStatuses();
-        if (lastname != name){
-            console.log("Last name: " + lastname + " New name: " + name);
-            if (onCD == true){
-                document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
-                console.log("On cooldown!");
-                return -1;
-            } else {
-                document.getElementById("refreshstatus").innerText = "";
-                onCD = true;
-                setTimeout(() => { onCD = false }, 5000);
-            }
+        console.log("Last name: " + lastname + " New name: " + name);
+        if (onCD == true){
+            document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+            console.log("On cooldown!");
+            return -1;
+        } else {
+            document.getElementById("refreshstatus").innerText = "";
+            onCD = true;
+            setTimeout(() => { onCD = false }, 5000);
+        }
             UUID = await getUUIDbyName(name);
-            const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/skyblock/profiles?uuid=" + UUID);
-            if (!apicall.ok){
-                console.log("Api call error");
-                document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-                return -1;
-            }
-            data = await apicall.json();
-            try {
+            if (!fasttrack){
+                data = await getAPIdata(UUID);
+                console.log(data);
+        }
+        try {
+                console.log("Attempting to set profile ID...");
                 profilelist = (data.profiles);
                 for (var i = 0; i < 5; i++){
                     document.getElementById("profile" + i).innerText = "–––––";
@@ -205,8 +212,14 @@
                 document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
             }
             lastname = name;
-        }
-        try {
+            fasttrack = false;
+            localStorage.setItem("storedname", name);
+            console.log("Set item " + localStorage.getItem("storedname"));
+            localStorage.setItem("storeddata", JSON.stringify(data)); 
+            console.log("Set item " + localStorage.getItem("storeddata"));
+        
+        //try {
+            console.log(data);
             var dungeons = data.profiles[profileid.value].members[UUID].dungeons;
             var cataxp =  dungeons.dungeon_types.catacombs.experience;
             var time = Math.floor(Date.now()/1000);
@@ -374,10 +387,10 @@
             }
             
             
-        } catch (TypeError){ 
-            console.log("Type error...");
-            document.getElementById("otherstatus").innerText = "This profile has no Dungeons stats!";
-        }
+        //} catch (TypeError){ 
+            //console.log("Type error...");
+            //document.getElementById("otherstatus").innerText = "This profile has no Dungeons stats!";
+        //}
         
     }
     function copyText(){

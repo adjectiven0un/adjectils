@@ -1,6 +1,6 @@
 <!DOCTYPE html>
   <html>
-  <body onload="" style = "background-image:url(./images/dwarvenbg.png); background-size:15%">
+  <body onload="updatePage()" style = "background-image:url(./images/dwarvenbg.png); background-size:15%">
   <title>adjectils - Dwarven Mines</title>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
@@ -135,9 +135,24 @@
   <div id = "nav" class = "dwarven_block" style = "width:600px"></div>
   </body>
   <script>
+    var fasttrack = false;
+    var data;
+    async function updatePage(){
+        console.log("Stored a name: " + localStorage.getItem("storedname"));
+        if (localStorage.getItem("storedname") != null){
+            console.log("Found a previous name and data! Loading...");
+            console.log("Previous name: " + localStorage.getItem("storedname"));
+            console.log("Previous data: " + localStorage.getItem("storeddata"));
+            document.getElementById("nameinput").value = localStorage.getItem("storedname");
+            data = JSON.parse(localStorage.getItem("storeddata"));
+            fasttrack = true;
+            updateForges(localStorage.getItem("storedname"));
+        }
+    }
     const intervalID = [];
     var onCD = false;
-    function fullReset(forgelog){
+    
+    function fullReset(){
       for (var i = 1; i <= 5; i++){
             document.getElementById("time" + i).innerText = "––:––";
             document.getElementById("finish" + i).innerText = "––:––";
@@ -151,29 +166,32 @@
           
     }
     var lastname = "";
+    
     async function updateForges(name){
-      
+      var UUID = await getUUIDbyName(name);
       if (onCD == true){
-        document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+        document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
         return -1;
       } else {
         document.getElementById("refreshstatus").innerText = "";
         onCD = true;
-        setTimeout(() => { onCD = false }, 3000);
+        setTimeout(() => { onCD = false }, 5000);
       }
+      if (!fasttrack){
+        data = await getAPIdata(UUID);
+      }
+      fasttrack = false;
+      if (lastname != name){
+
+      
       fullReset();
       clearInterval(intervalID[0]);
       intervalID.length = 0;
-      var UUID = await getUUIDbyName(name);
+      
       //try {
-        const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/skyblock/profiles?uuid=" + UUID);
-        if (!apicall.ok){
-          console.log("Api call error");
-          document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
-          return -1;
-        }
-        const data = await apicall.json();
+        
+        
         var profilelist;
         try {
           profilelist = (data.profiles);
@@ -184,13 +202,12 @@
             document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
           }
           if (lastname != name){
-            console.log("Checking new name");
             var profilenum = 0;
-            lastname = name;
             for (var i = 0; i < profilelist.length; i++){
               if (profilelist[i].selected){
-                console.log("Profile ID found: " + profilenum);
                 profilenum = i;
+                console.log("Profile ID found: " + profilenum);
+                
                 break;
               }
             }
@@ -199,6 +216,10 @@
         } catch (TypeError){
           fullReset();
         }
+        lastname = name;
+        localStorage.setItem("storedname", name);
+        localStorage.setItem("storeddata", JSON.stringify(data));
+      }
         var forgelog;
         try {
           forgelog = (data.profiles[profileid.value].members[UUID].forge.forge_processes.forge_1);
@@ -253,6 +274,7 @@
         }
         var interval = setInterval(() => updateTimers(qfm, forgelog), 1000);
         intervalID.push(interval);
+      
       
     }
 
@@ -326,7 +348,6 @@
             document.getElementById("forgeunmeter" + i).innerText = chunk2;
             
           } catch (TypeError) {
-            console.log("No item in slot " + i);
             actives[i - 1] = 0;
             document.getElementById("time" + i).innerText = "Inactive";
           }
