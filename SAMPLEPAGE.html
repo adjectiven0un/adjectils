@@ -5,17 +5,24 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Abstract utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
+  <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
         $("#nav").load("nav.html"); 
       });
       </script>
-  <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>Sample Text</span><br>
+  <div style = "text-align:center; margin: auto"> 
+    <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>Sample Text</span><br>
+  </div>
 
 
 
-  <div id = "nav" style = "width:600px" class = "hub_block"></div>
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
   </body>
   <script>
     function updatePage(){

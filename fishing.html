@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+    <html>
+    <body onload="updatePage()">
+    <title>adjectils - Fishing</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <meta name = "description" content = "Piscine utilities for Hypixel SkyBlock">
+    <meta name = "author" content = "adjective_n0un">
+    <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+    <script src = "getUUID.js"></script>
+    <script>
+    $(function(){
+        $("#nav").load("nav.html"); 
+    });
+    </script>
+    <div style = "text-align:center; margin: auto"> 
+        <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header style = "Color: #50b0ff">Fishing</span><br>
+    </div>
+    <section class = "flex_box_index" style = "flex-basis: min(calc(100% - 30px), max(756px, 70%));">
+        <div class = "flex_index_box">
+            <span class = "flex_full_row" style = "font-size: 24px; color:#e08000">Coming soon!</span>
+            <span class = "flex_full_row" style = "color:#282828"><input type = "text" id = "nameinput" style = "height:16px;" onchange = updateFish(value)><span>&nbsp;</span><button onclick = updateFish(nameinput.value) style = "width: 20px; height: 20px;text-align:center;">⟳</button></span>
+            <span id = "refreshstatus" class = "flex_full_row">Enter a username to continue.</span>
+            <form action = "#">
+                <label>Profile:</label>
+                <select id = profileid value = 4 onchange = updateFish(nameinput.value)>
+                    <option id = profile0 value = 0>–––––</option>
+                    <option id = profile1 value = 1>–––––</option>
+                    <option id = profile2 value = 2>–––––</option>
+                    <option id = profile3 value = 3>–––––</option>
+                    <option id = profile4 value = 4>–––––</option>
+                </select>
+            </form>
+            <span id = "status" class = "flex_full_row"></span>
+            <div class = "flex_index_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                
+            </div>
+            <div class = "flex_index_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                
+            </div>
+            <div class = "flex_index_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                
+            </div>
+        </div>
+    </section>
+
+
+
+    <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+    </body>
+    <script>
+
+        const fishnames = ["sulphur_skitter", "obfuscated_fish_1", "steaming_hot_flounder", "", "gusher", "blobfish", "obfuscated_fish_2", "slugfish", "flyfish", "obfuscated_fish_3", "lava_horse", "mana_ray", "volcanic_stonefish", "vanille", "", "skeleton_fish", "moldfin", "soul_fish", "karate_fish", "golden_fish", ""];
+        var rarities = ["bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", ""];
+        var fasttrack = false;
+        var onCD = false;
+        var data;
+
+        //Empty out the rows when resetting them
+
+        function resetFish(){
+            for (var i = 1; i <= 3; i++){
+                document.getElementById("row" + i).innerHTML = "";
+            }
+        }
+
+        //Updates the page with previous API data, if it exists, and fasttrack it to avoid calling the API again
+
+        function updatePage(){
+            if (localStorage.getItem("storedname") != null){
+                console.log("Found a previous name and data! Loading...");
+                console.log("Previous name: " + localStorage.getItem("storedname"));
+                console.log("Previous data: " + localStorage.getItem("storeddata"));
+                document.getElementById("nameinput").value = localStorage.getItem("storedname");
+                data = JSON.parse(localStorage.getItem("storeddata"));
+                fasttrack = true;
+                updateFish(localStorage.getItem("storedname"));
+            } else {
+                setFish();
+            }
+        }
+        
+        async function updateFish(name){
+
+            //Rudimentary cooldown to avoid refresh spamming causing rate limits. Fast tracking does not trigger the cooldown.
+
+            if (onCD == true){
+                document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+                console.log("On cooldown!");
+                return -1;
+            } else {
+                document.getElementById("refreshstatus").innerText = "";
+                if (!fasttrack){
+                    onCD = true;
+                    setTimeout(() => { onCD = false }, 5000);
+                }
+            }
+
+            //Get the API data. Note that if we already have data from localstorage, this step will be skipped.
+
+            UUID = await getUUIDbyName(name);
+            if (!fasttrack){
+                data = await getAPIdata(UUID);
+                console.log(data);
+            } 
+
+            //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
+
+            try {
+                profilelist = (data.profiles);
+
+                //Set up the dropdown menu.
+
+                for (var i = 0; i < 5; i++){
+                    document.getElementById("profile" + i).innerText = "–––––";
+                }
+                for (var i = 0; i < profilelist.length; i++){
+                    document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
+                }
+
+                //Find selected profile.
+          
+                var profilenum = 0;
+                for (var i = 0; i < profilelist.length; i++){
+                    if (profilelist[i].selected){
+                        profilenum = i;
+                        break;
+                    }
+                }
+                document.getElementById("profileid").value = profilenum;    
+            } catch (TypeError){
+                document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
+            }
+
+            //Deactivate fasttrack if applicable, then store the last name and api data in localStorage.
+
+            fasttrack = false;
+            localStorage.setItem("storedname", name);
+            console.log("Set item " + localStorage.getItem("storedname"));
+            localStorage.setItem("storeddata", JSON.stringify(data)); 
+            console.log("Set item " + localStorage.getItem("storeddata"));
+
+            //Start fresh
+
+            resetFish();
+
+            //Set up the Rarities array. (TBA)
+
+            //Generates the boxes for the trophy fish. Spaces are deliberately left in the fishnames array so that some boxes are left empty and hidden.
+            
+            setFish();
+
+            //Set a hover element for each image telling the user more detail about each fish. (TBA)
+            
+        }
+        
+        function setFish() {
+            for (var j = 1; j <= 3; j++){
+                for (var i = 7 * (j - 1); i < 7 * j; i++){
+                    var box = document.createElement("div");
+                    box.className = "fishbox";
+                    box.id = fishnames[i] + "_box";
+                    if (fishnames[i] == ""){
+                        box.style.opacity = "0%";
+                    } else {
+                        var fishimage = document.createElement("img");
+                        fishimage.src = "./images/" + fishnames[i] + "_" + rarities[i] + ".png";
+                        fishimage.style.height = "80%"; 
+                        fishimage.style.width = "80%";
+                        box.appendChild(fishimage);
+                    }
+                    document.getElementById("row" + j).appendChild(box);
+                }
+            }
+        }
+    </script>

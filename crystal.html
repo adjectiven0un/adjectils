@@ -177,13 +177,15 @@
     }
     async function updatePass(name){
         if (onCD == true){
-            document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+            document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
             console.log("On cooldown!");
             return -1;
         } else {
             document.getElementById("refreshstatus").innerText = "";
-            onCD = true;
-            setTimeout(() => { onCD = false }, 3000);
+            if (!fasttrack){
+                onCD = true;
+                setTimeout(() => { onCD = false }, 5000);
+            }
         }
         purchasetime = 0;
         console.log(intervalID);

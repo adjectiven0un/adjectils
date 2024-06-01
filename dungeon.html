@@ -178,19 +178,22 @@
         resetStatuses();
         console.log("Last name: " + lastname + " New name: " + name);
         if (onCD == true){
-            document.getElementById("refreshstatus").innerText = "Please wait 3 seconds before using this again.";
+            document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
             console.log("On cooldown!");
             return -1;
         } else {
             document.getElementById("refreshstatus").innerText = "";
-            onCD = true;
-            setTimeout(() => { onCD = false }, 5000);
-        }
-            UUID = await getUUIDbyName(name);
             if (!fasttrack){
-                data = await getAPIdata(UUID);
-                console.log(data);
+                onCD = true;
+                setTimeout(() => { onCD = false }, 5000);
+            }
+            
         }
+        UUID = await getUUIDbyName(name);
+        if (!fasttrack){
+            data = await getAPIdata(UUID);
+            console.log(data);
+        } 
         try {
                 console.log("Attempting to set profile ID...");
                 profilelist = (data.profiles);

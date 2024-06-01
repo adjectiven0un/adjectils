@@ -175,8 +175,10 @@
         return -1;
       } else {
         document.getElementById("refreshstatus").innerText = "";
-        onCD = true;
-        setTimeout(() => { onCD = false }, 5000);
+        if (!fasttrack){
+            onCD = true;
+            setTimeout(() => { onCD = false }, 5000);
+        }
       }
       if (!fasttrack){
         data = await getAPIdata(UUID);
