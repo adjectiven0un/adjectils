@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-    <html>
+    <html lang = "en">
+    <head>
+        <meta name = "description" content = "Piscine utilities for Hypixel SkyBlock">
+        <meta name = "author" content = "adjective_n0un">
+        <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+        <title>adjectils - Fishing</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+        <link rel="manifest" href="./favicon/site.webmanifest">
+        <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+        <script src = "getUUID.js"></script>
+    </head>
     <body onload="updatePage()">
-    <title>adjectils - Fishing</title>
-    <link rel="stylesheet" href="stylesheet.css">
-    <meta name = "description" content = "Piscine utilities for Hypixel SkyBlock">
-    <meta name = "author" content = "adjective_n0un">
-    <meta name = "viewport" content="width=device-width, initial-scale=0.6">
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
-    <script src = "getUUID.js"></script>
     <script>
     $(function(){
         $("#nav").load("nav.html"); 
@@ -258,6 +260,7 @@
                         fishimage.src = "./images/" + fishnames[i] + "_" + rarities[i] + ".png";
                         fishimage.style.height = "80%"; 
                         fishimage.style.width = "80%";
+                        fishimage.alt = "";
                         box.appendChild(fishimage);
                         var tooltip = document.createElement("div");
                         tooltip.className = "fishboxtext";

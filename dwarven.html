@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-  <html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Dwarven Mines</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
+      <meta name = "author" content = "adjective_n0un">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "getUUID.js"></script>
+      <script src = "timeToMinutes.js"></script>
+      <script src = "dwarvendata.js"></script>
+    </head>
   <body onload="updatePage()" style = "background-image:url(./images/dwarvenbg.png); background-size:15%">
-  <title>adjectils - Dwarven Mines</title>
-  <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
-  <meta name = "author" content = "adjective_n0un">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="manifest" href="./favicon/site.webmanifest">
-  <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+  
       <script>
       $(function(){
         $("#nav").load("nav.html"); 
       });
       </script>
-  <script src = "getUUID.js"></script>
-  <script src = "timeToMinutes.js"></script>
-  <script src = "dwarvendata.js"></script>
+  
   <div id = header style = "background-color: #282828; width: 340px">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
   </div>  

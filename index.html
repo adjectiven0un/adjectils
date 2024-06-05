@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-  <html>
+  <html lang = "en">
+  <head>
+    <meta name = "description" content = "Adjectils' Home Page!">
+    <meta name = "author" content = "adjective_n0un">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>adjectils - Home</title>
+    <link rel="stylesheet" href="stylesheet.css">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <script src = "timeToMinutes.js"></script>
+  </head>
   <body onload="updatePage()">
-  <title>adjectils - Home</title>
-  <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Adjectils' Home Page!">
-  <meta name = "author" content = "adjective_n0un">
-  <meta name="viewport" content="width=device-width, initial-scale=0.5">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="manifest" href="./favicon/site.webmanifest">
+  
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
         $("#nav").load("nav.html"); 
       });
       </script>
-  <script src = "timeToMinutes.js"></script>
+  
   <div id = header style = "text-align: center; margin: 20px">
   <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
   <span class = "splash" id = "splashtext"></span>
@@ -65,8 +70,8 @@
       </div>
       <div class = "flex_full_row">
         <div>
-          <form action = "#">
-            <label>Notify me </label>
+          <form action = "#" id = "notificationtime">
+            <label for = "notificationtime">Notify me
             <select id = "notibefore">
               <option value = 60>1</option>
               <option value = 180>3</option>
@@ -78,7 +83,7 @@
               <option value = 2700>45</option>
               <option value = 3600>60</option>
             </select>
-            <label> minutes before event.</label>
+            minutes before event.</label>
           </form>
         </div>
       </div>

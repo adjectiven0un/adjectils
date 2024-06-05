@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-  <html>
+  <html lang = "en">
+    <head>
+        <title>adjectils - Dungeons</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <meta name = "description" content = "Decrepit utilities for Hypixel SkyBlock">
+        <meta name = "author" content = "adjective_n0un">
+        <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+        <link rel="manifest" href="./favicon/site.webmanifest">
+        <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
+    </head>
   <body onload="updatePage()">
-  <title>adjectils - Dungeons</title>
-  <link rel="stylesheet" href="stylesheet.css">
-  <meta name = "description" content = "Decrepit utilities for Hypixel SkyBlock">
-  <meta name = "author" content = "adjective_n0un">
-  <meta name = "viewport" content="width=device-width, initial-scale=0.6">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="manifest" href="./favicon/site.webmanifest">
-  <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
+  
       <script>
       $(function(){
         $("#nav").load("nav.html"); 
@@ -27,7 +30,7 @@
   <span id = "otherstatus"></span><br>
   <div>
     <form action = "#" style = "background-color: #282828;">
-      <label>Profile:</label>
+      <label>Profile:
       <select id = profileid value = 4 onchange = updateCata(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
         <option id = profile1 value = 1>–––––</option>
@@ -35,6 +38,7 @@
         <option id = profile3 value = 3>–––––</option>
         <option id = profile4 value = 4>–––––</option>
       </select>
+      </label>
     </form>
   </div>
   </div>
@@ -67,7 +71,7 @@
             <tr><td>
                 <form action = "#">
                     <div id = "floorselectdiv">
-                    <label>Floor: </label>
+                    <label>Floor:
                     <select id = "selectedfloor" onchange = updateCata(nameinput.value)>
                         <option value = 324000>M7</option>
                         <option value = 108000>M6</option>
@@ -85,16 +89,18 @@
                         <option value = 118.8>F1</option>
                         <option value = 59.4>Entrance</option>
                     </select>
+                    </label>
                     </div>
                     <div id = "ringselectdiv">
-                    <label>Catacombs Expert Ring: </label>
+                    <label>Catacombs Expert Ring:
                     <select id = "cataexpert" onchange = updateCata(nameinput.value)>
                         <option value = 0.1>Yes</option>
                         <option value = 0>No</option>
                     </select>
+                    </label>
                     </div>
                     <div id = "hecaselectdiv">
-                    <label>Hecatomb Level: </label>
+                    <label>Hecatomb Level:
                     <select id = "hecatomb" onchange = updateCata(nameinput.value)>
                         <option value = 0.02>X</option>
                         <option value = 0.0184>IX</option>
@@ -108,6 +114,7 @@
                         <option value = 0.0056>I</option>
                         <option value = 0>0</option>
                     </select>
+                    </label>
                     </div>
                 </form>
             </td></tr>
