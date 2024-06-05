@@ -58,9 +58,10 @@
       <span style = "margin-right:20px">Notify me when events start</span>
       <div>
 
-        <label class = "switchbox">
-          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif()>
-          <span class = "switch"></span></label>
+        <label class = "switchbox" id = "notifyswitch" for = "notify">
+          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif() aria-labelledby = "notifyswitch">
+          <span class = "switch"></span>
+        </label>
       </div>
       <div>
       </div>
