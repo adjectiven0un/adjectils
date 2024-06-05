@@ -266,6 +266,7 @@ body {
     
   }
   .fishbox{
+    position:relative;
     display:flex;
     align-items:center;
     justify-content: space-evenly;
@@ -275,6 +276,28 @@ body {
     border-style: solid;
     border-color: #808080;
   }
+  .fishbox .fishboxtext {
+    visibility: hidden;
+    background-color: #282828;
+    width: min(calc(600%), max(400px, 30%));
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    opacity:0;
+    transition: opacity 0.1s;
+  }
+  .fishbox .fishboxtext::after {
+    margin-left: 200px;
+    border-width: 400px;
+    border-style: solid;
+    border-color: #282828;  
+  }
+  .fishbox:hover .fishboxtext {
+    visibility: visible;
+    opacity: 1;
+  }
+
   .flex_index_box{
     background-color: #404040;
     border-style: solid;

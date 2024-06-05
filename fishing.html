@@ -22,12 +22,12 @@
     </div>
     <section class = "flex_box_index" style = "flex-basis: min(calc(100% - 30px), max(756px, 70%));">
         <div class = "flex_index_box">
-            <span class = "flex_full_row" style = "font-size: 24px; color:#e08000">Coming soon!</span>
+            <span class = "flex_full_row" style = "font-size: 24px; color:#e08000">Trophy Fishing</span>
             <span class = "flex_full_row" style = "color:#282828"><input type = "text" id = "nameinput" style = "height:16px;" onchange = updateFish(value)><span>&nbsp;</span><button onclick = updateFish(nameinput.value) style = "width: 20px; height: 20px;text-align:center;">⟳</button></span>
             <span id = "refreshstatus" class = "flex_full_row">Enter a username to continue.</span>
-            <form action = "#">
+            <form action = "#" class = "flex_full_row">
                 <label>Profile:</label>
-                <select id = profileid value = 4 onchange = updateFish(nameinput.value)>
+                <select id = profileid value = 4 onchange = updateProfileFish(nameinput.value)>
                     <option id = profile0 value = 0>–––––</option>
                     <option id = profile1 value = 1>–––––</option>
                     <option id = profile2 value = 2>–––––</option>
@@ -35,17 +35,46 @@
                     <option id = profile4 value = 4>–––––</option>
                 </select>
             </form>
+            
             <span id = "status" class = "flex_full_row"></span>
-            <div class = "flex_index_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+            <span id = "profilestatus" class = "flex_full_row"></span>
+            <form action = "#" class = "flex_full_row">
+                <label>Bait: </label>
+                <select id = baitused value = 1.05 onchange = updateProfileFish(nameinput.value)>
+                    <option value = 1.05>Hot Bait</option>
+                    <option value = 1>Something else</option>
+                </select>
+            </form>
+            <form action = "#" class = "flex_full_row">
+                <label>Rod: </label>
+                <select id = rodused value = 1.2 onchange = updateProfileFish(nameinput.value)>
+                    <option value = 1>Starter Lava Rod</option>
+                    <option value = 1.1>Magma Rod</option>
+                    <option value = 1.15>Inferno Rod</option>
+                    <option value = 1.2>Hellfire Rod</option>
+                </select>
+            </form>
+            <form action = "#" class = "flex_full_row">
+                <label>Armor: </label>
+                <select id = armorused value = 1.1 onchange = updateProfileFish(nameinput.value)>
+                    <option value = 1>Something else</option>
+                    <option value = 1.05>Silver Hunter Armor</option>
+                    <option value = 1.1>Gold Hunter Armor</option>
+                    <option value = 1.15>Diamond Hunter Armor</option>
+                </select>
+            </form>
+            <span class = "flex_full_row">Kuudra Pet level (Epic+ rarity): <input type = "number" id = "kuudralevel" value = "100" style = "height:16px;" onchange = updateProfileFish(value)><span>&nbsp;</span></span>
+            <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
                 
             </div>
-            <div class = "flex_index_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+            <div class = "flex_index_row flex_full_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
                 
             </div>
-            <div class = "flex_index_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+            <div class = "flex_index_row flex_full_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
                 
             </div>
         </div>
+        
     </section>
 
 
@@ -56,6 +85,12 @@
 
         const fishnames = ["sulphur_skitter", "obfuscated_fish_1", "steaming_hot_flounder", "", "gusher", "blobfish", "obfuscated_fish_2", "slugfish", "flyfish", "obfuscated_fish_3", "lava_horse", "mana_ray", "volcanic_stonefish", "vanille", "", "skeleton_fish", "moldfin", "soul_fish", "karate_fish", "golden_fish", ""];
         var rarities = ["bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", ""];
+        const fishrealnames = ["Sulphur Skitter", "Obfuscated 1", "Steaming-Hot Flounder", "", "Gusher", "Blobfish", "Obfuscated 2", "Slugfish", "Flyfish", "Obfuscated 3", "Lavahorse", "Mana Ray", "Volcanic Stonefish", "Vanille", "", "Skeleton Fish", "Moldfin", "Soul Fish", "Karate Fish", "Golden Fish", ""];
+        var fishchances = [30, 25, 20, "", 20, 20, 15, 10, 10, 8, 4, "(User's Mana/1000)", 3, 3, "", 2, 2, 2, 1, "", ""];
+        const methods = ["% chance to be caught within 8 blocks of a Sulphur Ore", "% chance to be caught using Corrupted Bait or when killing a Corrupted Sea Creature", "% chance to be caught in a geyser in the Blazing Volcano", "", "% chance to be caught 7-16 minutes after a volcano eruption", "% chance to be caught under any conditions", "% chance to be caught using Obfuscated 1 as bait", "% chance to be caught when the bobber has been out for at least 20 seconds", "% chance to be caught while standing at least 8 blocks over lava in the Blazing Volcano", "% chance to be caught while using Obfuscated 2 as bait", "% chance to be caught under any conditions", "% chance to be caught when the user has at least 1200 mana", "% chance to be caught while inside the Blazing Volcano", "% chance to be caught using a Starter Lava Rod with no enchantments", "", "% chance to be caught in the Burning Desert or Dragontail", "% chance to be caught in the Mystic Marsh or Scarleton", "% chance to be caught in the Stronghold", "% chance to be caught in the Dojo", "Appears every 15-20 minutes of consecutive fishing"];
+        const fishrarities = ["#ffffff", "#ffffff", "#ffffff", "", "#ffffff", "#ffffff", "#55ff55", "#55ff55", "#55ff55", "#5555ff", "#5555ff", "#5555ff", "#5555ff", "#5555ff", "", "#aa00aa", "#aa00aa", "#aa00aa","#aa00aa", "#ffaa00", ""];
+        const raritycontrol = ["_bronze", "_silver", "_gold", "_diamond", ""];
+        const raritycolors = ["#555555", "#aaaaaa", "#ffaa00", "#55ffff", "#ffffff"];
         var fasttrack = false;
         var onCD = false;
         var data;
@@ -66,11 +101,16 @@
             for (var i = 1; i <= 3; i++){
                 document.getElementById("row" + i).innerHTML = "";
             }
+            document.getElementById("profilestatus").innerText = "";
+            rarities = ["bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", ""];
         }
 
         //Updates the page with previous API data, if it exists, and fasttrack it to avoid calling the API again
 
         function updatePage(){
+            updateSizes();
+            document.getElementById("rodused").value = "1.2";
+            document.getElementById("armorused").value = "1.1";
             if (localStorage.getItem("storedname") != null){
                 console.log("Found a previous name and data! Loading...");
                 console.log("Previous name: " + localStorage.getItem("storedname"));
@@ -81,6 +121,7 @@
                 updateFish(localStorage.getItem("storedname"));
             } else {
                 setFish();
+                addToolTips();
             }
         }
         
@@ -103,14 +144,16 @@
             //Get the API data. Note that if we already have data from localstorage, this step will be skipped.
 
             UUID = await getUUIDbyName(name);
-            if (!fasttrack){
+            if (!fasttrack && UUID != -1){
                 data = await getAPIdata(UUID);
-                console.log(data);
             } 
 
             //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
 
             try {
+                if (UUID == -1) {
+                    error();
+                }
                 profilelist = (data.profiles);
 
                 //Set up the dropdown menu.
@@ -133,29 +176,73 @@
                 }
                 document.getElementById("profileid").value = profilenum;    
             } catch (TypeError){
-                document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
+                document.getElementById("profilestatus").innerHTML = "<span class = errored>No profiles found</span>";
+                resetFish();
             }
 
             //Deactivate fasttrack if applicable, then store the last name and api data in localStorage.
 
             fasttrack = false;
             localStorage.setItem("storedname", name);
-            console.log("Set item " + localStorage.getItem("storedname"));
             localStorage.setItem("storeddata", JSON.stringify(data)); 
-            console.log("Set item " + localStorage.getItem("storeddata"));
 
+            if (data != -1){    
+                updateProfileFish();
+            } else {
+                setFish();
+                addToolTips();
+            }
+            
+        }
+
+        //Function that is used as a checkpoint so that switching profiles does not call API and does not need a cooldown.
+        var fishdata;
+        function updateProfileFish(){
+            console.log("Updating fish for " + UUID);
             //Start fresh
 
             resetFish();
 
-            //Set up the Rarities array. (TBA)
+            
+            try {
+                fishdata = data.profiles[profileid.value].members[UUID].trophy_fish;
+            } catch (TypeError) {
+                console.log("This profile hasn't trophy fished!");
+                document.getElementById("profilestatus").innerText = "This profile has no trophy fishing stats!";
+                
+            }
+            
+            for (var i = 0; i < 21; i++){
+                if (fishnames[i] != ""){
+                    try {
+                        if (fishdata[fishnames[i] + "_diamond"] > 0) {
+                            rarities[i] = "diamond";
+                        } else if (fishdata[fishnames[i] + "_gold"] > 0) {
+                            rarities[i] = "gold";
+                        } else if (fishdata[fishnames[i] + "_silver"] > 0) {
+                            rarities[i] = "silver";
+                        } else {
+                            rarities[i] = "bronze";
+                        }
+                        
+                    } catch (TypeError) {
+                        console.log("Type error!");
+                        document.getElementById("profilestatus").innerText = "This profile has no trophy fishing stats!";
+                        setFish();
+                        addToolTips();
+                        return -1;
+                    }
+                }
+            }
 
             //Generates the boxes for the trophy fish. Spaces are deliberately left in the fishnames array so that some boxes are left empty and hidden.
             
             setFish();
 
-            //Set a hover element for each image telling the user more detail about each fish. (TBA)
-            
+            //Initialize the hover element for each image telling the user more detail about each fish.
+
+            addToolTips();
+
         }
         
         function setFish() {
@@ -172,9 +259,98 @@
                         fishimage.style.height = "80%"; 
                         fishimage.style.width = "80%";
                         box.appendChild(fishimage);
+                        var tooltip = document.createElement("div");
+                        tooltip.className = "fishboxtext";
+                        tooltip.id = (fishnames[i] + "_text");
+                        box.appendChild(tooltip);
                     }
                     document.getElementById("row" + j).appendChild(box);
                 }
+            }
+        }
+
+        function addToolTips() {
+
+            updateChances();
+
+            for (var i = 0; i < 21; i++){
+                if (fishnames[i] != ""){
+                    var title = document.createElement("span");
+                    title.innerText = fishrealnames[i];
+                    title.style.flexBasis = "100%";
+                    title.style.color = fishrarities[i];
+                    document.getElementById(fishnames[i] + "_text").appendChild(title);
+                    document.getElementById(fishnames[i] + "_text").appendChild(document.createElement("br"));
+                    var obtainment = document.createElement("span");
+                    obtainment.innerText = fishchances[i] + methods[i];
+                    document.getElementById(fishnames[i] + "_text").appendChild(obtainment);
+                    obtainment.style.fontSize = "10px";
+                    document.getElementById(fishnames[i] + "_text").appendChild(document.createElement("br"));
+                    document.getElementById(fishnames[i] + "_text").appendChild(document.createElement("br"));
+                    for (var j = 0; j < 5; j++){
+                        var raritytext = document.createElement("span");
+                        if (raritycontrol[j] != ""){
+                            raritytext.innerText = (raritycontrol[j]).replace(/^.(\w)/, (match, p1) => p1.toUpperCase())
+                        } else {
+                            raritytext.innerText = "Total";
+                        }
+                        raritytext.style.color = raritycolors[j];
+                        document.getElementById(fishnames[i] + "_text").appendChild(raritytext);
+                        var fishcount = document.createElement("span");
+                        try {
+                            fishcount.innerText = (": " + fishdata[fishnames[i] + raritycontrol[j]]).replace(/undefined/g, "0");
+                        } catch (TypeError) {
+                            fishcount.innerText = (": 0");
+                        }
+                        
+                        document.getElementById(fishnames[i] + "_text").appendChild(fishcount);
+                        document.getElementById(fishnames[i] + "_text").appendChild(document.createElement("br"));
+                    }
+                
+                }
+            }
+        } 
+
+        function updateChances(){
+            if (kuudralevel.value > 100){
+                document.getElementById("kuudralevel").value = 100;
+            }
+            if (kuudralevel.value < 0 || isNaN(kuudralevel.value) || kuudralevel.value == ""){
+                mf = 0;
+                document.getElementById("kuudralevel").value = 0;
+            }
+            var fishmult = parseFloat(rodused.value) * parseFloat(baitused.value) * parseFloat(armorused.value) * (1 + (kuudralevel.value * 0.002));
+            
+            var fishchances2 = [30, 25, 20, "", 20, 20, 15, 10, 10, 8, 4, "(User's Mana/1000)", 3, 3, "", 2, 2, 2, 1, "", ""];
+            for (var i = 0; i < 21; i++){
+                
+                fishchances[i] = (parseFloat(fishchances2[i]) * fishmult).toFixed(2);
+                if (fishchances2[i] == "(User's Mana/1000)"){
+                    var manachance = Math.floor(1000 / fishmult);
+                    fishchances[i] = "(User's Mana/" + manachance + ")";
+                }
+                if (i == 19){
+                    fishchances[i] = "";
+                }
+            }
+        }
+        window.addEventListener('resize', updateSizes);
+        function updateSizes(){
+            console.log("Current width: " + window.innerWidth);
+            if (window.innerWidth >= 768 * (5/3)) {
+                console.log("Desktop mode...");
+                for (var i = 1; i <= 3; i++){
+                    document.getElementById("row" + i).style.width = "50%";
+                    document.getElementById("row" + i).style.flexBasis = "51%";
+                }
+          
+            } else {
+                console.log("Mobile mode...");
+                for (var i = 1; i <= 3; i++){
+                    document.getElementById("row" + i).style.width = "calc(100% - 30px)";
+                    document.getElementById("row" + i).style.flexBasis = "calc(100% - 30px)";
+                }
+          
             }
         }
     </script>

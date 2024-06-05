@@ -5,6 +5,7 @@ async function getUUIDbyName(name){
       const check = await fetch("https://playerdb.co/api/player/minecraft/" + name);
       if (!check.ok){
         document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
+        return -1;
       }
        const data = await check.json();
        var activeid = (data.data.player.raw_id);

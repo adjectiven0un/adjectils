@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="stylesheet.css">
   <meta name = "description" content = "Decrepit utilities for Hypixel SkyBlock">
   <meta name = "author" content = "adjective_n0un">
+  <meta name = "viewport" content="width=device-width, initial-scale=0.6">
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -20,7 +21,7 @@
   </div>
   <br>
   <div style = "text-align:center">
-  <span style = "color:#282828"></span><input type = "text" id = "nameinput" onchange = updateCata(value)><span>&nbsp;</span><button onclick = updateCata(nameinput.value) style = "width: 5%;  text-align:center">Refresh ⟳</button><br>
+  <span style = "color:#282828"></span><input type = "text" id = "nameinput" onchange = updateCata(value)><span>&nbsp;</span><button onclick = updateCata(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
   <span id = "refreshstatus"></span><br>
   <span id = "status"></span><br>
   <span id = "otherstatus"></span><br>
@@ -39,8 +40,8 @@
   </div>
   <br>
   <section class = "flex_box_cata" style = "margin:auto">
-    <div class = "flex_index_row" style = "width:95%; align-items: stretch;">
-        <div class = "flex_cata_box" style = "width:29%;">
+    <div class = "flex_index_row" style = "width:95%; align-items: stretch;" id = "catarow">
+        <div class = "flex_cata_box" style = "width:29%;" id = "levelsbox">
             <span class = header class = "flex_full_row" style = "margin-bottom: 20px;">Current levels</span>
             <table style = "width:100%">
             <tr><td class = "flex_full_row" style = "margin-bottom: 18px;"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right" style = "margin-bottom:18px"></span></td></tr>
@@ -59,12 +60,13 @@
         </table>
             
         </div>
-        <div class = "flex_cata_box" style = "width:69%;">
+        <div class = "flex_cata_box" style = "width:69%;" id = "calcbox">
             <span class = header class = "flex_full_row">Milestone calculations</span>
             <span class = fineprint style = "display:flex; flex-basis:100%;">Note: For ease of calculation, it's assumed that each floor has been completed at least 25 times, and that a score of exactly 300 is reached every run.</span>
             <table>
             <tr><td>
                 <form action = "#">
+                    <div id = "floorselectdiv">
                     <label>Floor: </label>
                     <select id = "selectedfloor" onchange = updateCata(nameinput.value)>
                         <option value = 324000>M7</option>
@@ -83,11 +85,15 @@
                         <option value = 118.8>F1</option>
                         <option value = 59.4>Entrance</option>
                     </select>
+                    </div>
+                    <div id = "ringselectdiv">
                     <label>Catacombs Expert Ring: </label>
                     <select id = "cataexpert" onchange = updateCata(nameinput.value)>
                         <option value = 0.1>Yes</option>
                         <option value = 0>No</option>
                     </select>
+                    </div>
+                    <div id = "hecaselectdiv">
                     <label>Hecatomb Level: </label>
                     <select id = "hecatomb" onchange = updateCata(nameinput.value)>
                         <option value = 0.02>X</option>
@@ -102,6 +108,7 @@
                         <option value = 0.0056>I</option>
                         <option value = 0>0</option>
                     </select>
+                    </div>
                 </form>
             </td></tr>
             </table>
@@ -113,13 +120,13 @@
             <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><button onclick = copyText() style = "width: 40%;">Copy!</button></td></tr>
+            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
             </table>
         </div>
     </div>
   </section>
 
-  <div id = "nav" style = "width:600px; margin:auto" class = "hub_block"></div>
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "hub_block"></div>
   </body>
   <script src = "getUUID.js"></script>
   <script>
@@ -129,6 +136,7 @@
     const totalxp = 569809640;
     var copyabletext = "";
     function updatePage(){
+        updateSizes();
         if (localStorage.getItem("storedname") != null){
             console.log("Found a previous name and data! Loading...");
             console.log("Previous name: " + localStorage.getItem("storedname"));
@@ -225,7 +233,7 @@
             localStorage.setItem("storeddata", JSON.stringify(data)); 
             console.log("Set item " + localStorage.getItem("storeddata"));
         
-        //try {
+        try {
             console.log(data);
             var dungeons = data.profiles[profileid.value].members[UUID].dungeons;
             var cataxp =  dungeons.dungeon_types.catacombs.experience;
@@ -394,10 +402,10 @@
             }
             
             
-        //} catch (TypeError){ 
-            //console.log("Type error...");
-            //document.getElementById("otherstatus").innerText = "This profile has no Dungeons stats!";
-        //}
+        } catch (TypeError){ 
+            console.log("Type error...");
+            document.getElementById("otherstatus").innerText = "This profile has no Dungeons stats!";
+        }
         
     }
     function copyText(){
@@ -407,6 +415,21 @@
             textarea.select();
             textarea.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(textarea.value);
+        }
+    }
+    window.addEventListener('resize', updateSizes);
+    function updateSizes(){
+        console.log("Current width: " + window.innerWidth);
+        if (window.innerWidth >= 768 * (5/3)) {
+            console.log("Desktop mode...");
+            document.getElementById("levelsbox").style.flexBasis = "29%";
+            document.getElementById("calcbox").style.flexBasis = "69%";
+            document.getElementById("catarow").style.flexWrap = "no-wrap";
+        } else {
+            console.log("Mobile mode...");
+            document.getElementById("levelsbox").style.flexBasis = "100%";
+            document.getElementById("calcbox").style.flexBasis = "100%";
+            document.getElementById("catarow").style.flexWrap = "wrap";
         }
     }
   </script>
