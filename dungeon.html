@@ -24,7 +24,7 @@
   </div>
   <br>
   <div style = "text-align:center">
-  <span style = "color:#282828"></span><input type = "text" id = "nameinput" onchange = updateCata(value)><span>&nbsp;</span><button onclick = updateCata(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
+  <label>Username: <input type = "text" id = "nameinput" onchange = updateCata(value)>&nbsp;</label><button onclick = updateCata(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
   <span id = "refreshstatus"></span><br>
   <span id = "status"></span><br>
   <span id = "otherstatus"></span><br>
@@ -120,7 +120,7 @@
             </td></tr>
             </table>
             <table style = "width:100%">
-            <tr><td><span>Runs until Catacombs </span><input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)><span>: </span></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+            <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
