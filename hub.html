@@ -22,19 +22,20 @@
             <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = hubheader>SkyBlock Hub</span><br>
         </div>  
         
-          <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
+          <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
           <form action = "#">
-            <label>Display: </label>
+            <label>Display: 
             <select id = frac onchange = updateAllChances()>
               <option value = 0>Percentage</option>
               <option value = 1>Fraction</option>
             </select>
+            </label>
           </form>
         <div class = "hub_block" style = "width:600px; float:left">
         <span class = hubheader>Revenant Horror</span><br>
-        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentz value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercentz value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
-            <label>Selected meter item: </label>
+            <label>Selected meter item: 
             <select id = selecteddropz onchange = updateAllChances()>
                 <option value = null>None</option>
                 <option value = foulflesh>Foul Flesh</option>
@@ -51,6 +52,7 @@
                 <option value = rune_snake>Snake Rune I</option>
 
             </select>
+            </label>
         </form>
         <span class = fineprint>Note: This calculator only provides the chances for tier V.</span>   
         <table id = loottable_zombie>
@@ -74,9 +76,9 @@
       </div>
       <div class = "hub_block" style = "width:600px">
         <span class = hubheader>Sven Packmaster</span><br>
-        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentw value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <label class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentw value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
-            <label>Selected meter item: </label>
+            <label>Selected meter item: 
             <select id = selecteddropw onchange = updateAllChances()>
                 <option value = null>None</option>
                 <option value = wheel>Hamster Wheel</option>
@@ -88,6 +90,7 @@
                 <option value = rune_spirit>Spirit Rune</option>
                 <option value = rune_couture>Couture Rune</option>
             </select>
+            </label>
         </form>
         <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
         <table id = loottable_wolf>

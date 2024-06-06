@@ -26,10 +26,10 @@
   
     <div class = "blaze_block" style = "width: 600px", id = "box2">
         <span class = blazeheader>Inferno Demonlord</span><br>
-        <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
-        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
+        <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
-            <label>Selected meter item: </label>
+            <label>Selected meter item: 
             <select id = selecteddrop onchange = updateAllChances()>
                 <option value = null>None</option>
                 <option value = arrows_magma>Bundle of Magma Arrows</option>
@@ -54,13 +54,15 @@
                 <option value = dice_high>High Class Archfiend Dice</option>
                 <option value = rune_burst>Fiery Burst Rune I</option>
             </select>
+            </label>
         </form>
         <form action = "#">
-          <label>Display: </label>
+          <label>Display: 
           <select id = frac onchange = updateAllChances(slayermagicfind.value)>
             <option value = 0>Percentage</option>
             <option value = 1>Fraction</option>
           </select>
+          </label>
         </form>
         <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
         <table id = loottable_blaze>

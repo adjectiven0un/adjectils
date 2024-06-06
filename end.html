@@ -25,9 +25,9 @@
   </div> 
   <div class = "end_block" style = "width: 600px;", id = "box1">
     <span class = voidheader>Dragons & Golems</span><br>  
-    <span class = basictext>User's Magic Find: </span><input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input><br>
-    <span class = basictext>User's Pet Luck: </span><input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input><br>
-    <span class = basictext>Eyes placed: </span><input type = "number" inputmode = "numeric" id = "summoningeye" min = 0 max = 8 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 4></input><br>
+    <label class = basictext>User's Magic Find: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input></label><br>
+    <label class = basictext>User's Pet Luck: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input></label><br>
+    <label class = basictext>Eyes placed: </span><input type = "number" inputmode = "numeric" id = "summoningeye" min = 0 max = 8 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 4></input></label><br>
     <br>
     <table style = "width:400px">
       <tr><td><span class = basictext>Chance of Dragon Claw: </span></td><td><span id = "clawoutput" style = "text-align:right">0.000%</span><br></td></tr>
@@ -42,10 +42,10 @@
   </div>
   <div class = "end_block" style = " width: 600px", id = "box2">
     <span class = voidheader>Voidgloom Seraph</span><br>
-    <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input><br>
-    <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input><span>%</span><br>
+    <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input></label><br>
+    <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input>%</label><br>
     <form action = "#">
-      <label>Selected meter item: </label>
+      <label>Selected meter item: 
       <select id = selecteddrop onchange = updateAllChances(slayermagicfind.value)>
         <option value = null>None</option>
         <option value = twilight>Twilight Arrow Poison</option>
@@ -67,13 +67,15 @@
         <option value = skin_void>Void Conqueror Enderman Skin</option>
         <option value = rune_enchant>Enchant Rune I</option>
       </select>
+      </label>
     </form>
     <form action = "#">
-      <label>Display: </label>
+      <label>Display: 
       <select id = frac onchange = updateAllChances(slayermagicfind.value)>
         <option value = 0>Percentage</option>
         <option value = 1>Fraction</option>
       </select>
+      </label>
     </form>
     <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>
     <table id = loottable_seraph>

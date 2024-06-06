@@ -28,10 +28,10 @@
   <div style = "width:1050px">
     <div class = "spider_block" style = "width: 600px", id = "box2">
         <span class = spiderheader>Tarantula Broodfather</span><br>
-        <span class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input><br>
-        <span class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span><br>
+        <label class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
+        <label class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
-            <label>Selected meter item: </label>
+            <label>Selected meter item: 
             <select id = selecteddrop onchange = updateAllChances()>
                 <option value = null>None</option>
                 <option value = toxic>Toxic Arrow Poison</option>
@@ -42,13 +42,15 @@
                 <option value = mosquito>Digested Mosquito</option>
                 <option value = rune_bite>Bite Rune</option>
             </select>
+            </label>
         </form>
         <form action = "#">
-            <label>Display: </label>
+            <label>Display: 
             <select id = frac onchange = updateAllChances(slayermagicfind.value)>
               <option value = 0>Percentage</option>
               <option value = 1>Fraction</option>
             </select>
+            </label>
           </form>
         <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
         <table id = loottable_spider>

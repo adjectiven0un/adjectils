@@ -25,14 +25,14 @@
   <div id = header style = "background-color: #282828; width: 340px">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
   </div>  
-  <input type = "text" id = "nameinput" onchange = updateForges(value)><span>&nbsp;</span><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
+  <label>Username: <input type = "text" id = "nameinput" onchange = updateForges(value)>&nbsp;</label><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
   <div style = "float:left; width:270px;">
   <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
   <br>
   <div style = "float:left;">
     <form action = "#" style = "background-color: #282828;">
-      <label>Profile:</label>
+      <label>Profile:
       <select id = profileid value = 4 onchange = updateForges(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
         <option id = profile1 value = 1>–––––</option>
@@ -40,6 +40,7 @@
         <option id = profile3 value = 3>–––––</option>
         <option id = profile4 value = 4>–––––</option>
       </select>
+      </label>
     </form>
   </div>
   <div style = "display: inline-block;">

@@ -27,10 +27,10 @@
         
     <div class = "flex_index_box_big rift_box" style = "color: #b070ff;" id = "vampbox">
         <span class = "flex_full_row" style = "font-size: 24px; color: #d22b55;">Riftstalker Bloodfiend</span>
-        <div class = "flex_full_row" style = "margin-top:10px">User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 20 min = 0 max = 28 onchange = updateAllChances()></input></div>
+        <div class = "flex_full_row" style = "margin-top:10px"><label>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 20 min = 0 max = 28 onchange = updateAllChances()></input></label></div>
         <div class = "flex_full_row">RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input><span>%</span></div>
         <form action = "#" class = "flex_full_row">
-            <label>Selected meter item: </label>
+            <label>Selected meter item: 
             <select id = selecteddrop onchange = updateAllChances()>
                 <option value = null>None</option>
                 <option value = book_quantum>Quantum III Book Bundle</option>
@@ -41,20 +41,23 @@
                 <option value = book_theone>The One IV Book Bundle</option>
                 <option value = rune_soultwist>Soultwist Rune I</option>
             </select>
+            </label>
         </form>
         <form action = "#" class = "flex_full_row">
-          <label>Display: </label>
+          <label>Display: 
           <select id = frac onchange = updateAllChances()>
             <option value = 0>Percentage</option>
             <option value = 1>Fraction</option>
           </select>
+          </label>
         </form>
         <form action = "#" class = "flex_full_row">
-            <label>Tier: </label>
+            <label>Tier: 
             <select id = vamptier onchange = updateAllChances()>
               <option value = 0 style = "color: #AA0000">IV</option>
               <option value = 1 style = "color: #AA00AA">V</option>
             </select>
+            </label>
           </form>
           <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: This calculator only provides the chances for tiers IV and V.</span>
           <table id = loottable_vamp>
@@ -74,9 +77,9 @@
     
     <div class = "flex_index_box_small rift_box" id = motesbox>
         <span class = "flex_full_row" style = "font-size: 24px; color: #ff00ff;">Motes</span>
-        <div class = "flex_full_row" style = "margin-top:10px">Target motes: <input type = "number" inputmode = "numeric" id = targetmotes value = 7500000 min = 0 max = 100000000 onchange = updateMotes()></input></div>
+        <div class = "flex_full_row" style = "margin-top:10px"><label>Target motes: <input type = "number" inputmode = "numeric" id = targetmotes value = 7500000 min = 0 max = 100000000 onchange = updateMotes()></input></label></div>
         <form action = "#" class = "flex_full_row">
-            <label>Grubber stacks: </label>
+            <label>Grubber stacks: 
             <select id = grubberstacks onchange = updateMotes()>
                 <option value = 1.25>5</option>
                 <option value = 1.2>4</option>
@@ -85,6 +88,7 @@
                 <option value = 1.05>1</option>
                 <option value = 1>0</option>
             </select>
+            </label>
         </form>
         <span class = "fineprint flex_full_row" style = "margin-top:10px">Note: It is assumed that the user crafts Vampiric Melons into Enchanted Vampiric Melons before selling them to the Motes Grubber.</span>
         <table id = "killstable" style = "margin-top:10px; width:100%; margin-bottom: 65%;">
