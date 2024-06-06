@@ -58,6 +58,7 @@
         <span style = "font-size:18px">Slot 1: </span><span id = "forgeitem_1" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter1>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter1></span><span class = meter>]</span>
       </div>
+      <div id = timers1>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Completion time:&nbsp;</span>
@@ -65,6 +66,7 @@
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time1>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish1>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
       </div>
     </div>
     <div id = "item2" class = "flex_forge_box">
@@ -75,6 +77,7 @@
         <span style = "font-size:18px">Slot 2: </span><span id = "forgeitem_2" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter2>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter2></span><span class = meter>]</span>
       </div>
+      <div id = timers2>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Completion time:&nbsp;</span>
@@ -82,6 +85,7 @@
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time2>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish2>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
       </div>
     </div>
     <div id = "item3" class = "flex_forge_box">
@@ -92,6 +96,7 @@
         <span style = "font-size:18px">Slot 3: </span><span id = "forgeitem_3" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter3>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter3></span><span class = meter>]</span>
       </div>
+      <div id = timers3>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Completion time:&nbsp;</span>
@@ -99,6 +104,7 @@
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time3>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish3>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
       </div>
     </div>
     <div id = "item4" class = "flex_forge_box">
@@ -109,6 +115,7 @@
         <span style = "font-size:18px">Slot 4: </span><span id = "forgeitem_4" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter4>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter4></span><span class = meter>]</span>
       </div>
+      <div id = timers4>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Completion time:&nbsp;</span>
@@ -116,6 +123,7 @@
       <div style = "display:inline-block; margin:5px; height:40px;">
         <span id = time4>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish4>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
       </div>
     </div>
     <div id = "item5" class = "flex_forge_box"> 
@@ -126,6 +134,7 @@
         <span style = "font-size:18px">Slot 5: </span><span id = "forgeitem_5" style = "font-size:16px">None</span><br>
         <span class = meter>[</span><span class = meter id = forgemeter5>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter5></span><span class = meter>]</span>
       </div>
+      <div id = timers5>
       <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
         <span>&nbsp;Remaining time:&nbsp;</span><br>
         <span>&nbsp;Completion time:&nbsp;</span>
@@ -133,6 +142,7 @@
       <div style = "display:inline-block; margin:5px; height:40px">
         <span id = time5>&ndash;&ndash;:&ndash;&ndash;</span><br>
         <span id = finish5>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
       </div>
     </div>
       
@@ -144,6 +154,7 @@
     var fasttrack = false;
     var data;
     async function updatePage(){
+      updateSizes();
         console.log("Stored a name: " + localStorage.getItem("storedname"));
         if (localStorage.getItem("storedname") != null){
             console.log("Found a previous name and data! Loading...");
@@ -370,6 +381,23 @@
         intervalID.length = 0;
       }
     }
+    window.addEventListener('resize', updateSizes);
+        function updateSizes(){
+            console.log("Current width: " + window.innerWidth);
+            if (window.innerWidth >= 768 * (5/3)) {
+                console.log("Desktop mode...");
+                for (var i = 1; i <= 5; i++){
+                    document.getElementById("timers" + i).style.flexBasis = "";
+                }
+          
+            } else {
+                console.log("Mobile mode...");
+                for (var i = 1; i <= 5; i++){
+                    document.getElementById("timers" + i).style.flexBasis = "100%";
+                }
+          
+            }
+        }
   </script>
   </html>
   
