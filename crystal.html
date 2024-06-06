@@ -5,6 +5,7 @@
         <link rel = "stylesheet" href = "stylesheet.css">
         <meta name = "description" content = "Crystalline utilities for Hypixel SkyBlock">
         <meta name = "author" content = "adjective_n0un">
+        <meta name = "viewport" content="width=device-width, initial-scale=0.6">
         <link rel = "apple-touch-icon" sizes = "180x180" href="./favicon/apple-touch-icon.png">
         <link rel = "icon" type = "image/png" sizes = "32x32" href = "./favicon/favicon-32x32.png">
         <link rel = "icon" type = "image/png" sizes = "16x16" href = "./favicon/favicon-16x16.png">
@@ -23,10 +24,12 @@
       });
       </script>
   
-    <div id = header>
+    <div id = header style = "margin:auto; text-align:center">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = crystalheader>Crystal Hollows</span><br>
-  </div>
-  <label>Username: <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button></label><br>
+    </div>
+    <section class = "flex_box_index">
+
+    <label>Username: <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button></label><br>
   <span id = "status">Enter a username to continue.</span><br>
   <span id = "refreshstatus"></span><br>
   <div>
@@ -42,7 +45,7 @@
       </label>
     </form>
   </div><br>
-  <div class = "crystal_block" style = "width:600px; height:100px">
+  <div class = crystal_block style = "width:min(calc(100% - 30px), max(600px, 40%));">
     <span class = hollowheader>Pass tracker</span><br><br>
     <div style = "float:left">
         <span>Pass expiration:&nbsp;</span><br>
@@ -53,7 +56,7 @@
         <span id = "timeleft">––:––</span>
     </div>
   </div>
-  <div class = crystal_block style = "width:600px">
+  <div class = crystal_block style = "width:min(calc(100% - 30px), max(600px, 40%));">
     <span class = hollowheader>Crystal Nucleus loot</span><br><br>
     <table>
         <tr><td><span> User has High Roller: </span></td>
@@ -161,9 +164,10 @@
             <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
         </tr>
     </table>
-  </div>
 
-  <div id = "nav" style = "width:600px" class = "crystal_block"></div>
+  </div>
+  </section>
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "crystal_block"></div>
   </body>
   <script>
     var lastname = "";
