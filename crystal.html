@@ -26,12 +26,12 @@
     <div id = header>
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = crystalheader>Crystal Hollows</span><br>
   </div>
-  <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button><br>
+  <label>Username: <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button></label><br>
   <span id = "status">Enter a username to continue.</span><br>
   <span id = "refreshstatus"></span><br>
   <div>
     <form action = "#" style = "background-color: #282828;">
-      <label>Profile:</label>
+      <label>Profile:
       <select id = profileid value = 4 onchange = updatePass(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
         <option id = profile1 value = 1>–––––</option>
@@ -39,6 +39,7 @@
         <option id = profile3 value = 3>–––––</option>
         <option id = profile4 value = 4>–––––</option>
       </select>
+      </label>
     </form>
   </div><br>
   <div class = "crystal_block" style = "width:600px; height:100px">
@@ -56,23 +57,23 @@
     <span class = hollowheader>Crystal Nucleus loot</span><br><br>
     <table>
         <tr><td><span> User has High Roller: </span></td>
-            <td><label class = "switchbox">
-                <input type = "checkbox" id = "hashighroller" onchange = updateHR()>
+            <td><label class = "switchbox" for = "hashighroller" id = "highrollerswitch">
+                <input type = "checkbox" id = "hashighroller" onchange = updateHR() aria-labelledby = "highrollerswitch">
                 <span class = "switch"></span></label>
             </td></tr>
         <tr><td style = "width:85%"><span> User has Jasper Crystal: </span></td>
-            <td style = "display:flex; justify-content: flex-end;"><label class = "switchbox">
-                <input type = "checkbox" id = "hasjc" onchange = updateJC()>
+            <td style = "display:flex; justify-content: flex-end;"><label class = "switchbox" for = "hasjc" id = "jcswitch">
+                <input type = "checkbox" id = "hasjc" onchange = updateJC() aria-labelledby = "jcswitch"> 
                 <span class = "switch"></span></label>
             </td></tr>
         <tr><td><span> User has Ruby Crystal: </span></td>
-            <td><label class = "switchbox">
-                <input type = "checkbox" id = "hasrc" onchange = updateRC()>
+            <td><label class = "switchbox" for = "hasrc" id = "rcswitch">
+                <input type = "checkbox" id = "hasrc" onchange = updateRC() aria-labelledby = "rcswitch">
                 <span class = "switch"></span></label>
             </td></tr>
         <tr><td><span> User has Mole Pet: </span></td>
-            <td><label class = "switchbox">
-                <input type = "checkbox" id = "hasmole" onchange = updateMole()>
+            <td><label class = "switchbox" for = "hasmole" id = "moleswitch">
+                <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch">
                 <span class = "switch"></span></label>
             </td></tr>
     </table>
