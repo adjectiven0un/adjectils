@@ -16,7 +16,7 @@
   
       <script>
       $(function(){
-        $("#nav").load("nav.html"); 
+        $("#nav").load("nav.html", function() { setWord(); }); 
       });
       </script>
         <div id = header class = "standardwidth" style = "text-align:center">

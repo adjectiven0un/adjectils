@@ -18,7 +18,7 @@
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
-        $("#nav").load("nav.html"); 
+        $("#nav").load("nav.html", function() { setWord(); }); 
       });
       </script>
   
