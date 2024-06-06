@@ -89,7 +89,6 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
-    width:min(calc(100% - 30px), max(600px, 40%));
   }
   .navblock{
     background-color: #404040;
@@ -99,8 +98,7 @@ body {
     border-spacing: 5px;
     padding: 10px;
     text-align:left;
-    width:min(calc(100% - 30px), max(600px, 40%));
-    
+    font-size:12px;
   }
   .dwarven_block{
     background-color: #404040;
