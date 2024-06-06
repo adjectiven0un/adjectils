@@ -5,7 +5,7 @@
       <link rel="stylesheet" href="stylesheet.css">
       <meta name = "description" content = "Dwarven utilities for Hypixel SkyBlock">
       <meta name = "author" content = "adjective_n0un">
-      <!--<meta name = "viewport" content="width=device-width, initial-scale=0.6">-->
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
       <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -23,15 +23,16 @@
       });
       </script>
   
-  <div id = header style = "background-color: #282828; width: 340px">
+  <div id = header class = "standardwidth" style = "text-align:center; background-color: #282828;">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
   </div>  
-  <label>Username: <input type = "text" id = "nameinput" onchange = updateForges(value)>&nbsp;</label><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
-  <div style = "float:left; width:270px;">
+  <div class = "standardwidth" style = "text-align:center">
+  <label style = "background-color:#282828">Username: <input type = "text" id = "nameinput" onchange = updateForges(value)>&nbsp;</label><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
+  <div>
   <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
   <br>
-  <div style = "float:left;">
+  <div>
     <form action = "#" style = "background-color: #282828;">
       <label>Profile:
       <select id = profileid value = 4 onchange = updateForges(nameinput.value)>
@@ -44,13 +45,12 @@
       </label>
     </form>
   </div>
-  <div style = "display: inline-block;">
-    
   </div>
-  <div class = "dwarven_block" style = "width:800px">
+  <section class = "flex_box_index">
+  <div class = "dwarven_block " style = "width:min(calc(100% - 30px), max(800px, 40%)); margin:auto">
     <span class = minesheader>Forge timers</span><br><br>
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
-    <div id = "item1">
+    <div id = "item1" class = "flex_forge_box">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img1" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
@@ -67,7 +67,7 @@
         <span id = finish1>&ndash;&ndash;:&ndash;&ndash;</span>
       </div>
     </div>
-    <div id = "item2">
+    <div id = "item2" class = "flex_forge_box">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img2" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
@@ -84,7 +84,7 @@
         <span id = finish2>&ndash;&ndash;:&ndash;&ndash;</span>
       </div>
     </div>
-    <div id = "item3">
+    <div id = "item3" class = "flex_forge_box">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img3" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
@@ -101,7 +101,7 @@
         <span id = finish3>&ndash;&ndash;:&ndash;&ndash;</span>
       </div>
     </div>
-    <div id = "item4">
+    <div id = "item4" class = "flex_forge_box">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img4" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
@@ -118,7 +118,7 @@
         <span id = finish4>&ndash;&ndash;:&ndash;&ndash;</span>
       </div>
     </div>
-    <div id = "item5">
+    <div id = "item5" class = "flex_forge_box"> 
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img5" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
       </div>
@@ -137,8 +137,8 @@
     </div>
       
   </div>
-  
-  <div id = "nav" class = "dwarven_block" style = "width:600px"></div>
+  </section>
+  <div id = "nav" class = "dwarven_block standardwidth"></div>
   </body>
   <script>
     var fasttrack = false;
@@ -174,7 +174,7 @@
     var lastname = "";
     
     async function updateForges(name){
-      var UUID = await getUUIDbyName(name);
+      
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -186,6 +186,7 @@
             setTimeout(() => { onCD = false }, 5000);
         }
       }
+      var UUID = await getUUIDbyName(name);
       if (!fasttrack){
         data = await getAPIdata(UUID);
       }
@@ -225,9 +226,10 @@
           fullReset();
         }
         lastname = name;
+        
+      }
         localStorage.setItem("storedname", name);
         localStorage.setItem("storeddata", JSON.stringify(data));
-      }
         var forgelog;
         try {
           forgelog = (data.profiles[profileid.value].members[UUID].forge.forge_processes.forge_1);
