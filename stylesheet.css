@@ -61,6 +61,7 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
+    width:min(calc(100% - 30px), max(600px, 40%));
   }
   .spider_block{
     background-color: #404040;
@@ -70,6 +71,7 @@ body {
     border-spacing: 5px;
     padding: 10px;
     color: #c0c0c0;
+    width:min(calc(100% - 30px), max(600px, 40%));
   }
   .blaze_block{
     background-color: #404040;
@@ -78,6 +80,7 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
+    width:min(calc(100% - 30px), max(600px, 40%));
   }
   .hub_block{
     background-color: #404040;
@@ -86,11 +89,17 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
+    width:min(calc(100% - 30px), max(600px, 40%));
   }
   .navblock{
     background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    margin: auto;
+    border-spacing: 5px;
+    padding: 10px;
     text-align:left;
-    font-size:12px;
+    width:min(calc(100% - 30px), max(600px, 40%));
     
   }
   .dwarven_block{
@@ -108,6 +117,11 @@ body {
     margin:5px;
     border-spacing:5px;
     padding:10px;
+    width:min(calc(100% - 30px), max(600px, 40%));
+  }
+  .standardwidth{
+    width:min(calc(100% - 30px), max(600px, 40%));
+    margin:auto;
   }
   input {
     background-color:#686868;

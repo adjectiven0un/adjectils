@@ -5,6 +5,7 @@
       <link rel="stylesheet" href="stylesheet.css">
       <meta name = "description" content = "Ender utilities for Hypixel SkyBlock">
       <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
       <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -20,10 +21,11 @@
       });
       </script>
   
-  <div id = header style = "background-color: #282828; width: 600px">
+  <div id = header style = "background-color: #282828; width: 600px; text-align:center; margin:auto">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = endheader>The End</span><br>
   </div> 
-  <div class = "end_block" style = "width: 600px;", id = "box1">
+  <section class = "flex_box_index">
+  <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box1">
     <span class = voidheader>Dragons & Golems</span><br>  
     <label class = basictext>User's Magic Find: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input></label><br>
     <label class = basictext>User's Pet Luck: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input></label><br>
@@ -40,7 +42,7 @@
     </table>
 
   </div>
-  <div class = "end_block" style = " width: 600px", id = "box2">
+  <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box2">
     <span class = voidheader>Voidgloom Seraph</span><br>
     <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input></label><br>
     <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input>%</label><br>
@@ -105,7 +107,8 @@
     </table>
   </div>
   </div>
-  <div id = "nav" class = "end_block" style = "width:600px;"></div>
+  </section>
+  <div id = "nav" class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto"></div>
   </body>
   
   <script>

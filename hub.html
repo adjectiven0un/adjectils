@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="stylesheet.css">
         <meta name = "description" content = "Utilities for Hypixel SkyBlock">
         <meta name = "author" content = "adjective_n0un">
+        <meta name = "viewport" content="width=device-width, initial-scale=0.6">
         <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -18,10 +19,10 @@
         $("#nav").load("nav.html"); 
       });
       </script>
-        <div id = header style = "background-color: #282828; width: 340px">
+        <div id = header class = "standardwidth" style = "text-align:center">
             <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = hubheader>SkyBlock Hub</span><br>
         </div>  
-        
+        <div style = "text-align:center">
           <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
           <form action = "#">
             <label>Display: 
@@ -31,7 +32,9 @@
             </select>
             </label>
           </form>
-        <div class = "hub_block" style = "width:600px; float:left">
+          </div>
+          <section class = "flex_box_index">
+        <div class = "hub_block standardwidth">
         <span class = hubheader>Revenant Horror</span><br>
         <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercentz value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
@@ -74,7 +77,7 @@
         <tr><td><hr class = solid></td></tr>
         </table>
       </div>
-      <div class = "hub_block" style = "width:600px">
+      <div class = "hub_block standardwidth">
         <span class = hubheader>Sven Packmaster</span><br>
         <label class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercentw value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
         <form action = "#">
@@ -109,7 +112,8 @@
         </table>
       
       </div>
-      <div id = "nav" class = "hub_block" style = "width:600px;"></div>
+      </section>
+      <div id = "nav" class = "hub_block standardwidth"></div>
   </body>
   <script>
     //Dual calculator means syntaxes must be changed, so I can't just reuse old code

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="stylesheet.css">
     <meta name = "description" content = "Arachnal utilities for Hypixel SkyBlock">
     <meta name = "author" content = "adjective_n0un">
+    <meta name = "viewport" content="width=device-width, initial-scale=0.6">
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -22,11 +23,11 @@
       </script>
   
   
-  <div id = header style = "background-color: #282828; width: 340px">
+  <div id = header class = "standardwidth" style = "text-align: center;">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = denheader>Spider's Den</span><br>
   </div>    
-  <div style = "width:1050px">
-    <div class = "spider_block" style = "width: 600px", id = "box2">
+  <section class = "flex_box_index">
+    <div class = "spider_block standardwidth" id = "box2">
         <span class = spiderheader>Tarantula Broodfather</span><br>
         <label class = basictext>User's Magic Find: </span><input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
         <label class = basictext>RNG meter percent: </span><input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances()></input>%</label><br>
@@ -68,7 +69,7 @@
         </table>
         
       </div>
-      <div class = spider_block style = "width:600px">
+      <div class = "spider_block standardwidth" >
         <span class = spiderheader>Weather</span><br>
         <hr class = solid>
         <table id = raintable>
@@ -82,7 +83,8 @@
         </div>
       </div>
       </div>
-      <div id = "nav" class = "spider_block" style = "width:600px;"></div>
+      </section>
+      <div id = "nav" class = "hub_block standardwidth"></div>
       </body>  
       
       <script>
