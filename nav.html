@@ -7,7 +7,7 @@
     <meta name = "author" content = "adjective_n0un">
   </head>
   
-  <body>
+  <body onload = "setWord()">
   <div class = navblock>
     <hr class = solid>
     <span>Site Navigation</span>
@@ -21,7 +21,14 @@
     <span>Mining</span><br>
     <span>&nbsp;•&nbsp;</span><a href = "dwarven.html" style = "color:#808080">Dwarven Mines</a><span>&nbsp;•&nbsp;</span><a href = "crystal.html" style = "color:#808080">Crystal Hollows</a><span>&nbsp;•&nbsp;</span>
     <hr class = solid>
+    <span>&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a>&nbsp;•&nbsp;</span>
   </div>
   
   </body>
   </html>
+  <script>
+    const adjectivesandnouns = ["love", "warmth", "courage", "awesomeness", "pride", "patience"];
+    function setWord(){
+      document.getElementById("word").innerText = adjectivesandnouns[Math.floor(6 * Math.random())];
+    }
+  </script>
