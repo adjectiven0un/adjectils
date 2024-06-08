@@ -68,4 +68,4 @@ const goblinscs = ["abyssal_miner", "water_worm", "poisoned_water_worm"];
 const precursorscs = ["flaming_worm"];
 const magmascs = ["lava_blaze", "lava_pigman"];
 const crimsonscs = ["magma_slug", "moogma", "lava_leech", "pyroclastic_worm", "lava_flame", "fire_eel", "taurus", "thunder", "lord_jawbus"];
-const plhlegblastscs = ["plhlegblast"];
+const plhlegblastscs = ["magma_slug", "moogma", "lava_leech", "pyroclastic_worm", "lava_flame", "fire_eel", "taurus", "thunder", "lord_jawbus", "plhlegblast"];

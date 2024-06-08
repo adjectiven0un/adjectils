@@ -202,7 +202,7 @@
                 </form>
                 <form action = "#" class = "flex_full_row">
                     <label>Squid Hat:
-                    <select id = squidhatlava value = "Other" onchange = updateLavaTable()>
+                    <select id = squidhatlava value = "0" onchange = updateLavaTable()>
                         <option value = "0">Not equipped</option>
                         <option value = "1">Equipped</option>
                     </select>
@@ -732,8 +732,7 @@
                 activelavascs = crimsonscs;
             }
             if (locationlava.value == "4") {
-                activelavascs = crimsonscs;
-                activelavascs.push("plhlegblast");
+                activelavascs = plhlegblastscs;
             }
             if (lavabait.value == "Whale") {
                 for (var i = 0; i < activelavascs.length; i++){
