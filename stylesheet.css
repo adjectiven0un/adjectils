@@ -321,7 +321,15 @@ body {
     display:flex;
     flex-wrap:wrap;
   }
-
+  .index_box {
+    background-color: #404040;
+    border-style: solid;
+    border-color: #808080;
+    text-justify: auto;
+    margin: 10px;
+    border-spacing: 5px;
+    padding: 10px;
+  }
   .flex_index_box_big {
     background-color: #404040;
     border-style: solid;

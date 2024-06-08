@@ -381,7 +381,7 @@
         intervalID.length = 0;
       }
     }
-    window.addEventListener('resize', updateSizes);
+    window.addEventListener('resize', updateSizes());
         function updateSizes(){
             console.log("Current width: " + window.innerWidth);
             if (window.innerWidth >= 768 * (5/3)) {

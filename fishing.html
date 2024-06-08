@@ -12,6 +12,7 @@
         <link rel="manifest" href="./favicon/site.webmanifest">
         <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
         <script src = "getUUID.js"></script>
+        <script src = "fishingdata.js"></script>
     </head>
     <body onload="updatePage()">
     <script>
@@ -23,64 +24,195 @@
         <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header style = "Color: #50b0ff">Fishing</span><br>
     </div>
     <section class = "flex_box_index" style = "flex-basis: min(calc(100% - 30px), max(756px, 70%));">
-        <div class = "flex_index_box">
-            <span class = "flex_full_row" style = "font-size: 24px; color:#e08000">Trophy Fishing</span>
-            <span class = "flex_full_row"><label>Username: <input type = "text" id = "nameinput" style = "height:16px;" onchange = updateFish(value)>&nbsp;</label><button onclick = updateFish(nameinput.value) style = "width: 80px; text-align:center;">Refresh ⟳</button></span>
-            <span id = "refreshstatus" class = "flex_full_row">Enter a username to continue.</span>
-            <form action = "#" class = "flex_full_row">
-                <label>Profile:
-                <select id = profileid value = 4 onchange = updateProfileFish(nameinput.value)>
-                    <option id = profile0 value = 0>–––––</option>
-                    <option id = profile1 value = 1>–––––</option>
-                    <option id = profile2 value = 2>–––––</option>
-                    <option id = profile3 value = 3>–––––</option>
-                    <option id = profile4 value = 4>–––––</option>
-                </select>
-                </label>
-            </form>
-            
-            <span id = "status" class = "flex_full_row"></span>
-            <span id = "profilestatus" class = "flex_full_row"></span>
-            <form action = "#" class = "flex_full_row">
-                <label>Bait:
-                <select id = baitused value = 1.05 onchange = updateProfileFish(nameinput.value)>
-                    <option value = 1.05>Hot Bait</option>
-                    <option value = 1>Something else</option>
-                </select>
-                </label>
-            </form>
-            <form action = "#" class = "flex_full_row">
-                <label>Rod:
-                <select id = rodused value = 1.2 onchange = updateProfileFish(nameinput.value)>
-                    <option value = 1>Starter Lava Rod</option>
-                    <option value = 1.1>Magma Rod</option>
-                    <option value = 1.15>Inferno Rod</option>
-                    <option value = 1.2>Hellfire Rod</option>
-                </select>
-                </label>
-            </form>
-            <form action = "#" class = "flex_full_row">
-                <label>Armor:
-                <select id = armorused value = 1.1 onchange = updateProfileFish(nameinput.value)>
-                    <option value = 1>Something else</option>
-                    <option value = 1.05>Silver Hunter Armor</option>
-                    <option value = 1.1>Gold Hunter Armor</option>
-                    <option value = 1.15>Diamond Hunter Armor</option>
-                </select>
-                </label>
-            </form>
-            <label class = "flex_full_row">Kuudra Pet level (Epic+ rarity): <input type = "number" id = "kuudralevel" value = "100" style = "height:16px;" onchange = updateProfileFish(value)>&nbsp;</label>
-            <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+        <div class = "flex_index_row" id = "trophyrow">
+            <div class = "flex_index_box">
+                <span class = "flex_full_row" style = "font-size: 24px; color:#e08000">Trophy Fishing</span>
+                <span class = "flex_full_row"><label>Username: <input type = "text" id = "nameinput" style = "height:16px;" onchange = updateFish(value)>&nbsp;</label><button onclick = updateFish(nameinput.value) style = "width: 80px; text-align:center;">Refresh ⟳</button></span>
+                <span id = "refreshstatus" class = "flex_full_row">Enter a username to continue.</span>
+                <form action = "#" class = "flex_full_row">
+                    <label>Profile:
+                    <select id = profileid value = 4 onchange = updateProfileFish(nameinput.value)>
+                        <option id = profile0 value = 0>–––––</option>
+                        <option id = profile1 value = 1>–––––</option>
+                        <option id = profile2 value = 2>–––––</option>
+                        <option id = profile3 value = 3>–––––</option>
+                        <option id = profile4 value = 4>–––––</option>
+                    </select>
+                    </label>
+                </form>
                 
-            </div>
-            <div class = "flex_index_row flex_full_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
-                
-            </div>
-            <div class = "flex_index_row flex_full_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
-                
+                <span id = "status" class = "flex_full_row"></span>
+                <span id = "profilestatus" class = "flex_full_row"></span>
+                <form action = "#" class = "flex_full_row">
+                    <label>Bait:
+                    <select id = baitused value = 1.05 onchange = updateProfileFish(nameinput.value)>
+                        <option value = 1.05>Hot Bait</option>
+                        <option value = 1>Something else</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Rod:
+                    <select id = rodused value = 1.2 onchange = updateProfileFish(nameinput.value)>
+                        <option value = 1>Starter Lava Rod</option>
+                        <option value = 1.1>Magma Rod</option>
+                        <option value = 1.15>Inferno Rod</option>
+                        <option value = 1.2>Hellfire Rod</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Armor:
+                    <select id = armorused value = 1.1 onchange = updateProfileFish(nameinput.value)>
+                        <option value = 1>Something else</option>
+                        <option value = 1.05>Silver Hunter Armor</option>
+                        <option value = 1.1>Gold Hunter Armor</option>
+                        <option value = 1.15>Diamond Hunter Armor</option>
+                    </select>
+                    </label>
+                </form>
+                <label class = "flex_full_row">Kuudra Pet level (Epic+ rarity): <input type = "number" id = "kuudralevel" value = "100" style = "height:16px;width:48px" onchange = updateProfileFish(value)>&nbsp;</label>
+                <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                    
+                </div>
+                <div class = "flex_index_row flex_full_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                    
+                </div>
+                <div class = "flex_index_row flex_full_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                    
+                </div>
             </div>
         </div>
-        
+        <div class = "flex_index_row" id = "catchtablerow">
+            <div class = "index_box" style = "width:49%;" id = "waterbox">
+                <span style = "font-size: 24px; color:#4090f0;">Catch Table (Water)</span>
+                <form action = "#" class = "flex_full_row">
+                    <label>Location:
+                    <select id = locationwater value = 0 onchange = updateWaterTable()>
+                        <option value = "0">Somewhere else</option>
+                        <option value = "1">The Park</option>
+                        <option value = "2">Jerry Pond</option>
+                        <option value = "3">Oasis</option>
+                        <option value = "4">Crystal Hollows</option>
+                        <option value = "5">Goblin Holdout</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Spooky Festival:
+                    <select id = spookyfest value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Not active</option>
+                        <option value = "1">Active</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Fishing Festival:
+                    <select id = marinafest value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Not active</option>
+                        <option value = "1">Active</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Chumcap Bucket:
+                    <select id = chumcap value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Not active</option>
+                        <option value = "1">Active</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Bait:
+                    <select id = bait value = "None" onchange = updateWaterTable()>
+                        <option value = "None">No bait</option>
+                        <option value = "Carrot">Carrot Bait</option>
+                        <option value = "Spooky">Spooky Bait</option>
+                        <option value = "Shark">Shark Bait</option>
+                        <option value = "Ice">Ice Bait</option>
+                        <option value = "Frozen">Frozen Bait</option>
+                        <option value = "Worm">Worm Bait</option>
+                        <option value = "Whale">Whale Bait</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Rod:
+                    <select id = rod value = "Other" onchange = updateWaterTable()>
+                        <option value = "Other">Other</option>
+                        <option value = "Yeti">Yeti Rod</option>
+                        <option value = "Auger">Auger Rod</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Squid Hat:
+                    <select id = squidhat value = "Other" onchange = updateWaterTable()>
+                        <option value = "0">Not equipped</option>
+                        <option value = "1">Equipped</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Drake Piper:
+                    <select id = drakepiper value = "1" onchange = updateWaterTable()>
+                        <option value = "1">0</option>
+                        <option value = "1.02">I</option>
+                        <option value = "1.04">II</option>
+                        <option value = "1.06">III</option>
+                        <option value = "1.08">IV</option>
+                        <option value = "1.1">V</option>
+                    </select>
+                    </label>
+                </form>
+                
+                <label class = "flex_full_row">Bat Pet level (Mythic rarity): <input type = "number" id = "batlevel" value = "0" style = "height:16px;width:48px" onchange = updateWaterTable()>&nbsp;</label>
+                <table id = "watertable" style = "border-width:1px; margin-top:10px;">
+
+                </table>
+            </div>
+            <div class = "index_box" style = "width:49%;" id = "lavabox">
+                <span style = "font-size: 24px; color:#e08000;">Catch Table (Lava)</span>
+                <form action = "#" class = "flex_full_row">
+                    <label>Location:
+                    <select id = locationlava value = "3" onchange = updateLavaTable()>
+                        <option value = "0">Somewhere else</option>
+                        <option value = "1">Magma Fields</option>
+                        <option value = "2">Precursor Remnants</option>
+                        <option value = "3">Crimson Isle</option>
+                        <option value = "4">Plhlegblast Pool</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Bait:
+                    <select id = lavabait value = "None" onchange = updateLavaTable()>
+                        <option value = "None">No bait</option>
+                        <option value = "Whale">Whale Bait</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Enderman Slayer Lv9:
+                    <select id = es9 value = "0" onchange = updateLavaTable()>
+                        <option value = "0">No</option>
+                        <option value = "1">Yes</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Squid Hat:
+                    <select id = squidhatlava value = "Other" onchange = updateLavaTable()>
+                        <option value = "0">Not equipped</option>
+                        <option value = "1">Equipped</option>
+                    </select>
+                    </label>
+                </form>
+                <table id = "lavatable" style = "border-width:1px; margin-top:10px;">
+
+                </table>
+            </div>
+        </div>
     </section>
 
 
@@ -89,14 +221,9 @@
     </body>
     <script>
 
-        const fishnames = ["sulphur_skitter", "obfuscated_fish_1", "steaming_hot_flounder", "", "gusher", "blobfish", "obfuscated_fish_2", "slugfish", "flyfish", "obfuscated_fish_3", "lava_horse", "mana_ray", "volcanic_stonefish", "vanille", "", "skeleton_fish", "moldfin", "soul_fish", "karate_fish", "golden_fish", ""];
+        
         var rarities = ["bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "bronze", "", "bronze", "bronze", "bronze", "bronze", "bronze", ""];
-        const fishrealnames = ["Sulphur Skitter", "Obfuscated 1", "Steaming-Hot Flounder", "", "Gusher", "Blobfish", "Obfuscated 2", "Slugfish", "Flyfish", "Obfuscated 3", "Lavahorse", "Mana Ray", "Volcanic Stonefish", "Vanille", "", "Skeleton Fish", "Moldfin", "Soul Fish", "Karate Fish", "Golden Fish", ""];
         var fishchances = [30, 25, 20, "", 20, 20, 15, 10, 10, 8, 4, "(User's Mana/1000)", 3, 3, "", 2, 2, 2, 1, "", ""];
-        const methods = ["% chance to be caught within 8 blocks of a Sulphur Ore", "% chance to be caught using Corrupted Bait or when killing a Corrupted Sea Creature", "% chance to be caught in a geyser in the Blazing Volcano", "", "% chance to be caught 7-16 minutes after a volcano eruption", "% chance to be caught under any conditions", "% chance to be caught using Obfuscated 1 as bait", "% chance to be caught when the bobber has been out for at least 20 seconds", "% chance to be caught while standing at least 8 blocks over lava in the Blazing Volcano", "% chance to be caught while using Obfuscated 2 as bait", "% chance to be caught under any conditions", "% chance to be caught when the user has at least 1200 mana", "% chance to be caught while inside the Blazing Volcano", "% chance to be caught using a Starter Lava Rod with no enchantments", "", "% chance to be caught in the Burning Desert or Dragontail", "% chance to be caught in the Mystic Marsh or Scarleton", "% chance to be caught in the Stronghold", "% chance to be caught in the Dojo", "Appears every 15-20 minutes of consecutive fishing"];
-        const fishrarities = ["#ffffff", "#ffffff", "#ffffff", "", "#ffffff", "#ffffff", "#55ff55", "#55ff55", "#55ff55", "#5555ff", "#5555ff", "#5555ff", "#5555ff", "#5555ff", "", "#aa00aa", "#aa00aa", "#aa00aa","#aa00aa", "#ffaa00", ""];
-        const raritycontrol = ["_bronze", "_silver", "_gold", "_diamond", ""];
-        const raritycolors = ["#555555", "#aaaaaa", "#ffaa00", "#55ffff", "#ffffff"];
         var fasttrack = false;
         var onCD = false;
         var data;
@@ -129,7 +256,12 @@
                 setFish();
                 addToolTips();
             }
+            locationwater.value = "0";
+            updateWaterTable();
+            locationlava.value = "3";
+            updateLavaTable();
         }
+
         
         async function updateFish(name){
 
@@ -341,7 +473,7 @@
                 }
             }
         }
-        window.addEventListener('resize', updateSizes);
+        window.addEventListener('resize', updateSizes());
         function updateSizes(){
             console.log("Current width: " + window.innerWidth);
             if (window.innerWidth >= 768 * (5/3)) {
@@ -350,14 +482,316 @@
                     document.getElementById("row" + i).style.width = "50%";
                     document.getElementById("row" + i).style.flexBasis = "51%";
                 }
-          
+                document.getElementById("catchtablerow").style.flexWrap = "no-wrap";
+                //document.getElementById("waterbox").style.flexBasis = "49%";
+                document.getElementById("waterbox").style.width = "49%";
+                //document.getElementById("lavabox").style.flexBasis = "49%";
+                document.getElementById("lavabox").style.width = "49%";
             } else {
                 console.log("Mobile mode...");
                 for (var i = 1; i <= 3; i++){
                     document.getElementById("row" + i).style.width = "calc(100% - 30px)";
                     document.getElementById("row" + i).style.flexBasis = "calc(100% - 30px)";
                 }
+                document.getElementById("catchtablerow").style.flexWrap = "wrap";
+                //document.getElementById("waterbox").style.flexBasis = "calc(100% - 30px)";
+                document.getElementById("waterbox").style.width = "calc(100% - 30px)";
+                //document.getElementById("lavabox").style.flexBasis = "calc(100% - 30px)";
+                document.getElementById("lavabox").style.width = "calc(100% - 30px)";
           
             }
+        }
+
+        
+        function updateWaterTable() {
+            console.log(batlevel.value);
+            if (batlevel.value > 100){
+                document.getElementById("batlevel").value = 100;
+            }
+            if (batlevel.value < 0 || isNaN(batlevel.value) || batlevel.value == ""){
+                mf = 0;
+                document.getElementById("batlevel").value = 0;
+            }
+            //Clear previous data.
+
+            watertable.innerHTML = "";
+
+            const waterscweights = {
+                "squid": 1200,
+                "agarimoo": 950,
+                "sea_walker": 800,
+                "night_squid": 1100,
+                "sea_guardian": 600,
+                "sea_witch": 700,
+                "sea_archer": 550,
+                "rider_of_the_deep": 400,
+                "catfish": 250,
+                "carrot_king": 300,
+                "sea_leech": 160,
+                "guardian_defender": 130,
+                "deep_sea_protector": 88,
+                "water_hydra": 18,
+                "sea_emperor": 10,
+                "oasis_rabbit": 300,
+                "oasis_sheep": 700,
+                "water_worm": 300,
+                "poisoned_water_worm": 300,
+                "abyssal_miner": 90,
+                "scarecrow": 1000,
+                "nightmare": 550,
+                "werewolf": 250,
+                "phantom_fisher": 90,
+                "grim_reaper": 25,
+                "frozen_steve": 1100,
+                "frosty": 800,
+                "grinch": 50,
+                "yeti": 30,
+                "nutcracker": 60,
+                "reindrake": 6,
+                "nurse_shark": 1100,
+                "blue_shark": 550,
+                "tiger_shark": 300,
+                "great_white_shark": 150,
+                "None": 0,
+            }
+
+            // Initialize the array. (This will get messy.)
+            
+            var activewaterscs = [];
+
+            if (chumcap.value == "1"){
+                activewaterscs.push("agarimoo");
+            }
+            if (locationwater.value == "1") {
+                for (var i = 1; i < squids.length; i++){
+                    activewaterscs.push(squids[i]);
+                }
+            }
+            if (locationwater.value == "2") {
+                for (var i = 0; i < winterscs.length; i++){
+                    console.log("Pushed winter sc " + winterscs[i]);
+                    activewaterscs.push(winterscs[i]);
+                }
+            }
+            if (locationwater.value == "3") {
+                for (var i = 0; i < oasisscs.length; i++){
+                    activewaterscs.push(oasisscs[i]);
+                }
+            }
+            if (locationwater.value == "4"){
+                activewaterscs.push("abyssal_miner");
+            }
+            
+            if (locationwater.value == "5"){
+                for (var i = 0; i < goblinscs.length; i++){
+                    activewaterscs.push(goblinscs[i]);
+                }
+            }
+            if (spookyfest.value == "1"){
+                for (var i = 0; i < spookyscs.length; i++){
+                    activewaterscs.push(spookyscs[i]);
+                }
+            }
+            if (marinafest.value == "1"){
+                for (var i = 0; i < sharkscs.length; i++){
+                    activewaterscs.push(sharkscs[i]);
+                }
+            }
+            for (var i = 0; i < normalwaterscs.length; i++){
+                activewaterscs.push(normalwaterscs[i]);
+            }
+            if (bait.value == "Carrot") {
+                activewaterscs.push("carrot_king");
+            }
+            if (bait.value == "Worm") {
+                if (locationwater.value == "5") {
+                    activewaterscs = ["water_worm", "poisoned_water_worm"];
+                } else {
+                    activewaterscs = ["None"];
+                }
+                
+            }
+            
+
+            
+
+            if (bait.value == "Spooky") {
+                for (var i = 0; i < spookyscs.length; i++){
+                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * 1.15;
+                }
+            }
+            if (batlevel.value != "0") {
+                for (var i = 0; i < spookyscs.length; i++){
+                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * (1 + (parseFloat(batlevel.value) * 0.0025));
+                }
+            }
+            if (bait.value == "Shark") {   
+                for (var i = 0; i < sharkscs.length; i++){
+                    waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * 1.15;
+                }
+            }
+            if (bait.value == "Ice") {
+                for (var i = 0; i < winterscs.length; i++){
+                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 1.15;
+                }
+            }
+            if (bait.value == "Frozen") {
+                for (var i = 0; i < winterscs.length; i++){
+                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 1.35;
+                }
+            }
+            if (bait.value == "Whale") {
+                for (var i = 0; i < activewaterscs.length; i++){
+                    if (waterscweights[activewaterscs[i]] < 400){
+                        waterscweights[activewaterscs[i]] = waterscweights[activewaterscs[i]] * 1.25;
+                    }
+                }
+            }
+            if (rod.value == "Yeti") {
+                for (var i = 0; i < winterscs.length; i++){
+                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 2;
+                }
+            }
+            if (rod.value == "Auger") {
+                for (var i = 0; i < winterscs.length; i++){
+                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 3;
+                }
+            }
+            if (squidhat.value == "1") {
+                for (var i = 0; i < squids.length; i++){
+                    waterscweights[squids[i]] = waterscweights[squids[i]] * 2;
+                }
+            }
+            if (drakepiper.value != "1") {
+                waterscweights["reindrake"] = waterscweights["reindrake"] * parseFloat(drakepiper.value);
+            }
+
+            // Fill in the water table.
+            var totalwaterweight = 0;
+            for (var i = 0; i < activewaterscs.length; i++){
+                totalwaterweight += waterscweights[activewaterscs[i]];
+            }
+            console.log("Total weight: " + totalwaterweight);
+            console.log("Active: " + activewaterscs); 
+            for (var i = 0; i < activewaterscs.length; i++){
+                
+                var scrow = document.createElement("tr");
+                var infotd = document.createElement("td");
+                infotd.innerText = waterscnames[activewaterscs[i]];
+                infotd.style.paddingRight = "60px";
+                var chancetd = document.createElement("td");
+                if (totalwaterweight != 0){
+                    chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(2) + "%";
+                } else {
+                    chancetd.innerText = "100%";
+                    infotd.innerText = "None";
+                }
+                
+                chancetd.style.textAlign = "right";
+                scrow.appendChild(infotd);
+                scrow.appendChild(chancetd);
+                watertable.appendChild(scrow);
+            }
+
+            updateTableHeights();
+
+        }
+        function updateLavaTable(){
+            // Initialization
+
+            lavatable.innerHTML = "";
+            const lavascweights = {
+                "magma_slug": 1600,
+                "moogma": 1200,
+                "lava_leech": 600,
+                "pyroclastic_worm": 400,
+                "lava_flame": 360,
+                "fire_eel": 280,
+                "taurus": 160,
+                "plhlegblast": 0,
+                "thunder": 40,
+                "lord_jawbus": 8,
+                "flaming_worm": 180,
+                "lava_blaze": 36,
+                "lava_pigman": 36,
+                "None": 0,
+            }
+            activelavascs = [];
+
+            // Fill lava sc array. (This will get messy.)
+            if (locationlava.value == "0") {
+                activelavascs = ["None"];
+            }
+            if (locationlava.value == "1") {
+                activelavascs = magmascs;
+            }
+            if (locationlava.value == "2") {
+                activelavascs = precursorscs;
+            }
+            if (locationlava.value == "3") {
+                activelavascs = crimsonscs;
+            }
+            if (locationlava.value == "4") {
+                activelavascs = crimsonscs;
+                activelavascs.push("plhlegblast");
+            }
+            if (lavabait.value == "Whale") {
+                for (var i = 0; i < activelavascs.length; i++){
+                    if (lavascweights[activelavascs[i]] < 400){
+                        lavascweights[activelavascs[i]] = lavascweights[activelavascs[i]] * 1.25;
+                    }
+                }
+            }
+            if (es9.value == "1") {
+                lavascweights["lord_jawbus"] = lavascweights["lord_jawbus"] * 1.15;
+            }
+            var totallavaweight = 0;
+            for (var i = 0; i < activelavascs.length; i++){
+                totallavaweight += lavascweights[activelavascs[i]];
+            }
+            console.log("Total lava weight: " + totallavaweight);
+            for (var i = 0; i < activelavascs.length; i++){
+                var scrow = document.createElement("tr");
+                var infotd = document.createElement("td");
+                infotd.innerText = lavascnames[activelavascs[i]];
+                infotd.style.paddingRight = "60px";
+                var chancetd = document.createElement("td");
+                if (totallavaweight != 0){
+                    if (activelavascs[i] == "plhlegblast" && squidhatlava.value == "0") {
+                        lavascweights["plhlegblast"] = 1/999 * totallavaweight;
+                        totallavaweight *= 1000/999;
+                    } else if (activelavascs[i] == "plhlegblast" && squidhatlava.value == "1") {
+                        lavascweights["plhlegblast"] = 1/499 * totallavaweight;
+                        totallavaweight *= 500/499;
+                    }
+                    chancetd.innerText = (100 * (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(2) + "%";
+                } else {
+                    chancetd.innerText = "100%";
+                    infotd.innerText = "None";
+                }
+                
+                chancetd.style.textAlign = "right";
+                scrow.appendChild(infotd);
+                scrow.appendChild(chancetd);
+                lavatable.appendChild(scrow);
+            }
+            updateTableHeights();
+        }
+        function updateTableHeights() {
+            const water_box = document.getElementById('waterbox');
+            const lava_box = document.getElementById('lavabox');
+            water_box.style.height = "auto";
+            lava_box.style.height = "auto";
+            const catch_table_row = document.getElementById('catchtablerow');
+            const trophy_row = document.getElementById('trophyrow');
+            const waterrect = water_box.getBoundingClientRect();
+            const lavarect = lava_box.getBoundingClientRect();
+            const catchrect = catch_table_row.getBoundingClientRect();
+            const trophyrect = trophy_row.getBoundingClientRect();
+            
+            const maxHeight = Math.max(waterrect.height, lavarect.height);
+            water_box.style.height = `${maxHeight}px`;
+            lava_box.style.height = `${maxHeight}px`;
+            catch_table_row.style.width = `${trophyrect.width}px`;
         }
     </script>
