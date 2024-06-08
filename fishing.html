@@ -165,8 +165,17 @@
                     </select>
                     </label>
                 </form>
+
+                <form action = "#" class = "flex_full_row">
+                    <label>Pet:
+                    <select id = petselected value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Something else</option>
+                        <option value = "1">Mythic Bat</option>
+                        <option value = "2">Legendary Megalodon</option>
+                    </select>
+                    Level: <input type = "number" id = "petlevel" value = "1" style = "height:16px;width:48px" onchange = updateWaterTable()>&nbsp;</label>
+                </form>
                 
-                <label class = "flex_full_row">Bat Pet level (Mythic rarity): <input type = "number" id = "batlevel" value = "0" style = "height:16px;width:48px" onchange = updateWaterTable()>&nbsp;</label>
                 <table id = "watertable" style = "border-width:1px; margin-top:10px;">
 
                 </table>
@@ -504,13 +513,13 @@
 
         
         function updateWaterTable() {
-            console.log(batlevel.value);
-            if (batlevel.value > 100){
-                document.getElementById("batlevel").value = 100;
+            console.log(petlevel.value);
+            if (petlevel.value > 100){
+                document.getElementById("petlevel").value = 100;
             }
-            if (batlevel.value < 0 || isNaN(batlevel.value) || batlevel.value == ""){
+            if (petlevel.value < 1 || isNaN(petlevel.value) || petlevel.value == ""){
                 mf = 0;
-                document.getElementById("batlevel").value = 0;
+                document.getElementById("petlevel").value = 1;
             }
             //Clear previous data.
 
@@ -620,10 +629,16 @@
                     waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * 1.15;
                 }
             }
-            if (batlevel.value != "0") {
+            if (petselected.value == 1){
                 for (var i = 0; i < spookyscs.length; i++){
-                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * (1 + (parseFloat(batlevel.value) * 0.0025));
+                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * (1 + (parseFloat(petlevel.value) * 0.0025));
                 }
+            }
+            if (petselected.value == 2){
+                for (var i = 0; i < sharkscs.length; i++){
+                    waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * (1.1 + (parseFloat(petlevel.value) * 0.001));
+                }
+                
             }
             if (bait.value == "Shark") {   
                 for (var i = 0; i < sharkscs.length; i++){
