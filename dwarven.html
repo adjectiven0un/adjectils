@@ -50,6 +50,23 @@
   <div class = "dwarven_block " style = "width:min(calc(100% - 30px), max(800px, 40%)); margin:auto">
     <span class = minesheader>Forge timers</span><br><br>
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
+
+    <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%));">
+      <span style = "margin-right:20px">Notify me when forges complete</span>
+      <div>
+
+        <label class = "switchbox" id = "notifyswitch" for = "notify">
+          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif() aria-labelledby = "notifyswitch">
+          <span class = "switch"></span>
+        </label>
+      </div>
+      <div>
+      </div>
+      </div>
+      <div class = "flex_full_row">
+        <span id = "notifstatus">(Notifications disabled)</span>
+      </div>
+
     <div id = "item1" class = "flex_forge_box">
       <div style = "float:left; width:40px; height:40px; margin:5px;">
         <img id = "img1" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
@@ -168,6 +185,8 @@
     }
     const intervalID = [];
     var onCD = false;
+    var eventNotifs = 0;
+    var notifPerms = 0;
     
     function fullReset(){
       for (var i = 1; i <= 5; i++){
@@ -185,7 +204,7 @@
     var lastname = "";
     
     async function updateForges(name){
-      
+      fullReset();
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -198,6 +217,9 @@
         }
       }
       var UUID = await getUUIDbyName(name);
+      if (UUID == -1) {
+        return -1;
+      }
       if (!fasttrack){
         data = await getAPIdata(UUID);
       }
@@ -205,7 +227,7 @@
       if (lastname != name){
 
       
-      fullReset();
+      
       clearInterval(intervalID[0]);
       intervalID.length = 0;
       
@@ -317,18 +339,29 @@
           try {
             var timeelapsed = ((Date.now() - forgelog[i].startTime)/1000);
             var maxtime = qfm * times[forgelog[i].id];
+            var dontnotify = false;
             if (timeelapsed > maxtime){
+              //1 second buffer for consistency purposes
+              if (timeelapsed - maxtime > 1) {
+                dontnotify = true;
+              }
               timeelapsed = maxtime;
             }
             var timeremaining = (maxtime - timeelapsed).toFixed(0);
             var ticks = ((timeelapsed / maxtime) * 60).toFixed(0);
-            
-            if (timeremaining <= 0){
+            if (timeremaining < 0){
               timeremaining = 0;
             }
-            if (timeremaining == 0){
+            else if (timeremaining == 0){
               actives[i - 1] = 0;
               document.getElementById("time" + i).innerText = "Finished!";
+              
+              //send notif here
+              if (eventNotifs == 1 && notifPerms == 1 && dontnotify == false){
+                  var notification = new Notification("adjectils", {body:  translations[forgelog[i].id] + " forge process complete", icon: "./favicon/favicon.ico"});
+              }
+              
+
             } else {
               document.getElementById("time" + i).innerText = timeToMinutes(timeremaining);
             }
@@ -382,22 +415,46 @@
       }
     }
     window.addEventListener('resize', updateSizes());
-        function updateSizes(){
-            console.log("Current width: " + window.innerWidth);
-            if (window.innerWidth >= 768 * (5/3)) {
-                console.log("Desktop mode...");
-                for (var i = 1; i <= 5; i++){
-                    document.getElementById("timers" + i).style.flexBasis = "";
-                }
-          
-            } else {
-                console.log("Mobile mode...");
-                for (var i = 1; i <= 5; i++){
-                    document.getElementById("timers" + i).style.flexBasis = "100%";
-                }
-          
+    function updateSizes(){
+        console.log("Current width: " + window.innerWidth);
+        if (window.innerWidth >= 768 * (5/3)) {
+            console.log("Desktop mode...");
+            for (var i = 1; i <= 5; i++){
+                document.getElementById("timers" + i).style.flexBasis = "";
             }
+      
+        } else {
+            console.log("Mobile mode...");
+            for (var i = 1; i <= 5; i++){
+                document.getElementById("timers" + i).style.flexBasis = "100%";
+            }
+      
         }
+    }
+    function toggleEventNotif(){
+      eventNotifs = Math.abs(eventNotifs - 1);
+      if (eventNotifs == 1){
+        Notification.requestPermission().then(
+        function(permission){
+          if (permission == "granted"){
+            console.log("Notifications enabled");
+            document.getElementById("notifstatus").innerText = "(Notifications enabled)";
+            notifPerms = 1;
+          } else if (permission == "denied"){
+            console.log("Notification permissions denied");
+            document.getElementById("notifstatus").innerText = "(Notification access denied! Please enable notifications)";
+          } else {
+            console.log("Notifications not supported");
+            document.getElementById("notifstatus").innerText = "(Your browser does not support notifications)";
+          }
+        }
+        );
+      } else {
+        console.log("Notifications disabled");
+        document.getElementById("notifstatus").innerText = "(Notifications disabled)";
+      }
+      
+    }
   </script>
   </html>
   

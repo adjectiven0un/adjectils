@@ -203,6 +203,9 @@
         clearInterval[intervalID[0]];
         //intervalID[0] = "";
         UUID = await getUUIDbyName(name);
+        if (UUID == -1) {
+            return -1;
+        }
         if (!fasttrack){
             data = await getAPIdata(UUID);
         }

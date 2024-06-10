@@ -291,16 +291,16 @@
             //Get the API data. Note that if we already have data from localstorage, this step will be skipped.
 
             UUID = await getUUIDbyName(name);
-            if (!fasttrack && UUID != -1){
+            if (UUID == -1) {
+                return -1;
+            }
+            if (!fasttrack){
                 data = await getAPIdata(UUID);
             } 
 
             //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
 
             try {
-                if (UUID == -1) {
-                    error();
-                }
                 profilelist = (data.profiles);
 
                 //Set up the dropdown menu.
