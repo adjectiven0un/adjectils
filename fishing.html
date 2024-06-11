@@ -297,7 +297,14 @@
             if (!fasttrack){
                 data = await getAPIdata(UUID);
             } 
-
+            fasttrack = false;
+            if (data.profiles == null){
+                resetFish();
+                setFish();
+                addToolTips();
+                document.getElementById("status").innerText = "This player hasn't played on Hypixel!";
+                return -1;
+            }
             //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
 
             try {
@@ -329,7 +336,6 @@
 
             //Deactivate fasttrack if applicable, then store the last name and api data in localStorage.
 
-            fasttrack = false;
             localStorage.setItem("storedname", name);
             localStorage.setItem("storeddata", JSON.stringify(data)); 
 
@@ -356,7 +362,6 @@
             } catch (TypeError) {
                 console.log("This profile hasn't trophy fished!");
                 document.getElementById("profilestatus").innerText = "This profile has no trophy fishing stats!";
-                
             }
             
             for (var i = 0; i < 21; i++){

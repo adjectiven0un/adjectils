@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Mega Walls</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Dermal utilities for Mega Walls">
+      <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "getUUID.js"></script>
+      <script src = "mwdata.js"></script>
+    </head>
+  <body onload="updatePage()">
+  
+    <script>
+        $(function(){
+        $("#nav").load("nav.html", function() { setWord(); }); 
+        });
+    </script>
+    <div style = "text-align:center; margin: auto"> 
+        <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>Mega Walls</span><br>
+    </div>
+
+    <div style = "text-align:center">
+        <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
+        <span id = "refreshstatus"></span><br>
+        <span id = "status"></span><br>
+        <span id = "otherstatus"></span><br>
+    </div>
+
+    <section class = flex_box_index style = "margin:auto">
+        <span class = "header">Classes</span>
+        <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+                    
+        </div>
+        <div class = "flex_index_row flex_full_row" id = row2 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+            
+        </div>
+        <div class = "flex_index_row flex_full_row" id = row3 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
+            
+        </div>
+    </section>
+    <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: auto;" >
+        <span class = "header">Skins</span>
+        <div class = "flex_index_row flex_full_row" id = row4 style = "width:90%; flex-basis:51%; margin:auto; margin-top:10px;">
+            <div class = "flex_index_box" style = "flex-basis: 70%;">
+                <div class = "flex_index_row flex_full_row" id = "skinrow1">
+
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "skinrow2">
+                    
+                </div>
+            </div>
+            <div class = "flex_index_box" style = "flex-basis: 30%;">
+
+            </div>
+        </div>
+
+    </section>
+    
+
+
+
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+</body>
+<script>
+
+    // Startup sequence.
+
+    function updatePage(){
+        resetBoxes();
+        initClasses();
+        selectClass(-1);
+        
+    }
+
+    // Failsafe command. May be run on page load or if an invalid username is input.
+
+    function resetBoxes(){
+        console.log("Resetting all");
+        for (var i = 1; i <= 3; i++){
+            document.getElementById("row" + i).innerHTML = "";
+        }
+    }
+
+    // Part of the startup sequence.
+
+    function initClasses() {
+        for (let j = 1; j <= 3; j++){
+            for (let i = 9 * (j - 1); i < 9 * j; i++){
+                let box = document.createElement("div");
+                box.className = "fishbox";
+                box.id = classnames[i] + "_box";
+                box.onclick = function() {
+                    selectClass(i);
+                };
+                if (classnames[i] == ""){
+                    box.style.opacity = "0%";
+                } else {
+                    var classimage = document.createElement("img");
+                    classimage.src = "./images/not_unlocked.png";
+                    classimage.style.height = "80%"; 
+                    classimage.style.width = "80%";
+                    classimage.alt = "";
+                    classimage.id = classnames[i] + "_image";
+                    box.appendChild(classimage);
+                    var tooltip = document.createElement("div");
+                    tooltip.className = "fishboxtext";
+                    tooltip.id = (classnames[i] + "_text");
+                    tooltip.style.opacity = "90%";
+                    box.appendChild(tooltip);
+                }
+                
+                document.getElementById("row" + j).appendChild(box);
+            }
+        }
+        initToolTips();
+    }
+
+    // Allows user to pick a a class.
+
+    var selectedClass = 20;
+
+    function selectClass(classIndex){
+        document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#808080";
+        if (classIndex == -1){
+            return -1;
+        }
+        selectedClass = classIndex;
+        document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#00cc00";
+    }
+
+    // Gets API data. 
+    var data;
+    var mwdata;
+    var onCD = false;
+    async function updateUser(name){
+
+        // Rudimentary cooldown to avoid refresh spamming causing rate limits. 
+
+        if (onCD == true){
+            document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+            console.log("On cooldown!");
+            return -1;
+        } else {
+            document.getElementById("refreshstatus").innerText = "";
+        
+            onCD = true;
+            setTimeout(() => { onCD = false }, 5000);
+            
+        }
+        // Get the API data.
+
+        UUID = await getUUIDbyName(name);
+        if (UUID == -1) {
+            return -1;
+        }
+        
+        data = await getStats(UUID);
+        try {
+            mwdata = data.player.stats.Walls3;
+        } catch (TypeError) {
+            document.getElementById("status").innerText = "This player hasn't played on Hypixel!";
+            updatePage();
+            return -1;
+        }
+        
+        if (mwdata == undefined){
+            document.getElementById("status").innerText = "This player hasn't played Mega Walls!";
+            updatePage();
+            return -1;
+        }
+        updateClasses(mwdata);
+    }
+
+    // Updates boxes when a player is checked.
+
+    function updateClasses(playerdata){
+
+        // Update icons.
+
+        for (let j = 1; j <= 3; j++){
+            for (let i = 9 * (j - 1); i < 9 * j; i++){
+                if (playerdata.classes[classnames[i]] != undefined && playerdata.classes[classnames[i]].unlocked == true) {
+                    
+                    document.getElementById(classnames[i] + "_image").src = "./images/" + classnames[i] + "_icon.png";
+                } else if (i >= 0 && i <= 2) {
+                    document.getElementById(classnames[i] + "_image").src = "./images/" + classnames[i] + "_icon.png";
+                } else {
+                    document.getElementById(classnames[i] + "_image").src = "./images/not_unlocked.png";
+                }
+            }
+        }
+
+        // Update prestiges. 
+
+        for (let i = 0; i < 27; i++) {
+            document.getElementById(classnames[i] + "_prestige").innerText = "";
+            if (playerdata.classes[classnames[i]] != undefined && playerdata.classes[classnames[i]].prestige > 0) {
+                var prestag = "";
+                for (let j = 0; j < playerdata.classes[classnames[i]].prestige; j++){
+                    prestag += "✫";
+                }
+                document.getElementById(classnames[i] + "_prestige").innerText = prestag;
+                if (playerdata.classes[classnames[i]].prestige_tag != undefined && playerdata.classes[classnames[i]].prestige_tag.type != "CHROMA" && playerdata.classes[classnames[i]].prestige_tag.type != "CUSTOM"){
+                    document.getElementById(classnames[i] + "_prestige").style.color = tagColors[playerdata.classes[classnames[i]].prestige_tag.type];
+                } else {
+                    document.getElementById(classnames[i] + "_prestige").style.color = "#ffaa00";
+                }
+                // Note to self: write exceptions for chroma and custom later
+            }
+        }
+
+        // Update class points.
+
+        for (let i = 0; i < 27; i++) {
+            document.getElementById(classnames[i] + "_classPoints").innerText = "0";
+            if (playerdata[classnames[i] + "_class_points"] != undefined) {
+                document.getElementById(classnames[i] + "_classPoints").innerText = playerdata[classnames[i] + "_class_points"];
+            }
+        }
+
+
+        
+    }
+    
+    // Initializes the tooltip for each class.
+
+    function initToolTips() {
+        for (var i = 0; i < 27; i++){
+            if (classnames[i] != ""){
+                makeTooltipObject(classnames[i] + "_text", "", classnamesCapital[i] + " ", "20px", classColors[i], false);
+                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_prestige", "", "20px", "#ffaa00", true);
+                makeTooltipObject(classnames[i] + "_text", "", classTypes[i] + " Class", "16px", "#c0c0c0", true);
+                makeTooltipObject(classnames[i] + "_text", "", "Play styles: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classnames[i] + "_text", "", classStyles1[i], "16px", styleColors[classStyles1[i]], false);
+                makeTooltipObject(classnames[i] + "_text", "", ", ", "16px", "#c0c0c0");
+                makeTooltipObject(classnames[i] + "_text", "", classStyles2[i], "16px", styleColors[classStyles2[i]], true);
+                makeTooltipObject(classnames[i] + "_text", "", "Difficulty: ", "16px", "#c0c0c0", false);
+                for (var j = 0; j < difficulties[i]; j++){
+                    makeTooltipObject(classnames[i] + "_text", "", "●", "16px", difficultyColors[difficulties[i]], false);
+                }
+                for (var j = difficulties[i]; j < 4; j++){
+                    makeTooltipObject(classnames[i] + "_text", "", "●", "16px", "#c0c0c0", false);
+                }
+                makeTooltipObject(classnames[i] + "_text", "", "", "16px", "#c0c0c0", true);
+                makeTooltipObject(classnames[i] + "_text", "", "Skins: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_skinCount", "1", "16px", "#c0c0c0", false);
+                makeTooltipObject(classnames[i] + "_text", "", "/" + classTotalSkins[i], "16px", "#c0c0c0", true);
+                makeTooltipObject(classnames[i] + "_text", "", "Class Points: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_classPoints", "0", "16px", "#c0c0c0", true);
+            }
+        }
+    } 
+
+    // Helper function.
+
+    function makeTooltipObject(target, id, text, fontSize, color, lineBreak){
+        var toInsert = document.createElement("span");
+        toInsert.innerText = text;
+        toInsert.style.flexBasis = "100%";
+        toInsert.style.fontSize = fontSize;
+        toInsert.style.color = color;
+        if (id != ""){
+            toInsert.id = id;
+        }
+        document.getElementById(target).appendChild(toInsert);
+        if (lineBreak) {
+            document.getElementById(target).appendChild(document.createElement("br"));
+        }   
+    }
+
+    function updateSkinRows() {
+        
+    }
+  </script>

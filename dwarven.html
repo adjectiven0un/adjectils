@@ -224,6 +224,10 @@
         data = await getAPIdata(UUID);
       }
       fasttrack = false;
+      if (data.profiles == null) {
+        document.getElementById("status").innerText = "This player hasn't played on Hypixel!"
+        return -1;
+      }
       if (lastname != name){
 
       
