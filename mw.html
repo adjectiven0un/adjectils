@@ -13,6 +13,8 @@
       <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script src = "getUUID.js"></script>
       <script src = "mwdata.js"></script>
+      <script src="skinview3d.bundle.js"></script>
+      <script src="skinview3d.bundle.js.map"></script>
     </head>
   <body onload="updatePage()">
   
@@ -45,18 +47,22 @@
         </div>
     </section>
     <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: auto;" >
-        <span class = "header">Skins</span>
+        <span class = "header" style = "margin-top:20px">Skins</span>
         <div class = "flex_index_row flex_full_row" id = row4 style = "width:90%; flex-basis:51%; margin:auto; margin-top:10px;">
             <div class = "flex_index_box" style = "flex-basis: 70%;">
-                <div class = "flex_index_row flex_full_row" id = "skinrow1">
+                <div class = "flex_index_row flex_full_row" style = "margin:5px;flex-wrap:wrap; align-items: center;">
+                    <span class = "flex_full_row" style = "margin:auto; justify-content: center;">Hover to view details.</span>
+                    <span class = "flex_full_row" style = "margin:auto; justify-content: center;">Click to view skins.</span>
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "skinrow1" style = "margin:5px">
 
                 </div>
-                <div class = "flex_index_row flex_full_row" id = "skinrow2">
-                    
+                <div class = "flex_index_row flex_full_row" id = "skinrow2" style = "margin:5px">
+                    <div class = "fishbox"><div class = "fishboxtext">Select a class first!</div><img src = "./images/mega_walls/not_unlocked.png" style = "width:80%; height:80%"></div>
                 </div>
             </div>
-            <div class = "flex_index_box" style = "flex-basis: 30%;">
-
+            <div class = "flex_index_box" style = "flex-basis: 20%; width:200px;height:400px;">
+                <canvas id="skin_container" style = "width:100px;height:200px;background-color: #404040;"></canvas>
             </div>
         </div>
 
@@ -75,7 +81,7 @@
         resetBoxes();
         initClasses();
         selectClass(-1);
-        
+        makeRender();
     }
 
     // Failsafe command. May be run on page load or if an invalid username is input.
@@ -102,7 +108,7 @@
                     box.style.opacity = "0%";
                 } else {
                     var classimage = document.createElement("img");
-                    classimage.src = "./images/not_unlocked.png";
+                    classimage.src = "./images/mega_walls/not_unlocked.png";
                     classimage.style.height = "80%"; 
                     classimage.style.width = "80%";
                     classimage.alt = "";
@@ -132,6 +138,7 @@
         }
         selectedClass = classIndex;
         document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#00cc00";
+        updateSkinRows();
     }
 
     // Gets API data. 
@@ -175,6 +182,8 @@
             return -1;
         }
         updateClasses(mwdata);
+        updateTooltipNumbers();
+        selectClass(classnamesCapital.indexOf(mwdata.chosen_class));
     }
 
     // Updates boxes when a player is checked.
@@ -187,11 +196,11 @@
             for (let i = 9 * (j - 1); i < 9 * j; i++){
                 if (playerdata.classes[classnames[i]] != undefined && playerdata.classes[classnames[i]].unlocked == true) {
                     
-                    document.getElementById(classnames[i] + "_image").src = "./images/" + classnames[i] + "_icon.png";
+                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/" + classnames[i] + "_icon.png";
                 } else if (i >= 0 && i <= 2) {
-                    document.getElementById(classnames[i] + "_image").src = "./images/" + classnames[i] + "_icon.png";
+                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/" + classnames[i] + "_icon.png";
                 } else {
-                    document.getElementById(classnames[i] + "_image").src = "./images/not_unlocked.png";
+                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/not_unlocked.png";
                 }
             }
         }
@@ -274,7 +283,308 @@
         }   
     }
 
-    function updateSkinRows() {
-        
+    //Updates the numbers of skins for each class.
+
+    function updateTooltipNumbers(){
+        for (var j = 0; j < 27; j++) {
+            var totalSkins = 1;
+            for (var i = 0; i < classTotalSkins[j]; i++){
+                let skinNames = eval(`skinNames_${j}`);
+                let skinDesc = eval(`skinDesc_${j}`);
+                let skinPaths = eval(`skinPaths_${j}`);
+                let skinPaths_onetime = eval(`skinPaths_onetime_${j}`);
+                let skinReqs = eval(`skinReqs_${j}`);
+                let skinReqDesc = eval(`skinReqDesc_${j}`);
+                let skinReqDesc_onetime = eval(`skinReqDesc_onetime_${j}`);
+                
+                if (skinPaths[i] == "") {
+                }
+                else if (skinPaths[i] == "onetime") {
+                    try {
+                        if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                            totalSkins++;
+                        }
+                    } catch (TypeError) {
+                    }
+                }
+                else if (skinPaths[i] == "pres3") {
+                    try {
+                        if (mwdata.classes[classnames[j]].prestige >= 3) {
+                            totalSkins++;
+                        } 
+                    } catch (TypeError) {
+                    }
+                }
+                else if (skinPaths[i] == "pres5") {
+                    try {
+                        if (mwdata.classes[classnames[j]].prestige >= 5) {
+                            totalSkins++;
+                        }
+                    } catch (TypeError) {
+                    }
+                }
+                else if (skinPaths[i] == "purchase") {
+                    try {
+                        if (mwdata.packages.includes(skinReqDesc_onetime[i])) {
+                            totalSkins++;
+                        }
+                    } catch (TypeError) {
+                    }
+                }
+                else {
+                    try {
+                        if (mwdata[skinPaths[i]] >= skinReqs[i]) {
+                            totalSkins++;
+                        } else {
+                        }
+                    } catch (TypeError) {
+                    }
+                }
+                
+            }
+            document.getElementById(classnames[j] + "_skinCount").innerText = totalSkins; 
+        }
     }
+
+    function updateSkinRows() {
+        skinrow1.innerHTML = "";
+        skinrow2.innerHTML = "";
+        let skinNames = eval(`skinNames_${selectedClass}`);
+        let skinDesc = eval(`skinDesc_${selectedClass}`);
+        let skinPaths = eval(`skinPaths_${selectedClass}`);
+        let skinPaths_onetime = eval(`skinPaths_onetime_${selectedClass}`);
+        let skinReqs = eval(`skinReqs_${selectedClass}`);
+        let skinReqDesc = eval(`skinReqDesc_${selectedClass}`);
+        let skinReqDesc_onetime = eval(`skinReqDesc_onetime_${selectedClass}`);
+        let perrow = 7;
+        if (classTotalSkins[selectedClass] % 2 == 0) {
+            perrow = classTotalSkins[selectedClass] / 2;
+        }
+        // initialize boxes
+        for (var i = 0; i < classTotalSkins[selectedClass]; i++){
+            if (i < perrow) {
+                addSkinBox(skinrow1, skinNames[i]);
+            } else {
+                addSkinBox(skinrow2, skinNames[i]);
+            }
+        }
+        // Load req tooltips
+        for (var i = 0; i < classTotalSkins[selectedClass]; i++){
+            var tip = document.getElementById(skinNames[i] + "_tiptext");
+            makeTooltipObject(tip.id, "", skinNames[i], "20px", "#c0c0c0", true);
+            makeTooltipObject(tip.id, "", skinDesc[i], "12px", "#808080", true);
+            makeTooltipObject(tip.id, "", "Requirement: ", "12px", "#c0c0c0", false);
+            if (skinPaths[i] == "") {
+                makeTooltipObject(tip.id, "", "Unlocked by default", "12px", "#c0c0c0", true);
+                document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+            }
+            else if (skinPaths[i] == "onetime") {
+                makeTooltipObject(tip.id, "", skinReqDesc_onetime[i], "12px", "#c0c0c0", true);
+                makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
+                try {
+                    if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                        makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                    } else {
+                        makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    }
+                } catch (TypeError) {
+                    makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                }
+                
+            }
+            else if (skinPaths[i] == "pres3") {
+                makeTooltipObject(tip.id, "", "Prestige III " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
+                makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
+                try {
+                    if (mwdata.classes[classnames[selectedClass]].prestige >= 3) {
+                        makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                    } else {
+                        makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    }
+                } catch (TypeError) {
+                    makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                }
+            }
+            else if (skinPaths[i] == "pres5") {
+                makeTooltipObject(tip.id, "", "Prestige V " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
+                makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
+                try {
+                    if (mwdata.classes[classnames[selectedClass]].prestige >= 5) {
+                        makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                    } else {
+                        makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    }
+                } catch (TypeError) {
+                    makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                }
+            }
+            else if (skinPaths[i] == "purchase") {
+                makeTooltipObject(tip.id, "", skinReqs[i] + " coins", "12px", "#ffaa00", true);
+                makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
+                try {
+                    if (mwdata.packages.includes(skinReqDesc_onetime[i])) {
+                        makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                    } else {
+                        makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    }
+                } catch (TypeError) {
+                    makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
+                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                }
+            }
+            else {
+                makeTooltipObject(tip.id, "", skinReqDesc[i], "12px", "#c0c0c0", true);
+                makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
+                try {
+                    console.log("Skin path: " + skinPaths[i]);
+                    if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills") {
+                        makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
+                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                    } else if (skinPaths[i] == "squid_defender_final_kills") {
+                        
+                        // I had to write an entire exception for this ONE stat. Enjoy.
+
+                        var squidDefFKA = 0;
+                        if (mwdata[skinPaths[i]] != undefined) {
+                            if (mwdata[extraPaths[0]] != undefined){
+                                squidDefFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[0]]);
+                            } else {
+                                squidDefFKA = parseInt(mwdata[skinPaths[i]]);
+                            }
+                        } else {
+                            if (mwdata[extraPaths[0]] != undefined){
+                                squidDefFKA = parseInt(mwdata[extraPaths[0]]);
+                            } else {
+                                squidDefFKA = 0;
+                            }
+                        }
+
+                        if (squidDefFKA >= 10) {
+                            makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", squidDefFKA, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                        } else {
+                            makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", squidDefFKA, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        }
+                        
+                    } else {
+                        if (mwdata[skinPaths[i]] != undefined){
+                            makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        } else {
+                            makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        }
+                    }
+                } catch (TypeError) {
+                    makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
+                    makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                    makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                }
+            }
+            
+        }
+
+    }
+    var selectedSkin = "";
+    var selectedColor = "";
+    function selectSkin(skinName) {
+        if (skinName == -1){
+            return -1;
+        }
+        if (selectedSkin != ""){
+            try {
+                document.getElementById(selectedSkin + "_box").style.borderColor = selectedColor;
+            } catch (ReferenceError) {
+                console.log("Looks like you swapped class there.");
+            }
+        }
+        if (selectedColor != "") {
+            try {
+                document.getElementById(selectedSkin + "_box").style.borderColor = "selectedColor";
+            } catch (ReferenceError){
+            }
+            
+        }
+        selectedSkin = skinName;
+        selectedColor = document.getElementById(selectedSkin + "_box").style.borderColor;
+        document.getElementById(skinName + "_box").style.borderColor = "#55ff55";
+        makeRender(skinName);
+    }
+
+    function addSkinBox(targetrow, imageName){
+        var box = document.createElement("div");
+        var bg = document.createElement("span");
+        box.className = "fishbox";
+        bg.id = imageName + "_span";
+        bg.style.height = "8px"; 
+        bg.style.width = "8px";
+        bg.style.transform = "scale(5)";
+        bg.style.imageRendering = "pixelated";
+        bg.style.backgroundImage = "url('./images/mega_walls/skins/" + imageName + ".png')";
+        bg.style.backgroundRepeat = "no-repeat";
+        bg.style.backgroundPositionX = "-8px";
+        bg.style.backgroundPositionY = "-8px";
+        box.appendChild(bg);
+        var tooltip = document.createElement("div");
+        tooltip.className = "fishboxtext";
+        tooltip.id = (imageName + "_tiptext");
+        tooltip.style.opacity = "90%";
+        box.appendChild(tooltip);
+        box.id = imageName + "_box";
+        box.onclick = function() {
+            selectSkin(imageName);
+        };;
+        targetrow.appendChild(box);
+    }
+
+    function makeRender(skinName){
+        let skinViewer = new skinview3d.SkinViewer({
+            canvas: document.getElementById("skin_container"),
+            width: 200,
+            height: 400,
+            skin: "images/mega_walls/skins/" + skinName + ".png"
+        });
+        skinViewer.background = 0x808080;
+        skinViewer.fov = 70;
+        skinViewer.zoom = 0.7;
+
+        skinViewer.animation = new skinview3d.IdleAnimation();
+        skinViewer.animation.speed = 1;
+        skinViewer.camera.position.x = 20;
+        skinViewer.camera.position.y = 5;
+       
+    }
+
+    
   </script>

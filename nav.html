@@ -21,14 +21,17 @@
     <span>Mining</span><br>
     <span>&nbsp;•&nbsp;</span><a href = "dwarven.html" style = "color:#808080">Dwarven Mines</a><span>&nbsp;•&nbsp;</span><a href = "crystal.html" style = "color:#808080">Crystal Hollows</a><span>&nbsp;•&nbsp;</span>
     <hr class = solid>
+    <span>Other</span><br>
+    <span>&nbsp;•&nbsp;</span><a href = "mw.html" style = "color:#808080">Mega Walls</a><span>&nbsp;•&nbsp;</span>
+    <hr class = solid>
     <span>&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a>&nbsp;•&nbsp;</span>
   </div>
   
   </body>
   </html>
   <script>
-    const nouns = ["love", "warmth", "courage", "awesomeness", "pride", "patience"];
+    const nouns = ["love", "warmth", "courage", "awesomeness", "pride", "patience", "integrity", "sorrow", "hope"];
     function setWord(){
-      document.getElementById("word").innerText = nouns[Math.floor(6 * Math.random())];
+      document.getElementById("word").innerText = nouns[Math.floor(nouns.length * Math.random())];
     }
   </script>
