@@ -14,7 +14,6 @@
       <script src = "getUUID.js"></script>
       <script src = "mwdata.js"></script>
       <script src="skinview3d.bundle.js"></script>
-      <script src="skinview3d.bundle.js.map"></script>
     </head>
   <body onload="updatePage()">
   
@@ -34,7 +33,7 @@
         <span id = "otherstatus"></span><br>
     </div>
 
-    <section class = flex_box_index style = "margin:auto">
+    <section class = flex_box_index style = "width: min(calc(100% - 30px), max(960px, 70%)); margin:auto">
         <span class = "header">Classes</span>
         <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
                     
@@ -48,6 +47,7 @@
     </section>
     <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: auto;" >
         <span class = "header" style = "margin-top:20px">Skins</span>
+        <span style = "margin-top:20px">Total skins found: <span style = "margin-top:20px" id = totalskinsfound>27</span>/301 (<span id = "totalskinspercent">9</span>%)</span>
         <div class = "flex_index_row flex_full_row" id = row4 style = "width:90%; flex-basis:51%; margin:auto; margin-top:10px;">
             <div class = "flex_index_box" style = "flex-basis: 70%;">
                 <div class = "flex_index_row flex_full_row" style = "margin:5px;flex-wrap:wrap; align-items: center;">
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class = "flex_index_box" style = "flex-basis: 20%; width:200px;height:400px;">
-                <canvas id="skin_container" style = "width:100px;height:200px;background-color: #404040;"></canvas>
+                <canvas id="skin_container" style = "width:100px;height:200px;background-color: #404040;cursor:pointer"></canvas>
             </div>
         </div>
 
@@ -101,6 +101,7 @@
                 let box = document.createElement("div");
                 box.className = "fishbox";
                 box.id = classnames[i] + "_box";
+                box.style.cursor = "pointer";
                 box.onclick = function() {
                     selectClass(i);
                 };
@@ -286,6 +287,7 @@
     //Updates the numbers of skins for each class.
 
     function updateTooltipNumbers(){
+        var totaltotalskins = 0;
         for (var j = 0; j < 27; j++) {
             var totalSkins = 1;
             for (var i = 0; i < classTotalSkins[j]; i++){
@@ -343,7 +345,10 @@
                 
             }
             document.getElementById(classnames[j] + "_skinCount").innerText = totalSkins; 
+            totaltotalskins += totalSkins;
         }
+        document.getElementById("totalskinsfound").innerText = totaltotalskins;
+        document.getElementById("totalskinspercent").innerText = ((totaltotalskins/301) * 100).toFixed(1);
     }
 
     function updateSkinRows() {
@@ -562,6 +567,7 @@
         tooltip.style.opacity = "90%";
         box.appendChild(tooltip);
         box.id = imageName + "_box";
+        box.style.cursor = "pointer";
         box.onclick = function() {
             selectSkin(imageName);
         };;
