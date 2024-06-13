@@ -120,7 +120,7 @@ const skinReqDesc_onetime_0 = [
     "",
     "Get a final kill with a Steak as Cow.",
     "",
-    "king_cowie",
+    "king cowie",
     "",
     "",
 ];
@@ -527,7 +527,7 @@ const skinReqDesc_onetime_5 = [
     "Reach 14 FK/A in a single game as Golem.",
     "Final kill 4 players with Iron Punch in one game.",
     "",
-    "commander_brown",
+    "commander brown",
     "",
     "",
 ];
@@ -616,7 +616,7 @@ const skinReqDesc_onetime_6 = [
     "",
     "Final kill 4 players from the same team as Herobrine",
     "As Herobrine, final kill someone who killed you earlier in the game.",
-    "dark_herobrine",
+    "dark herobrine",
     "null",
     "",
     "",
@@ -697,7 +697,7 @@ const skinReqDesc_onetime_7 = [
     "Reach 14 FK/A in a single game as Pigman.",
     "",
     "",
-    "zombie_pigman",
+    "zombie pigman",
     "",
     "",
 ];
@@ -942,7 +942,7 @@ const skinReqDesc_onetime_10 = [
     "Teleport to players 50 times in one game as Enderman.",
     "As any class, get the first and last final kill of the game.",
     "jumper",
-    "entity_303",
+    "entity 303",
     "",
     "",
 ];
@@ -1425,7 +1425,7 @@ const skinReqDesc_onetime_16 = [
     "Reach 14 FK/A in a single game as Skeleton.",
     "Win a game as Skeleton while only using your bow to deal damage.",
     "Final kill 3 players in one game using Explosive Arrow.",
-    "mr_wither",
+    "mr wither",
     "",
     "",
 ];
@@ -1505,7 +1505,7 @@ const skinReqDesc_onetime_17 = [
     "Reach 14 FK/A in a single game as Spider.",
     "",
     "",
-    "cave_spider",
+    "cave spider",
     "",
     "",
 ];
@@ -1972,7 +1972,7 @@ const skinReqDesc_onetime_23 = [
     "Reach 14 FK/A in a single game as Phoenix.",
     "Final kill a player within 10 seconds of resurrecting.",
     "As Phoenix, final kill the player who currently has the most FK/A.",
-    "baby_chick",
+    "baby chick",
     "",
     "",
 ];
@@ -2059,7 +2059,7 @@ const skinReqDesc_onetime_24 = [
     "",
     "Land 4 Hellfire shots in a row without missing a shot.",
     "Reach 14 FK/A in a single game as Dragon.",
-    "ender_dragon",
+    "ender dragon",
     "",
     "",
 ];
@@ -2206,7 +2206,7 @@ const skinReqDesc_onetime_26 = [
     "Reach 14 FK/A in a single game as Snowman.",
     "Final kill a player as Snowman while holding a snowball.",
     "Final kill 3 players with your diamond shovel without dying as Snowman.",
-    "frozen_alex",
+    "frozen alex",
     "",
     "",
 ];
