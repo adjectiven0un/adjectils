@@ -79,6 +79,7 @@
     // Startup sequence.
 
     function updatePage(){
+        updateSize();
         resetBoxes();
         initClasses();
         selectClass(-1);
@@ -593,6 +594,26 @@
         skinViewer.camera.position.x = 20;
         skinViewer.camera.position.y = 5;
        
+    }
+
+    function updateSize(){
+      console.log("Current width: " + window.innerWidth);
+      if (window.innerWidth >= 768 * (5/3)) {
+          console.log("Desktop mode...");
+          for (var i = 1; i <= 3; i++) {
+            document.getElementById("row" + i).style.width = "50%";
+            document.getElementById("row" + i).style.flexBasis = "51%";
+          }
+          document.getElementById("row4").style.flexWrap = "nowrap";
+          
+        } else {
+          console.log("Mobile mode...");
+          for (var i = 1; i <= 3; i++) {
+            document.getElementById("row" + i).style.width = "min(calc(100% - 30px), max(960px, 70%))";
+            document.getElementById("row" + i).style.flexBasis = "min(calc(100% - 30px), max(960px, 70%))";
+          }
+          document.getElementById("row4").style.flexWrap = "wrap";
+        }
     }
 
     
