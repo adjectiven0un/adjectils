@@ -89,7 +89,6 @@
     // Failsafe command. May be run on page load or if an invalid username is input.
 
     function resetBoxes(){
-        console.log("Resetting all");
         for (var i = 1; i <= 3; i++){
             document.getElementById("row" + i).innerHTML = "";
         }
@@ -154,7 +153,6 @@
 
         if (onCD == true){
             document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
-            console.log("On cooldown!");
             return -1;
         } else {
             document.getElementById("refreshstatus").innerText = "";
@@ -454,7 +452,6 @@
                 makeTooltipObject(tip.id, "", skinReqDesc[i], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    console.log("Skin path: " + skinPaths[i]);
                     if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills") {
                         makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
@@ -533,7 +530,6 @@
             try {
                 document.getElementById(selectedSkin + "_box").style.borderColor = selectedColor;
             } catch (ReferenceError) {
-                console.log("Looks like you swapped class there.");
             }
         }
         if (selectedColor != "") {
@@ -553,8 +549,9 @@
 
     function addSkinBox(targetrow, imageName){
         var box = document.createElement("div");
-        var bg = document.createElement("span");
+        box.style.position = "relative";
         box.className = "fishbox";
+        var bg = document.createElement("span");
         bg.id = imageName + "_span";
         bg.style.height = "8px"; 
         bg.style.width = "8px";
@@ -564,7 +561,20 @@
         bg.style.backgroundRepeat = "no-repeat";
         bg.style.backgroundPositionX = "-8px";
         bg.style.backgroundPositionY = "-8px";
+        bg.style.position = "absolute";
         box.appendChild(bg);
+        var fringe = document.createElement("span");
+        fringe.id = imageName + "_span";
+        fringe.style.height = "8px"; 
+        fringe.style.width = "8px";
+        fringe.style.transform = "scale(5)";
+        fringe.style.imageRendering = "pixelated";
+        fringe.style.backgroundImage = "url('./images/mega_walls/skins/" + imageName + ".png')";
+        fringe.style.backgroundRepeat = "no-repeat";
+        fringe.style.backgroundPositionX = "-40px";
+        fringe.style.backgroundPositionY = "-8px";
+        fringe.style.position = "absolute";
+        box.appendChild(fringe);
         var tooltip = document.createElement("div");
         tooltip.className = "fishboxtext";
         tooltip.id = (imageName + "_tiptext");
@@ -597,7 +607,6 @@
     }
 
     function updateSize(){
-      console.log("Current width: " + window.innerWidth);
       if (window.innerWidth >= 768 * (5/3)) {
           console.log("Desktop mode...");
           for (var i = 1; i <= 3; i++) {
