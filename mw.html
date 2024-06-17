@@ -95,14 +95,14 @@
 
     function updatePage(){
         resetPage();
-        if (!(localStorage.getItem("storedname") == "" || localStorage.getItem("storedname") == null)){
+        if (!(localStorage.getItem("storedmwname") == "" || localStorage.getItem("storedmwname") == null)){
             console.log("Found a previous name and data! Loading...");
-            console.log("Previous name: " + localStorage.getItem("storedname"));
-            console.log("Previous data: " + localStorage.getItem("storeddata"));
-            document.getElementById("nameinput").value = localStorage.getItem("storedname");
-            data = JSON.parse(localStorage.getItem("storeddata"));
+            console.log("Previous name: " + localStorage.getItem("storedmwname"));
+            console.log("Previous data: " + localStorage.getItem("storedmwdata"));
+            document.getElementById("nameinput").value = localStorage.getItem("storedmwname");
+            data = JSON.parse(localStorage.getItem("storedmwdata"));
             fasttrack = true;
-            updateUser(localStorage.getItem("storedname"));
+            updateUser(localStorage.getItem("storedmwname"));
         }
     }
     function resetPage() {
@@ -203,18 +203,18 @@
         }
         fasttrack = false;
         console.log("Cleared fasttrack tag");
-        localStorage.setItem("storedname", name);
-        console.log("Set item " + localStorage.getItem("storedname"));
-        localStorage.setItem("storeddata", JSON.stringify(data)); 
-        console.log("Set item " + localStorage.getItem("storeddata"));
+        localStorage.setItem("storedmwname", name);
+        console.log("Set item " + localStorage.getItem("storedmwname"));
+        localStorage.setItem("storedmwdata", JSON.stringify(data)); 
+        console.log("Set item " + localStorage.getItem("storedmwdata"));
         
         try {
             mwdata = data.player.stats.Walls3;
         } catch (TypeError) {
             document.getElementById("status").innerText = "This player hasn't played on Hypixel!";
             fasttrack = false;
-            localStorage.setItem("storedname", "");
-            localStorage.setItem("storeddata", ""); 
+            localStorage.setItem("storedmwname", "");
+            localStorage.setItem("storedmwdata", ""); 
             data = "";
             mwdata = "";
             resetPage();
@@ -224,8 +224,8 @@
         if (mwdata == undefined){
             document.getElementById("status").innerText = "This player hasn't played Mega Walls!";
             fasttrack = false;
-            localStorage.setItem("storedname", null);
-            localStorage.setItem("storeddata", null); 
+            localStorage.setItem("storedmwname", null);
+            localStorage.setItem("storedmwdata", null); 
             data = "";
             mwdata = "";
             resetPage();
