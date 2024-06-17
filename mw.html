@@ -94,10 +94,23 @@
     // Startup sequence.
 
     function updatePage(){
+        resetPage();
+        if (!(localStorage.getItem("storedname") == "" || localStorage.getItem("storedname") == null)){
+            console.log("Found a previous name and data! Loading...");
+            console.log("Previous name: " + localStorage.getItem("storedname"));
+            console.log("Previous data: " + localStorage.getItem("storeddata"));
+            document.getElementById("nameinput").value = localStorage.getItem("storedname");
+            data = JSON.parse(localStorage.getItem("storeddata"));
+            fasttrack = true;
+            updateUser(localStorage.getItem("storedname"));
+        }
+    }
+    function resetPage() {
         updateSize();
         resetBoxes();
         initClasses();
         selectClass(-1);
+        selectSkin(-1);
         makeRender();
     }
 
@@ -151,6 +164,7 @@
     function selectClass(classIndex){
         document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#808080";
         if (classIndex == -1){
+            
             return -1;
         }
         selectedClass = classIndex;
@@ -161,6 +175,7 @@
     // Gets API data. 
     var data;
     var mwdata;
+    var fasttrack = false;
     var onCD = false;
     async function updateUser(name){
 
@@ -171,9 +186,10 @@
             return -1;
         } else {
             document.getElementById("refreshstatus").innerText = "";
-        
-            onCD = true;
-            setTimeout(() => { onCD = false }, 5000);
+            if (!fasttrack) {
+                onCD = true;
+                setTimeout(() => { onCD = false }, 5000);
+            }
             
         }
         // Get the API data.
@@ -182,19 +198,37 @@
         if (UUID == -1) {
             return -1;
         }
+        if (!fasttrack){
+            data = await getStats(UUID);
+        }
+        fasttrack = false;
+        console.log("Cleared fasttrack tag");
+        localStorage.setItem("storedname", name);
+        console.log("Set item " + localStorage.getItem("storedname"));
+        localStorage.setItem("storeddata", JSON.stringify(data)); 
+        console.log("Set item " + localStorage.getItem("storeddata"));
         
-        data = await getStats(UUID);
         try {
             mwdata = data.player.stats.Walls3;
         } catch (TypeError) {
             document.getElementById("status").innerText = "This player hasn't played on Hypixel!";
-            updatePage();
+            fasttrack = false;
+            localStorage.setItem("storedname", "");
+            localStorage.setItem("storeddata", ""); 
+            data = "";
+            mwdata = "";
+            resetPage();
             return -1;
         }
         
         if (mwdata == undefined){
             document.getElementById("status").innerText = "This player hasn't played Mega Walls!";
-            updatePage();
+            fasttrack = false;
+            localStorage.setItem("storedname", null);
+            localStorage.setItem("storeddata", null); 
+            data = "";
+            mwdata = "";
+            resetPage();
             return -1;
         }
         updateClasses(mwdata);
@@ -539,6 +573,22 @@
     var selectedColor = "";
     function selectSkin(skinName) {
         if (skinName == -1){
+            console.log("neg1 call");
+            skinrow1.innerHTML = "";
+            skinrow2.innerHTML = "";
+            var defaultdiv = document.createElement("div");
+            defaultdiv.className = "fishbox";
+            var defaultdivtext = document.createElement("div");
+            defaultdivtext.className = "fishboxtext";
+            defaultdivtext.innerText = "Select a class first!";
+            defaultdiv.appendChild(defaultdivtext);
+            var defaultimg = document.createElement("img");
+            defaultimg.src = "./images/mega_walls/not_unlocked.png";
+            defaultimg.style.width = "80%";
+            defaultimg.style.height = "80%";
+            defaultdiv.appendChild(defaultimg);
+            skinrow2.appendChild(defaultdiv);
+
             return -1;
         }
         if (selectedSkin != ""){
