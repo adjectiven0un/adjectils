@@ -942,7 +942,7 @@ const skinReqDesc_onetime_10 = [
     "Teleport to players 50 times in one game as Enderman.",
     "As any class, get the first and last final kill of the game.",
     "jumper",
-    "entity 303",
+    "entity_303",
     "",
     "",
 ];
