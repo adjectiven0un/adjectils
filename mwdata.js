@@ -811,7 +811,7 @@ const skinPaths_9 = [
 ];
 const skinPaths_onetime_9 = [
     "",
-    "walls3_throwing_hot_coconuts",
+    "walls3_throwing_coconuts",
     "walls3_max_render_distance",
     "walls3_blaze_party",
     "",
