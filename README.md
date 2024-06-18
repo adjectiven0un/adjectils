@@ -1,4 +1,4 @@
 # adjectils
 
-Utilities website for Hypixel SkyBlock
-featuring calculators, timers and more
+Utilities website for Hypixel
+featuring calculators, timers, API readers and more
