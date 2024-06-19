@@ -1927,7 +1927,7 @@ const skinDesc_23 = [
 const skinPaths_23 = [
     "",
     "onetime",
-    "phoenix_amount_healed_standard",
+    "phoenix_allies_healed",
     "onetime",
     "onetime",
     "onetime",
@@ -2008,7 +2008,7 @@ const skinPaths_24 = [
     "onetime",
     "onetime",
     "onetime",
-    "dragon_on_fire_final_kills",
+    "final_kills_with_fire",
     "onetime",
     "onetime",
     "purchase",

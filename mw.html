@@ -395,15 +395,39 @@
                         if (mwdata[skinPaths[i]] >= skinReqs[i]) {
                             totalSkins++;
                         } else if (mwdata[skinPaths[i]] != undefined){
-                            topSkins.push({
-                                key: j + "/" + skinPaths[i] + "&" + i,
-                                value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
-                                className: classnamesCapital[j],
-                                skinName: skinNames[i],
-                                req: skinReqDesc[i],
-                                progress: mwdata[skinPaths[i]],
-                                max: skinReqs[i],
-                            })
+                            if (skinPaths[i] == "squid_defender_final_kills") {
+                                var squidDFK = 0;
+                                var squidDFA = 0;
+                                if (mwdata["squid_defender_final_kills"] != undefined) {
+                                    squidDFK = mwdata["squid_defender_final_kills"];
+                                }
+                                if (mwdata["squid_defender_final_assists"] != undefined) {
+                                    squidDFA = mwdata["squid_defender_final_assists"];
+                                }
+                                if ((squidDFK + squidDFA) < 10) {
+                                    topSkins.push({
+                                        key: skinPaths[i],
+                                        value: (((squidDFK + squidDFA) / skinReqs[i]) * 100).toFixed(1),
+                                        className: classnamesCapital[j],
+                                        skinName: skinNames[i],
+                                        req: skinReqDesc[i],
+                                        progress: squidDFK + squidDFA,
+                                        max: skinReqs[i],
+                                    })
+                                }
+                                
+                            } else {
+                                topSkins.push({
+                                    key: skinPaths[i],
+                                    value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
+                                    className: classnamesCapital[j],
+                                    skinName: skinNames[i],
+                                    req: skinReqDesc[i],
+                                    progress: mwdata[skinPaths[i]],
+                                    max: skinReqs[i],
+                                })
+                            }
+                            
 
                         }
                     } catch (TypeError) {
@@ -413,7 +437,7 @@
             }
             document.getElementById(classnames[j] + "_skinCount").innerText = totalSkins; 
             totaltotalskins += totalSkins;
-            
+            console.log(topSkins);
         }
         document.getElementById("totalskinsfound").innerText = totaltotalskins;
         document.getElementById("totalskinspercent").innerText = ((totaltotalskins/301) * 100).toFixed(1);
