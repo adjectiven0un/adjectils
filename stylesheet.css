@@ -458,5 +458,12 @@ body {
     display:flex;
     flex-wrap:wrap;
   }
+  .hovertext {
+    text-decoration: underline;
+    color:#c0c0c0;
+  }
+  .hovertext:hover {
+    color:#e0e0e0;
+  }
 
   

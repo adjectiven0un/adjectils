@@ -81,6 +81,15 @@
                 <a id = "downloadlink"  style = "height:24px; width:24px;background-color: #808080;text-align: center;color:#c0c0c0; margin-left:5px; border-style: solid;border-width:2px;cursor:pointer">⤓</a>
             </div>
         </div>
+        <div class = "flex_index_row flex_full_row" style = "width:min(calc(100% - 30px), max(960px, 70%)); flex-basis:100%; flex-wrap:wrap;">
+            <div class = "header" style = "text-align:center; flex-basis:100%">Closest In-Progress Skins</div>
+            <div class = "flex_index_box" style = "flex-basis:100%" id = "closestskinbox">
+                <table id = "closestskintable">
+
+                </table>
+            </div>
+
+        </div>
 
     </section>
     
@@ -97,8 +106,6 @@
         resetPage();
         if (!(localStorage.getItem("storedmwname") == "" || localStorage.getItem("storedmwname") == null)){
             console.log("Found a previous name and data! Loading...");
-            console.log("Previous name: " + localStorage.getItem("storedmwname"));
-            console.log("Previous data: " + localStorage.getItem("storedmwdata"));
             document.getElementById("nameinput").value = localStorage.getItem("storedmwname");
             data = JSON.parse(localStorage.getItem("storedmwdata"));
             fasttrack = true;
@@ -202,11 +209,8 @@
             data = await getStats(UUID);
         }
         fasttrack = false;
-        console.log("Cleared fasttrack tag");
         localStorage.setItem("storedmwname", name);
-        console.log("Set item " + localStorage.getItem("storedmwname"));
         localStorage.setItem("storedmwdata", JSON.stringify(data)); 
-        console.log("Set item " + localStorage.getItem("storedmwdata"));
         
         try {
             mwdata = data.player.stats.Walls3;
@@ -232,7 +236,7 @@
             return -1;
         }
         updateClasses(mwdata);
-        updateTooltipNumbers();
+        updateTooltipNumbers(5);
         selectClass(classnamesCapital.indexOf(mwdata.chosen_class));
     }
 
@@ -334,8 +338,9 @@
     }
 
     //Updates the numbers of skins for each class.
-
-    function updateTooltipNumbers(){
+    var topSkins = [];
+    function updateTooltipNumbers(showmore){
+        topSkins = [];
         var totaltotalskins = 0;
         for (var j = 0; j < 27; j++) {
             var totalSkins = 1;
@@ -386,7 +391,17 @@
                     try {
                         if (mwdata[skinPaths[i]] >= skinReqs[i]) {
                             totalSkins++;
-                        } else {
+                        } else if (mwdata[skinPaths[i]] != undefined){
+                            topSkins.push({
+                                key: j + "/" + skinPaths[i] + "&" + i,
+                                value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
+                                className: classnamesCapital[j],
+                                skinName: skinNames[i],
+                                req: skinReqDesc[i],
+                                progress: mwdata[skinPaths[i]],
+                                max: skinReqs[i],
+                            })
+
                         }
                     } catch (TypeError) {
                     }
@@ -395,9 +410,87 @@
             }
             document.getElementById(classnames[j] + "_skinCount").innerText = totalSkins; 
             totaltotalskins += totalSkins;
+            
         }
         document.getElementById("totalskinsfound").innerText = totaltotalskins;
         document.getElementById("totalskinspercent").innerText = ((totaltotalskins/301) * 100).toFixed(1);
+        topSkins.sort((a, b) => b.value - a.value);
+        closestskintable.innerHTML = "";
+        try {
+            closestskinbox.removeChild(document.getElementById("showmoretext"));
+        } catch {
+            
+        }
+        
+        for (var i = 0; i < showmore; i++) {
+            if (i >= topSkins.length) {
+                break;
+            }
+            var tablerow = document.createElement("tr");
+            var classname = document.createElement("td");
+            classname.innerText = topSkins[i].className;
+            classname.style.paddingLeft = "20px";
+            var skinname = document.createElement("td");
+            skinname.style.paddingLeft = "20px";
+            skinname.innerText = topSkins[i].skinName;
+            var skintask = document.createElement("td");
+            skintask.style.paddingLeft = "20px";
+            skintask.innerText = topSkins[i].req;
+            skintask.style.fontSize = "16px";
+            var progress = document.createElement("td");
+            progress.style.paddingLeft = "20px";
+            if (topSkins[i].value < 10) {
+                progress.innerText = "(" + topSkins[i].progress + "/" + topSkins[i].max + ")\n(" + topSkins[i].value + "%)";
+            } else {
+                progress.innerText = "(" + topSkins[i].progress + "/" + topSkins[i].max + ")\n(" + topSkins[i].value + "%)";
+            }
+            progress.style.textAlign = "right";
+            var box = document.createElement("div");
+            box.style.position = "relative";
+            box.className = "fishbox";
+            var bg = document.createElement("span");
+            bg.style.height = "8px"; 
+            bg.style.width = "8px";
+            bg.style.transform = "scale(5)";
+            bg.style.imageRendering = "pixelated";
+            bg.style.backgroundImage = "url('./images/mega_walls/skins/" + topSkins[i].skinName + ".png')";
+            bg.style.backgroundRepeat = "no-repeat";
+            bg.style.backgroundPositionX = "-8px";
+            bg.style.backgroundPositionY = "-8px";
+            bg.style.position = "absolute";
+            box.appendChild(bg);
+            var fringe = document.createElement("span");
+            fringe.style.height = "8px"; 
+            fringe.style.width = "8px";
+            fringe.style.transform = "scale(5)";
+            fringe.style.imageRendering = "pixelated";
+            fringe.style.backgroundImage = "url('./images/mega_walls/skins/" + topSkins[i].skinName + ".png')";
+            fringe.style.backgroundRepeat = "no-repeat";
+            fringe.style.backgroundPositionX = "-40px";
+            fringe.style.backgroundPositionY = "-8px";
+            fringe.style.position = "absolute";
+            box.appendChild(fringe);
+            var imagetd = document.createElement("td");
+            imagetd.appendChild(box);
+            tablerow.appendChild(imagetd);
+            tablerow.appendChild(classname);
+            tablerow.appendChild(skinname);
+            tablerow.appendChild(skintask);
+            tablerow.appendChild(progress);
+            closestskintable.appendChild(tablerow);
+        }
+        if (showmore == 5) {
+            var tablerow = document.createElement("div");
+            tablerow.id = "showmoretext";
+            var showtext = document.createElement("span");
+            showtext.innerText = "Show more ...";
+            showtext.className = "hovertext";
+            tablerow.appendChild(showtext);
+            tablerow.onclick = function() {
+                updateTooltipNumbers(1000);
+            };
+            closestskinbox.appendChild(tablerow);
+        }
     }
 
     function updateSkinRows() {
@@ -573,7 +666,6 @@
     var selectedColor = "";
     function selectSkin(skinName) {
         if (skinName == -1){
-            console.log("neg1 call");
             skinrow1.innerHTML = "";
             skinrow2.innerHTML = "";
             var defaultdiv = document.createElement("div");
@@ -649,7 +741,7 @@
         box.style.cursor = "pointer";
         box.onclick = function() {
             selectSkin(imageName);
-        };;
+        };
         targetrow.appendChild(box);
     }
 
