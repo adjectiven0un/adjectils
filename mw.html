@@ -118,6 +118,7 @@
         initClasses();
         selectClass(-1);
         selectSkin(-1);
+        updateTooltipNumbers(0);
         makeRender();
     }
 
@@ -221,6 +222,7 @@
             localStorage.setItem("storedmwdata", ""); 
             data = "";
             mwdata = "";
+            topSkins = [];
             resetPage();
             return -1;
         }
@@ -232,6 +234,7 @@
             localStorage.setItem("storedmwdata", null); 
             data = "";
             mwdata = "";
+            topSkins = [];
             resetPage();
             return -1;
         }
@@ -479,7 +482,7 @@
             tablerow.appendChild(progress);
             closestskintable.appendChild(tablerow);
         }
-        if (showmore == 5) {
+        if (showmore == 5 && i >= 5) {
             var tablerow = document.createElement("div");
             tablerow.id = "showmoretext";
             var showtext = document.createElement("span");
@@ -490,6 +493,24 @@
                 updateTooltipNumbers(1000);
             };
             closestskinbox.appendChild(tablerow);
+        }
+        if (i == 0) {
+            var tablerow = document.createElement("tr");
+            var NUimg = document.createElement("td");
+            var box = document.createElement("div");
+            box.style.position = "relative";
+            box.className = "fishbox";
+            var defaultimg = document.createElement("img");
+            defaultimg.src = "./images/mega_walls/not_unlocked.png";
+            defaultimg.style.width = "80%";
+            defaultimg.style.height = "80%";
+            box.appendChild(defaultimg);
+            tablerow.appendChild(box);
+            var defaulttext = document.createElement("td");
+            defaulttext.innerText = "No skins in progress!"
+            defaulttext.style.paddingLeft = "20px";
+            tablerow.appendChild(defaulttext);
+            closestskintable.appendChild(tablerow);
         }
     }
 
