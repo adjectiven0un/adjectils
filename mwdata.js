@@ -5,7 +5,6 @@ const classTypes = ["Starter", "Starter", "Starter", "Standard", "Standard", "St
 const classStyles1 = ["Support", "Ranged", "Fighter", "Control", "Rusher", "Tank", "Damage", "Damage", "Tank", "Damage", "Mobility", "Control", "Control", "Control", "Fighter", "Control", "Ranged", "Mobility", "Mobility", "Fighter", "Fighter", "Tank", "Damage", "Support", "Damage", "Mobility", "Damage"];
 const classStyles2 = ["Tank", "Fighter", "Control", "Fighter", "Damage", "Control", "Control", "Tank", "Support", "Ranged", "Fighter", "Mobility", "Tank", "Damage", "Damage", "Support", "Control", "Rusher", "Tank", "Support", "Mobility", "Fighter", "Mobility", "Ranged", "Ranged", "Ranged", "Fighter"];
 const difficulties = [1, 2, 3, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 4, 4, 4];
-const classTotalSkins = [12, 12, 11, 11, 11, 11, 13, 11, 11, 11, 12, 12, 11, 11, 11, 10, 11, 11, 11, 10, 11, 11, 12, 11, 10, 11, 11];
 const tagColors = {
     "DARK_GRAY": "#555555",
     "WHITE": "#ffffff",
@@ -39,7 +38,7 @@ const difficultyColors = {
     3: "#ff5555",
     4: "#aa0000",
 }
-const skinNames_0 = ["Cow", "Cow Suit", "Iron Cow", "Skelly Moo", "Fungu Madness", "One Serious Bull", "Parasite", "Sir Loin", "Sacred Bull", "King Cowie", "Buffalo Bill", "Minotaur"];
+const skinNames_0 = ["Cow", "Cow Suit", "Iron Cow", "Skelly Moo", "Fungu Madness", "One Serious Bull", "Parasite", "Sir Loin", "Sacred Bull", "King Cowie", "Buffalo Bill", "Minotaur", "Charred"];
 const skinDesc_0 = [
     "The default skin for Cow.",
     "Perfect for costume parties!",
@@ -53,6 +52,7 @@ const skinDesc_0 = [
     "Now that is one fancy cow.",
     "Not actually a cow, but just as ruthless in its ruminant glory.",
     "Don't let its floral nature fool you. You do not want to cross this minotaur.",
+    "Went to Hell and back for revenge, but might have stayed a bit too long."
 ];
 const skinPaths_0 = [
     "",
@@ -67,6 +67,7 @@ const skinPaths_0 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist"
 ];
 const skinPaths_onetime_0 = [
     "",
@@ -109,6 +110,7 @@ const skinReqDesc_0 = [
     "",
     "",
     "",
+    
 ];
 const skinReqDesc_onetime_0 = [
     "",
@@ -125,13 +127,13 @@ const skinReqDesc_onetime_0 = [
     "",
 ];
 
-const skinNames_1 = ["Hunter", "Edge", "Tucson", "Hippie Moon", "Sheep", "Cake Hunter", "Kuba the Caveman", "Annie", "Bounty", "Jasmin", "Genghis", "Sparta"];
+const skinNames_1 = ["Hunter", "Edge", "Tucson", "Hippie Moon", "Animal Tamer", "Cake Hunter", "Kuba the Caveman", "Annie", "Bounty", "Jasmin", "Genghis", "Sparta", "Slinger"];
 const skinDesc_1 = [
     "The default skin for Hunter.",
     "Highly skilled archer. Edge's fashion sense, however, is clearly not as strong as his bow skills.",
     "Roams the world searching for forgotten treasures.",
     "Has never harmed a fly in his life. Moon just wants to look after all the animals.",
-    "Baaaa... Baaaa! Baaaa... Baaaa! Baaaa... BOOM!",
+    "This is his full-time profession. Next to Mega Walls, of course, where any creature would be lucky to be this warrior's mighty steed!",
     "At least I got cake.",
     "Kuba did not discover fire, and he did not invent the wheel... but he does have homing arrows.",
     "Her most refined weapon is her wit.",
@@ -139,6 +141,7 @@ const skinDesc_1 = [
     "Beware, Jasmin is a master huntress.",
     "Master hunter. It is said that one in every two hundred animals is directly spawned from Genghis's Animal Companion ability.",
     "Wishes they would come back. Even as a shadow. Even as a dream...",
+    "Die standing or die running, that much is up to you.",
 ];
 const skinPaths_1 = [
     "",
@@ -153,6 +156,7 @@ const skinPaths_1 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_1 = [
     "",
@@ -211,7 +215,7 @@ const skinReqDesc_onetime_1 = [
     "",
 ];
 
-const skinNames_2 = ["Shark", "Shelly", "Treasure", "Devourer", "Wata", "Bblurgbl", "Cosmo", "Chum", "Hammy", "Selkie", "Terror of the Deep"];
+const skinNames_2 = ["Shark", "Shelly", "Treasure", "Devourer", "Wata", "Bblurgbl", "Cosmo", "Chum", "Hammy", "Selkie", "Terror of the Deep", "Fishmonger"];
 const skinDesc_2 = [
     "The default skin for Shark.",
     "Shelly really is just a peaceful turtle. She likes to eat plants and legs.",
@@ -224,6 +228,7 @@ const skinDesc_2 = [
     "Years of butting heads with his fellow sharks has left him with the smoothest skull around.",
     "Selkie doesn't care about your opinion. Selkie doesn't care what you look like. Selkie will chomp on you because you're breakfast.",
     "Over 90% of the ocean is still unexplored? Good!",
+    "Sometimes the best way to catch fish is by diving in and grabbing them yourself.",
 ];
 const skinPaths_2 = [
     "",
@@ -237,6 +242,7 @@ const skinPaths_2 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_2 = [
     "",
@@ -289,10 +295,9 @@ const skinReqDesc_onetime_2 = [
     "",
     "hammy",
     "",
-    "",
 ];
 
-const skinNames_3 = ["Arcanist", "Drufus", "Steele", "Chester", "Byron Boy", "Emperor", "Archmage", "Arcana", "Isaiah", "Crawler", "Kioka"];
+const skinNames_3 = ["Arcanist", "Drufus", "Steele", "Chester", "Byron Boy", "Emperor", "Archmage", "Arcana", "Isaiah", "Crawler", "Kioka", "Mysterious"];
 const skinDesc_3 = [
     "The default skin for Arcanist.",
     "This druid isn't into magic potions; Drufus instead brews some tasty soup.",
@@ -305,6 +310,7 @@ const skinDesc_3 = [
     "Rises above the battlefield with his prismarine-blue armor.",
     "Creature of the void galaxies. Its appearace is both mysterious and sublime.",
     "An experiment went wrong, turning two young inventors into one. While one sleeps, the other works.",
+    "Fighting through this avatar, the real identity of Mysterious is unknown, and he is probably from the frontlines."
 ];
 const skinPaths_3 = [
     "",
@@ -318,6 +324,7 @@ const skinPaths_3 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_3 = [
     "",
@@ -372,7 +379,7 @@ const skinReqDesc_onetime_3 = [
     "",
 ];
 
-const skinNames_4 = ["Dreadlord", "Doomboy", "Crowe", "Rushlord", "Breadlord", "Sweets", "Frostlord", "Conquest", "Reaper", "Milo", "Soul Reaver"];
+const skinNames_4 = ["Dreadlord", "Doomboy", "Crowe", "Rushlord", "Breadlord", "Sweets", "Frostlord", "Conquest", "Reaper", "Milo", "Soul Reaver", "Dominator"];
 const skinDesc_4 = [
     "The default skin for Dreadlord.",
     "Fighting machine. Doomboy slices through enemies as if he's slicing through soft butter. ",
@@ -385,6 +392,7 @@ const skinDesc_4 = [
     "Nobody knows what's hiding behind Reaper's skull. Maybe another skull.",
     "Punished by the gods for his vanity, Milo was given the face of a demon such that nobody, including himself, could bear his sight.",
     "Feeds off the life force of others. Channels their stored energy in combat when those they deem worthy die.",
+    "Foul in wisdom, cruel in strength, the world lies within his dormant grasp.",
 ];
 const skinPaths_4 = [
     "",
@@ -398,6 +406,7 @@ const skinPaths_4 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_4 = [
     "",
@@ -452,7 +461,7 @@ const skinReqDesc_onetime_4 = [
     "",
 ];
 
-const skinNames_5 = ["Golem", "Ogre", "Bryce", "Flint", "Victor", "Grey", "Cooper", "Iglu", "Commander Brown", "Grown", "Spol"];
+const skinNames_5 = ["Golem", "Ogre", "Bryce", "Flint", "Victor", "Grey", "Cooper", "Iglu", "Commander Brown", "Grown", "Spol", "Construct"] ;
 const skinDesc_5 = [
     "The default skin for Golem.",
     "Defend your swamp!",
@@ -465,6 +474,7 @@ const skinDesc_5 = [
     "Ready for deployment!",
     "A charming Golem in the prime of her life! Grown will knock you off your feet with her beauty... and her Iron Punch!",
     "Legends speak of an ancient, slumbering creature the size of a continent.",
+    "Though those who created it left its dimension eons ago, the Construct remains stalwart in its defense of their territory.",
 ];
 const skinPaths_5 = [
     "",
@@ -478,6 +488,7 @@ const skinPaths_5 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_5 = [
     "",
@@ -532,7 +543,7 @@ const skinReqDesc_onetime_5 = [
     "",
 ];
 
-const skinNames_6 = ["Herobrine", "Thunders", "Larry", "Sunny", "Boxer", "Odin", "Santabrine", "Jerry", "Derpbrine", "Dark Herobrine", "Null", "Xiao Yu", "Zeus"];
+const skinNames_6 = ["Herobrine", "Thunders", "Larry", "Sunny", "Boxer", "Odin", "Santabrine", "Jerry", "Derpbrine", "Dark Herobrine", "Null", "Xiao Yu", "Zeus", "Godfrey"];
 const skinDesc_6 = [
     "The default skin for Herobrine.",
     "Some like Thunders because he's so cute. Thunders just likes to electrocute.",
@@ -546,7 +557,8 @@ const skinDesc_6 = [
     "Who would've thought a more villainous Herobrine existed?",
     "An ancient spirit that roams the code. Null plans to nullify and plunge the world back into the darkness of his oblivion.",
     "Swordmaster Xiao Yu does not speak, he lets his sword do the talking.",
-    "God of the Sky and all things under it. Move out of his way or die standing."
+    "God of the Sky and all things under it. Move out of his way or die standing.",
+    "Fought on the rooftops of Forsaken in his youth. Now, old and blind, he's yet to shy away from a fight, even one that seems unwinnable.",
 ];
 const skinPaths_6 = [
     "",
@@ -562,6 +574,7 @@ const skinPaths_6 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_6 = [
     "",
@@ -622,7 +635,7 @@ const skinReqDesc_onetime_6 = [
     "",
 ];
 
-const skinNames_7 = ["Pigman", "Super Pig", "King Pig", "Kai", "Picasso", "Bandit", "Soos", "Goliath", "Zombie Pigman", "Dusk", "Chomper"];
+const skinNames_7 = ["Pigman", "Super Pig", "King Pig", "Kai", "Picasso", "Bandit", "Soos", "Goliath", "Zombie Pigman", "Dusk", "Chomper", "Brute"];
 const skinDesc_7 = [
     "The default skin for Pigman.",
     "Is it a bird? Is it a plane? It's Super Pig!",
@@ -635,6 +648,7 @@ const skinDesc_7 = [
     "Half-man, half-pig, half-zombie. Wait... that doesn't add up.",
     "Mythical creature of the dark-golden nights. Rumoured to be awoken by the northern lights.",
     "Will eat anything thrown in his direction, whether it's friend or foe.",
+    "Forged in fire, he's been waiting for this moment for decades."
 ];
 const skinPaths_7 = [
     "",
@@ -648,6 +662,7 @@ const skinPaths_7 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_7 = [
     "",
@@ -702,7 +717,7 @@ const skinReqDesc_onetime_7 = [
     "",
 ];
 
-const skinNames_8 = ["Zombie", "Toon", "Jumbo", "Taco", "Yawn", "Gorilla", "Furbie", "King Dáinn", "Zaza", "Dorc", "Shibe"];
+const skinNames_8 = ["Zombie", "Toon", "Jumbo", "Taco", "Yawn", "Gorilla", "Furbie", "King Dáinn", "Zaza", "Dorc", "Shibe", "Shogun"];
 const skinDesc_8 = [
     "The default skin for Zombie.",
     "Scarily cute... but also cutely scary!",
@@ -715,6 +730,7 @@ const skinDesc_8 = [
     "Zaza loves to play some Mega Walls.",
     "Orcs may not seem the brightest, but Dorc has studied medicine!",
     "Loves nothing more than chasing after Skeletons.",
+    "Long dead, the Shogun keeps fighting in the hope that he will one day meet his match.",
 ];
 const skinPaths_8 = [
     "",
@@ -728,6 +744,7 @@ const skinPaths_8 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_8 = [
     "",
@@ -782,7 +799,7 @@ const skinReqDesc_onetime_8 = [
     "",
 ];
 
-const skinNames_9 = ["Blaze", "Mango", "Proto", "Scorch", "Chaze", "Ghaze", "Matcho", "Miquella", "Blizz", "Molton", "Fiery"];
+const skinNames_9 = ["Blaze", "Mango", "Proto", "Scorch", "Chaze", "Ghaze", "Matcho", "Miquella", "Blizz", "Molton", "Fiery", "Flaming Rider"];
 const skinDesc_9 = [
     "The default skin for Blaze.",
     "Mango the Fire Monkey! Nobody can throw flaming coconuts better than Mango.",
@@ -795,6 +812,7 @@ const skinDesc_9 = [
     "Who said Blazes couldn't be cool?",
     "Risen from the magmatic insides of an active volcano. Be aware, Molton has only just started to heat up.",
     "Just as dangerous on the battlefield as he is in the kitchen!",
+    "Smells of burning rubber and scorched marshmallows.",
 ];
 const skinPaths_9 = [
     "",
@@ -808,6 +826,7 @@ const skinPaths_9 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_9 = [
     "",
@@ -862,7 +881,7 @@ const skinReqDesc_onetime_9 = [
     "",
 ];
 
-const skinNames_10 = ["Enderman", "Dash", "Seeker", "Gamer", "Shadow", "Hoops", "Inno", "Plexi", "Jumper", "Entity_303", "Baron", "Follower"];
+const skinNames_10 = ["Enderman", "Dash", "Seeker", "Gamer", "Shadow", "Hoops", "Inno", "Plexi", "Jumper", "Entity_303", "Baron", "Follower", "Warden"];
 const skinDesc_10 = [
     "The default skin for Enderman.",
     "It might look like Dash teleports around... in reality, he jogs from one place to another.",
@@ -876,6 +895,7 @@ const skinDesc_10 = [
     "This mysterious entity is said to be the 'New Herobrine'. He is skilled in the art of deception and is out to cast his wrath on the ones who have betrayed him.",
     "Malay dragon and guardian of the End gates. Baron is the protector of all Endermen.",
     "Eagerly awaits the return of his master, even after all these years.",
+    "The guardian of the Deep Dark has come to reap his revenge upon the pillagers of his city.",
 ];
 const skinPaths_10 = [
     "",
@@ -890,6 +910,7 @@ const skinPaths_10 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_10 = [
     "",
@@ -947,7 +968,7 @@ const skinReqDesc_onetime_10 = [
     "",
 ];
 
-const skinNames_11 = ["Shaman", "Totem", "Doggo", "Brian the Disco Bear", "Wolf", "Nikolaos", "Fina", "Avarion", "Dauntless", "Chu", "Wayne", "Kalhuik"];
+const skinNames_11 = ["Shaman", "Totem", "Doggo", "Brian the Disco Bear", "Wolf", "Nikolaos", "Fina", "Avarion", "Dauntless", "Chu", "Wayne", "Kalhuik", "Major"];
 const skinDesc_11 = [
     "The default skin for Shaman.",
     "Don't worry, it's just a sculpture! It's not actually alive... I hope.",
@@ -961,6 +982,7 @@ const skinDesc_11 = [
     "This Arctic nomad possesses a wide range of excellent survival skills.",
     "Wolfmaster Wayne, a courageous leader, was raised by wolves himself.",
     "Creator of seasons, maintainer of balance. Without him there would be nothing but chaos.",
+    "Having once stumbled upon a strange mask in a stranger place, what's left of Major now wields its power.",
 ];
 const skinPaths_11 = [
     "",
@@ -975,6 +997,7 @@ const skinPaths_11 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_11 = [
     "",
@@ -1033,7 +1056,7 @@ const skinReqDesc_onetime_11 = [
     "",
 ];
 
-const skinNames_12 = ["Squid", "Guardian", "Doctor Squish", "K`Tulu", "Grumps", "Sea Warrior", "Lava Kraken", "Glow Squid", "Sharky", "Snails", "Mind Flayer"];
+const skinNames_12 = ["Squid", "Guardian", "Doctor Squish", "K`Tulu", "Grumps", "Sea Warrior", "Lava Kraken", "Glow Squid", "Sharky", "Snails", "Mind Flayer", "Davy Bones"];
 const skinDesc_12 = [
     "The default skin for Squid.",
     "Has never lost a staring contest.",
@@ -1046,6 +1069,7 @@ const skinDesc_12 = [
     "Cute but brutal predator. Sharky is a swift swimmer with razor sharp teeth.",
     "Enemies turn into stone upon gazing at his face. No mortal soul has ever dared to defy Snails.",
     "Believes all other life forms to be inferior. This realm will be his next conquest.",
+    "Used to get shoved into lockers during his days at seawater school. Now, he roams the seas, searching for those who wronged him.",
 ];
 const skinPaths_12 = [
     "",
@@ -1059,9 +1083,11 @@ const skinPaths_12 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const extraPaths = [
     "squid_defender_final_assists",
+    "final_kills_after_final_killed",
 ]
 const skinPaths_onetime_12 = [
     "",
@@ -1116,7 +1142,7 @@ const skinReqDesc_onetime_12 = [
     "",
 ];
 
-const skinNames_13 = ["Creeper", "Johnny", "Bomberdude", "Destructo", "Kreeft", "Cricket", "Haze", "Steampunk", "Rainbow Creeper", "Slith", "Carlos"];
+const skinNames_13 = ["Creeper", "Johnny", "Bomberdude", "Destructo", "Kreeft", "Cricket", "Haze", "Steampunk", "Rainbow Creeper", "Slith", "Carlos", "Nuclear Fuze"];
 const skinDesc_13 = [
     "The default skin for Creeper.",
     "Thinks he's a real Creeper. Nobody has the heart to tell little Johnny the truth.",
@@ -1129,6 +1155,7 @@ const skinDesc_13 = [
     "Some lands use Rainbow Creepers as fireworks. We just force 'em to play Mega Walls.",
     "Overlord Slith is the invisible force behind several thriving Creeper galaxies.",
     "Scared of fireworks, alarm clocks, explosions and cats.",
+    "What happened that night changed him for life... Approach him if you dare!"
 ];
 const skinPaths_13 = [
     "",
@@ -1142,6 +1169,7 @@ const skinPaths_13 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_13 = [
     "",
@@ -1191,12 +1219,12 @@ const skinReqDesc_onetime_13 = [
     "Reach 14 FK/A in a single game as Creeper.",
     "Final kill two players with one Detonate.",
     "",
-    "rainbow_creeper",
+    "rainbow creeper",
     "",
     "",
 ];
 
-const skinNames_14 = ["Pirate", "Captain Bones", "Jameson", "Guy", "Parrot Frank", "Fjodor", "Killigrew", "Axe", "Weaver", "Nero", "Slothpixel"];
+const skinNames_14 = ["Pirate", "Captain Bones", "Jameson", "Guy", "Parrot Frank", "Fjodor", "Killigrew", "Axe", "Weaver", "Nero", "Slothpixel", "Whitebeard"];
 const skinDesc_14 = [
     "The default skin for Pirate.",
     "Most heartless pirate to have travelled the seven seas... literally.",
@@ -1209,6 +1237,7 @@ const skinDesc_14 = [
     "Arr matey! Weaver is out for yer coins!",
     "Weaves twine into his beard and lights it on fire to look more demonic. One day this ritual ensued a chain reaction of fires, causing a whole city to go down in flames.",
     "Slothpixel and his fleet rule over the seven seas. Wrong him and he will get you... eventually.",
+    "Formerly known as Redbeard. Every life he sends to a watery grave turns one of his hairs white.",
 ];
 const skinPaths_14 = [
     "",
@@ -1222,6 +1251,7 @@ const skinPaths_14 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_14 = [
     "",
@@ -1276,7 +1306,7 @@ const skinReqDesc_onetime_14 = [
     "",
 ];
 
-const skinNames_15 = ["Sheep", "Pablo", "Mutton", "Lord Lambchop", "Llama", "Ramsay", "Dolly", "Lambert", "Baandit", "Sorceress"];
+const skinNames_15 = ["Sheep", "Pablo", "Mutton", "Lord Lambchop", "Llama", "Ramsay", "Dolly", "Lambert", "Baandit", "Sorceress", "Sheep in Wolf`s Clothing"];
 const skinDesc_15 = [
     "The default skin for Sheep.",
     "Can paint with all the colors of the wind.",
@@ -1288,6 +1318,7 @@ const skinDesc_15 = [
     "Gray brings him happiness!",
     "Truly a wolf in sheep's clothing.",
     "Of those who have been unfortunate enough to see her in the flesh, few have lived to tell the tale.",
+    "Inspired by how Werewolves were able to hit so hard and climb so high, he decided to become one of them."
 ];
 const skinPaths_15 = [
     "",
@@ -1300,6 +1331,7 @@ const skinPaths_15 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_15 = [
     "",
@@ -1350,7 +1382,7 @@ const skinReqDesc_onetime_15 = [
     "",
 ];
 
-const skinNames_16 = ["Skeleton", "Jazz Hands", "Space Armor", "Trick", "Spookster", "Red Ted", "Symphony", "dave", "Mr. Wither", "Knuckles", "Rib"];
+const skinNames_16 = ["Skeleton", "Jazz Hands", "Space Armor", "Trick", "Spookster", "Red Ted", "Symphony", "dave", "Mr. Wither", "Knuckles", "Rib", "Skully"];
 const skinDesc_16 = [
     "The default skin for Skeleton.",
     "Worry about enemies first. Let's play some tunes first.",
@@ -1363,6 +1395,7 @@ const skinDesc_16 = [
     "All skeletons wear suits, but not all skeletons use bows!",
     "Legend has it that Knuckles has been playing since pre-alpha.",
     "Wants to ask his crush out, but doesn't have the guts.",
+    "Something something you're gonna have a bad time...",
 ];
 const skinPaths_16 = [
     "",
@@ -1376,6 +1409,7 @@ const skinPaths_16 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_16 = [
     "",
@@ -1425,12 +1459,12 @@ const skinReqDesc_onetime_16 = [
     "Reach 14 FK/A in a single game as Skeleton.",
     "Win a game as Skeleton while only using your bow to deal damage.",
     "Final kill 3 players in one game using Explosive Arrow.",
-    "mr wither",
+    "mr. wither",
     "",
     "",
 ];
 
-const skinNames_17 = ["Spider", "Lethal", "Vinny", "Flutter", "Frog", "Shade", "spoderman", "Earl", "Cave Spider", "Buggs", "Symbiote"];
+const skinNames_17 = ["Spider", "Lethal", "Vinny", "Flutter", "Frog", "Shade", "spoderman", "Earl", "Cave Spider", "Buggs", "Symbiote", "Massacre"];
 const skinDesc_17 = [
     "The default skin for Spider.",
     "A warrior of myth who knows no fear.",
@@ -1443,6 +1477,7 @@ const skinDesc_17 = [
     "Twice as deadly as a regular Spider.",
     "Floats like a butterfly, stings like a bee, and leaps like a Spider.",
     "By the time you notice him, it'll already be too late.",
+    "So primal in his brutality is Massacre that he oftentimes entirely forgets he is capable of leaping."
 ];
 const skinPaths_17 = [
     "",
@@ -1456,6 +1491,7 @@ const skinPaths_17 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_17 = [
     "",
@@ -1510,7 +1546,7 @@ const skinReqDesc_onetime_17 = [
     "",
 ];
 
-const skinNames_18 = ["Werewolf", "Crunch", "Bloo", "Duster", "Jake", "Cruze", "Lupus", "Savage", "Pupper", "Vito", "Warren"];
+const skinNames_18 = ["Werewolf", "Crunch", "Bloo", "Duster", "Jake", "Cruze", "Lupus", "Savage", "Pupper", "Vito", "Warren", "Wolf in Sheep`s Clothing"];
 const skinDesc_18 = [
     "The default skin for Werewolf.",
     "Always angry, very angry. You definitely don't want to try to steal one of Crunch's kills.",
@@ -1523,6 +1559,7 @@ const skinDesc_18 = [
     "Sometimes you'd almost forget that this cute wolf pupper will one day grow up to be a beast.",
     "Loyal but ruthless. Playing as 'Don the Lion'? Now there's an offer you can't refuse.",
     "Loves picnics, fine wine, and getting his teeth into a good read.",
+    "Inspired by how Sheep were able to fool even the most grizzled of veterans, he decided to become one of them.",
 ];
 const skinPaths_18 = [
     "",
@@ -1536,6 +1573,7 @@ const skinPaths_18 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_18 = [
     "",
@@ -1590,7 +1628,7 @@ const skinReqDesc_onetime_18 = [
     "",
 ];
 
-const skinNames_19 = ["Angel", "Athena", "Goddess", "Chad", "Eyeless", "Puck", "Justice", "Weepy", "Angel of Death", "Moon"];
+const skinNames_19 = ["Angel", "Athena", "Goddess", "Chad", "Eyeless", "Puck", "Justice", "Weepy", "Angel of Death", "Moon", "Shining Judgement"];
 const skinDesc_19 = [
     "The default skin for Angel.",
     "Will your final moments truly be your final moments? That is for her to decide.",
@@ -1602,6 +1640,7 @@ const skinDesc_19 = [
     "Probably best not to look away.",
     "Powered by years of sitting in the Skywars lobby receiving souls as sacrifice, it was finally able to ascend to its true form.",
     "A silent observer in the night sky, yearning to take part in the battles unfolding below.",
+    "Said to reside within the brief interstice between life and death."
 ];
 const skinPaths_19 = [
     "",
@@ -1614,6 +1653,7 @@ const skinPaths_19 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_19 = [
     "",
@@ -1664,7 +1704,7 @@ const skinReqDesc_onetime_19 = [
     "",
 ];
 
-const skinNames_20 = ["Assassin", "Hitguy", "Torny", "Connor", "Blu", "Okamoto", "Shady", "Baba Yaga", "Abyss", "Inner Monster", "The Scream"];
+const skinNames_20 = ["Assassin", "Hitguy", "Torny", "Connor", "Blu", "Okamoto", "Shady", "Baba Yaga", "Abyss", "Inner Monster", "The Scream", "Creed"];
 const skinDesc_20 = [
     "The default skin for Assassin.",
     "Absolutely top secret credentials.",
@@ -1677,6 +1717,7 @@ const skinDesc_20 = [
     "Being stranded between worlds is enough to drive anyone crazy.",
     "It only takes one bad day to forever put on a mask.",
     "While many Assassins prefer to move in silence, The Scream likes to let his prey know that he knows exactly where they're hiding.",
+    "Treasure every moment, for it is fleeting, and you never know when Creed will strike.",
 ];
 const skinPaths_20 = [
     "",
@@ -1690,6 +1731,7 @@ const skinPaths_20 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinReqs_20 = [
     "",
@@ -1744,7 +1786,7 @@ const skinPaths_onetime_20 = [
     "",
 ];
 
-const skinNames_21 = ["Automaton", "Atomic", "Fender", "Vacuum", "Failed Experiment", "Crank", "CCDA-3301", "Soldier", "TERMIN8R", "Orange", "Al"];
+const skinNames_21 = ["Automaton", "Atomic", "Fender", "Vacuum", "Failed Experiment", "Crank", "CCDA-3301", "Soldier", "TERMIN8R", "Orange", "Al", "Unit-13"];
 const skinDesc_21 = [
     "The default skin for Automaton.",
     "A great man during his life, mechanized beyond the grave.",
@@ -1757,6 +1799,7 @@ const skinDesc_21 = [
     "Programmed to wipe out enemies at all costs - even if that means a little killstealing here and there.",
     "Proof that one tiny bot can do great things.",
     "Possesses the cumulative knowledge of all mankind as a result of once plugging a USB into his belly button.",
+    "If you're going to be making your last stand, this is a pretty impressive mech to be doing it in."
 ];
 const skinPaths_21 = [
     "",
@@ -1770,6 +1813,7 @@ const skinPaths_21 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinReqs_21 = [
     "",
@@ -1824,7 +1868,7 @@ const skinPaths_onetime_21 = [
     "",
 ];
 
-const skinNames_22 = ["Moleman", "Truck", "Mineman Tyler", "Jolly", "Brick", "Graen", "Capybara", "Mole-rat", "Rat", "Beaver", "General Marcus", "Matty"];
+const skinNames_22 = ["Moleman", "Truck", "Mineman Tyler", "Jolly", "Brick", "Graen", "Capybara", "Mole-rat", "Rat", "Beaver", "General Marcus", "Matty", "Biggie"];
 const skinDesc_22 = [
     "The default skin for Moleman.",
     "Tough and hard-working. Truck is here to get stuff done.",
@@ -1838,6 +1882,7 @@ const skinDesc_22 = [
     "Did you know? Beavers' large front teeth never stop growing.",
     "Grand Mole General Marcus. Lead his troops to victory in the bloody Battle of El Whackamole.",
     "Voted best-dressed and most likely to accidentally spleef his teammates seven years in a row.",
+    "Put your ear to the ground. Feel the vibrations? Hear the sweet, sweet tunes? That's Biggie, and he's heading straight for ya!"
 ];
 const skinPaths_22 = [
     "",
@@ -1852,6 +1897,7 @@ const skinPaths_22 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_22 = [
     "",
@@ -1910,7 +1956,7 @@ const skinReqDesc_onetime_22 = [
     "",
 ];
 
-const skinNames_23 = ["Phoenix", "Sailor Sid", "Owl", "Ember", "Fringe", "Falcon X", "Fae", "Hotshot", "Baby Chick", "Dukes", "Terry"];
+const skinNames_23 = ["Phoenix", "Sailor Sid", "Owl", "Ember", "Fringe", "Falcon X", "Fae", "Hotshot", "Baby Chick", "Dukes", "Terry", "Everfyre"];
 const skinDesc_23 = [
     "The default skin for Phoenix.",
     "Oh boy, oh boy, oh boy... He's a bit clumsy and short-tempered, but Sailor Sid definitely has a big heart.",
@@ -1923,6 +1969,7 @@ const skinDesc_23 = [
     "Tweet, tweet!",
     "Although born and raised in Dragonkeep, Dukes was banished from his home for toxic behavior.",
     "Can't decide which of his five favorite dinosaurs is his ultimate favorite, so he has a onesie for each of them.",
+    "Goddess of the sun, her flames burn the wicked and heal the righteous.",
 ];
 const skinPaths_23 = [
     "",
@@ -1936,6 +1983,7 @@ const skinPaths_23 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinReqs_23 = [
     "",
@@ -1990,7 +2038,7 @@ const skinPaths_onetime_23 = [
     "",
 ];
 
-const skinNames_24 = ["Dragon", "Frightful", "Jade", "Greg", "Fury", "Hydragon", "Pip", "Ender Dragon", "The Terrible", "Hollow"];
+const skinNames_24 = ["Dragon", "Frightful", "Jade", "Greg", "Fury", "Hydragon", "Pip", "Ender Dragon", "The Terrible", "Hollow", "Dragon Slayer"];
 const skinDesc_24 = [
     "The default skin for Dragon.",
     "A tiny dragon who loves to hide inside of pumpkins and startle passersby.",
@@ -2002,6 +2050,7 @@ const skinDesc_24 = [
     "Will do whatever it takes to protect her habitat.",
     "Taking over the kingdom and driving out its inhabitants, he now has more gold than he could ever need.",
     "Mankind thought they had finally triumphed only for him to rise again, even stronger.",
+    "Cursed to never get a good night's sleep, he took up Mega Walls as a pastime.",
 ];
 const skinPaths_24 = [
     "",
@@ -2014,6 +2063,7 @@ const skinPaths_24 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinPaths_onetime_24 = [
     "",
@@ -2064,7 +2114,7 @@ const skinReqDesc_onetime_24 = [
     "",
 ];
 
-const skinNames_25 = ["Renegade", "Bedrock", "Traitor", "Ara", "Hood", "Morde", "Deathskull", "Renny", "Elvish", "Scarab", "Brother Betrayer"];
+const skinNames_25 = ["Renegade", "Bedrock", "Traitor", "Ara", "Hood", "Morde", "Deathskull", "Renny", "Elvish", "Scarab", "Brother Betrayer", "V"];
 const skinDesc_25 = [
     "The default skin for Renegade.",
     "The most agile of fighters, protected by bedrock armor.",
@@ -2077,6 +2127,7 @@ const skinDesc_25 = [
     "Light-footed and nimble, few are able to catch him out on any occasion.",
     "Jewel of both the desert and all the deserters.",
     "Long live the King.",
+    "You can (final) kill a man, but you can't kill an idea.",
 ];
 const skinPaths_25 = [
     "",
@@ -2090,6 +2141,7 @@ const skinPaths_25 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinReqs_25 = [
     "",
@@ -2144,7 +2196,7 @@ const skinPaths_onetime_25 = [
     "",
 ];
 
-const skinNames_26 = ["Snowman", "Gus", "Frozen", "Abominable", "Ice Bug", "Dobu", "Feathers", "David", "Frozen Alex", "Basilisk", "Frosty"];
+const skinNames_26 = ["Snowman", "Gus", "Frozen", "Abominable", "Ice Bug", "Dobu", "Feathers", "David", "Frozen Alex", "Basilisk", "Frosty", "Cynic"];
 const skinDesc_26 = [
     "The default skin for Snowman.",
     "This adventurer has ben waiting in the cold for the perfect kill so long that he became one with the snow.",
@@ -2157,6 +2209,7 @@ const skinDesc_26 = [
     "Native to the Jerry Pond until recently, Alex is still adjusting to the new climate.",
     "The Basilisk has only been heard of in whispers of legends.",
     "No matter the season, Frosty's always keeping it cool.",
+    "He's making a list, he's checking it twice, Cynic's gonna smash you with bolts made o' ice!",
 ];
 const skinPaths_26 = [
     "",
@@ -2170,6 +2223,7 @@ const skinPaths_26 = [
     "purchase",
     "pres3",
     "pres5",
+    "completionist",
 ];
 const skinReqs_26 = [
     "",
@@ -2223,3 +2277,5 @@ const skinPaths_onetime_26 = [
     "",
     "",
 ];
+
+const classTotalSkins = [skinNames_0.length, skinNames_1.length, skinNames_2.length, skinNames_3.length, skinNames_4.length, skinNames_5.length, skinNames_6.length, skinNames_7.length, skinNames_8.length, skinNames_9.length, skinNames_10.length, skinNames_11.length, skinNames_12.length, skinNames_13.length, skinNames_14.length, skinNames_15.length, skinNames_16.length, skinNames_17.length, skinNames_18.length, skinNames_19.length, skinNames_20.length, skinNames_21.length, skinNames_22.length, skinNames_23.length, skinNames_24.length, skinNames_25.length, skinNames_26.length];
