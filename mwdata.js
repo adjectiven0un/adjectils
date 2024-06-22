@@ -151,7 +151,7 @@ const skinPaths_1 = [
     "hunter_b_final_assists",
     "cakes_found",
     "onetime",
-    "hunter_finals_with_strength",
+    "force_of_nature_final_kills",
     "onetime",
     "purchase",
     "pres3",
