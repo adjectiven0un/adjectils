@@ -62,7 +62,7 @@
     </section>
     <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: auto;" >
         <span class = "header" style = "margin-top:20px">Skins</span>
-        <span style = "margin-top:20px">Total skins found: <span style = "margin-top:20px" id = totalskinsfound>27</span>/301 (<span id = "totalskinspercent">9</span>%)</span>
+        <span style = "margin-top:20px">Total skins found: <span style = "margin-top:20px" id = totalskinsfound>27</span>/328 (<span id = "totalskinspercent">9</span>%)</span>
         <div class = "flex_index_row flex_full_row" id = row4 style = "width:90%; flex-basis:51%; margin:auto; margin-top:10px;">
             <div class = "flex_index_box" style = "flex-basis: 70%;">
                 <div class = "flex_index_row flex_full_row" style = "margin:5px;flex-wrap:wrap; align-items: center;">
@@ -471,7 +471,7 @@
             currentSkinCount.push(totalSkins);
         }
         document.getElementById("totalskinsfound").innerText = totaltotalskins;
-        document.getElementById("totalskinspercent").innerText = ((totaltotalskins/301) * 100).toFixed(1);
+        document.getElementById("totalskinspercent").innerText = ((totaltotalskins/328) * 100).toFixed(1);
         topSkins.sort((a, b) => b.value - a.value);
         closestskintable.innerHTML = "";
         try {
