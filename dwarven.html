@@ -14,6 +14,7 @@
       <script src = "getUUID.js"></script>
       <script src = "timeToMinutes.js"></script>
       <script src = "dwarvendata.js"></script>
+      <script src = "binomials.js"></script>
     </head>
   <body onload="updatePage()" style = "background-image:url(./images/dwarvenbg.png); background-size:15%">
   
@@ -32,8 +33,8 @@
   <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
   <br>
-  <div>
-    <form action = "#" style = "background-color: #282828;">
+  <div style = "background-color: #282828;">
+    
       <label>Profile:
       <select id = profileid value = 4 onchange = updateForges(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
@@ -43,8 +44,8 @@
         <option id = profile4 value = 4>–––––</option>
       </select>
       </label>
-    </form>
   </div>
+  
   </div>
   <section class = "flex_box_index">
   <div class = "dwarven_block " style = "width:min(calc(100% - 30px), max(800px, 40%)); margin:auto">
@@ -164,6 +165,70 @@
     </div>
       
   </div>
+  <br>
+  <div style = "flex-basis:100%;width:min(calc(100% - 30px), max(800px, 40%)); margin:auto" class = "dwarven_block">
+    <span class = minesheader>Corpse Loot</span><br><br>
+    <div>
+        <label>Corpse:
+          <select id = corpsetype value = 0 onchange = updateCorpses()>
+            <option value = vanguard>Vanguard</option>
+            <option value = metal>Umber/Tungsten</option>
+          </select>
+        </label>
+        <br>
+        <label>Gifts from the Departed: <input type = "number" id = "gftd" value = 0 min = "0" max = "20" onchange = updateCorpses()>&nbsp;</label>
+
+        <table style = "align-items: center; margin-top:20px; margin-bottom: 20px;">
+          <tr><td style = "padding-right:20px; display:flex">
+        <br>Jasper Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "jasper-switch" for = "jasper-crystal">
+          <input type = "checkbox"  id = "jasper-crystal" onchange = toggleJasper() aria-labelledby = "jasper-switch" >
+          <span class = "switch"></span>
+        </label>
+        </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Ruby Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "ruby-switch" for = "ruby-crystal">
+          <input type = "checkbox"  id = "ruby-crystal" onchange = toggleRuby() aria-labelledby = "ruby-switch" >
+          <span class = "switch"></span>
+        </label>
+      </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Opal Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "opal-switch" for = "opal-crystal">
+          <input type = "checkbox"  id = "opal-crystal" onchange = toggleOpal() aria-labelledby = "opal-switch" >
+          <span class = "switch"></span>
+        </label>
+      </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Aquamarine per Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "aqua-switch" for = "aqua-crystal">
+          <input type = "checkbox"  id = "aqua-crystal" onchange = toggleAqua() aria-labelledby = "aqua-switch" >
+          <span class = "switch"></span>
+        </label>
+      </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Peridot Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "peridot-switch" for = "peridot-crystal">
+          <input type = "checkbox"  id = "peridot-crystal" onchange = togglePeridot() aria-labelledby = "peridot-switch" >
+          <span class = "switch"></span>
+        </label>
+      </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Onyx Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "onyx-switch" for = "onyx-crystal">
+          <input type = "checkbox"  id = "onyx-crystal" onchange = toggleOnyx() aria-labelledby = "onyx-switch" >
+          <span class = "switch"></span>
+        </label>
+      </tr><tr><td style = "padding-right:20px; display:flex">
+        <br>Citrine Crystal obtained:</td><td style = "padding-left: 20px;">
+        <label class = "switchbox" id = "citrine-switch" for = "citrine-crystal">
+          <input type = "checkbox"  id = "citrine-crystal" onchange = toggleCitrine() aria-labelledby = "citrine-switch" >
+          <span class = "switch"></span>
+        </label>
+        </table>
+      
+    </div>
+
+    <table id = "corpsetable" style = "width:50%">
+    </table>
+
+  </div>
   </section>
   <div id = "nav" class = "dwarven_block standardwidth"></div>
   </body>
@@ -181,7 +246,14 @@
             data = JSON.parse(localStorage.getItem("storeddata"));
             fasttrack = true;
             updateForges(localStorage.getItem("storedname"));
+            
         }
+        corpsetype.value = "vanguard";
+        updateCorpses();
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
     }
     const intervalID = [];
     var onCD = false;
@@ -459,6 +531,147 @@
       }
       
     }
+    var jaspercrystal = 0;
+    var rubycrystal = 0;
+    var opalcrystal = 0;
+    var aquamarinecrystal = 0;
+    var peridotcrystal = 0;
+    var onyxcrystal = 0;
+    var citrinecrystal = 0;
+    function toggleJasper () {
+      jaspercrystal = Math.abs(jaspercrystal - 1);
+      if (jaspercrystal == 1) {
+        weights_vanguard["jasper_crystal"] = 0;
+        weights_metal["jasper_crystal"] = 0;
+        //weights_tungsten["jasper_crystal"] = 0;
+      } else {
+        weights_vanguard["jasper_crystal"] = 50;
+        weights_metal["jasper_crystal"] = 50;
+        //weights_tungsten["jasper_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function toggleRuby () {
+      rubycrystal = Math.abs(rubycrystal - 1);
+      if (rubycrystal == 1) {
+        weights_vanguard["ruby_crystal"] = 0;
+        weights_metal["ruby_crystal"] = 0;
+        //weights_tungsten["ruby_crystal"] = 0;
+      } else {
+        weights_vanguard["ruby_crystal"] = 50;
+        weights_metal["ruby_crystal"] = 50;
+        //weights_tungsten["ruby_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function toggleOpal () {
+      opalcrystal = Math.abs(opalcrystal - 1);
+      if (opalcrystal == 1) {
+        weights_vanguard["opal_crystal"] = 0;
+        weights_metal["opal_crystal"] = 0;
+        //weights_tungsten["opal_crystal"] = 0;
+      } else {
+        weights_vanguard["opal_crystal"] = 50;
+        weights_metal["opal_crystal"] = 50;
+        //weights_tungsten["opal_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function toggleAqua () {
+      aquamarinecrystal = Math.abs(aquamarinecrystal - 1);
+      if (aquamarinecrystal == 1) {
+        weights_vanguard["aquamarine_crystal"] = 0;
+        weights_metal["aquamarine_crystal"] = 0;
+        //weights_tungsten["aquamarine_crystal"] = 0;
+      } else {
+        weights_vanguard["aquamarine_crystal"] = 50;
+        weights_metal["aquamarine_crystal"] = 50;
+        //weights_tungsten["aquamarine_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function togglePeridot () {
+      peridotcrystal = Math.abs(peridotcrystal - 1);
+      if (peridotcrystal == 1) {
+        weights_vanguard["peridot_crystal"] = 0;
+        weights_metal["peridot_crystal"] = 0;
+        //weights_tungsten["peridot_crystal"] = 0;
+      } else {
+        weights_vanguard["peridot_crystal"] = 50;
+        weights_metal["peridot_crystal"] = 50;
+        //weights_tungsten["peridot_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function toggleOnyx () {
+      onyxcrystal = Math.abs(onyxcrystal - 1);
+      if (onyxcrystal == 1) {
+        weights_vanguard["onyx_crystal"] = 0;
+        weights_metal["onyx_crystal"] = 0;
+        //weights_tungsten["onyx_crystal"] = 0;
+      } else {
+        weights_vanguard["onyx_crystal"] = 50;
+        weights_metal["onyx_crystal"] = 50;
+        //weights_tungsten["onyx_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function toggleCitrine () {
+      citrinecrystal = Math.abs(citrinecrystal - 1);
+      if (citrinecrystal == 1) {
+        weights_vanguard["citrine_crystal"] = 0;
+        weights_metal["citrine_crystal"] = 0;
+        //weights_tungsten["citrine_crystal"] = 0;
+      } else {
+        weights_vanguard["citrine_crystal"] = 50;
+        weights_metal["citrine_crystal"] = 50;
+        //weights_tungsten["citrine_crystal"] = 50;
+      }
+      updateCorpses();
+    }
+    function updateCorpses() {
+      if (gftd.value > 20){
+          document.getElementById("gftd").value = 20;
+      }
+      if (gftd.value < 0 || isNaN(gftd.value) || gftd.value == ""){
+          document.getElementById("gftd").value = 0;
+      }
+      corpsetable.innerHTML = "";
+      var loottable = eval(`weights_${corpsetype.value}`);
+      var loottranslations = eval(`translations_${corpsetype.value}`);
+      
+      var totalweight = 0;
+        for (var key2 in loottable) {
+            totalweight += loottable[key2];
+        }
+        console.log("Total weight: " + totalweight);
+        console.log("Chance per roll: " + 3/(totalweight));   
+        var rolls5 = binomial(5, (3/totalweight));
+        var rolls6 = binomial(6, (3/totalweight));
+        var rolls7 = binomial(7, (3/totalweight));
+        var rolls8 = binomial(8, (3/totalweight));
+        var rolls9 = binomial(9, (3/totalweight));
+        console.log("Locket chance: " + (100 * ((0.2 * rolls5) + (0.25 * rolls6) + (0.25 * rolls7) + (0.25 * rolls8) + (0.05 * rolls9))).toFixed(3) + "%");
+        for (var key2 in loottable) {
+            var tablerow = document.createElement("tr");
+            tablerow.style.width = "100%"
+            var itemname = document.createElement("td");
+            itemname.style.paddingRight = "20px";
+            itemname.innerText = loottranslations[key2] + ":";
+            var itemchance = document.createElement("td");
+            itemchance.style.paddingRight = "20px";
+            itemchance.style.textAlign = "right";
+            if (corpsetype.value == "vanguard"){
+              itemchance.innerText = (100 * (((0.2 + ((20 - gftd.value) * 0.0025)) * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (0.25 * binomial(8, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0025) * binomial(9, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+            } else if (corpsetype.value = "metal") {
+              itemchance.innerText = (100 * (((0.2 + ((20 - gftd.value) * 0.0025)) * binomial(4, (loottable[key2]/totalweight))) + (0.25 * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0025) * binomial(8, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+            }
+            
+            tablerow.appendChild(itemname);
+            tablerow.appendChild(itemchance);
+            corpsetable.appendChild(tablerow);
+        }
+      }
   </script>
   </html>
   

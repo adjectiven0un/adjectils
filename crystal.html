@@ -56,115 +56,117 @@
         <span id = "timeleft">––:––</span>
     </div>
   </div>
-  <div class = crystal_block >
-    <span class = hollowheader>Crystal Nucleus loot</span><br><br>
-    <table>
-        <tr><td><span> User has High Roller: </span></td>
-            <td><label class = "switchbox" for = "hashighroller" id = "highrollerswitch">
-                <input type = "checkbox" id = "hashighroller" onchange = updateHR() aria-labelledby = "highrollerswitch">
-                <span class = "switch"></span></label>
-            </td></tr>
-        <tr><td style = "width:85%"><span> User has Jasper Crystal: </span></td>
-            <td style = "display:flex; justify-content: flex-end;"><label class = "switchbox" for = "hasjc" id = "jcswitch">
-                <input type = "checkbox" id = "hasjc" onchange = updateJC() aria-labelledby = "jcswitch"> 
-                <span class = "switch"></span></label>
-            </td></tr>
-        <tr><td><span> User has Ruby Crystal: </span></td>
-            <td><label class = "switchbox" for = "hasrc" id = "rcswitch">
-                <input type = "checkbox" id = "hasrc" onchange = updateRC() aria-labelledby = "rcswitch">
-                <span class = "switch"></span></label>
-            </td></tr>
-        <tr><td><span> User has Mole Pet: </span></td>
-            <td><label class = "switchbox" for = "hasmole" id = "moleswitch">
-                <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch">
-                <span class = "switch"></span></label>
-            </td></tr>
-    </table>
-    <br>
-    <table>
-        <tr>
-            <td><span>Chance of Bob-omb ×16: &nbsp;</span></td><td><span id = "chance_bombs">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Pickonimbus 2000: &nbsp;</span></td><td><span id = "chance_pick2k">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Oil Barrel: &nbsp;</span></td><td><span id = "chance_oil">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Divan Fragment: &nbsp;</span></td><td><span id = "chance_divan_fragment">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Prehistoric Egg: &nbsp;</span></td><td><span id = "chance_arma_egg">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Helix Fossil: &nbsp;</span></td><td><span id = "chance_helix">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Jasper Crystal: &nbsp;</span></td><td><span id = "chance_crystal_jasper">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Ruby Crystal: &nbsp;</span></td><td><span id = "chance_crystal_ruby">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Treasurite ×5: &nbsp;</span></td><td><span id = "chance_treasurite5">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Treasurite ×10: &nbsp;</span></td><td><span id = "chance_treasurite10">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Jaderald: &nbsp;</span></td><td><span id = "chance_jaderald">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Gold Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_gold">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Diamond Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_diamond">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Gemstone Mixture: &nbsp;</span></td><td><span id = "chance_gemmix">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Fortune IV book: &nbsp;</span></td><td><span id = "chance_book_fortune">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Wishing Compass ×3: &nbsp;</span></td><td><span id = "chance_compass">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Precious Pearl: &nbsp;</span></td><td><span id = "chance_preciouspearl">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Claw Fossil: &nbsp;</span></td><td><span id = "chance_claw">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Recall Potion: &nbsp;</span></td><td><span id = "chance_recall">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Quick Claw: &nbsp;</span></td><td><span id = "chance_quick_claw">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Amethyst Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amethyst">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Jade Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jade">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Amber Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amber">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Sapphire Gemstone: &nbsp;</span></td><td><span id = "chance_fl_sapphire">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Topaz Gemstone: &nbsp;</span></td><td><span id = "chance_fl_topaz">Loading...</span></td>
-        </tr>
-        <tr>
-            <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
-        </tr>
-    </table>
+  <div class = "flex_index_row">
+    <div class = "flex_index_box crystal_block" style = "border-color:#c2c2c2">
+        <span class = hollowheader style = "flex-basis:100%; margin-bottom:10px">Crystal Nucleus loot</span><br><br>
+        <table style = "margin-bottom: 10px;">
+            <tr><td><span> User has High Roller: </span></td>
+                <td><label class = "switchbox" for = "hashighroller" id = "highrollerswitch">
+                    <input type = "checkbox" id = "hashighroller" onchange = updateHR() aria-labelledby = "highrollerswitch">
+                    <span class = "switch"></span></label>
+                </td></tr>
+            <tr><td style = "width:85%"><span> User has Jasper Crystal: </span></td>
+                <td style = "display:flex; justify-content: flex-end;"><label class = "switchbox" for = "hasjc" id = "jcswitch">
+                    <input type = "checkbox" id = "hasjc" onchange = updateJC() aria-labelledby = "jcswitch"> 
+                    <span class = "switch"></span></label>
+                </td></tr>
+            <tr><td><span> User has Ruby Crystal: </span></td>
+                <td><label class = "switchbox" for = "hasrc" id = "rcswitch">
+                    <input type = "checkbox" id = "hasrc" onchange = updateRC() aria-labelledby = "rcswitch">
+                    <span class = "switch"></span></label>
+                </td></tr>
+            <tr><td><span> User has Mole Pet: </span></td>
+                <td><label class = "switchbox" for = "hasmole" id = "moleswitch">
+                    <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch">
+                    <span class = "switch"></span></label>
+                </td></tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td><span>Chance of Bob-omb ×16: &nbsp;</span></td><td><span id = "chance_bombs">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Pickonimbus 2000: &nbsp;</span></td><td><span id = "chance_pick2k">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Oil Barrel: &nbsp;</span></td><td><span id = "chance_oil">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Divan Fragment: &nbsp;</span></td><td><span id = "chance_divan_fragment">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Prehistoric Egg: &nbsp;</span></td><td><span id = "chance_arma_egg">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Helix Fossil: &nbsp;</span></td><td><span id = "chance_helix">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Jasper Crystal: &nbsp;</span></td><td><span id = "chance_crystal_jasper">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Ruby Crystal: &nbsp;</span></td><td><span id = "chance_crystal_ruby">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Treasurite ×5: &nbsp;</span></td><td><span id = "chance_treasurite5">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Treasurite ×10: &nbsp;</span></td><td><span id = "chance_treasurite10">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Jaderald: &nbsp;</span></td><td><span id = "chance_jaderald">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Gold Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_gold">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Diamond Essence ×10: &nbsp;</span></td><td><span id = "chance_essence_diamond">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Gemstone Mixture: &nbsp;</span></td><td><span id = "chance_gemmix">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Fortune IV book: &nbsp;</span></td><td><span id = "chance_book_fortune">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Wishing Compass ×3: &nbsp;</span></td><td><span id = "chance_compass">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Precious Pearl: &nbsp;</span></td><td><span id = "chance_preciouspearl">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Claw Fossil: &nbsp;</span></td><td><span id = "chance_claw">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Recall Potion: &nbsp;</span></td><td><span id = "chance_recall">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Quick Claw: &nbsp;</span></td><td><span id = "chance_quick_claw">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Ruby Gemstone: &nbsp;</span></td><td><span id = "chance_fl_ruby">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Amethyst Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amethyst">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Jade Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jade">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Amber Gemstone: &nbsp;</span></td><td><span id = "chance_fl_amber">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Sapphire Gemstone: &nbsp;</span></td><td><span id = "chance_fl_sapphire">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Topaz Gemstone: &nbsp;</span></td><td><span id = "chance_fl_topaz">Loading...</span></td>
+            </tr>
+            <tr>
+                <td><span>Chance of Flawless Jasper Gemstone: &nbsp;</span></td><td><span id = "chance_fl_jasper">Loading...</span></td>
+            </tr>
+        </table>
 
+    </div>
   </div>
   </section>
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "crystal_block"></div>
@@ -336,6 +338,7 @@
             fasttrack = true;
             updatePass(localStorage.getItem("storedname"));
         }
+        
     }
     
   </script>

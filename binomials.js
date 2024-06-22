@@ -39,3 +39,19 @@ function binomial(n, p){
     
     return ret;
 }
+
+//Given trials n and probability p, determine the chance that p occurs between a and b times.
+function binomialRange(n, p, a, b){
+    if (a < 0 || b < 0 || b < a) {
+        console.log("Invalid binomial input!");
+    }
+    var ret = 0;
+    for (var i = a; i <= b; i++){
+        if (i > n){
+            break;
+        }
+        ret += (nCr(n, i) * (p ** i) * ((1 - p) ** (n - i)));
+    }
+    
+    return ret;
+}
