@@ -569,10 +569,10 @@
             closestskintable.appendChild(tablerow);
         }
     }
-    function addCheck(skinNames, i) {
+    function addCheck(skinNames, i, text) {
         var checkmark = document.createElement("span");
         checkmark.className = "upperRightIcon";
-        checkmark.innerText = "✓";
+        checkmark.innerText = text;
         document.getElementById(skinNames[i] + "_box").appendChild(checkmark);
 
     }
@@ -607,7 +607,7 @@
             if (skinPaths[i] == "") {
                 makeTooltipObject(tip.id, "", "Unlocked by default", "12px", "#c0c0c0", true);
                 document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                addCheck(skinNames, i);
+                addCheck(skinNames, i, "✓");
             }
             else if (skinPaths[i] == "onetime") {
                 makeTooltipObject(tip.id, "", skinReqDesc_onetime[i], "12px", "#c0c0c0", true);
@@ -617,7 +617,7 @@
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                         document.getElementById(skinNames[i] + "_box").className = "fishbox";
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
@@ -635,7 +635,7 @@
                     if (mwdata.classes[classnames[selectedClass]].prestige >= 3) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
@@ -652,7 +652,7 @@
                     if (mwdata.classes[classnames[selectedClass]].prestige >= 5) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
@@ -669,7 +669,7 @@
                     if (mwdata.packages.includes(skinReqDesc_onetime[i])) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
@@ -686,7 +686,7 @@
                     if (classTotalSkins[selectedClass] == currentSkinCount[selectedClass]) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
@@ -706,7 +706,7 @@
                         makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                        addCheck(skinNames, i);
+                        addCheck(skinNames, i, "✓");
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                     } else if (skinPaths[i] == "squid_defender_final_kills") {
                         
@@ -734,7 +734,7 @@
                             makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
                             document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i);
+                            addCheck(skinNames, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", squidDefFKA, "12px", "#ff5555", false);
@@ -768,7 +768,7 @@
                             makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
                             document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i);
+                            addCheck(skinNames, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", deadFKA, "12px", "#ff5555", false);
@@ -779,19 +779,34 @@
                         }
                         
                     } else {
-                        if (mwdata[skinPaths[i]] != undefined){
-                            makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        //try {
+                        if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])){
+                            makeTooltipObject(tip.id, "", "Unlocked! (Legacy) (", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinNames, i, "✱");
                         } else {
-                            makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            
+                        //} catch (TypeError){
+                            if (mwdata[skinPaths[i]] != undefined){
+                                makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                                document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            } else {
+                                makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                                document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            }
                         }
+                        //}
+                        
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
