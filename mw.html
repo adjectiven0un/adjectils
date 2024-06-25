@@ -426,6 +426,27 @@
                                     })
                                 }
                                 
+                            } if (skinPaths[i] == "spider_a_kills") {
+                                var leapkills = 0;
+                                var leapfinals = 0;
+                                if (mwdata["spider_a_kills"] != undefined) {
+                                    leapkills = mwdata["spider_a_kills"];
+                                }
+                                if (mwdata["spider_a_final_kills"] != undefined) {
+                                    leapfinals = mwdata["spider_a_final_kills"];
+                                }
+                                if ((leapkills + leapfinals) < 250) {
+                                    topSkins.push({
+                                        key: skinPaths[i],
+                                        value: (((leapkills + leapfinals) / skinReqs[i]) * 100).toFixed(1),
+                                        className: classnamesCapital[j],
+                                        skinName: skinNames[i],
+                                        req: skinReqDesc[i],
+                                        progress: leapkills + leapfinals,
+                                        max: skinReqs[i],
+                                    })
+                                }
+                                
                             } else if (skinPaths[i] == "final_assists_after_final_killed") {
                                 var deadFK = 0;
                                 var deadFA = 0;
@@ -700,7 +721,7 @@
                 makeTooltipObject(tip.id, "", skinReqDesc[i], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills") {
+                    if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills" && skinPaths[i] != "spider_a_kills" && skinPaths[i] != "final_assists_after_final_killed") {
                         makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
@@ -710,7 +731,7 @@
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                     } else if (skinPaths[i] == "squid_defender_final_kills") {
                         
-                        // I had to write an entire exception for these TWO stats. Enjoy.
+                        // I had to write an entire exception for these THREE stats. Enjoy.
 
                         var squidDefFKA = 0;
                         if (mwdata[skinPaths[i]] != undefined) {
@@ -744,8 +765,40 @@
                             document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
                         }
                         
-                    } else if (skinPaths[i] == "final_assists_after_final_killed") {
+                    } else if (skinPaths[i] == "spider_a_kills") {
+                        var totalleapkills = 0;
+                        if (mwdata[skinPaths[i]] != undefined) {
+                            if (mwdata[extraPaths[2]] != undefined){
+                                totalleapkills = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[2]]);
+                            } else {
+                                totalleapkills = parseInt(mwdata[skinPaths[i]]);
+                            }
+                        } else {
+                            if (mwdata[extraPaths[2]] != undefined){
+                                totalleapkills = parseInt(mwdata[extraPaths[2]]);
+                            } else {
+                                totalleapkills = 0;
+                            }
+                        }
 
+                        if (totalleapkills >= 250) {
+                            makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", totalleapkills, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinNames, i, "✓");
+                        } else {
+                            makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", totalleapkills, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        }
+                        
+                    } else if (skinPaths[i] == "final_assists_after_final_killed") {
                         var deadFKA = 0;
                         if (mwdata[skinPaths[i]] != undefined) {
                             if (mwdata[extraPaths[0]] != undefined){
