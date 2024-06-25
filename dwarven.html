@@ -176,7 +176,7 @@
           </select>
         </label>
         <br>
-        <label>Gifts from the Departed: <input type = "number" id = "gftd" value = 0 min = "0" max = "20" onchange = updateCorpses()>&nbsp;</label>
+        <label>Gifts from the Departed: <input type = "number" id = "gftd" value = 0 min = "0" max = "100" onchange = updateCorpses()>&nbsp;</label>
 
         <table style = "align-items: center; margin-top:20px; margin-bottom: 20px;">
           <tr><td style = "padding-right:20px; display:flex">
@@ -630,8 +630,8 @@
       updateCorpses();
     }
     function updateCorpses() {
-      if (gftd.value > 20){
-          document.getElementById("gftd").value = 20;
+      if (gftd.value > 100){
+          document.getElementById("gftd").value = 100;
       }
       if (gftd.value < 0 || isNaN(gftd.value) || gftd.value == ""){
           document.getElementById("gftd").value = 0;
@@ -662,9 +662,9 @@
             itemchance.style.paddingRight = "20px";
             itemchance.style.textAlign = "right";
             if (corpsetype.value == "vanguard"){
-              itemchance.innerText = (100 * (((0.2 + ((20 - gftd.value) * 0.0025)) * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (0.25 * binomial(8, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0025) * binomial(9, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (0.25 * binomial(8, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0005) * binomial(9, (loottable[key2]/totalweight))))).toFixed(3) + "%";
             } else if (corpsetype.value = "metal") {
-              itemchance.innerText = (100 * (((0.2 + ((20 - gftd.value) * 0.0025)) * binomial(4, (loottable[key2]/totalweight))) + (0.25 * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0025) * binomial(8, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(4, (loottable[key2]/totalweight))) + (0.25 * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0005) * binomial(8, (loottable[key2]/totalweight))))).toFixed(3) + "%";
             }
             
             tablerow.appendChild(itemname);
