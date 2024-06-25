@@ -1008,6 +1008,7 @@ const skinPaths_onetime_11 = [
     "walls3_legendary_shaman",
     "walls3_souls_bound",
     "walls3_call_it_a_comeback",
+    "walls3_living_on_the_edge",
     "",
     "",
     "",

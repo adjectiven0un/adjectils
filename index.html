@@ -55,7 +55,7 @@
         <span class = header>Events</span>
       </div>
       <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%));">
-      <span style = "margin-right:20px">Notify me when events start</span>
+      <span style = "margin-right:20px">Allow event notifications</span>
       <div>
 
         <label class = "switchbox" id = "notifyswitch" for = "notify">
@@ -88,9 +88,59 @@
           </form>
         </div>
       </div>
-      <table id = "eventtable" style = "flex-basis: min(calc(100% - 30px), max(600px, 65%));">  
+      <table id = "eventtable" style = "flex-basis: min(calc(100% - 30px), max(960px, 90%));">  
         
       </table>
+      <div style = "display:flex;flex-basis:100%; margin-top: 10px;">
+        <span class = header>Hourly events</span>
+      </div>
+      
+      <span class = "flex_full_row">Time until next&nbsp;<span style = "color:#aa00aa">Dark Auction</span>:&nbsp;<span id = "datime"></span></span>
+      <div class = "flex_full_row">
+        <form action = "#" id = "danotifs">
+          <div class = "flex_full_row">
+          <span style = "margin-right:20px">Notify me when <span style = "color:#aa00aa">Dark Auction</span> starts.</span>
+            <label class = "switchbox" id = "daswitch" for = "danotif">
+              <input type = "checkbox"  id = "danotif" aria-labelledby = "daswitch">
+              <span class = "switch"></span>
+            </label>
+          </div>
+          
+          <label for = "danotibefore">Notify me
+          <select id = "danotibefore">
+            <option value = 60>1</option>
+            <option value = 120>2</option>
+            <option value = 180>3</option>
+            <option value = 240>4</option>
+            <option value = 300>5</option>
+          </select>
+          minutes before <span style = "color: #aa00aa">Dark Auction</span>.</label>
+        </form> 
+      </div>
+      <span class = "flex_full_row">Time until next&nbsp;<span style = "color:#ffff55">Jacob's Farming Contest</span>:&nbsp;<span id = "jacobtime"></span></span>
+      <div class = "flex_full_row">
+        
+        <form action = "#" id = "jacobnotifs">
+          <div class = "flex_full_row">
+            <span style = "margin-right:20px">Notify me when <span style = "color:#ffff55">Jacob's Farming Contest</span> starts.</span>
+              <label class = "switchbox" id = "jacobswitch" for = "jacobnotif">
+                <input type = "checkbox"  id = "jacobnotif" aria-labelledby = "jacobswitch">
+                <span class = "switch"></span>
+              </label>
+            </div>
+            
+          <label for = "jacobnotibefore">Notify me
+          <select id = "jacobnotibefore">
+            <option value = 60>1</option>
+            <option value = 120>2</option>
+            <option value = 180>3</option>
+            <option value = 240>4</option>
+            <option value = 300>5</option>
+            x
+          </select>
+          minutes before <span style = "color: #ffff55">Jacob's Farming Contest</span>.</label>
+        </form> 
+      </div>
     </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
@@ -132,7 +182,7 @@
     const seasons = ["Spring", "Summer", "Autumn", "Winter"];
     const monthlist = ["Early", "", "Late"];
     var initial = 1560275700;
-    var currenttime = Date.now() / 1000;
+    var currenttime = (Date.now() / 1000);
     var yearcycletime = (currenttime - initial) % yearlen;
     var eventNotifs = 0;
     var notifPerms = 0;
@@ -161,6 +211,9 @@
       
     }
     async function updatePage(){
+        document.getElementById("notify").checked = false;
+        document.getElementById("danotif").checked = false;
+        document.getElementById("jacobnotif").checked = false;
         var splashindex = Math.floor(25 * Math.random());
         console.log("Chose splash " + splashindex);
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
@@ -168,6 +221,7 @@
         updateEvents();
         setInterval(updateDate, 4167);
         setInterval(updateEvents, 1000);
+        setInterval(updateHourlies, 1000);
         try {
           const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
           if (!apicall.ok){
@@ -352,10 +406,21 @@
         "jerry": "Season of Jerry",
         "newyear": "New Year Celebration",
     }
+    var notifPermsByEvent = {
+      "hoppity": 0,
+        "electionClose": 0,
+        "zoo1": 0,
+        "electionOpen": 0,
+        "spooky": 0,
+        "zoo2": 0,
+        "winter": 0,
+        "jerry": 0,
+        "newyear": 0,
+    }
     var previndex = -1;
     function updateEvents(){
       var initial = 1560275700;
-      var now = Math.floor(Date.now() / 1000);
+      var now = Math.floor(Date.now() / 1000) + 7000; 
       var yearcycletime = (now - initial) % yearlen;
       var indices = ["hoppity", "electionClose", "zoo1", "electionOpen",  "spooky", "zoo2", "winter", "jerry", "newyear"];
       var timeUntil = {
@@ -410,8 +475,6 @@
           timediv.appendChild(evtime);
           data2.appendChild(timediv);
           row.appendChild(data2);
-          var spacedata2 = document.createElement("td");
-          var spacediv2 = document.createElement("div");
           
           var data3 = document.createElement("td");
           var datediv = document.createElement("div");
@@ -424,6 +487,35 @@
           datediv.appendChild(datespan);
           data3.appendChild(datediv);
           row.appendChild(data3);
+          
+
+          var data4 = document.createElement("td");
+          var notifydiv = document.createElement("div");
+          notifydiv.style.display = "flex";
+          notifydiv.style.flexBasis = "100%";
+          notifydiv.style.justifyContent = "flex-end";
+          notifydiv.style.paddingRight = "10%";
+          var label = document.createElement("span");
+          label.textContent = "Notify me";
+          label.style.marginRight = "20px";
+          notifydiv.appendChild(label);
+          var switchlabel = document.createElement("label");
+          switchlabel.className = "switchbox";
+          var switchcheck = document.createElement("input");
+          switchcheck.type = "checkbox";
+          switchcheck.id = indices[i % 9] + "switch";
+          let name = indices[i % 9];
+          switchcheck.onchange = function() {
+            updatePerms(name);
+          };
+          var switchspan = document.createElement("span");
+          switchspan.className = "switch";
+          switchlabel.appendChild(switchcheck);
+          switchlabel.appendChild(switchspan);
+          notifydiv.appendChild(switchlabel);
+          data4.appendChild(notifydiv);
+          row.appendChild(data4);
+
           eventtable.appendChild(row);
         }
       }
@@ -448,7 +540,7 @@
         var current = Math.floor(Date.now() / 1000);
         var eventtime = Math.floor(current + timer);
         document.getElementById(elementname + "date").innerText = "@ " + convertTimestamp(eventtime);
-        if (timer == notibefore.value && eventNotifs == 1 && notifPerms == 1){
+        if (timer == notibefore.value && eventNotifs == 1 && notifPerms == 1 && notifPermsByEvent[elementname] == 1){
           var mingrammar = "minutes";
           if (notibefore.value == 60){
             mingrammar = "minute";
@@ -456,5 +548,33 @@
           var notification = new Notification("adjectils", {body: eventNames[elementname] + " begins in " + Math.floor(notibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
         }
       }
+    }
+    function updatePerms(elementname){
+      notifPermsByEvent[elementname] = Math.abs(notifPermsByEvent[elementname] - 1);
+    }
+    function updateHourlies(){
+      var initial = 1560275700;
+      var now = Math.floor(Date.now() / 1000); 
+      var hourcycletime = (now - initial) % 3600;
+      var timetojacob = Math.abs((4800 - hourcycletime) % 3600);
+      jacobtime.innerText = timeToMinutes(timetojacob);
+      var timetoda = Math.abs((3600 - hourcycletime) % 3600);
+      datime.innerText = timeToMinutes(timetoda);
+      //console.log("DA time: " + timetoda + " EVN: " + eventNotifs + " NP: " + notifPerms + " CN: " + danotif.checked);
+      if (timetoda == danotibefore.value && danotif.checked == true){
+          var mingrammar = "minutes";
+          if (danotibefore.value == 60){
+            mingrammar = "minute";
+          }
+        var notification = new Notification("adjectils",  {body: "Dark Auction begins in " + Math.floor(danotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+      }
+      if (timetojacob == jacobnotibefore.value && jacobnotif.checked == true){
+          var mingrammar = "minutes";
+          if (jacobnotibefore.value == 60){
+            mingrammar = "minute";
+          }
+        var notification = new Notification("adjectils",  {body: "Jacob's Farming Contest begins in " + Math.floor(jacobnotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+      }
+
     }
 </script>
