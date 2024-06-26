@@ -421,12 +421,12 @@
                                         className: classnamesCapital[j],
                                         skinName: skinNames[i],
                                         req: skinReqDesc[i],
-                                        progress: squidDFK + squidDFA,
+                                        progress: (squidDFK + squidDFA),
                                         max: skinReqs[i],
                                     })
                                 }
                                 
-                            } if (skinPaths[i] == "spider_a_kills") {
+                            } else if (skinPaths[i] == "spider_a_kills") {
                                 var leapkills = 0;
                                 var leapfinals = 0;
                                 if (mwdata["spider_a_kills"] != undefined) {

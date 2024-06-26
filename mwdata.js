@@ -1089,6 +1089,7 @@ const skinPaths_12 = [
 const extraPaths = [
     "squid_defender_final_assists",
     "final_kills_after_final_killed",
+    "spider_a_final_kills",
 ]
 const skinPaths_onetime_12 = [
     "",
