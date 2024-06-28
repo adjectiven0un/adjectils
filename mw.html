@@ -475,6 +475,30 @@
                                     totalSkins++;
                                 }
                                 
+                            } else if (skinPaths[i] == "force_of_nature_final_kills") {
+                                var fonFK = 0;
+                                var fonFA = 0;
+                                if (mwdata["force_of_nature_final_kills"] != undefined) {
+                                    fonFK = mwdata["force_of_nature_final_kills"];
+                                }
+                                if (mwdata["force_of_nature_final_assists"] != undefined) {
+                                    fonFA = mwdata["force_of_nature_final_assists"];
+                                }
+                                if ((fonFK + fonFA) < 50) {
+                                    topSkins.push({
+                                        key: skinPaths[i],
+                                        value: (((fonFK + fonFA) / skinReqs[i]) * 100).toFixed(1),
+                                        className: classnamesCapital[j],
+                                        skinName: skinNames[i],
+                                        req: skinReqDesc[i],
+                                        progress: fonFK + fonFA,
+                                        max: skinReqs[i],
+                                    })
+                                    
+                                } else {
+                                    totalSkins++;
+                                }
+                                
                             } else {
                                 topSkins.push({
                                     key: skinPaths[i],
@@ -832,6 +856,39 @@
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", deadFKA, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        }
+                        
+                    } else if (skinPaths[i] == "force_of_nature_final_kills") {
+                        var fonFKA = 0;
+                        if (mwdata[skinPaths[i]] != undefined) {
+                            if (mwdata["force_of_nature_final_assists"] != undefined){
+                                fonFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata["force_of_nature_final_assists"]);
+                            } else {
+                                fonFKA = parseInt(mwdata[skinPaths[i]]);
+                            }
+                        } else {
+                            if (mwdata["force_of_nature_final_assists"] != undefined){
+                                fonFKA = parseInt(mwdata["force_of_nature_final_assists"]);
+                            } else {
+                                fonFKA = 0;
+                            }
+                        }
+
+                        if (fonFKA >= 50) {
+                            makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", fonFKA, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
+                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinNames, i, "✓");
+                        } else {
+                            makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", fonFKA, "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
