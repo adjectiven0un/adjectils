@@ -382,6 +382,9 @@
           hours -= 12;
           ampm = "pm";
         }
+        if (hours == 0) {
+          hours = 12;
+        }
         document.getElementById("sbtime").innerText = hours + ":" + minutes + ampm;
     }
     var eventColors = {
