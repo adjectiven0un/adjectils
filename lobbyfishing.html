@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+    <html lang = "en">
+        <head>
+            <title>adjectils - Sample Page</title>
+            <link rel="stylesheet" href="stylesheet.css">
+            <meta name = "description" content = "Piscine utilities for the Main Lobby">
+            <meta name = "author" content = "adjective_n0un">
+            <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+            <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+            <link rel="manifest" href="./favicon/site.webmanifest">
+            <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+            <script src = "getUUID.js"></script>
+            <script src = "mainlobbydata.js"></script>
+        </head>
+    <body onload="updatePage()">
+  
+        <script>
+        $(function(){
+          $("#nav").load("nav.html", function() { setWord(); }); 
+        });
+        </script>
+        <div style = "text-align:center; margin: auto"> 
+            <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header style = "color: #55aaaa">Main Lobby Fishing</span><br>
+        </div>
+        <div style = "text-align:center">
+            <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
+            <span id = "refreshstatus"></span><br>
+            <span id = "status"></span><br>
+            <span id = "otherstatus"></span><br>
+        </div>
+        <section class = "flex_box_index">
+            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))"> 
+                <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+                    <span class = "header flex_full_row" style = "margin-bottom:10px">Fishing Stats</span>
+                    <label class = "flex_full_row">Environment:
+                      <select id = environment value = overall onchange = updateFish(nameinput.value)>
+                        <option value = overall>Anywhere</option>
+                        <option value = water style = "color:#5555ff">Water</option>
+                        <option value = lava style = "color:#ffaa00">Lava</option>
+                        <option value = ice style = "color:#55ffff">Ice</option>
+                      </select>
+                    </label>
+                    <table>
+                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> caught:&nbsp;</span></td><td><span id = "caught_fish">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> caught:&nbsp;</span></td><td><span id = "caught_junk">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> caught:&nbsp;</span></td><td><span id = "caught_treasure">0</span></span></tr></tr>
+                    </table>
+                  </div>
+                <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+                    <span class = "header flex_full_row">Catch Table</span>
+                    <label class = "flex_full_row">Lure enchantment level:
+                        <select id = lure value = 3 onchange = updateFish(nameinput.value)>
+                          <option value = 3>3</option>
+                          <option value = 4>4</option>
+                          <option value = 5>5</option>
+                          <option value = 6>6</option>
+                        </select>
+                    </label>
+                    <label class = "flex_full_row">Dumpster Diver enchantment level:
+                        <select id = dumpster value = 0 onchange = updateFish(nameinput.value)>
+                            <option value = 0>0</option>
+                            <option value = 1>1</option>
+                            <option value = 2>2</option>
+                            <option value = 3>3</option>
+                            <option value = 4>4</option>
+                            <option value = 5>5</option>
+                        </select>
+                    </label>
+                    <label class = "flex_full_row">Luck of the Sea enchantment level:
+                        <select id = lots value = 0 onchange = updateFish(nameinput.value)>
+                            <option value = 0>0</option>
+                            <option value = 1>1</option>
+                            <option value = 2>2</option>
+                            <option value = 3>3</option>
+                            <option value = 4>4</option>
+                            <option value = 5>5</option>
+                            <option value = 6>6</option>
+                        </select>
+                    </label>
+                    <label class = "flex_full_row">Mythical Hook active:
+                        <select id = lots value = 0 onchange = updateFish(nameinput.value)>
+                            <option value = 0>Yes</option>
+                            <option value = 1>No</option>
+                        </select>
+                    </label>
+                    <table>
+                        <tr><td><span><span>Catch time:&nbsp;</span></td><td><span id = "fish_speed">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> chance:&nbsp;</span></td><td><span id = "chance_fish">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> chance:&nbsp;</span></td><td><span id = "chance_junk">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> chance:&nbsp;</span></td><td><span id = "chance_treasure">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ffaa00">Mythical Fish</span> chance:&nbsp;</span></td><td><span id = "chance_mythical">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff55ff">Special Fish</span> chance:&nbsp;</span></td><td><span id = "chance_special">0</span></span></tr></tr>
+                    </table>  
+                </div>
+              </div>
+            </div>
+            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+              <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))"> 
+                <span class = "header">Special Fish</span>
+                <label class = "flex_full_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">Category:
+                  <select id = specialcategory value = all onchange = updateFish(nameinput.value)>
+                      <option value = all>All</option>
+                      <option value = summer style = "color:#ffaa00">Summer</option>
+                      <option value = halloween style = "color:#aa00aa">Halloween</option>
+                      <option value = holidays style = "color:#ff5555">Holidays</option>
+                      <option value = spring style = "color:#55ffff">Spring</option>
+                  </select>
+                </label>
+                <span class = "flex_full_row"><span>Found:&nbsp;</span><span id = "currentspecials">0</span>/<span id = "totalspecials">44</span></span>
+                <div class = "flex_index_row flex_full_row" id = "row0" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
+
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "row1" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
+
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "row2" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
+
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "row3" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
+
+                </div>
+                <div class = "flex_index_row flex_full_row" id = "row4" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
+
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+    </body>
+<script>
+    function updatePage(){
+        if (!(localStorage.getItem("storedmwname") == "" || localStorage.getItem("storedmwname") == null)){
+            console.log("Found a previous name and data! Loading...");
+            document.getElementById("nameinput").value = localStorage.getItem("storedmwname");
+            data = JSON.parse(localStorage.getItem("storedmwdata"));
+            fasttrack = true;
+            updateUser(localStorage.getItem("storedmwname"));
+        }
+    }
+    var data;
+    var fishingdata;
+    var fasttrack = false;
+    var onCD = false;
+    async function updateUser(name){
+        
+        if (onCD == true){
+            document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+            return -1;
+        } else {
+            document.getElementById("refreshstatus").innerText = "";
+            if (!fasttrack) {
+                onCD = true;
+                setTimeout(() => { onCD = false }, 5000);
+            }  
+        }
+        
+        UUID = await getUUIDbyName(name);
+        if (UUID == -1){
+            return -1;
+        }
+        if (!fasttrack){
+            data = await getStats(UUID);
+            console.log(data);
+        } 
+        fasttrack = false;
+        localStorage.setItem("storedmwname", name);
+        console.log("Set item " + localStorage.getItem("storedmwname"));
+        localStorage.setItem("storedmwdata", JSON.stringify(data)); 
+        console.log("Set item " + localStorage.getItem("storedmwdata"));
+        updateFish();
+    }
+    function updateFish(){
+        for (var i = 0; i <= 4; i++) {
+            document.getElementById("row" + i).innerHTML = "";
+        }
+
+        //try {
+            fishingdata = data.player.stats.MainLobby.fishing;
+            var max_j = 5;
+            var foundfish = 0;
+            var maxfish = 0;
+            if (specialcategory.value == "all") {
+              max_j = 9;
+            }
+            var j = 0;
+            var fishes = 0;
+            for (var key in specialfish){
+              if ((specialfish[key].season == specialcategory.value || specialcategory.value == "all")) {
+                maxfish++;
+              }
+              if (fishingdata.special_fish[key] == true && (specialfish[key].season == specialcategory.value || specialcategory.value == "all")){
+                console.log("Making box for " + key);
+                makeBox(key, fishes, max_j);
+                foundfish++;
+                fishes++;
+              }
+            }
+            document.getElementById("currentspecials").innerText = foundfish;
+            document.getElementById("totalspecials").innerText = maxfish;
+            
+        //} catch (TypeError) {
+            //document.getElementById("otherstatus").innerText = "This player has no Main Lobby Fishing stats!";
+        //}
+    }
+        
+
+    
+    function makeBox(fishname, i, max_i){
+        var box = document.createElement("div");
+        box.className = "fishbox";
+        box.id = fishname + "box";
+        box.style.cursor = "pointer";
+        var classimage = document.createElement("img");
+        classimage.src = "./images/main_lobby/" + fishname + ".png";
+        classimage.style.height = "80%"; 
+        classimage.style.width = "80%";
+        classimage.alt = "";
+        classimage.id = fishname + "_image";
+        box.appendChild(classimage);
+        var tooltip = document.createElement("div");
+        tooltip.className = "fishboxtext";
+        tooltip.id = (fishname + "_text");
+        tooltip.style.opacity = "90%";
+        tooltip.style.zIndex = "5";
+        box.appendChild(tooltip);
+        console.log(tooltip.id);
+        console.log(fishname + "_text");
+        document.getElementById("row" + Math.floor(i / max_i)).appendChild(box);
+        makeTooltipObject((tooltip.id), "", specialfish[fishname].plaintext, "20px", "#c0c0c0", true);
+        makeTooltipObject((tooltip.id), "", specialfish[fishname].description, "12px", "#808080", true);
+        makeTooltipObject((tooltip.id), "", "Found in ", "12px", "#808080", false);
+        if (specialfish[fishname].environment == "water") {
+          makeTooltipObject((tooltip.id), "", "WATER", "12px", "#5555ff", false);
+        } else if (specialfish[fishname].environment == "lava") {
+          makeTooltipObject((tooltip.id), "", "LAVA", "12px", "#ff5555", false);
+        } else if (specialfish[fishname].environment == "ice") {
+          makeTooltipObject((tooltip.id), "", "ICE", "12px", "#55ffff", false);
+        }
+        if (specialfish[fishname].season == "all") {
+          makeTooltipObject((tooltip.id), "", " year-round", "12px", "#808080", false);
+        } else {
+            makeTooltipObject((tooltip.id), "", " during ", "12px", "#808080", false);
+            if (specialfish[fishname].season == "summer") {
+                makeTooltipObject((tooltip.id), "", "SUMMER", "12px", "#ffff55", false);
+            } else if (specialfish[fishname].season == "halloween") {
+                makeTooltipObject((tooltip.id), "", "HALLOWEEN", "12px", "#aa00aa", false);
+            } else if (specialfish[fishname].season == "holidays") {
+                makeTooltipObject((tooltip.id), "", "HOLIDAYS", "12px", "#ff5555", false);
+            } else if (specialfish[fishname].season == "easter") {
+                makeTooltipObject((tooltip.id), "", "EASTER", "12px", "#55ffff", false);
+            }
+        }
+        
+    }
+    function makeTooltipObject(target, id, text, fontSize, color, lineBreak){
+        console.log("Target: " + target);
+        var toInsert = document.createElement("span");
+        toInsert.innerText = text;
+        toInsert.style.flexBasis = "100%";
+        toInsert.style.fontSize = fontSize;
+        toInsert.style.color = color;
+        if (id != ""){
+            toInsert.id = id;
+        }
+        document.getElementById(target).appendChild(toInsert);
+        if (lineBreak) {
+            document.getElementById(target).appendChild(document.createElement("br"));
+        }   
+    }
+</script>

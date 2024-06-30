@@ -1,0 +1,273 @@
+const specialfishnames_all = ["puffer_emoji", "nemo", "knockback_slimeball", "hot_potato", "fish_monger_suit_helmet", "fish_monger_suit_chestplate", "fish_monger_suit_leggings", "fish_monger_suit_boots", "barnacle", "leviathan", "star_eater_scales", "rubber_duck", "oops_the_fish", "shark", "sea_bass", "sunscreen", "pile_of_sand", "mahi_mahi", "lucent_bee_hive", "spook_the_fish", "chocolate_bar", "pumpkin_spice_latte", "angler", "pumpkin_pie", "eyeball", "wayfinders_compass", "molten_iron", "regular_fish", "lava_shark", "chill_the_fish_3", "frozen_fish", "festival_pufferfish_hat", "eggnog", "dawning_snowball", "frozen_meal", "festive_lights", "egg_the_fish", "cracked_egg", "raw_ham", "carrot", "soggy_hot_cross_bun", "clay_ball", "rose", "cherry_blossom"];
+const specialfishnames_default = ["puffer_emoji", "nemo", "knockback_slimeball", "hot_potato", "fish_monger_suit_helmet", "fish_monger_suit_chestplate", "fish_monger_suit_leggings", "fish_monger_suit_boots", "barnacle", "leviathan", "star_eater_scales", "rubber_duck"];
+const specialfishnames_summer = ["oops_the_fish", "shark", "sea_bass", "sunscreen", "pile_of_sand", "mahi_mahi", "lucent_bee_hive"];
+const specialfishnames_halloween = ["spook_the_fish", "chocolate_bar", "pumpkin_spice_latte", "angler", "pumpkin_pie", "eyeball", "wayfinders_compass", "molten_iron", "regular_fish", "lava_shark"];
+const specialfishnames_holidays = ["chill_the_fish_3", "frozen_fish", "festival_pufferfish_hat", "eggnog", "dawning_snowball", "frozen_meal", "festive_lights"];
+const specialfishnames_spring = ["egg_the_fish", "cracked_egg", "raw_ham", "carrot", "soggy_hot_cross_bun", "clay_ball", "rose", "cherry_blossom"];
+
+const specialfish = {
+    "puffer_emoji": {
+        plaintext: "Puffer Emoji",
+        season: "all",
+        description: ":puffer:",
+        environment: "water",
+    },
+    "nemo": {
+        plaintext: "Nemo",
+        season: "all",
+        description: "Maybe he's lost again?",
+        environment: "water",
+    },
+    "knockback_slimeball": {
+        plaintext: "Knockback Slimeball",
+        season: "all",
+        description: "So this is where it's been all this time?",
+        environment: "water",
+    },
+    "hot_potato": {
+        plaintext: "Hot Potato",
+        season: "all",
+        description: "Would you look at that?",
+        environment: "water",
+    },
+    "fish_monger_suit_helmet": {
+        plaintext: "Fish Monger Suit Helmet",
+        season: "all",
+        description: "Oh look, a dirty helmet.",
+        environment: "water",
+    },
+    "fish_monger_suit_chestplate": {
+        plaintext: "Fish Monger Suit Chestplate",
+        season: "all",
+        description: "That's a pretty scuzzy shirt.",
+        environment: "water",
+    },
+    "fish_monger_suit_leggings": {
+        plaintext: "Fish Monger Suit Leggings",
+        season: "all",
+        description: "Gross, mossy pants.",
+        environment: "water",
+    },
+    "fish_monger_suit_boots": {
+        plaintext: "Fish Monger Suit Boots",
+        season: "all",
+        description: "These boots are falling apart.",
+        environment: "water",
+    },
+    "barnacle": {
+        plaintext: "Barnacle",
+        season: "all",
+        description: "It really grows on you.",
+        environment: "water",
+    },
+    "leviathan": {
+        plaintext: "Leviathan",
+        season: "all",
+        description: "That's one huge catch!",
+        environment: "water",
+    },
+    "star_eater_scales": {
+        plaintext: "Star-Eater Scales",
+        season: "all",
+        description: "It's destiny.",
+        environment: "water",
+    },
+    "rubber_duck": {
+        plaintext: "Rubber Duck",
+        season: "all",
+        description: "This isn't meant to be here!",
+        environment: "water",
+    },
+    "oops_the_fish": {
+        plaintext: "Oops the Fish",
+        season: "summer",
+        description: "Oops, wrong game.",
+        environment: "water",
+    },
+    "shark": {
+        plaintext: "Shark",
+        season: "summer",
+        description: "Seems a bit small.",
+        environment: "water",
+    },
+    "sea_bass": {
+        plaintext: "Sea Bass",
+        season: "summer",
+        description: "No wait- it's at least a C+!",
+        environment: "water",
+    },
+    "sunscreen": {
+        plaintext: "Sunscreen",
+        season: "summer",
+        description: "Safety first!",
+        environment: "water",
+    },
+    "pile_of_sand": {
+        plaintext: "Pile of Sand",
+        season: "summer",
+        description: "Just like the beach!",
+        environment: "water",
+    },
+    "mahi_mahi": {
+        plaintext: "Mahi Mahi",
+        season: "summer",
+        description: "So tasty!",
+        environment: "water",
+    },
+    "lucent_bee_hive": {
+        plaintext: "Lucent Bee Hive",
+        season: "summer",
+        description: "It's glowing!",
+        environment: "water",
+    },
+    "spook_the_fish": {
+        plaintext: "Spook the Fish",
+        season: "halloween",
+        description: "Wow, so spooky!",
+        environment: "water",
+    },
+    "chocolate_bar": {
+        plaintext: "Chocolate Bar",
+        season: "halloween",
+        description: "Might be a bit soggy.",
+        environment: "water",
+    },
+    "pumpkin_spice_latte": {
+        plaintext: "Pumpkin Spice Latte",
+        season: "halloween",
+        description: "Wouldn't be fall without some pumpkin spice.",
+        environment: "water",
+    },
+    "angler": {
+        plaintext: "Angler",
+        season: "halloween",
+        description: "It looks kinda scary.",
+        environment: "water",
+    },
+    "pumpkin_pie": {
+        plaintext: "Pumpkin Pie",
+        season: "halloween",
+        description: "You can have it for dessert!",
+        environment: "water",
+    },
+    "eyeball": {
+        plaintext: "Eyeball",
+        season: "halloween",
+        description: "How'd this get in here...",
+        environment: "water",
+    },
+    "wayfinders_compass": {
+        plaintext: "Wayfinder's Compass",
+        season: "halloween",
+        description: "It's the season of the lost, don't lose your way.",
+        environment: "water",
+    },
+    "molten_iron": {
+        plaintext: "Molten Iron",
+        season: "halloween",
+        description: "Is it hot in here?",
+        environment: "lava",
+    },
+    "regular_fish": {
+        plaintext: "Regular Fish",
+        season: "halloween",
+        description: "Wait, what?",
+        environment: "lava",
+    },
+    "lava_shark": {
+        plaintext: "Lava Shark",
+        season: "halloween",
+        description: "Even scarier than a regular shark!",
+        environment: "lava",
+    },
+    "chill_the_fish_3": {
+        plaintext: "Chill The Fish 3",
+        season: "holidays",
+        description: "BrrRrRRr.",
+        environment: "water",
+    },
+    "frozen_fish": {
+        plaintext: "Frozen Fish",
+        season: "holidays",
+        description: "Heat in a microwave for 30 seconds.",
+        environment: "ice",
+    },
+    "festival_pufferfish_hat": {
+        plaintext: "Festival Pufferfish Hat",
+        season: "holidays",
+        description: "Look at its cute little hat!",
+        environment: "water",
+    },
+    "eggnog": {
+        plaintext: "Eggnog",
+        season: "holidays",
+        description: "Now is when everyone starts arguing.",
+        environment: "water",
+    },
+    "dawning_snowball": {
+        plaintext: "Dawning Snowball",
+        season: "holidays",
+        description: "Oh how I miss you...",
+        environment: "ice",
+    },
+    "frozen_meal": {
+        plaintext: "Frozen Meal",
+        season: "holidays",
+        description: "Instant dinner!",
+        environment: "ice",
+    },
+    "festive_lights": {
+        plaintext: "Festive Lights",
+        season: "holidays",
+        description: "Just needs to be untangled.",
+        environment: "ice",
+    },
+    "egg_the_fish": {
+        plaintext: "Egg The Fish",
+        season: "easter",
+        description: "Don't crack it, it's fragile!",
+        environment: "water",
+    },
+    "cracked_egg": {
+        plaintext: "Cracked Egg",
+        season: "easter",
+        description: "Poor chicken. :(.",
+        environment: "water",
+    },
+    "raw_ham": {
+        plaintext: "Raw Ham",
+        season: "easter",
+        description: "Well, that saves a trip to the supermarket.",
+        environment: "water",
+    },
+    "carrot": {
+        plaintext: "Carrot",
+        season: "easter",
+        description: "Feed it to a rabbit!",
+        environment: "water",
+    },
+    "soggy_hot_cross_bun": {
+        plaintext: "Soggy Hot Cross Bun",
+        season: "easter",
+        description: "Make sure to learn the song on your recorder.",
+        environment: "water",
+    },
+    "clay_ball": {
+        plaintext: "Clay Ball",
+        season: "easter",
+        description: "That's no egg!",
+        environment: "water",
+    },
+    "rose": {
+        plaintext: "Rose",
+        season: "easter",
+        description: "From the sea birthed beauty.",
+        environment: "water",
+    },
+    "cherry_blossom": {
+        plaintext: "Cherry Blossom",
+        season: "easter",
+        description: "So pretty!",
+        environment: "water",
+    },
+}
