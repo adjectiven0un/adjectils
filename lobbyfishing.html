@@ -132,6 +132,8 @@
     </body>
 <script>
     function updatePage(){
+        resetSpecialFish();
+        
         if (!(localStorage.getItem("storedmwname") == "" || localStorage.getItem("storedmwname") == null)){
             console.log("Found a previous name and data! Loading...");
             document.getElementById("nameinput").value = localStorage.getItem("storedmwname");
@@ -165,6 +167,7 @@
             data = await getStats(UUID);
             console.log(data);
         } 
+        
         fasttrack = false;
         localStorage.setItem("storedmwname", name);
         console.log("Set item " + localStorage.getItem("storedmwname"));
@@ -173,11 +176,12 @@
         updateFish();
     }
     function updateFish(){
+        otherstatus.innerText = "";
         for (var i = 0; i <= 4; i++) {
             document.getElementById("row" + i).innerHTML = "";
         }
 
-        //try {
+        try {
             fishingdata = data.player.stats.MainLobby.fishing;
             var max_j = 5;
             var foundfish = 0;
@@ -200,13 +204,40 @@
             }
             document.getElementById("currentspecials").innerText = foundfish;
             document.getElementById("totalspecials").innerText = maxfish;
-            
-        //} catch (TypeError) {
-            //document.getElementById("otherstatus").innerText = "This player has no Main Lobby Fishing stats!";
-        //}
+            if (foundfish == 0) {
+              resetSpecialFish();
+            }
+        } catch (TypeError) {
+            document.getElementById("otherstatus").innerText = "This player has no Main Lobby Fishing stats!";
+            resetSpecialFish();
+        }
     }
         
-
+    function resetSpecialFish() {
+        for (var i = 0; i <= 4; i++) {
+            document.getElementById("row" + i).innerHTML = "";
+        }
+        document.getElementById("currentspecials").innerText = "0";
+        var box = document.createElement("div");
+        box.className = "fishbox";
+        box.style.cursor = "pointer";
+        var classimage = document.createElement("img");
+        classimage.src = "./images/mega_walls/not_unlocked.png";
+        classimage.style.height = "80%"; 
+        classimage.style.width = "80%";
+        classimage.alt = "";
+        classimage.id = "not_unlocked_image";
+        box.appendChild(classimage);
+        var tooltip = document.createElement("div");
+        tooltip.className = "fishboxtext";
+        tooltip.style.opacity = "90%";
+        tooltip.style.zIndex = "5";
+        tooltip.id = "no_special_fish_box";
+        box.appendChild(tooltip);
+        console.log(tooltip.id);
+        document.getElementById("row0").appendChild(box);
+        makeTooltipObject((tooltip.id), "", "This user has no special fish!", "16px", "#808080", true);
+    }
     
     function makeBox(fishname, i, max_i){
         var box = document.createElement("div");
