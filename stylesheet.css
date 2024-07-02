@@ -478,5 +478,9 @@ body {
     bottom: 12px;
     text-shadow: 0px 0px 5px black, 0px 0px 5px black;
   }
+  .tdalignright {
+    text-align: right; 
+    align-items: right;
+  }
 
   

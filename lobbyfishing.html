@@ -31,27 +31,37 @@
             <span id = "otherstatus"></span><br>
         </div>
         <section class = "flex_box_index">
-            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))"> 
-                <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "tablerow"> 
+                <div class = "index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "statsbox">
                     <span class = "header flex_full_row" style = "margin-bottom:10px">Fishing Stats</span>
                     <label class = "flex_full_row">Environment:
-                      <select id = environment value = overall onchange = updateFish(nameinput.value)>
-                        <option value = overall>Anywhere</option>
+                      <select id = environment value = individual onchange = updateFish(nameinput.value)>
+                        <option value = individual>Anywhere</option>
                         <option value = water style = "color:#5555ff">Water</option>
                         <option value = lava style = "color:#ffaa00">Lava</option>
                         <option value = ice style = "color:#55ffff">Ice</option>
                       </select>
                     </label>
                     <table>
-                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> caught:&nbsp;</span></td><td><span id = "caught_fish">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> caught:&nbsp;</span></td><td><span id = "caught_junk">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> caught:&nbsp;</span></td><td><span id = "caught_treasure">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> caught:&nbsp;</span></td><td class = "tdalignright"><span id = "caught_fish">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> caught:&nbsp;</span></td><td class = "tdalignright"><span id = "caught_junk">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> caught:&nbsp;</span></td><td class = "tdalignright"><span id = "caught_treasure">0</span></span></tr></tr>
+                    </table>
+                    <span class = "flex_full_row" style = "margin-bottom:10px; margin-top:10px; font-size:20px">Mythical Fish Stats (Lifetime)</span>
+                    <table>
+                        <tr><td><span style = "color:#ffaa00">Ember of Helios</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_helios">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_helios">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#c0c0c0">Dust of Selene</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_selene">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_selene">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#aa00aa">Shadow of Nyx</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_nyx">0</span></td><td> <span>&nbsp;(<span id = "weight_nyx">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#ff5555">Heart of Aphrodite</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_aphrodite">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_aphrodite">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#5555ff">Spark of Zeus</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_zeus">0</span></td><td> <span>&nbsp;(<span id = "weight_zeus">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#ff55ff">Automaton of Daedalus</span><span>:&nbsp;</span></td><td class = "tdalignright">  <span id = "caught_archimedes">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_archimedes">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#ff55ff">Wrath of Hades</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_hades">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_hades">0</span> kg record)</span></td></tr>
                     </table>
                   </div>
-                <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+                <div class = "index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "calcbox">
                     <span class = "header flex_full_row">Catch Table</span>
                     <label class = "flex_full_row">Lure enchantment level:
-                        <select id = lure value = 3 onchange = updateFish(nameinput.value)>
+                        <select id = lure value = 3 onchange = updateWeights()>
                           <option value = 3>3</option>
                           <option value = 4>4</option>
                           <option value = 5>5</option>
@@ -59,7 +69,7 @@
                         </select>
                     </label>
                     <label class = "flex_full_row">Dumpster Diver enchantment level:
-                        <select id = dumpster value = 0 onchange = updateFish(nameinput.value)>
+                        <select id = dumpster value = 0 onchange = updateWeights()>
                             <option value = 0>0</option>
                             <option value = 1>1</option>
                             <option value = 2>2</option>
@@ -69,7 +79,7 @@
                         </select>
                     </label>
                     <label class = "flex_full_row">Luck of the Sea enchantment level:
-                        <select id = lots value = 0 onchange = updateFish(nameinput.value)>
+                        <select id = lots value = 0 onchange = updateWeights()>
                             <option value = 0>0</option>
                             <option value = 1>1</option>
                             <option value = 2>2</option>
@@ -80,27 +90,35 @@
                         </select>
                     </label>
                     <label class = "flex_full_row">Mythical Hook active:
-                        <select id = lots value = 0 onchange = updateFish(nameinput.value)>
-                            <option value = 0>Yes</option>
-                            <option value = 1>No</option>
+                        <select id = mythicalhook value = 1 onchange = updateWeights()>
+                            <option value = 1>Yes</option>
+                            <option value = 0>No</option>
+                        </select>
+                    </label>
+                    <label class = "flex_full_row">Collector enchantment level:
+                        <select id = collector value = 0 onchange = updateWeights()>
+                            <option value = 0>0</option>
+                            <option value = 1>1</option>
+                            <option value = 2>2</option>
+                            <option value = 3>3</option>
                         </select>
                     </label>
                     <table>
-                        <tr><td><span><span>Catch time:&nbsp;</span></td><td><span id = "fish_speed">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> chance:&nbsp;</span></td><td><span id = "chance_fish">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> chance:&nbsp;</span></td><td><span id = "chance_junk">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> chance:&nbsp;</span></td><td><span id = "chance_treasure">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#ffaa00">Mythical Fish</span> chance:&nbsp;</span></td><td><span id = "chance_mythical">0</span></span></tr></tr>
-                        <tr><td><span><span><span style = "color:#ff55ff">Special Fish</span> chance:&nbsp;</span></td><td><span id = "chance_special">0</span></span></tr></tr>
+                        <tr><td><span><span>Catch time:&nbsp;</span></td><td class = "tdalignright"><span id = "fish_speed">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ffff">Fish</span> chance:&nbsp;</span></td><td class = "tdalignright"><span id = "chance_fish">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff5555">Junk</span> chance:&nbsp;</span></td><td class = "tdalignright"><span id = "chance_junk">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#55ff55">Treasure</span> chance:&nbsp;</span></td><td class = "tdalignright"><span id = "chance_treasure">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ffaa00">Mythical Fish</span> chance:&nbsp;</span></td><td class = "tdalignright"><span id = "chance_mythical">0</span></span></tr></tr>
+                        <tr><td><span><span><span style = "color:#ff55ff">Special Fish</span> chance:&nbsp;</span></td><td class = "tdalignright"><span id = "chance_special">0</span></span></tr></tr>
                     </table>  
                 </div>
               </div>
             </div>
-            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "specialfishrow">
               <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))"> 
                 <span class = "header">Special Fish</span>
                 <label class = "flex_full_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">Category:
-                  <select id = specialcategory value = all onchange = updateFish(nameinput.value)>
+                  <select id = specialcategory value = all onchange = updateSpecialFish(nameinput.value)>
                       <option value = all>All</option>
                       <option value = summer style = "color:#ffaa00">Summer</option>
                       <option value = halloween style = "color:#aa00aa">Halloween</option>
@@ -131,9 +149,11 @@
         <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
     </body>
 <script>
-    function updatePage(){
+    async function updatePage(){
+        updateTableHeights();
+        updateSize();
         resetSpecialFish();
-        
+        resetMythicals();
         if (!(localStorage.getItem("storedmwname") == "" || localStorage.getItem("storedmwname") == null)){
             console.log("Found a previous name and data! Loading...");
             document.getElementById("nameinput").value = localStorage.getItem("storedmwname");
@@ -141,6 +161,7 @@
             fasttrack = true;
             updateUser(localStorage.getItem("storedmwname"));
         }
+        
     }
     var data;
     var fishingdata;
@@ -173,9 +194,147 @@
         console.log("Set item " + localStorage.getItem("storedmwname"));
         localStorage.setItem("storedmwdata", JSON.stringify(data)); 
         console.log("Set item " + localStorage.getItem("storedmwdata"));
+        fresh = 1;
+        updateSpecialFish();
+        updateWeights();
         updateFish();
     }
-    function updateFish(){
+    var fresh = 0;
+    async function updateWeights() {
+        if (fresh == 1) {
+            var enchants = fishingdata.enchants;
+            try {
+                if (enchants.lure.toggle) {
+                lure.value = enchants.lure.level;
+                } else {
+                    lure.value = "3";
+                }
+            } catch (TypeError) {
+                lure.value = "3";
+            }
+            
+            try {
+                if (enchants.dumpster_diver.toggle) {
+                dumpster.value = enchants.dumpster_diver.level;
+                } else {
+                    dumpster.value = "0";
+                }
+            } catch (TypeError) {
+                dumpster.value = "0";
+            }
+            try {
+                if (enchants.luck.toggle) {
+                    lots.value = enchants.luck.level;
+                } else {
+                    lots.value = "0";
+                }
+            } catch (TypeError) {
+                lots.value = "0";
+            }
+            try {
+                if (enchants.collector.toggle) {
+                    collector.value = enchants.collector.level;
+                } else {
+                    collector.value = "3";
+                }
+            } catch (TypeError) {
+                collector.value = "3";
+            }
+            fresh = 0;
+        }
+       
+        document.getElementById("fish_speed").innerText = "5 – " + (45 - (6.25 * Number(lure.value))) + " seconds";
+        var fishweight = 80;
+        var junkweight = 10 + (2.5 * Number(dumpster.value));
+        var treasureweight = Number(5) + Number(lots.value);
+        var mythicalweight = Number(5) * Number(mythicalhook.value);
+        var specialweight = 0.3 + (0.2 * Number(collector.value));
+        if (currentspecials.innerText == "44") {
+            specialweight = 0;
+        }
+        console.log("Fishweight: " + fishweight);
+        console.log(junkweight);
+        console.log(treasureweight);
+        console.log(mythicalweight);
+        console.log(specialweight);
+        var totalweight = fishweight + junkweight + treasureweight + mythicalweight + specialweight;
+        console.log(80 + 10 + 5 + 5 + 0.3);
+        console.log("Total weight: " + totalweight);
+        document.getElementById("chance_fish").innerText = ((fishweight / totalweight) * 100).toFixed(2) + "%";
+        document.getElementById("chance_junk").innerText = ((junkweight / totalweight) * 100).toFixed(2) + "%";
+        document.getElementById("chance_treasure").innerText = ((treasureweight / totalweight) * 100).toFixed(2) + "%";
+        document.getElementById("chance_mythical").innerText = ((mythicalweight / totalweight) * 100).toFixed(2) + "%";
+        document.getElementById("chance_special").innerText = ((specialweight / totalweight) * 100).toFixed(2) + "%";
+    }
+    const mythicals = ["helios", "selene", "nyx", "aphrodite", "zeus", "archimedes", "hades"];
+    function updateFish() {  
+        try {
+            if (environment.value == "individual") {
+                var fish = 0;
+                fish += fishingdata.stats.permanent["water"]["fish"];
+                fish += fishingdata.stats.permanent["lava"]["fish"];
+                fish += fishingdata.stats.permanent["ice"]["fish"];
+                document.getElementById("caught_fish").innerText = fish.toLocaleString();
+            } else {
+                var fish = fishingdata.stats.permanent[environment.value]["fish"];
+                document.getElementById("caught_fish").innerText = fish.toLocaleString();
+            }
+        } catch  (TypeError) {
+            document.getElementById("caught_fish").innerText = 0;
+        }
+        try {
+            if (environment.value == "individual") {
+                var fish = 0;
+                fish += fishingdata.stats.permanent["water"]["junk"];
+                fish += fishingdata.stats.permanent["lava"]["junk"];
+                fish += fishingdata.stats.permanent["ice"]["junk"];
+                document.getElementById("caught_junk").innerText = fish.toLocaleString();
+            } else {
+                var fish = fishingdata.stats.permanent[environment.value]["junk"];
+                
+                document.getElementById("caught_junk").innerText = fish.toLocaleString();
+            }
+        } catch  (TypeError) {
+            document.getElementById("caught_junk").innerText = 0;
+        }
+        try {
+            if (environment.value == "individual") {
+                var fish = 0;
+                fish += fishingdata.stats.permanent["water"]["treasure"];
+                fish += fishingdata.stats.permanent["lava"]["treasure"];
+                fish += fishingdata.stats.permanent["ice"]["treasure"];
+                document.getElementById("caught_treasure").innerText = fish.toLocaleString();
+            } else {
+                var fish = fishingdata.stats.permanent[environment.value]["treasure"];
+                document.getElementById("caught_treasure").innerText = fish.toLocaleString();
+            }
+        } catch  (TypeError) {
+            document.getElementById("caught_treasure").innerText = 0;
+        }
+
+        try {
+            var mythicaldata = fishingdata.orbs;
+            for (var i = 0; i < mythicals.length; i++) {
+                if (mythicaldata[mythicals[i]] != undefined) {
+                    console.log("caught_" + mythicals[i]);
+                    document.getElementById("caught_" + mythicals[i]).innerText = mythicaldata[mythicals[i]].toLocaleString();
+                    document.getElementById("weight_" + mythicals[i]).innerText = mythicaldata.weight[mythicals[i]].toLocaleString();
+                } else {
+                    document.getElementById("caught_" + mythicals[i]).innerText = "0";
+                    document.getElementById("weight_" + mythicals[i]).innerText = "0";
+                }
+            }
+        } catch (TypeError){
+            resetMythicals();
+        }
+    }
+    function resetMythicals() {
+        for (var i = 0; i < mythicals.length; i++) {
+            document.getElementById("caught_" + mythicals[i]).innerText = "0";
+            document.getElementById("weight_" + mythicals[i]).innerText = "0";
+        }
+    }
+    function updateSpecialFish(){
         otherstatus.innerText = "";
         for (var i = 0; i <= 4; i++) {
             document.getElementById("row" + i).innerHTML = "";
@@ -196,7 +355,6 @@
                 maxfish++;
               }
               if (fishingdata.special_fish[key] == true && (specialfish[key].season == specialcategory.value || specialcategory.value == "all")){
-                console.log("Making box for " + key);
                 makeBox(key, fishes, max_j);
                 foundfish++;
                 fishes++;
@@ -205,12 +363,13 @@
             document.getElementById("currentspecials").innerText = foundfish;
             document.getElementById("totalspecials").innerText = maxfish;
             if (foundfish == 0) {
-              resetSpecialFish();
+                resetSpecialFish();
             }
         } catch (TypeError) {
             document.getElementById("otherstatus").innerText = "This player has no Main Lobby Fishing stats!";
             resetSpecialFish();
         }
+        updateWeights();
     }
         
     function resetSpecialFish() {
@@ -234,7 +393,6 @@
         tooltip.style.zIndex = "5";
         tooltip.id = "no_special_fish_box";
         box.appendChild(tooltip);
-        console.log(tooltip.id);
         document.getElementById("row0").appendChild(box);
         makeTooltipObject((tooltip.id), "", "This user has no special fish!", "16px", "#808080", true);
     }
@@ -257,8 +415,6 @@
         tooltip.style.opacity = "90%";
         tooltip.style.zIndex = "5";
         box.appendChild(tooltip);
-        console.log(tooltip.id);
-        console.log(fishname + "_text");
         document.getElementById("row" + Math.floor(i / max_i)).appendChild(box);
         makeTooltipObject((tooltip.id), "", specialfish[fishname].plaintext, "20px", "#c0c0c0", true);
         makeTooltipObject((tooltip.id), "", specialfish[fishname].description, "12px", "#808080", true);
@@ -287,7 +443,6 @@
         
     }
     function makeTooltipObject(target, id, text, fontSize, color, lineBreak){
-        console.log("Target: " + target);
         var toInsert = document.createElement("span");
         toInsert.innerText = text;
         toInsert.style.flexBasis = "100%";
@@ -300,5 +455,40 @@
         if (lineBreak) {
             document.getElementById(target).appendChild(document.createElement("br"));
         }   
+    }
+    function updateTableHeights() {
+        const water_box = document.getElementById('statsbox');
+        const lava_box = document.getElementById('calcbox');
+        water_box.style.height = "auto";
+        lava_box.style.height = "auto";
+        const catch_table_row = document.getElementById('tablerow');
+        const trophy_row = document.getElementById('specialfishrow');
+        const waterrect = water_box.getBoundingClientRect();
+        const lavarect = lava_box.getBoundingClientRect();
+        const catchrect = catch_table_row.getBoundingClientRect();
+        const trophyrect = trophy_row.getBoundingClientRect();
+        
+        const maxHeight = Math.max(waterrect.height, lavarect.height);
+        water_box.style.height = `${maxHeight}px`;
+        lava_box.style.height = `${maxHeight}px`;
+        catch_table_row.style.width = `${trophyrect.width}px`;
+    }
+    function updateSize(){
+      if (window.innerWidth >= 768 * (5/3)) {
+          console.log("Desktop mode...");
+          for (var i = 0; i <= 4; i++) {
+            document.getElementById("row" + i).style.width = "60%";
+            document.getElementById("row" + i).style.flexBasis = "61%";
+          }
+          document.getElementById("tablerow").style.flexWrap = "nowrap";
+          
+        } else {
+          console.log("Mobile mode...");
+          for (var i = 0; i <= 4; i++) {
+            document.getElementById("row" + i).style.width = "min(calc(100% - 30px), max(960px, 70%))";
+            document.getElementById("row" + i).style.flexBasis = "min(calc(100% - 30px), max(960px, 70%))";
+          }
+          document.getElementById("tablerow").style.flexWrap = "wrap";
+        }
     }
 </script>
