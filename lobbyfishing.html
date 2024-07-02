@@ -186,14 +186,11 @@
         }
         if (!fasttrack){
             data = await getStats(UUID);
-            console.log(data);
         } 
         
         fasttrack = false;
         localStorage.setItem("storedmwname", name);
-        console.log("Set item " + localStorage.getItem("storedmwname"));
         localStorage.setItem("storedmwdata", JSON.stringify(data)); 
-        console.log("Set item " + localStorage.getItem("storedmwdata"));
         fresh = 1;
         updateSpecialFish();
         updateWeights();
@@ -252,14 +249,7 @@
         if (currentspecials.innerText == "44") {
             specialweight = 0;
         }
-        console.log("Fishweight: " + fishweight);
-        console.log(junkweight);
-        console.log(treasureweight);
-        console.log(mythicalweight);
-        console.log(specialweight);
         var totalweight = fishweight + junkweight + treasureweight + mythicalweight + specialweight;
-        console.log(80 + 10 + 5 + 5 + 0.3);
-        console.log("Total weight: " + totalweight);
         document.getElementById("chance_fish").innerText = ((fishweight / totalweight) * 100).toFixed(2) + "%";
         document.getElementById("chance_junk").innerText = ((junkweight / totalweight) * 100).toFixed(2) + "%";
         document.getElementById("chance_treasure").innerText = ((treasureweight / totalweight) * 100).toFixed(2) + "%";
@@ -271,12 +261,27 @@
         try {
             if (environment.value == "individual") {
                 var fish = 0;
-                fish += fishingdata.stats.permanent["water"]["fish"];
-                fish += fishingdata.stats.permanent["lava"]["fish"];
-                fish += fishingdata.stats.permanent["ice"]["fish"];
+                try {
+                    if (fishingdata.stats.permanent["water"]["fish"] != undefined)
+                    fish += fishingdata.stats.permanent["water"]["fish"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["lava"]["fish"] != undefined)
+                    fish += fishingdata.stats.permanent["lava"]["fish"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["ice"]["fish"] != undefined)
+                    fish += fishingdata.stats.permanent["ice"]["fish"];
+                } catch (TypeError) {
+                }
                 document.getElementById("caught_fish").innerText = fish.toLocaleString();
             } else {
-                var fish = fishingdata.stats.permanent[environment.value]["fish"];
+                var fish = 0;
+                if (fishingdata.stats.permanent[environment.value]["fish"] != undefined) {
+                    fish += fishingdata.stats.permanent[environment.value]["fish"];
+                }
                 document.getElementById("caught_fish").innerText = fish.toLocaleString();
             }
         } catch  (TypeError) {
@@ -285,13 +290,27 @@
         try {
             if (environment.value == "individual") {
                 var fish = 0;
-                fish += fishingdata.stats.permanent["water"]["junk"];
-                fish += fishingdata.stats.permanent["lava"]["junk"];
-                fish += fishingdata.stats.permanent["ice"]["junk"];
+                try {
+                    if (fishingdata.stats.permanent["water"]["junk"] != undefined)
+                    fish += fishingdata.stats.permanent["water"]["junk"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["lava"]["junk"] != undefined)
+                    fish += fishingdata.stats.permanent["lava"]["junk"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["ice"]["junk"] != undefined)
+                    fish += fishingdata.stats.permanent["ice"]["junk"];
+                } catch (TypeError) {
+                }
                 document.getElementById("caught_junk").innerText = fish.toLocaleString();
             } else {
-                var fish = fishingdata.stats.permanent[environment.value]["junk"];
-                
+                var fish = 0;
+                if (fishingdata.stats.permanent[environment.value]["junk"] != undefined) {
+                    fish += fishingdata.stats.permanent[environment.value]["junk"];
+                }
                 document.getElementById("caught_junk").innerText = fish.toLocaleString();
             }
         } catch  (TypeError) {
@@ -300,12 +319,27 @@
         try {
             if (environment.value == "individual") {
                 var fish = 0;
-                fish += fishingdata.stats.permanent["water"]["treasure"];
-                fish += fishingdata.stats.permanent["lava"]["treasure"];
-                fish += fishingdata.stats.permanent["ice"]["treasure"];
+                try {
+                    if (fishingdata.stats.permanent["water"]["treasure"] != undefined)
+                    fish += fishingdata.stats.permanent["water"]["treasure"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["lava"]["treasure"] != undefined)
+                    fish += fishingdata.stats.permanent["lava"]["treasure"];
+                } catch (TypeError) {
+                }
+                try {
+                    if (fishingdata.stats.permanent["ice"]["treasure"] != undefined)
+                    fish += fishingdata.stats.permanent["ice"]["treasure"];
+                } catch (TypeError) {
+                }
                 document.getElementById("caught_treasure").innerText = fish.toLocaleString();
             } else {
-                var fish = fishingdata.stats.permanent[environment.value]["treasure"];
+                var fish = 0;
+                if (fishingdata.stats.permanent[environment.value]["treasure"] != undefined) {
+                    fish += fishingdata.stats.permanent[environment.value]["treasure"];
+                }
                 document.getElementById("caught_treasure").innerText = fish.toLocaleString();
             }
         } catch  (TypeError) {
@@ -313,19 +347,24 @@
         }
 
         try {
+            console.log("Checking mythics");
             var mythicaldata = fishingdata.orbs;
             for (var i = 0; i < mythicals.length; i++) {
                 if (mythicaldata[mythicals[i]] != undefined) {
-                    console.log("caught_" + mythicals[i]);
+                    console.log(mythicaldata[mythicals[i]]);
                     document.getElementById("caught_" + mythicals[i]).innerText = mythicaldata[mythicals[i]].toLocaleString();
-                    document.getElementById("weight_" + mythicals[i]).innerText = mythicaldata.weight[mythicals[i]].toLocaleString();
+                    try {
+                        document.getElementById("weight_" + mythicals[i]).innerText = mythicaldata.weight[mythicals[i]].toLocaleString();
+                    } catch {
+                        document.getElementById("weight_" + mythicals[i]).innerText = "0";
+                    }
                 } else {
                     document.getElementById("caught_" + mythicals[i]).innerText = "0";
                     document.getElementById("weight_" + mythicals[i]).innerText = "0";
                 }
             }
         } catch (TypeError){
-            resetMythicals();
+            console.log("Some failure on mythical fish check?");
         }
     }
     function resetMythicals() {
