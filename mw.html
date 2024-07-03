@@ -460,6 +460,7 @@
                                 if (mwdata["final_kills_after_final_killed"] != undefined) {
                                     deadFK = mwdata["final_kills_after_final_killed"];
                                 }
+                                console.log(deadFK + deadFA);
                                 if ((deadFK + deadFA) < 15) {
                                     topSkins.push({
                                         key: skinPaths[i],
@@ -762,7 +763,7 @@
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                     } else if (skinPaths[i] == "squid_defender_final_kills") {
                         
-                        // I had to write an entire exception for these THREE stats. Enjoy.
+                        // I had to write an entire exception for these stats. Enjoy.
 
                         var squidDefFKA = 0;
                         if (mwdata[skinPaths[i]] != undefined) {
@@ -832,19 +833,19 @@
                     } else if (skinPaths[i] == "final_assists_after_final_killed") {
                         var deadFKA = 0;
                         if (mwdata[skinPaths[i]] != undefined) {
-                            if (mwdata[extraPaths[0]] != undefined){
+                            if (mwdata[extraPaths[1]] != undefined){
                                 deadFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[1]]);
                             } else {
                                 deadFKA = parseInt(mwdata[skinPaths[i]]);
                             }
                         } else {
-                            if (mwdata[extraPaths[0]] != undefined){
+                            if (mwdata[extraPaths[1]] != undefined){
                                 deadFKA = parseInt(mwdata[extraPaths[0]]);
                             } else {
                                 deadFKA = 0;
                             }
                         }
-
+                        console.log(deadFKA);
                         if (deadFKA >= 15) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", deadFKA, "12px", "#55ff55", false);
