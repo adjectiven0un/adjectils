@@ -210,6 +210,7 @@
         if (!fasttrack){
             data = await getStats(UUID);
         }
+        console.log(UUID);
         fasttrack = false;
         localStorage.setItem("storedmwname", name);
         localStorage.setItem("storedmwdata", JSON.stringify(data)); 
@@ -228,8 +229,19 @@
             return -1;
         }
         
-        if (mwdata == undefined){
+        if (mwdata == undefined ){
             document.getElementById("status").innerText = "This player hasn't played Mega Walls!";
+            fasttrack = false;
+            localStorage.setItem("storedmwname", null);
+            localStorage.setItem("storedmwdata", null); 
+            data = "";
+            mwdata = "";
+            topSkins = [];
+            resetPage();
+            return -1;
+        }
+        if (mwdata.classes == undefined) {
+            document.getElementById("status").innerText = "This player hasn't had their stats migrated to the API!";
             fasttrack = false;
             localStorage.setItem("storedmwname", null);
             localStorage.setItem("storedmwdata", null); 
@@ -550,11 +562,9 @@
             skintask.style.fontSize = "16px";
             var progress = document.createElement("td");
             progress.style.paddingLeft = "20px";
-            if (topSkins[i].value < 10) {
-                progress.innerText = "(" + topSkins[i].progress + "/" + topSkins[i].max + ")\n(" + topSkins[i].value + "%)";
-            } else {
-                progress.innerText = "(" + topSkins[i].progress + "/" + topSkins[i].max + ")\n(" + topSkins[i].value + "%)";
-            }
+    
+            progress.innerText = "(" + topSkins[i].progress.toLocaleString() + "/" + parseInt(topSkins[i].max).toLocaleString() + ")\n(" + topSkins[i].value + "%)";
+           
             progress.style.textAlign = "right";
             var box = document.createElement("div");
             box.style.position = "relative";
@@ -755,9 +765,9 @@
                 try {
                     if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills" && skinPaths[i] != "spider_a_kills" && skinPaths[i] != "final_assists_after_final_killed") {
                         makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                        makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                        makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
                         addCheck(skinNames, i, "✓");
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
@@ -845,7 +855,6 @@
                                 deadFKA = 0;
                             }
                         }
-                        console.log(deadFKA);
                         if (deadFKA >= 15) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", deadFKA, "12px", "#55ff55", false);
@@ -900,9 +909,9 @@
                         //try {
                         if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])){
                             makeTooltipObject(tip.id, "", "Unlocked! (Legacy) (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
                             document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                             addCheck(skinNames, i, "✱");
@@ -911,14 +920,14 @@
                         //} catch (TypeError){
                             if (mwdata[skinPaths[i]] != undefined){
                                 makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", mwdata[skinPaths[i]], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
                                 document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
                             } else {
                                 makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
                                 document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
                             }
@@ -1020,15 +1029,24 @@
         };
         targetrow.appendChild(box);
     }
-
+    var prevSkin = "";
     function makeRender(skinName){
+        if (skinName == prevSkin) {
+            return;
+        }
+        prevSkin = skinName;
+        var buggedSkins = ["jade", "athena"];
+        
         let skinViewer = new skinview3d.SkinViewer({
             canvas: document.getElementById("skin_container"),
             width: 200,
             height: 400,
+            
             skin: "images/mega_walls/skins/" + skinName + ".png"
         });
-        skinViewer.background = 0x808080;
+        if (buggedSkins.includes(skinName)){
+            skinViewer.model = "slim";
+        }
         skinViewer.fov = 70;
         skinViewer.zoom = 0.7;
 
