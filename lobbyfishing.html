@@ -116,10 +116,15 @@
             </div>
             <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">
                 <div class = "flex_index_box flex_full_row" >
-                    <span class = "header flex_full_row">Seasonal Event</span>
-                    <span class = "flex_full_row">Latest season:&nbsp;<span id = "season"></span></span>
+                    <span class = "header flex_full_row" style = "margin-bottom:10px;">Seasonal Event</span>
+                    <span class = "flex_full_row" style = "margin-bottom:10px;">Latest season:&nbsp;<span id = "season"></span></span>
                     <span class = "flex_full_row">Event progress:&nbsp;<span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
-                    <span class = "flex_full_row"><span class = "meter">[</span><span id = "meter1" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter2" class = "meter"></span><span class = "meter">]</span></span>
+                    <span class = "flex_full_row" style = "margin-bottom:10px;"><span class = "meter">[</span><span id = "meter1" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter2" class = "meter"></span><span class = "meter">]</span></span>
+                    <table>
+                        <tr><td><span class = "flex_full_row"><span style = "color:#55ffff">Fish</span>&nbsp;caught:</td><td class = "tdalignright"><span id = "eventfish">0</span></span></td></tr>
+                        <tr><td><span class = "flex_full_row"><span style = "color:#ff5555">Junk</span>&nbsp;caught:</td><td class = "tdalignright"><span id = "eventjunk">0</span></span></td></tr>
+                        <tr><td style = "padding-right:20px"><span class = "flex_full_row"><span style = "color:#55ff55">Treasure</span>&nbsp;caught:</td><td class = "tdalignright"><span id = "eventtreasure">0</span></span></td></tr>
+                    </table>
                 </div>
             </div>
             <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "specialfishrow">
@@ -396,8 +401,49 @@
         } catch {
 
         }
-        console.log(seasonmythicals);
+        var seasonfish = 0;
+        var seasonjunk = 0;
+        var seasontreasure = 0;
+        try {
+            seasonfish += (notUndefined(seasonstats["water"]["fish"]));
+        } catch {
+        }
+        try {
+            seasonfish += (notUndefined(seasonstats["lava"]["fish"]));
+        } catch {
+        }
+        try {
+            seasonfish += (notUndefined(seasonstats["ice"]["fish"]));
+        } catch {
+        }
+        try {
+            seasonjunk = (notUndefined(seasonstats["water"]["junk"]));
+        } catch {
+        }
+        try {
+            seasonjunk = (notUndefined(seasonstats["lava"]["junk"]));
+        } catch {
+        }
+        try {
+            seasonjunk = (notUndefined(seasonstats["ice"]["junk"]));
+        } catch {
+        }
+        try {
+            seasontreasure = (notUndefined(seasonstats["water"]["treasure"]));
+        } catch {
+        }
+        try {
+            seasontreasure = (notUndefined(seasonstats["lava"]["treasure"]));
+        } catch {
+        }
+        try {
+            seasontreasure = (notUndefined(seasonstats["ice"]["treasure"]));
+        } catch {
+        }
         eventprogress.innerText = seasonmythicals.toLocaleString();
+        eventfish.innerText = seasonfish.toLocaleString();
+        eventjunk.innerText = seasonjunk.toLocaleString();
+        eventtreasure.innerText = seasontreasure.toLocaleString();
         eventmax.innerText = currentmax;
         var text1 = "";
         var text2 = "";
