@@ -118,7 +118,7 @@
                 <div class = "flex_index_box flex_full_row" >
                     <span class = "header flex_full_row">Seasonal Event</span>
                     <span class = "flex_full_row">Latest season:&nbsp;<span id = "season"></span></span>
-                    <span class = "flex_full_row">Event progress:&nbsp;<span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish</span>
+                    <span class = "flex_full_row">Event progress:&nbsp;<span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
                     <span class = "flex_full_row"><span class = "meter">[</span><span id = "meter1" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter2" class = "meter"></span><span class = "meter">]</span></span>
                 </div>
             </div>
@@ -397,7 +397,7 @@
 
         }
         console.log(seasonmythicals);
-        eventprogress.innerText = seasonmythicals;
+        eventprogress.innerText = seasonmythicals.toLocaleString();
         eventmax.innerText = currentmax;
         var text1 = "";
         var text2 = "";
@@ -438,6 +438,7 @@
         var hexcolor = "";
         hexcolor = "#" + redhex + greenhex + "00";
         meter1.style.color = hexcolor;
+        eventpercent.innerText = Math.min(100, ((seasonmythicals/currentmax) * 100).toFixed(1));
     }
     function notUndefined (input) {
         if (input == undefined) {
