@@ -1,9 +1,3 @@
-const specialfishnames_all = ["puffer_emoji", "nemo", "knockback_slimeball", "hot_potato", "fish_monger_suit_helmet", "fish_monger_suit_chestplate", "fish_monger_suit_leggings", "fish_monger_suit_boots", "barnacle", "leviathan", "star_eater_scales", "rubber_duck", "oops_the_fish", "shark", "sea_bass", "sunscreen", "pile_of_sand", "mahi_mahi", "lucent_bee_hive", "spook_the_fish", "chocolate_bar", "pumpkin_spice_latte", "angler", "pumpkin_pie", "eyeball", "wayfinders_compass", "molten_iron", "regular_fish", "lava_shark", "chill_the_fish_3", "frozen_fish", "festival_pufferfish_hat", "eggnog", "dawning_snowball", "frozen_meal", "festive_lights", "egg_the_fish", "cracked_egg", "raw_ham", "carrot", "soggy_hot_cross_bun", "clay_ball", "rose", "cherry_blossom"];
-const specialfishnames_default = ["puffer_emoji", "nemo", "knockback_slimeball", "hot_potato", "fish_monger_suit_helmet", "fish_monger_suit_chestplate", "fish_monger_suit_leggings", "fish_monger_suit_boots", "barnacle", "leviathan", "star_eater_scales", "rubber_duck"];
-const specialfishnames_summer = ["oops_the_fish", "shark", "sea_bass", "sunscreen", "pile_of_sand", "mahi_mahi", "lucent_bee_hive"];
-const specialfishnames_halloween = ["spook_the_fish", "chocolate_bar", "pumpkin_spice_latte", "angler", "pumpkin_pie", "eyeball", "wayfinders_compass", "molten_iron", "regular_fish", "lava_shark"];
-const specialfishnames_holidays = ["chill_the_fish_3", "frozen_fish", "festival_pufferfish_hat", "eggnog", "dawning_snowball", "frozen_meal", "festive_lights"];
-const specialfishnames_spring = ["egg_the_fish", "cracked_egg", "raw_ham", "carrot", "soggy_hot_cross_bun", "clay_ball", "rose", "cherry_blossom"];
 
 const specialfish = {
     "puffer_emoji": {

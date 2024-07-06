@@ -114,6 +114,14 @@
                 </div>
               </div>
             </div>
+            <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">
+                <div class = "flex_index_box flex_full_row" >
+                    <span class = "header flex_full_row">Seasonal Event</span>
+                    <span class = "flex_full_row">Latest season:&nbsp;<span id = "season"></span></span>
+                    <span class = "flex_full_row">Event progress:&nbsp;<span id = "eventprogress">0</span>/<span id = "eventmax">100</span></span>
+                    <span class = "flex_full_row"><span class = "meter">[</span><span id = "meter1" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter2" class = "meter"></span><span class = "meter">]</span></span>
+                </div>
+            </div>
             <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "specialfishrow">
               <div class = "flex_index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))"> 
                 <span class = "header">Special Fish</span>
@@ -347,11 +355,9 @@
         }
 
         try {
-            console.log("Checking mythics");
             var mythicaldata = fishingdata.orbs;
             for (var i = 0; i < mythicals.length; i++) {
                 if (mythicaldata[mythicals[i]] != undefined) {
-                    console.log(mythicaldata[mythicals[i]]);
                     document.getElementById("caught_" + mythicals[i]).innerText = mythicaldata[mythicals[i]].toLocaleString();
                     try {
                         document.getElementById("weight_" + mythicals[i]).innerText = mythicaldata.weight[mythicals[i]].toLocaleString();
@@ -366,6 +372,78 @@
         } catch (TypeError){
             console.log("Some failure on mythical fish check?");
         }
+        var time = new Date();
+        var currentyear = time.getFullYear();
+        var yearstats = fishingdata.stats[currentyear];
+        var currentevent = "summer"; // adj needs to change this manually because hypixel is really inconsistent on the definition of a season
+        var currentmax = 300; // adj needs to change this seasonally as well
+        season.innerText = "Summer";
+        var seasonstats = yearstats[currentevent];
+        console.log(seasonstats);
+        var seasonmythicals = 0;
+        try {
+            seasonmythicals += Number(notUndefined(seasonstats["water"]["orb"]));
+        } catch {
+
+        } 
+        try {
+            seasonmythicals += (notUndefined(seasonstats["lava"]["orb"]));
+        } catch {
+
+        }
+        try {
+            seasonmythicals += (notUndefined(seasonstats["ice"]["orb"]));
+        } catch {
+
+        }
+        console.log(seasonmythicals);
+        eventprogress.innerText = seasonmythicals;
+        eventmax.innerText = currentmax;
+        var text1 = "";
+        var text2 = "";
+        var percent = Math.floor(100 * (seasonmythicals/currentmax));
+        if (percent > 100) {
+            percent = 100;
+        }
+        for (var i = 0; i < percent; i++) {
+            text1 += "|";
+        }
+        meter1.innerText = text1;
+        for (var i = percent; i < 100; i++) {
+            text2 += "|";
+        }
+        meter2.innerText = text2;
+
+        var redhex = Math.floor((100-percent) * 2.5);
+        var greenhex = Math.ceil((percent) * 2.5);
+        if (redhex == 0){
+            redhex = "00";
+        } else if (redhex < 16){
+            redhex = "0" + redhex.toString(16);
+        } else if (redhex % 16 == 0){
+            redhex = redhex.toString(16);
+        } else {
+            redhex = redhex.toString(16);
+        }
+        
+        if (greenhex == 0){
+            greenhex = "00";
+        } else if (greenhex < 16){
+            greenhex = "0" + greenhex.toString(16);
+        } else if (greenhex % 16 == 0){
+            greenhex = greenhex.toString(16);
+        } else {
+            greenhex = greenhex.toString(16);
+        }
+        var hexcolor = "";
+        hexcolor = "#" + redhex + greenhex + "00";
+        meter1.style.color = hexcolor;
+    }
+    function notUndefined (input) {
+        if (input == undefined) {
+            return 0;
+        }
+        return input;
     }
     function resetMythicals() {
         for (var i = 0; i < mythicals.length; i++) {
