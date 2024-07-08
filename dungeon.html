@@ -127,7 +127,7 @@
             <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
             <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
+            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><span id = "copynotif" class = "fadebox" style = "opacity:0">Copied!&nbsp;</span><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
             </table>
         </div>
     </div>
@@ -425,6 +425,9 @@
         
     }
     function copyText(){
+        var box = document.getElementById("copynotif");
+        box.classList.remove("fade");
+        void box.offsetWidth;
         if (copyabletext != ""){
             const textarea = document.createElement("textarea");
             textarea.value = copyabletext;
@@ -432,6 +435,8 @@
             textarea.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(textarea.value);
         }
+        box.classList.add("fade");
+
     }
     window.addEventListener('resize', updateSizes());
     function updateSizes(){
