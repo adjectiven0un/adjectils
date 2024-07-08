@@ -118,8 +118,14 @@
                 <div class = "flex_index_box flex_full_row" >
                     <span class = "header flex_full_row" style = "margin-bottom:10px;">Seasonal Event</span>
                     <span class = "flex_full_row" style = "margin-bottom:10px;">Latest season:&nbsp;<span id = "season"></span></span>
-                    <span class = "flex_full_row">Event progress:&nbsp;<span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
-                    <span class = "flex_full_row" style = "margin-bottom:10px;"><span class = "meter">[</span><span id = "meter1" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter2" class = "meter"></span><span class = "meter">]</span></span>
+                    <span class = "flex_full_row" style = "padding-bottom: 10px;">Event progress:&nbsp;</span>
+                    <span class = "flex_full_row" style = "padding-bottom:10px;">&nbsp;
+                    <div class = "metercase" style = "text-align: center; z-index:0"></div>
+                    <span style = "color:#f0f0f0; z-index: 10; text-align: center; position:absolute; width:400px"><span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
+                    <div class = "meterfill" style = "width:0px; background-color: #00ff00; z-index: 5;" id = eventmeter></div>
+                
+                        
+                    </span>
                     <table>
                         <tr><td><span class = "flex_full_row"><span style = "color:#55ffff">Fish</span>&nbsp;caught:</td><td class = "tdalignright"><span id = "eventfish">0</span></span></td></tr>
                         <tr><td><span class = "flex_full_row"><span style = "color:#ff5555">Junk</span>&nbsp;caught:</td><td class = "tdalignright"><span id = "eventjunk">0</span></span></td></tr>
@@ -139,10 +145,12 @@
                       <option value = easter style = "color:#55ffff">Spring</option>
                   </select>
                 </label>
-                <span class = "flex_full_row"><span>Found:&nbsp;</span><span id = "currentspecials">0</span>/<span id = "totalspecials">44</span>&nbsp;(<span id = "specialfishpercent">0</span>%)</span>
-                <span class = "flex_full_row" style = "margin-bottom:10px;"><span class = "meter">[</span><span id = "meter3" class = "meter">||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span id = "meter4" class = "meter"></span><span class = "meter">]</span></span>
+                <span class = "flex_full_row" style = "padding-bottom: 20px; padding-top: 10px;">
+                <div class = "metercase" style = "text-align: center; z-index:0"></div>
+                <span style = "color:#f0f0f0; z-index: 4; text-align: center; position:absolute; width:400px"><span>Found:&nbsp;</span><span id = "currentspecials">0</span>/<span id = "totalspecials">44</span>&nbsp;(<span id = "specialfishpercent">0</span>%)</span>
+                <div class = "meterfill" style = "width:0px; background-color: #00ff00; z-index: 3; position:absolute" id = specialmeter></div>
+                </span>
                 <div class = "flex_index_row flex_full_row" id = "row0" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
-
                 </div>
                 <div class = "flex_index_row flex_full_row" id = "row1" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
 
@@ -452,17 +460,11 @@
         if (percent > 100) {
             percent = 100;
         }
-        for (var i = 0; i < percent; i++) {
-            text1 += "|";
-        }
-        meter1.innerText = text1;
-        for (var i = percent; i < 100; i++) {
-            text2 += "|";
-        }
-        meter2.innerText = text2;
+        
+        eventmeter.style.width = percent * 4 + "px";
 
-        var redhex = Math.floor((100-percent) * 2.5);
-        var greenhex = Math.ceil((percent) * 2.5);
+        var redhex = Math.min(240, Math.floor((100-percent) * 4));
+        var greenhex = Math.min(192, Math.ceil((percent) * 4));
         if (redhex == 0){
             redhex = "00";
         } else if (redhex < 16){
@@ -484,7 +486,7 @@
         }
         var hexcolor = "";
         hexcolor = "#" + redhex + greenhex + "00";
-        meter1.style.color = hexcolor;
+        eventmeter.style.backgroundColor = hexcolor;
         eventpercent.innerText = Math.min(100, ((seasonmythicals/currentmax) * 100).toFixed(1));
     }
     function notUndefined (input) {
@@ -535,23 +537,12 @@
             document.getElementById("otherstatus").innerText = "This player has no Main Lobby Fishing stats!";
             resetSpecialFish();
         }
-        var text1 = "";
-        var text2 = "";
-        var percent = Math.floor(100 * (foundfish/maxfish));
-        if (percent > 100) {
-            percent = 100;
-        }
-        for (var i = 0; i < percent; i++) {
-            text1 += "|";
-        }
-        meter3.innerText = text1;
-        for (var i = percent; i < 100; i++) {
-            text2 += "|";
-        }
-        meter4.innerText = text2;
+        var percent = Math.min(100, Math.floor(100 * (foundfish/maxfish)));
+        
+        specialmeter.style.width = 4 * percent + "px";
 
-        var redhex = Math.floor((100-percent) * 2.5);
-        var greenhex = Math.ceil((percent) * 2.5);
+        var redhex = Math.min(240, Math.floor((100-percent) * 4));
+        var greenhex = Math.min(192, Math.ceil((percent) * 4));
         if (redhex == 0){
             redhex = "00";
         } else if (redhex < 16){
@@ -572,8 +563,10 @@
             greenhex = greenhex.toString(16);
         }
         var hexcolor = "";
+        
         hexcolor = "#" + redhex + greenhex + "00";
-        meter3.style.color = hexcolor;
+        console.log(hexcolor);
+        specialmeter.style.backgroundColor = hexcolor;
         specialfishpercent.innerText = Math.min(100, ((foundfish/maxfish) * 100).toFixed(1));
         updateWeights();
     }
