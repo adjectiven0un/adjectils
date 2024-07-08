@@ -494,5 +494,24 @@ body {
     border-radius: 4px;
     position: absolute;
   }
+  @keyframes fadeOut {
+      0% {
+          opacity: 1;
+      }
+      100% {
+          opacity: 0;
+      }
+  }
+
+  .fadebox {
+      color: #c0c0c0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .fadebox.fade {
+      animation: fadeOut 2s forwards;
+  }
 
   
