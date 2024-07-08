@@ -482,5 +482,17 @@ body {
     text-align: right; 
     align-items: right;
   }
+  .metercase {
+    width:400px; 
+    height: 16px; 
+    background-color: #808080;
+    border-radius: 4px; 
+    position: absolute;
+  }
+  .meterfill {
+    height:16px; 
+    border-radius: 4px;
+    position: absolute;
+  }
 
   
