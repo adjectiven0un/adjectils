@@ -319,29 +319,34 @@
             localStorage.setItem("storeddata", JSON.stringify(data)); 
             console.log("Set item " + localStorage.getItem("storeddata"));
             try {
-                archboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.toxophilite) * 0.02;
+                archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.toxophilite) * 0.02;
             } catch {
-                archboost.value = 1.1;
+                console.log("Toxophilite defaulted");
+                archboost.value = 1;
             }
             try {
-                bersboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.unbridled_rage) * 0.02;
+                bersboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.unbridled_rage) * 0.02;
             } catch {
-                bersboost.value = 1.1;
+                console.log("Unbridled Rage defaulted");
+                bersboost.value = 1;
             }
             try {
-                healboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.heart_of_gold) * 0.02;
+                healboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.heart_of_gold) * 0.02;
             } catch {
-                healboost.value = 1.1;
+                console.log("Heart of Gold defaulted");
+                healboost.value = 1;
             }
             try {
-                mageboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.cold_efficiency) * 0.02;
+                mageboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.cold_efficiency) * 0.02;
             } catch {
-                mageboost.value = 1.1;
+                console.log("Cold Efficiency defaulted");
+                mageboost.value = 1;
             }
             try {
-                tankboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.diamond_in_the_rough) * 0.02;
+                tankboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.diamond_in_the_rough) * 0.02;
             } catch {
-                tankboost.value = 1.1;
+                console.log("Diamond in the Rough defaulted");
+                tankboost.value = 1;
             }
             
 
@@ -352,6 +357,7 @@
             return 0;
         }
         return input;
+        console.log("Something returned undefined.");
     }
     async function updateCata(name){
         
