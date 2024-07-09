@@ -24,14 +24,14 @@
   </div>
   <br>
   <div style = "text-align:center">
-  <label>Username: <input type = "text" id = "nameinput" onchange = updateCata(value)>&nbsp;</label><button onclick = updateCata(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
+  <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
   <span id = "refreshstatus"></span><br>
   <span id = "status"></span><br>
   <span id = "otherstatus"></span><br>
   <div>
     <form action = "#" style = "background-color: #282828;">
       <label>Profile:
-      <select id = profileid value = 4 onchange = updateCata(nameinput.value)>
+      <select id = profileid value = 4 onchange = updateUser(nameinput.value)>
         <option id = profile0 value = 0>–––––</option>
         <option id = profile1 value = 1>–––––</option>
         <option id = profile2 value = 2>–––––</option>
@@ -48,7 +48,8 @@
         <div class = "flex_cata_box" style = "width:29%;" id = "levelsbox">
             <span class = header class = "flex_full_row" style = "margin-bottom: 20px;">Current levels</span>
             <table style = "width:100%">
-            <tr><td class = "flex_full_row" style = "margin-bottom: 18px;"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right" style = "margin-bottom:18px"></span></td></tr>
+            <tr><td class = "flex_full_row"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"></td><td><span id = "dailytoday" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td class = "flex_full_row"><span class = "flex_full_row">Catacombs Level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "catapercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Archer Level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
@@ -67,7 +68,7 @@
         <div class = "flex_cata_box" style = "width:69%;" id = "calcbox">
             <span class = header class = "flex_full_row">Milestone calculations</span>
             <span class = fineprint style = "display:flex; flex-basis:100%;">Note: For ease of calculation, it's assumed that each floor has been completed at least 25 times, and that a score of exactly 300 is reached every run.</span>
-            <table>
+            <table class = "flex_full_row">
             <tr><td>
                 <form action = "#">
                     <div id = "floorselectdiv">
@@ -119,16 +120,84 @@
                 </form>
             </td></tr>
             </table>
-            <table style = "width:100%">
-            <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
-            <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><span id = "copynotif" class = "fadebox" style = "opacity:0">Copied!&nbsp;</span><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
+            <table>
+                <tr>
+                    <td>
+                        <label>Toxophilite (Archer XP Boost):</label></td>
+                        <td> <select id = "archboost" value = "1.1" onchange = updateCata(nameinput.value)>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1>0 (0%)</option>
+                        </select>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <label>Unbridled Rage (Berserk XP Boost):</label></td>
+                        <td> <select id = "bersboost" value = "1.1" onchange = updateCata(nameinput.value)>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1>0 (0%)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Heart of Gold (Healer XP Boost):</label></td>
+                        <td> <select id = "healboost" value = "1.1" onchange = updateCata(nameinput.value)>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1>0 (0%)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Cold Efficiency (Mage XP Boost):</label></td>
+                        <td> <select id = "mageboost" value = "1.1" onchange = updateCata(nameinput.value)>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1>0 (0%)</option>
+                        </select>
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
+                        <label>Diamond in the Rough (Tank XP Boost):</label></td>
+                        <td> <select id = "tankboost" value = "1.1" onchange = updateCata(nameinput.value)>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1>0 (0%)</option>
+                        </select>
+                    </td>
+                </tr> 
             </table>
+            <table style = "width:100%">
+                <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><span id = "copynotif" class = "fadebox" style = "opacity:0">Copied!&nbsp;</span><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
+            </table>
+
         </div>
     </div>
   </section>
@@ -137,11 +206,12 @@
   </body>
   <script src = "getUUID.js"></script>
   <script>
-    const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000];
+    const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000];
     var classes = ["archer", "berserk", "healer", "mage", "tank"];
     var classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
     const totalxp = 569809640;
     var copyabletext = "";
+    var data = undefined;
     function updatePage(){
         updateSizes();
         if (localStorage.getItem("storedname") != null){
@@ -151,15 +221,16 @@
             document.getElementById("nameinput").value = localStorage.getItem("storedname");
             data = JSON.parse(localStorage.getItem("storeddata"));
             fasttrack = true;
-            updateCata(localStorage.getItem("storedname"));
+            updateUser(localStorage.getItem("storedname"));
         }
     }
-    var data = undefined;
+    
     var onCD = false;
     var profilelist;
     var UUID;
     function resetStatuses(){
       document.getElementById("dailyruns").innerText = "0";
+      document.getElementById("dailytoday").innerHTML = "...";
       document.getElementById("status").innerText = "";
       document.getElementById("otherstatus").innerText = "";
       document.getElementById("catalevel").innerText = "...";
@@ -194,8 +265,7 @@
         return input;
     }
     var fasttrack = false;
-    
-    async function updateCata(name){
+    async function updateUser(name){
         resetStatuses();
         console.log("Last name: " + lastname + " New name: " + name);
         if (onCD == true){
@@ -248,9 +318,44 @@
             console.log("Set item " + localStorage.getItem("storedname"));
             localStorage.setItem("storeddata", JSON.stringify(data)); 
             console.log("Set item " + localStorage.getItem("storeddata"));
+            try {
+                archboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.toxophilite) * 0.02;
+            } catch {
+                archboost.value = 1.1;
+            }
+            try {
+                bersboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.unbridled_rage) * 0.02;
+            } catch {
+                bersboost.value = 1.1;
+            }
+            try {
+                healboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.heart_of_gold) * 0.02;
+            } catch {
+                healboost.value = 1.1;
+            }
+            try {
+                mageboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.cold_efficiency) * 0.02;
+            } catch {
+                mageboost.value = 1.1;
+            }
+            try {
+                tankboost.value = 1 + notUndefined(data.profiles[profilenum].members[UUID].player_data.perks.diamond_in_the_rough) * 0.02;
+            } catch {
+                tankboost.value = 1.1;
+            }
+            
+
+            updateCata(name);
+    }
+    function notUndefined (input) {
+        if (input == undefined) {
+            return 0;
+        }
+        return input;
+    }
+    async function updateCata(name){
         
         try {
-            console.log(data);
             var dungeons = data.profiles[profileid.value].members[UUID].dungeons;
             var cataxp =  dungeons.dungeon_types.catacombs.experience;
             var time = Math.floor(Date.now()/1000);
@@ -258,19 +363,21 @@
             var realdaystamp = Math.floor(time / realdaylen);
             if (dungeons.daily_runs.current_day_stamp == realdaystamp){
                 document.getElementById("dailyruns").innerText = Math.max(0, 5 - (dungeons.daily_runs.completed_runs_count));
+                document.getElementById("dailytoday").innerText = "(" + dungeons.daily_runs.completed_runs_count + " today)";
             } else {
                 document.getElementById("dailyruns").innerText = 5;
+                document.getElementById("dailytoday").innerText = "(0 today)";
             }
             
-            if (targetcata.value > 50) {
-                targetcata.value = 50;
+            if (targetcata.value > 60) {
+                targetcata.value = 60;
             }
             if (targetcata.value < 1) {
                 targetcata.value = 1;
             }
             var targetcatalevel = targetcata.value;
             var targetcataxp = 0;
-            for (var i = 0; i < targetcatalevel; i++){
+            for (var i = 0; i < 60; i++){
                 cataxp -= classxps[i];
                 if (cataxp <= 0){
                     cataxp += (classxps[i]);
@@ -280,10 +387,14 @@
                     break;
                 }
             }
-            if (i == 50){
-                console.log("Failsafe triggered, congrats on being cata " + targetcatalevel);
-                document.getElementById("catalevel").innerText = targetcatalevel;
+            if (i >= 60){
+                console.log("Failsafe triggered, congrats on being cata " + i);
+                document.getElementById("catalevel").innerText = i;
                 document.getElementById("catapercent").innerText = "Congrats!";
+            } else if (i >= targetcatalevel) {
+                console.log("Failsafe triggered, congrats on being cata " + i);
+                document.getElementById("catalevel").innerText = i;
+                document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
             }
             //Set the levels of the classes
             
@@ -322,7 +433,6 @@
                 Math.max(569809640 - dungeons.player_classes[classes[3]].experience, 0),
                 Math.max(569809640 - dungeons.player_classes[classes[4]].experience, 0),
             ]   
-            console.log(classxpsleft);
             //Sorts arrays into decreasing order - if i ever get back to optimizing this, i'll use this
             /*
             for (var i = 1; i < 5; i++){
@@ -349,9 +459,13 @@
             cataperrun *= (1 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value));
             cataperrun = Math.ceil(cataperrun);
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
-            classperrun = Math.ceil(cataperrun * (1/1.4));
-            console.log(classxpsleft);
-            console.log(classesabbrev);
+            var classperrun = {
+                arch: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(archboost.value)),
+                bers: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(bersboost.value)),
+                heal: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(healboost.value)),
+                mage: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(mageboost.value)),
+                tank: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(tankboost.value)),
+            };
             
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
@@ -388,10 +502,10 @@
 
                 for (var i = 0; i < 5; i++){
                     if (i == maxindex){
-                        classxpsleft[i] -= classperrun;
+                        classxpsleft[i] -= classperrun[classesabbrev[i]];
                         runstoca50[i] += 1;
                     } else {
-                        classxpsleft[i] -= (classperrun/4);
+                        classxpsleft[i] -= (classperrun[classesabbrev[i]]/4);
                     }
                 }
                 
@@ -401,7 +515,6 @@
 
             
             
-            console.log("Runs to CA 50: " + runstoca50);
             var total = 0;
             for (var i = 0; i < 5; i++){
                 var runs = runstoca50[i];

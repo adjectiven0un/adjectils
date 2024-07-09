@@ -37,4 +37,4 @@ async function getStats(UUID){
   }
   return await apicall.json();
 }
-  
+
