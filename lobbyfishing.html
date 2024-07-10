@@ -56,6 +56,7 @@
                         <tr><td><span style = "color:#5555ff">Spark of Zeus</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_zeus">0</span></td><td> <span>&nbsp;(<span id = "weight_zeus">0</span> kg record)</span></td></tr>
                         <tr><td><span style = "color:#ff55ff">Automaton of Daedalus</span><span>:&nbsp;</span></td><td class = "tdalignright">  <span id = "caught_archimedes">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_archimedes">0</span> kg record)</span></td></tr>
                         <tr><td><span style = "color:#ff55ff">Wrath of Hades</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_hades">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_hades">0</span> kg record)</span></td></tr>
+                        <tr><td><span style = "color:#ffffff">Total</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_total">0</span></td></tr>
                     </table>
                   </div>
                 <div class = "index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "calcbox">
@@ -370,11 +371,14 @@
 
         try {
             var mythicaldata = fishingdata.orbs;
+            var totalmythicals = 0;
             for (var i = 0; i < mythicals.length; i++) {
+                
                 if (mythicaldata[mythicals[i]] != undefined) {
                     document.getElementById("caught_" + mythicals[i]).innerText = mythicaldata[mythicals[i]].toLocaleString();
                     try {
                         document.getElementById("weight_" + mythicals[i]).innerText = mythicaldata.weight[mythicals[i]].toLocaleString();
+                        totalmythicals += mythicaldata[mythicals[i]];
                     } catch {
                         document.getElementById("weight_" + mythicals[i]).innerText = "0";
                     }
@@ -382,7 +386,9 @@
                     document.getElementById("caught_" + mythicals[i]).innerText = "0";
                     document.getElementById("weight_" + mythicals[i]).innerText = "0";
                 }
+                
             }
+            document.getElementById("caught_total").innerText = totalmythicals.toLocaleString();
         } catch (TypeError){
             console.log("Some failure on mythical fish check?");
         }
