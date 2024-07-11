@@ -148,10 +148,10 @@
     function updateMotes(){
 
         if (targetmotes.value > 1000000000){
-            document.getElementById("slayermagicfind").value = 1000000000;
+            document.getElementById("targetmotes").value = 1000000000;
         }
         if (targetmotes.value < 0 || isNaN(targetmotes.value) || targetmotes.value == ""){
-            document.getElementById("slayermagicfind").value = 0;
+            document.getElementById("targetmotes").value = 0;
         }
         var motesperthrall = 200 + 131.25 * grubberstacks.value;
         var motesperfledge = 250 + 131.25 * grubberstacks.value;
