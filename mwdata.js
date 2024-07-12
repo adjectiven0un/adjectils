@@ -5,6 +5,497 @@ const classTypes = ["Starter", "Starter", "Starter", "Standard", "Standard", "St
 const classStyles1 = ["Support", "Ranged", "Fighter", "Control", "Rusher", "Tank", "Damage", "Damage", "Tank", "Damage", "Mobility", "Control", "Control", "Control", "Fighter", "Control", "Ranged", "Mobility", "Mobility", "Fighter", "Fighter", "Tank", "Damage", "Support", "Damage", "Mobility", "Damage"];
 const classStyles2 = ["Tank", "Fighter", "Control", "Fighter", "Damage", "Control", "Control", "Tank", "Support", "Ranged", "Fighter", "Mobility", "Tank", "Damage", "Damage", "Support", "Control", "Rusher", "Tank", "Support", "Mobility", "Fighter", "Mobility", "Ranged", "Ranged", "Ranged", "Fighter"];
 const difficulties = [1, 2, 3, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 4, 4, 4];
+/*
+const skinNames_0 = ["Cow", "Cow Suit", "Iron Cow", "Skelly Moo", "Fungu Madness", "One Serious Bull", "Parasite", "Sir Loin", "Sacred Bull", "King Cowie", "Buffalo Bill", "Minotaur", "Charred"];
+const skinDesc_0 = [
+    "The default skin for Cow.",
+    "Perfect for costume parties!",
+    "The kind of cow to launch their pasture to Mars.",
+    "Thanks for good calcium.",
+    "This toxic cow conquers the world one infection at a time.",
+    "Thick as a brick, strong as a... bull.",
+    "Tainted meat.",
+    "Runs his own five-star restaurant.",
+    "Red in nature.",
+    "Now that is one fancy cow.",
+    "Not actually a cow, but just as ruthless in its ruminant glory.",
+    "Don't let its floral nature fool you. You do not want to cross this minotaur.",
+    "Went to Hell and back for revenge, but might have stayed a bit too long."
+];
+const skinPaths_0 = [
+    "",
+    "onetime",
+    "bucket_barriers_broken",
+    "cow_ultra_pasteurized_drank",
+    "onetime",
+    "onetime",
+    "final_assists_after_final_killed",
+    "onetime",
+    "cow_players_healed",
+    "purchase",
+    "pres3",
+    "pres5",
+    "completionist"
+];
+const skinPaths_onetime_0 = [
+    "",
+    "walls3_i_am_cow",
+    "",
+    "",
+    "walls3_team_player",
+    "walls3_legendary_cow",
+    "",
+    "walls3_fine_dining",
+    "",
+    "",
+    "",
+    "",
+];
+const skinReqs_0 = [
+    "",
+    "",
+    "600",
+    "500",
+    "",
+    "",
+    "15",
+    "",
+    "2500",
+    "5,000",
+    "",
+    "",
+];
+const skinReqDesc_0 = [
+    "",
+    "",
+    "Let 500 buckets from Bucket Barrier break protecting you.",
+    "Drink 500 Ultra Pasteurized Milk as Cow.",
+    "",
+    "",
+    "Get 15 total FK/A after taking a final death.",
+    "",
+    "Cast abilities on players 2,500 times as Cow.",
+    "",
+    "",
+    "",
+    
+];
+const skinReqDesc_onetime_0 = [
+    "",
+    "Cast Soothing Moo on 8 players at once.",
+    "",
+    "",
+    "Cast Refreshing Sip on 5 players at once during Deathmatch.",
+    "Reach 14 FK/A in a single game as Cow.",
+    "",
+    "Get a final kill with a Steak as Cow.",
+    "",
+    "king cowie",
+    "",
+    "",
+];
+*/
+const classes = {
+    0: {
+        id: "cow",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        styles: [
+            "Support",
+            "Tank",
+        ],
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                desc: "The default skin for Cow.",
+                type: "default",
+                path: "",
+                req: "",
+                reqdesc: "Unlocked by default.",
+            },
+            "Cow Suit": {
+                desc: "Perfect for costume parties!",
+                type: "challenge",
+                path: "walls3_i_am_cow",
+                req: "",
+                reqdesc: "Cast Soothing Moo on 8 players at once.",
+            },
+            "Iron Cow": {
+                desc: "The kind of cow to launch their pasture to Mars.",
+                type: "",
+                path: "bucket_barriers_broken",
+                req: "600",
+                reqdesc: "Let 500 buckets from Bucket Barrier break protecting you.",
+            },
+        }
+    },
+    1: {
+        id: "hunter",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    2: {
+        id: "shark",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    3: {
+        id: "arcanist",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    4: {
+        id: "dreadlord",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    5: {
+        id: "golem",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    6: {
+        id: "herobrine",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    7: {
+        id: "pigman",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    8: {
+        id: "zombie",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    9: {
+        id: "blaze",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    10: {
+        id: "enderman",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    11: {
+        id: "shaman",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    12: {
+        id: "squid",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    13: {
+        id: "creeper",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    14: {
+        id: "pirate",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    15: {
+        id: "sheep",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    16: {
+        id: "skeleton",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    17: {
+        id: "spider",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    18: {
+        id: "werewolf",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    19: {
+        id: "angel",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    20: {
+        id: "assassin",
+        plaintext: "Assassin",
+        classcolor: "#aa0000",
+        classtype: "Mythic",
+        style1: "Fighter",
+        style2: "Mobility",
+        difficulty: 2,
+        skins: {
+            "Assassin": {
+                description: "The default skin for Assassin.",
+            }
+        }
+    },
+    21: {
+        id: "automaton",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    22: {
+        id: "moleman",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    23: {
+        id: "phoenix",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    24: {
+        id: "dragon",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    25: {
+        id: "renegade",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+    26: {
+        id: "snowman",
+        plaintext: "Cow",
+        classcolor: "#ff55ff",
+        classtype: "Starter",
+        style1: "Support",
+        style2: "Tank",
+        difficulty: 1,
+        skins: {
+            "Cow": {
+                description: "The default skin for Cow.",
+            }
+        }
+    },
+}
+//"sheep", "skeleton", "spider", "werewolf", "angel", "assassin", "automaton", "moleman", "phoenix", "dragon", "renegade", "snowman"];
 const tagColors = {
     "DARK_GRAY": "#555555",
     "WHITE": "#ffffff",
@@ -38,6 +529,7 @@ const difficultyColors = {
     3: "#ff5555",
     4: "#aa0000",
 }
+
 const skinNames_0 = ["Cow", "Cow Suit", "Iron Cow", "Skelly Moo", "Fungu Madness", "One Serious Bull", "Parasite", "Sir Loin", "Sacred Bull", "King Cowie", "Buffalo Bill", "Minotaur", "Charred"];
 const skinDesc_0 = [
     "The default skin for Cow.",
