@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html lang = "en">
+  <html lang = "en" style = "width:99%;">
     <head>
       <title>adjectils - Mega Walls</title>
       <link rel="stylesheet" href="stylesheet.css">
@@ -20,7 +20,7 @@
         <meta name="twitter:description" content="Sartorial utilities for Mega Walls">
         <meta name="twitter:image" content="https://adjectils.com/images/mega_walls/embed_image.png">
         
-      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6, ">
       <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -37,18 +37,18 @@
         $("#nav").load("nav.html", function() { setWord(); }); 
         });
     </script>
-    <div style = "text-align:center; margin: auto"> 
+    <div style = "text-align:center; width: min(calc(100% - 60px), max(960px, 70%)); margin:0 auto"> 
         <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>Mega Walls</span><br>
     </div>
 
-    <div style = "text-align:center">
+    <div style = "text-align:center; width: min(calc(100% - 60px), max(960px, 70%)); margin:0 auto" >
         <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
         <span id = "refreshstatus"></span><br>
         <span id = "status"></span><br>
         <span id = "otherstatus"></span><br>
     </div>
 
-    <section class = flex_box_index style = "width: min(calc(100% - 30px), max(960px, 70%)); margin:auto">
+    <section class = flex_box_index style = "width: min(calc(100% - 30px), max(960px, 70%)); margin:0 auto">
         <span class = "header">Classes</span>
         <div class = "flex_index_row flex_full_row" id = row1 style = "width:50%; flex-basis:51%; margin:auto; margin-top:10px;">
                     
@@ -60,7 +60,7 @@
             
         </div>
     </section>
-    <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: auto;" >
+    <section class = "flex_box_index" style = "width: min(calc(100% - 30px), max(960px, 70%)); margin: 0 auto;" >
         <span class = "header" style = "margin-top:20px">Skins</span>
         <span style = "margin-top:20px">Total skins found: <span style = "margin-top:20px" id = totalskinsfound>27</span>/328 (<span id = "totalskinspercent">9</span>%)</span>
         <div class = "flex_index_row flex_full_row" id = row4 style = "width:90%; flex-basis:51%; margin:auto; margin-top:10px;">
@@ -148,6 +148,7 @@
                 classimage.style.height = "80%"; 
                 classimage.style.width = "80%";
                 classimage.alt = "";
+                classimage.style.position = "absolute";
                 classimage.id = classes[i].id + "_image";
                 box.appendChild(classimage);
                 var tooltip = document.createElement("div");
@@ -155,6 +156,18 @@
                 tooltip.id = (classes[i].id + "_text");
                 tooltip.style.opacity = "90%";
                 tooltip.style.zIndex = "5";
+                if (classes[i].id == "zombie" || classes[i].id == "spider" || classes[i].id == "snowman"){
+                    tooltip.style.transform = "translateX(-50%)";
+                }
+                if (classes[i].id == "cow" || classes[i].id == "blaze" || classes[i].id == "werewolf"){
+                    tooltip.style.transform = "translateX(50%)";
+                }
+                if (classes[i].id == "pigman" || classes[i].id == "skeleton" || classes[i].id == "renegade"){
+                    tooltip.style.transform = "translateX(-25%)";
+                }
+                if (classes[i].id == "hunter" || classes[i].id == "enderman" || classes[i].id == "angel"){
+                    tooltip.style.transform = "translateX(25%)";
+                }
                 box.appendChild(tooltip);
                 
                 
@@ -470,7 +483,6 @@
                                 if (mwdata["final_kills_after_final_killed"] != undefined) {
                                     deadFK = mwdata["final_kills_after_final_killed"];
                                 }
-                                console.log(deadFK + deadFA);
                                 if ((deadFK + deadFA) < 15) {
                                     topSkins.push({
                                         key: skinPaths[i],
@@ -533,6 +545,7 @@
                 
             }
             document.getElementById(classes[j].id + "_skinCount").innerText = totalSkins; 
+            addIcon(classes[j].id + "_box", totalSkins + "/" + classTotalSkins[j]);
             totaltotalskins += totalSkins;
             currentSkinCount.push(totalSkins);
         }
@@ -638,6 +651,18 @@
         checkmark.className = "upperRightIcon";
         checkmark.innerText = text;
         document.getElementById(skinNames[i] + "_box").appendChild(checkmark);
+
+    }
+    function addIcon(target, text) {
+        try {
+            document.getElementById("icon_" + target).remove();
+        } catch {
+        }
+        var checkmark = document.createElement("span");
+        checkmark.className = "upperRightIconSmall";
+        checkmark.innerText = text;
+        checkmark.id = "icon_" + target;
+        document.getElementById(target).appendChild(checkmark);
 
     }
     function updateSkinRows() {
@@ -1066,7 +1091,6 @@
             document.getElementById("row" + i).style.flexBasis = "51%";
           }
           document.getElementById("row4").style.flexWrap = "nowrap";
-          
         } else {
           console.log("Mobile mode...");
           for (var i = 1; i <= 3; i++) {
@@ -1076,6 +1100,10 @@
           document.getElementById("row4").style.flexWrap = "wrap";
         }
     }
+    window.addEventListener('resize', function() {
+            
+        updateSize();
+    });
 
     
   </script>
