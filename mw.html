@@ -137,28 +137,26 @@
             for (let i = 9 * (j - 1); i < 9 * j; i++){
                 let box = document.createElement("div");
                 box.className = "fishbox";
-                box.id = classnames[i] + "_box";
+                box.id = classes[i].id + "_box";
                 box.style.cursor = "pointer";
                 box.onclick = function() {
                     selectClass(i);
                 };
-                if (classnames[i] == ""){
-                    box.style.opacity = "0%";
-                } else {
-                    var classimage = document.createElement("img");
-                    classimage.src = "./images/mega_walls/not_unlocked.png";
-                    classimage.style.height = "80%"; 
-                    classimage.style.width = "80%";
-                    classimage.alt = "";
-                    classimage.id = classnames[i] + "_image";
-                    box.appendChild(classimage);
-                    var tooltip = document.createElement("div");
-                    tooltip.className = "fishboxtext";
-                    tooltip.id = (classnames[i] + "_text");
-                    tooltip.style.opacity = "90%";
-                    tooltip.style.zIndex = "5";
-                    box.appendChild(tooltip);
-                }
+                
+                var classimage = document.createElement("img");
+                classimage.src = "./images/mega_walls/not_unlocked.png";
+                classimage.style.height = "80%"; 
+                classimage.style.width = "80%";
+                classimage.alt = "";
+                classimage.id = classes[i].id + "_image";
+                box.appendChild(classimage);
+                var tooltip = document.createElement("div");
+                tooltip.className = "fishboxtext";
+                tooltip.id = (classes[i].id + "_text");
+                tooltip.style.opacity = "90%";
+                tooltip.style.zIndex = "5";
+                box.appendChild(tooltip);
+                
                 
                 document.getElementById("row" + j).appendChild(box);
             }
@@ -171,13 +169,13 @@
     var selectedClass = 20;
 
     function selectClass(classIndex){
-        document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#808080";
+        document.getElementById(classes[selectedClass].id + "_box").style.borderColor = "#808080";
         if (classIndex == -1){
             
             return -1;
         }
         selectedClass = classIndex;
-        document.getElementById(classnames[selectedClass] + "_box").style.borderColor = "#00cc00";
+        document.getElementById(classes[selectedClass].id + "_box").style.borderColor = "#00cc00";
         updateSkinRows();
     }
 
@@ -264,13 +262,13 @@
 
         for (let j = 1; j <= 3; j++){
             for (let i = 9 * (j - 1); i < 9 * j; i++){
-                if (playerdata.classes[classnames[i]] != undefined && playerdata.classes[classnames[i]].unlocked == true) {
+                if (playerdata.classes[classes[i].id] != undefined && playerdata.classes[classes[i].id].unlocked == true) {
                     
-                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/" + classnames[i] + "_icon.png";
+                    document.getElementById(classes[i].id + "_image").src = "./images/mega_walls/" + classes[i].id + "_icon.png";
                 } else if (i >= 0 && i <= 2) {
-                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/" + classnames[i] + "_icon.png";
+                    document.getElementById(classes[i].id + "_image").src = "./images/mega_walls/" + classes[i].id + "_icon.png";
                 } else {
-                    document.getElementById(classnames[i] + "_image").src = "./images/mega_walls/not_unlocked.png";
+                    document.getElementById(classes[i].id + "_image").src = "./images/mega_walls/not_unlocked.png";
                 }
             }
         }
@@ -278,17 +276,17 @@
         // Update prestiges. 
 
         for (let i = 0; i < 27; i++) {
-            document.getElementById(classnames[i] + "_prestige").innerText = "";
-            if (playerdata.classes[classnames[i]] != undefined && playerdata.classes[classnames[i]].prestige > 0) {
+            document.getElementById(classes[i].id + "_prestige").innerText = "";
+            if (playerdata.classes[classes[i].id] != undefined && playerdata.classes[classes[i].id].prestige > 0) {
                 var prestag = "";
-                for (let j = 0; j < playerdata.classes[classnames[i]].prestige; j++){
+                for (let j = 0; j < playerdata.classes[classes[i].id].prestige; j++){
                     prestag += "✫";
                 }
-                document.getElementById(classnames[i] + "_prestige").innerText = prestag;
-                if (playerdata.classes[classnames[i]].prestige_tag != undefined && playerdata.classes[classnames[i]].prestige_tag.type != "CHROMA" && playerdata.classes[classnames[i]].prestige_tag.type != "CUSTOM"){
-                    document.getElementById(classnames[i] + "_prestige").style.color = tagColors[playerdata.classes[classnames[i]].prestige_tag.type];
+                document.getElementById(classes[i].id + "_prestige").innerText = prestag;
+                if (playerdata.classes[classes[i].id].prestige_tag != undefined && playerdata.classes[classes[i].id].prestige_tag.type != "CHROMA" && playerdata.classes[classes[i].id].prestige_tag.type != "CUSTOM"){
+                    document.getElementById(classes[i].id + "_prestige").style.color = tagColors[playerdata.classes[classes[i].id].prestige_tag.type];
                 } else {
-                    document.getElementById(classnames[i] + "_prestige").style.color = "#ffaa00";
+                    document.getElementById(classes[i].id + "_prestige").style.color = "#ffaa00";
                 }
                 // Note to self: write exceptions for chroma and custom later
             }
@@ -297,9 +295,9 @@
         // Update class points.
 
         for (let i = 0; i < 27; i++) {
-            document.getElementById(classnames[i] + "_classPoints").innerText = "0";
-            if (playerdata[classnames[i] + "_class_points"] != undefined) {
-                document.getElementById(classnames[i] + "_classPoints").innerText = playerdata[classnames[i] + "_class_points"];
+            document.getElementById(classes[i].id + "_classPoints").innerText = "0";
+            if (playerdata[classes[i].id + "_class_points"] != undefined) {
+                document.getElementById(classes[i].id + "_classPoints").innerText = playerdata[classes[i].id + "_class_points"];
             }
         }
 
@@ -311,27 +309,27 @@
 
     function initToolTips() {
         for (var i = 0; i < 27; i++){
-            if (classnames[i] != ""){
-                makeTooltipObject(classnames[i] + "_text", "", classnamesCapital[i] + " ", "20px", classColors[i], false);
-                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_prestige", "", "20px", "#ffaa00", true);
-                makeTooltipObject(classnames[i] + "_text", "", classTypes[i] + " Class", "16px", "#c0c0c0", true);
-                makeTooltipObject(classnames[i] + "_text", "", "Play styles: ", "16px", "#c0c0c0", false);
-                makeTooltipObject(classnames[i] + "_text", "", classStyles1[i], "16px", styleColors[classStyles1[i]], false);
-                makeTooltipObject(classnames[i] + "_text", "", ", ", "16px", "#c0c0c0");
-                makeTooltipObject(classnames[i] + "_text", "", classStyles2[i], "16px", styleColors[classStyles2[i]], true);
-                makeTooltipObject(classnames[i] + "_text", "", "Difficulty: ", "16px", "#c0c0c0", false);
+            if (classes[i].id != ""){
+                makeTooltipObject(classes[i].id + "_text", "", classnamesCapital[i] + " ", "20px", classColors[i], false);
+                makeTooltipObject(classes[i].id + "_text", classes[i].id + "_prestige", "", "20px", "#ffaa00", true);
+                makeTooltipObject(classes[i].id + "_text", "", classTypes[i] + " Class", "16px", "#c0c0c0", true);
+                makeTooltipObject(classes[i].id + "_text", "", "Play styles: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classes[i].id + "_text", "", classStyles1[i], "16px", styleColors[classStyles1[i]], false);
+                makeTooltipObject(classes[i].id + "_text", "", ", ", "16px", "#c0c0c0");
+                makeTooltipObject(classes[i].id + "_text", "", classStyles2[i], "16px", styleColors[classStyles2[i]], true);
+                makeTooltipObject(classes[i].id + "_text", "", "Difficulty: ", "16px", "#c0c0c0", false);
                 for (var j = 0; j < difficulties[i]; j++){
-                    makeTooltipObject(classnames[i] + "_text", "", "●", "16px", difficultyColors[difficulties[i]], false);
+                    makeTooltipObject(classes[i].id + "_text", "", "●", "16px", difficultyColors[difficulties[i]], false);
                 }
                 for (var j = difficulties[i]; j < 4; j++){
-                    makeTooltipObject(classnames[i] + "_text", "", "●", "16px", "#c0c0c0", false);
+                    makeTooltipObject(classes[i].id + "_text", "", "●", "16px", "#c0c0c0", false);
                 }
-                makeTooltipObject(classnames[i] + "_text", "", "", "16px", "#c0c0c0", true);
-                makeTooltipObject(classnames[i] + "_text", "", "Skins: ", "16px", "#c0c0c0", false);
-                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_skinCount", "1", "16px", "#c0c0c0", false);
-                makeTooltipObject(classnames[i] + "_text", "", "/" + classTotalSkins[i], "16px", "#c0c0c0", true);
-                makeTooltipObject(classnames[i] + "_text", "", "Class Points: ", "16px", "#c0c0c0", false);
-                makeTooltipObject(classnames[i] + "_text", classnames[i] + "_classPoints", "0", "16px", "#c0c0c0", true);
+                makeTooltipObject(classes[i].id + "_text", "", "", "16px", "#c0c0c0", true);
+                makeTooltipObject(classes[i].id + "_text", "", "Skins: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classes[i].id + "_text", classes[i].id + "_skinCount", "1", "16px", "#c0c0c0", false);
+                makeTooltipObject(classes[i].id + "_text", "", "/" + classTotalSkins[i], "16px", "#c0c0c0", true);
+                makeTooltipObject(classes[i].id + "_text", "", "Class Points: ", "16px", "#c0c0c0", false);
+                makeTooltipObject(classes[i].id + "_text", classes[i].id + "_classPoints", "0", "16px", "#c0c0c0", true);
             }
         }
     } 
@@ -382,7 +380,7 @@
                 }
                 else if (skinPaths[i] == "pres3") {
                     try {
-                        if (mwdata.classes[classnames[j]].prestige >= 3) {
+                        if (mwdata.classes[classes[j].id].prestige >= 3) {
                             totalSkins++;
                         } 
                     } catch (TypeError) {
@@ -390,7 +388,7 @@
                 }
                 else if (skinPaths[i] == "pres5") {
                     try {
-                        if (mwdata.classes[classnames[j]].prestige >= 5) {
+                        if (mwdata.classes[classes[j].id].prestige >= 5) {
                             totalSkins++;
                         }
                     } catch (TypeError) {
@@ -513,15 +511,18 @@
                                 }
                                 
                             } else {
-                                topSkins.push({
-                                    key: skinPaths[i],
-                                    value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
-                                    className: classnamesCapital[j],
-                                    skinName: skinNames[i],
-                                    req: skinReqDesc[i],
-                                    progress: mwdata[skinPaths[i]],
-                                    max: skinReqs[i],
-                                })
+                                if (!data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                                    topSkins.push({
+                                        key: skinPaths[i],
+                                        value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
+                                        className: classnamesCapital[j],
+                                        skinName: skinNames[i],
+                                        req: skinReqDesc[i],
+                                        progress: mwdata[skinPaths[i]],
+                                        max: skinReqs[i],
+                                    })
+                                }
+                                
                             }
                             
 
@@ -531,7 +532,7 @@
                 }
                 
             }
-            document.getElementById(classnames[j] + "_skinCount").innerText = totalSkins; 
+            document.getElementById(classes[j].id + "_skinCount").innerText = totalSkins; 
             totaltotalskins += totalSkins;
             currentSkinCount.push(totalSkins);
         }
@@ -695,7 +696,7 @@
                 makeTooltipObject(tip.id, "", "Prestige III " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (mwdata.classes[classnames[selectedClass]].prestige >= 3) {
+                    if (mwdata.classes[classes[selectedClass].id].prestige >= 3) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                         addCheck(skinNames, i, "✓");
@@ -712,7 +713,7 @@
                 makeTooltipObject(tip.id, "", "Prestige V " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (mwdata.classes[classnames[selectedClass]].prestige >= 5) {
+                    if (mwdata.classes[classes[selectedClass].id].prestige >= 5) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
                         document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
                         addCheck(skinNames, i, "✓");
