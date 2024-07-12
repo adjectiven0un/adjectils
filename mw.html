@@ -310,7 +310,7 @@
         for (let i = 0; i < 27; i++) {
             document.getElementById(classes[i].id + "_classPoints").innerText = "0";
             if (playerdata[classes[i].id + "_class_points"] != undefined) {
-                document.getElementById(classes[i].id + "_classPoints").innerText = playerdata[classes[i].id + "_class_points"];
+                document.getElementById(classes[i].id + "_classPoints").innerText = playerdata[classes[i].id + "_class_points"].toLocaleString();
             }
         }
 
@@ -546,6 +546,12 @@
             }
             document.getElementById(classes[j].id + "_skinCount").innerText = totalSkins; 
             addIcon(classes[j].id + "_box", totalSkins + "/" + classTotalSkins[j]);
+            if (totalSkins == classTotalSkins[j]){
+                document.getElementById("icon_" + classes[j].id + "_box").style.color = "#ffaa00";
+            } else {
+                document.getElementById("icon_" + classes[j].id + "_box").style.color = "#c0c0c0";
+            }
+                
             totaltotalskins += totalSkins;
             currentSkinCount.push(totalSkins);
         }
