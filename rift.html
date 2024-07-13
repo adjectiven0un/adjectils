@@ -155,8 +155,8 @@
         }
         var motesperthrall = 200 + 131.25 * grubberstacks.value;
         var motesperfledge = 250 + 131.25 * grubberstacks.value;
-        document.getElementById("thrallkillsneeded").innerText = Math.ceil(targetmotes.value / motesperthrall);
-        document.getElementById("fledgekillsneeded").innerText = Math.ceil(targetmotes.value / motesperfledge);
+        document.getElementById("thrallkillsneeded").innerText = Math.ceil(targetmotes.value / motesperthrall).toLocaleString();
+        document.getElementById("fledgekillsneeded").innerText = Math.ceil(targetmotes.value / motesperfledge).toLocaleString();
     }
     function updateSizes(){
       console.log("Current width: " + window.innerWidth);
