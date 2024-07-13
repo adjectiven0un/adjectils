@@ -73,7 +73,7 @@
         <span class = spiderheader>Weather</span><br>
         <hr class = solid>
         <table id = raintable>
-            <tr><td><span id = weather>Loading...</span> for &nbsp;</td><td><span id = weathertime style = "text-align:right">00:00</span></td></tr>
+            <tr><td><span id = weather></span> for &nbsp;</td><td><span id = weathertime style = "text-align:right">00:00</span></td></tr>
             <tr><td>Time until thunder: &nbsp;&nbsp;&nbsp;<wbr></td><td><span id = untilthunder style = "text-align:right;">00:00</span></td></tr>
         </table>
         <hr class = solid>
@@ -106,6 +106,7 @@
         function updatePage(){
             console.log("Initializing...");
             updateAllChances();
+            updatetimer();
         }
         function updatetimer(){
             var starttime = 1711079700;

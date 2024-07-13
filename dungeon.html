@@ -369,7 +369,7 @@
             var realdaystamp = Math.floor(time / realdaylen);
             if (dungeons.daily_runs.current_day_stamp == realdaystamp){
                 document.getElementById("dailyruns").innerText = Math.max(0, 5 - (dungeons.daily_runs.completed_runs_count));
-                document.getElementById("dailytoday").innerText = "(" + dungeons.daily_runs.completed_runs_count + " today)";
+                document.getElementById("dailytoday").innerText = "(" + dungeons.daily_runs.completed_runs_count.toLocaleString() + " today)";
             } else {
                 document.getElementById("dailyruns").innerText = 5;
                 document.getElementById("dailytoday").innerText = "(0 today)";
@@ -525,7 +525,7 @@
             for (var i = 0; i < 5; i++){
                 var runs = runstoca50[i];
                 runs = runs.toLocaleString();
-                document.getElementById(classesabbrev[i] + "runs").innerText = runs;
+                document.getElementById(classesabbrev[i] + "runs").innerText = runs.toLocaleString();
                 total += runstoca50[i];
             }
             if (total != 0){

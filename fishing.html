@@ -443,7 +443,7 @@
                     for (var j = 0; j < 5; j++){
                         var raritytext = document.createElement("span");
                         if (raritycontrol[j] != ""){
-                            raritytext.innerText = (raritycontrol[j]).replace(/^.(\w)/, (match, p1) => p1.toUpperCase())
+                            raritytext.innerText = (raritycontrol[j]).replace(/^.(\w)/, (match, p1) => p1.toUpperCase());
                         } else {
                             raritytext.innerText = "Total";
                         }
@@ -451,7 +451,7 @@
                         document.getElementById(fishnames[i] + "_text").appendChild(raritytext);
                         var fishcount = document.createElement("span");
                         try {
-                            fishcount.innerText = (": " + fishdata[fishnames[i] + raritycontrol[j]]).replace(/undefined/g, "0");
+                            fishcount.innerText = (": " + (fishdata[fishnames[i] + raritycontrol[j]]).toLocaleString());    
                         } catch (TypeError) {
                             fishcount.innerText = (": 0");
                         }

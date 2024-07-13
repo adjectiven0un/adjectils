@@ -24,60 +24,34 @@
       });
       </script>
   
-    <div id = header style = "margin:auto; text-align:center">
+    <div id = header style = "margin-bottom: 20px; text-align:center">
     <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = crystalheader>Crystal Hollows</span><br>
     </div>
-    <section class = "flex_box_index">
 
-    <label>Username: <input type = "text" onchange = updatePass(value) id = "nameinput"><button onclick = updatePass(nameinput.value) style = "width: 80px; height: 24px; text-align:center; margin-left:10px;">Refresh ⟳</button></label><br>
-  <span id = "status">Enter a username to continue.</span><br>
-  <span id = "refreshstatus"></span><br>
-  <div>
-    <form action = "#" style = "background-color: #282828;">
-      <label>Profile:
-      <select id = profileid value = 4 onchange = updatePass(nameinput.value)>
-        <option id = profile0 value = 0>–––––</option>
-        <option id = profile1 value = 1>–––––</option>
-        <option id = profile2 value = 2>–––––</option>
-        <option id = profile3 value = 3>–––––</option>
-        <option id = profile4 value = 4>–––––</option>
-      </select>
-      </label>
-    </form>
-  </div><br>
-  <div class = crystal_block >
-    <span class = hollowheader>Pass tracker</span><br><br>
-    <div style = "float:left">
-        <span>Pass expiration:&nbsp;</span><br>
-        <span>Time remaining:&nbsp;</span>
-    </div>
-    <div style = "display:inline-block">
-        <span id = "passexpiration">––:––</span><br>
-        <span id = "timeleft">––:––</span>
-    </div>
-  </div>
+  <section class = "flex_box_index">
+  
   <div class = "flex_index_row">
-    <div class = "flex_index_box crystal_block" style = "border-color:#c2c2c2">
+    <div class = "flex_index_box crystal_block" style = "border-color:#c2c2c2; width:min(calc(100% - 30px), max(600px, 70%)); margin:auto">
         <span class = hollowheader style = "flex-basis:100%; margin-bottom:10px">Crystal Nucleus loot</span><br><br>
-        <table style = "margin-bottom: 10px;">
+        <table style = "margin-bottom: 10px;" class = "flex_full_row">
             <tr><td><span> User has High Roller: </span></td>
                 <td><label class = "switchbox" for = "hashighroller" id = "highrollerswitch">
-                    <input type = "checkbox" id = "hashighroller" onchange = updateHR() aria-labelledby = "highrollerswitch">
+                    <input type = "checkbox" id = "hashighroller" onchange = updateHR() aria-labelledby = "highrollerswitch" style = "opacity:0">
                     <span class = "switch"></span></label>
                 </td></tr>
             <tr><td style = "width:85%"><span> User has Jasper Crystal: </span></td>
                 <td style = "display:flex; justify-content: flex-end;"><label class = "switchbox" for = "hasjc" id = "jcswitch">
-                    <input type = "checkbox" id = "hasjc" onchange = updateJC() aria-labelledby = "jcswitch"> 
+                    <input type = "checkbox" id = "hasjc" onchange = updateJC() aria-labelledby = "jcswitch" style = "opacity:0"> 
                     <span class = "switch"></span></label>
                 </td></tr>
             <tr><td><span> User has Ruby Crystal: </span></td>
                 <td><label class = "switchbox" for = "hasrc" id = "rcswitch">
-                    <input type = "checkbox" id = "hasrc" onchange = updateRC() aria-labelledby = "rcswitch">
+                    <input type = "checkbox" id = "hasrc" onchange = updateRC() aria-labelledby = "rcswitch" style = "opacity:0">
                     <span class = "switch"></span></label>
                 </td></tr>
             <tr><td><span> User has Mole Pet: </span></td>
                 <td><label class = "switchbox" for = "hasmole" id = "moleswitch">
-                    <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch">
+                    <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch" style = "opacity:0">
                     <span class = "switch"></span></label>
                 </td></tr>
         </table>
