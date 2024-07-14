@@ -288,7 +288,7 @@
 
         // Update prestiges. 
 
-        for (let i = 0; i < 27; i++) {
+        for (let i = 0; i < classcount; i++) {
             document.getElementById(classes[i].id + "_prestige").innerText = "";
             if (playerdata.classes[classes[i].id] != undefined && playerdata.classes[classes[i].id].prestige > 0) {
                 var prestag = "";
@@ -307,7 +307,7 @@
 
         // Update class points.
 
-        for (let i = 0; i < 27; i++) {
+        for (let i = 0; i < classcount; i++) {
             document.getElementById(classes[i].id + "_classPoints").innerText = "0";
             if (playerdata[classes[i].id + "_class_points"] != undefined) {
                 document.getElementById(classes[i].id + "_classPoints").innerText = playerdata[classes[i].id + "_class_points"].toLocaleString();
@@ -319,22 +319,22 @@
     }
     
     // Initializes the tooltip for each class.
-
+    var classcount = 27;
     function initToolTips() {
-        for (var i = 0; i < 27; i++){
+        for (var i = 0; i < classcount; i++){
             if (classes[i].id != ""){
-                makeTooltipObject(classes[i].id + "_text", "", classnamesCapital[i] + " ", "20px", classColors[i], false);
+                makeTooltipObject(classes[i].id + "_text", "", classes[i].plaintext + " ", "20px", classes[i].classcolor, false);
                 makeTooltipObject(classes[i].id + "_text", classes[i].id + "_prestige", "", "20px", "#ffaa00", true);
-                makeTooltipObject(classes[i].id + "_text", "", classTypes[i] + " Class", "16px", "#c0c0c0", true);
+                makeTooltipObject(classes[i].id + "_text", "", classes[i].classtype + " Class", "16px", "#c0c0c0", true);
                 makeTooltipObject(classes[i].id + "_text", "", "Play styles: ", "16px", "#c0c0c0", false);
-                makeTooltipObject(classes[i].id + "_text", "", classStyles1[i], "16px", styleColors[classStyles1[i]], false);
+                makeTooltipObject(classes[i].id + "_text", "", classes[i].styles[0], "16px", styleColors[classes[i].styles[0]], false);
                 makeTooltipObject(classes[i].id + "_text", "", ", ", "16px", "#c0c0c0");
-                makeTooltipObject(classes[i].id + "_text", "", classStyles2[i], "16px", styleColors[classStyles2[i]], true);
+                makeTooltipObject(classes[i].id + "_text", "", classes[i].styles[1], "16px", styleColors[classes[i].styles[1]], true);
                 makeTooltipObject(classes[i].id + "_text", "", "Difficulty: ", "16px", "#c0c0c0", false);
-                for (var j = 0; j < difficulties[i]; j++){
-                    makeTooltipObject(classes[i].id + "_text", "", "●", "16px", difficultyColors[difficulties[i]], false);
+                for (var j = 0; j < classes[i].difficulty; j++){
+                    makeTooltipObject(classes[i].id + "_text", "", "●", "16px", difficultyColors[classes[i].difficulty], false);
                 }
-                for (var j = difficulties[i]; j < 4; j++){
+                for (var j = classes[i].difficulty; j < 4; j++){
                     makeTooltipObject(classes[i].id + "_text", "", "●", "16px", "#c0c0c0", false);
                 }
                 makeTooltipObject(classes[i].id + "_text", "", "", "16px", "#c0c0c0", true);
@@ -370,28 +370,20 @@
         topSkins = [];
         currentSkinCount = [];
         var totaltotalskins = 0;
-        for (var j = 0; j < 27; j++) {
+        for (var j = 0; j < classcount; j++) {
             var totalSkins = 1;
+            var skinPack = classes[j].skins;
             for (var i = 0; i < classTotalSkins[j]; i++){
-                let skinNames = eval(`skinNames_${j}`);
-                let skinDesc = eval(`skinDesc_${j}`);
-                let skinPaths = eval(`skinPaths_${j}`);
-                let skinPaths_onetime = eval(`skinPaths_onetime_${j}`);
-                let skinReqs = eval(`skinReqs_${j}`);
-                let skinReqDesc = eval(`skinReqDesc_${j}`);
-                let skinReqDesc_onetime = eval(`skinReqDesc_onetime_${j}`);
                 
-                if (skinPaths[i] == "") {
-                }
-                else if (skinPaths[i] == "onetime") {
+                if (skinPack[i].type == "onetime") {
                     try {
-                        if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                        if (data.player.achievementsOneTime.includes(skinPack[i].path)) {
                             totalSkins++;
                         }
                     } catch (TypeError) {
                     }
                 }
-                else if (skinPaths[i] == "pres3") {
+                else if (skinPack[i].type == "pres3") {
                     try {
                         if (mwdata.classes[classes[j].id].prestige >= 3) {
                             totalSkins++;
@@ -399,7 +391,7 @@
                     } catch (TypeError) {
                     }
                 }
-                else if (skinPaths[i] == "pres5") {
+                else if (skinPack[i].type == "pres5") {
                     try {
                         if (mwdata.classes[classes[j].id].prestige >= 5) {
                             totalSkins++;
@@ -407,15 +399,15 @@
                     } catch (TypeError) {
                     }
                 }
-                else if (skinPaths[i] == "purchase") {
+                else if (skinPack[i].type == "purchase") {
                     try {
-                        if (mwdata.packages.includes(skinReqDesc_onetime[i])) {
+                        if (mwdata.packages.includes(skinPack[i].path)) {
                             totalSkins++;
                         }
                     } catch (TypeError) {
                     }
                 }
-                else if (skinPaths[i] == "completionist") {
+                else if (skinPack[i].type == "completionist") {
                     try {
                         if (classTotalSkins[j] == totalSkins + 1) {
                             totalSkins++;
@@ -425,10 +417,10 @@
                 }
                 else {
                     try {
-                        if (mwdata[skinPaths[i]] >= skinReqs[i]) {
+                        if (mwdata[skinPack[i].path] >= skinPack[i].req ||  (data.player.achievementsOneTime.includes(skinPack[i].backup))) { 
                             totalSkins++;
-                        } else if (mwdata[skinPaths[i]] != undefined){
-                            if (skinPaths[i] == "squid_defender_final_kills") {
+                        } else if (mwdata[skinPack[i].path] != undefined){
+                            if (skinPack[i].path == "squid_defender_final_kills") {
                                 var squidDFK = 0;
                                 var squidDFA = 0;
                                 if (mwdata["squid_defender_final_kills"] != undefined) {
@@ -439,19 +431,19 @@
                                 }
                                 if ((squidDFK + squidDFA) < 10) {
                                     topSkins.push({
-                                        key: skinPaths[i],
-                                        value: (((squidDFK + squidDFA) / skinReqs[i]) * 100).toFixed(1),
-                                        className: classnamesCapital[j],
-                                        skinName: skinNames[i],
-                                        req: skinReqDesc[i],
+                                        key: skinPack[i].path,
+                                        value: (((squidDFK + squidDFA) / skinPack[i].req) * 100).toFixed(1),
+                                        className: classes[j].plaintext,
+                                        skinName: skinPack[i].name,
+                                        req: skinPack[i].reqdesc,
                                         progress: (squidDFK + squidDFA),
-                                        max: skinReqs[i],
+                                        max: skinPack[i].req,
                                     })
                                 } else {
                                     totalSkins++;
                                 }
                                 
-                            } else if (skinPaths[i] == "spider_a_kills") {
+                            } else if (skinPack[i].pack == "spider_a_kills") {
                                 var leapkills = 0;
                                 var leapfinals = 0;
                                 if (mwdata["spider_a_kills"] != undefined) {
@@ -462,19 +454,19 @@
                                 }
                                 if ((leapkills + leapfinals) < 250) {
                                     topSkins.push({
-                                        key: skinPaths[i],
-                                        value: (((leapkills + leapfinals) / skinReqs[i]) * 100).toFixed(1),
-                                        className: classnamesCapital[j],
-                                        skinName: skinNames[i],
-                                        req: skinReqDesc[i],
-                                        progress: leapkills + leapfinals,
-                                        max: skinReqs[i],
+                                        key: skinPack[i].path,
+                                        value: (((leapkills + leapfinals) / skinPack[i].req) * 100).toFixed(1),
+                                        className: classes[j].plaintext,
+                                        skinName: skinPack[i].name,
+                                        req: skinPack[i].reqdesc,
+                                        progress: (leapkills + leapfinals),
+                                        max: skinPack[i].req,
                                     })
                                 } else {
                                     totalSkins++;
                                 }
                                 
-                            } else if (skinPaths[i] == "final_assists_after_final_killed") {
+                            } else if (skinPack[i].path == "final_assists_after_final_killed") {
                                 var deadFK = 0;
                                 var deadFA = 0;
                                 if (mwdata["final_assists_after_final_killed"] != undefined) {
@@ -485,20 +477,20 @@
                                 }
                                 if ((deadFK + deadFA) < 15) {
                                     topSkins.push({
-                                        key: skinPaths[i],
-                                        value: (((deadFK + deadFA) / skinReqs[i]) * 100).toFixed(1),
-                                        className: classnamesCapital[j],
-                                        skinName: skinNames[i],
-                                        req: skinReqDesc[i],
-                                        progress: deadFK + deadFA,
-                                        max: skinReqs[i],
+                                        key: skinPack[i].path,
+                                        value: (((deadFK + deadFA) / skinPack[i].req) * 100).toFixed(1),
+                                        className: classes[j].plaintext,
+                                        skinName: skinPack[i].name,
+                                        req: skinPack[i].reqdesc,
+                                        progress: (deadFK + deadFA),
+                                        max: skinPack[i].req,
                                     })
                                     
                                 } else {
                                     totalSkins++;
                                 }
                                 
-                            } else if (skinPaths[i] == "force_of_nature_final_kills") {
+                            } else if (skinPack[i].path == "force_of_nature_final_kills") {
                                 var fonFK = 0;
                                 var fonFA = 0;
                                 if (mwdata["force_of_nature_final_kills"] != undefined) {
@@ -509,13 +501,13 @@
                                 }
                                 if ((fonFK + fonFA) < 50) {
                                     topSkins.push({
-                                        key: skinPaths[i],
-                                        value: (((fonFK + fonFA) / skinReqs[i]) * 100).toFixed(1),
-                                        className: classnamesCapital[j],
-                                        skinName: skinNames[i],
-                                        req: skinReqDesc[i],
-                                        progress: fonFK + fonFA,
-                                        max: skinReqs[i],
+                                        key: skinPack[i].path,
+                                        value: (((fonFK + fonFA) / skinPack[i].req) * 100).toFixed(1),
+                                        className: classes[j].plaintext,
+                                        skinName: skinPack[i].name,
+                                        req: skinPack[i].reqdesc,
+                                        progress: (fonFK + fonFA),
+                                        max: skinPack[i].req,
                                     })
                                     
                                 } else {
@@ -523,15 +515,15 @@
                                 }
                                 
                             } else {
-                                if (!data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                                if (!data.player.achievementsOneTime.includes(skinPack[i].path)) {
                                     topSkins.push({
-                                        key: skinPaths[i],
-                                        value: ((mwdata[skinPaths[i]] / skinReqs[i]) * 100).toFixed(1),
-                                        className: classnamesCapital[j],
-                                        skinName: skinNames[i],
-                                        req: skinReqDesc[i],
-                                        progress: mwdata[skinPaths[i]],
-                                        max: skinReqs[i],
+                                        key: skinPack[i].path,
+                                        value: ((mwdata[skinPack[i].path] / skinPack[i].req) * 100).toFixed(1),
+                                        className: classes[j].plaintext,
+                                        skinName: skinPack[i].name,
+                                        req: skinPack[i].reqdesc,
+                                        progress: mwdata[skinPack[i].path],
+                                        max: skinPack[i].req,
                                     })
                                 }
                                 
@@ -539,6 +531,7 @@
                             
 
                         }
+                        
                     } catch (TypeError) {
                     }
                 }
@@ -652,11 +645,11 @@
             closestskintable.appendChild(tablerow);
         }
     }
-    function addCheck(skinNames, i, text) {
+    function addCheck(skinPack, i, text) {
         var checkmark = document.createElement("span");
         checkmark.className = "upperRightIcon";
         checkmark.innerText = text;
-        document.getElementById(skinNames[i] + "_box").appendChild(checkmark);
+        document.getElementById(skinPack[i].name + "_box").appendChild(checkmark);
 
     }
     function addIcon(target, text) {
@@ -674,149 +667,145 @@
     function updateSkinRows() {
         skinrow1.innerHTML = "";
         skinrow2.innerHTML = "";
-        let skinNames = eval(`skinNames_${selectedClass}`);
-        let skinDesc = eval(`skinDesc_${selectedClass}`);
-        let skinPaths = eval(`skinPaths_${selectedClass}`);
-        let skinPaths_onetime = eval(`skinPaths_onetime_${selectedClass}`);
-        let skinReqs = eval(`skinReqs_${selectedClass}`);
-        let skinReqDesc = eval(`skinReqDesc_${selectedClass}`);
-        let skinReqDesc_onetime = eval(`skinReqDesc_onetime_${selectedClass}`);
+        
+        
         let perrow = 7;
         if (classTotalSkins[selectedClass] % 2 == 0) {
             perrow = classTotalSkins[selectedClass] / 2;
         }
         // initialize boxes
+        let skinPack = classes[selectedClass].skins;
         for (var i = 0; i < classTotalSkins[selectedClass]; i++){
             if (i < perrow) {
-                addSkinBox(skinrow1, skinNames[i]);
+                addSkinBox(skinrow1, skinPack[i].name);
             } else {
-                addSkinBox(skinrow2, skinNames[i]);
+                addSkinBox(skinrow2, skinPack[i].name);
             }
         }
         // Load req tooltips
         for (var i = 0; i < classTotalSkins[selectedClass]; i++){
-            var tip = document.getElementById(skinNames[i] + "_tiptext");
-            makeTooltipObject(tip.id, "", skinNames[i], "20px", "#c0c0c0", true);
-            makeTooltipObject(tip.id, "", skinDesc[i], "12px", "#808080", true);
+            var tip = document.getElementById(skinPack[i].name + "_tiptext");
+            makeTooltipObject(tip.id, "", skinPack[i].name, "20px", "#c0c0c0", true);
+            makeTooltipObject(tip.id, "", skinPack[i].desc, "12px", "#808080", true);
             makeTooltipObject(tip.id, "", "Requirement: ", "12px", "#c0c0c0", false);
-            if (skinPaths[i] == "") {
+            if (skinPack[i].type == "default") {
                 makeTooltipObject(tip.id, "", "Unlocked by default", "12px", "#c0c0c0", true);
-                document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                addCheck(skinNames, i, "✓");
+                document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                addCheck(skinPack, i, "✓");
             }
-            else if (skinPaths[i] == "onetime") {
-                makeTooltipObject(tip.id, "", skinReqDesc_onetime[i], "12px", "#c0c0c0", true);
+            else if (skinPack[i].type == "onetime") {
+                makeTooltipObject(tip.id, "", skinPack[i].reqdesc, "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])) {
+                    if (data.player.achievementsOneTime.includes(skinPack[i].path)) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        document.getElementById(skinNames[i] + "_box").className = "fishbox";
-                        addCheck(skinNames, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                        document.getElementById(skinPack[i].name + "_box").className = "fishbox";
+                        addCheck(skinPack, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
                 
             }
-            else if (skinPaths[i] == "pres3") {
+            else if (skinPack[i].type == "pres3") {
                 makeTooltipObject(tip.id, "", "Prestige III " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
                     if (mwdata.classes[classes[selectedClass].id].prestige >= 3) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                        addCheck(skinPack, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
             }
-            else if (skinPaths[i] == "pres5") {
+            else if (skinPack[i].type == "pres5") {
                 makeTooltipObject(tip.id, "", "Prestige V " + classnamesCapital[selectedClass], "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
                     if (mwdata.classes[classes[selectedClass].id].prestige >= 5) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                        addCheck(skinPack, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
             }
-            else if (skinPaths[i] == "purchase") {
-                makeTooltipObject(tip.id, "", skinReqs[i] + " coins", "12px", "#ffaa00", true);
+            else if (skinPack[i].type == "purchase") {
+                makeTooltipObject(tip.id, "", skinPack[i].req + " coins", "12px", "#ffaa00", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (mwdata.packages.includes(skinReqDesc_onetime[i])) {
+                    if (mwdata.packages.includes(skinPack[i].path)) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                        addCheck(skinPack, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
             }
-            else if (skinPaths[i] == "completionist") {
+            else if (skinPack[i].type == "completionist") {
                 makeTooltipObject(tip.id, "", "Unlock all other " + classnamesCapital[selectedClass] + " skins.", "12px", "#ffaa00", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
                     if (classTotalSkins[selectedClass] == currentSkinCount[selectedClass]) {
                         makeTooltipObject(tip.id, "", "Unlocked!", "12px", "#55ff55", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                        addCheck(skinNames, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                        addCheck(skinPack, i, "✓");
                     } else {
                         makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
             }
             else {
-                makeTooltipObject(tip.id, "", skinReqDesc[i], "12px", "#c0c0c0", true);
+                makeTooltipObject(tip.id, "", skinPack[i].reqdesc, "12px", "#c0c0c0", true);
                 makeTooltipObject(tip.id, "", "Status: ", "12px", "#c0c0c0", false);
                 try {
-                    if (mwdata[skinPaths[i]] >= skinReqs[i] && skinPaths[i] != "squid_defender_final_kills" && skinPaths[i] != "spider_a_kills" && skinPaths[i] != "final_assists_after_final_killed") {
+                    if (mwdata[skinPack[i].path] >= skinPack[i].req && skinPack[i].path != "squid_defender_final_kills" && skinPack[i].path != "spider_a_kills" && skinPack[i].path != "final_assists_after_final_killed" && skinPack[i].path != "force_of_nature_final_kills") {
                         makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                        makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", mwdata[skinPack[i].path].toLocaleString(), "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                        makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#55ff55", false);
+                        makeTooltipObject(tip.id, "", parseInt(skinPack[i].req).toLocaleString(), "12px", "#55ff55", false);
                         makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                        addCheck(skinNames, i, "✓");
-                        document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                    } else if (skinPaths[i] == "squid_defender_final_kills") {
+                        addCheck(skinPack, i, "✓");
+                        document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                    } else if (skinPack[i].path == "squid_defender_final_kills") {
                         
                         // I had to write an entire exception for these stats. Enjoy.
 
                         var squidDefFKA = 0;
-                        if (mwdata[skinPaths[i]] != undefined) {
-                            if (mwdata[extraPaths[0]] != undefined){
-                                squidDefFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[0]]);
+                        if (mwdata["squid_defender_final_kills"] != undefined) {
+                            if (mwdata["squid_defender_final_assists"] != undefined){
+                                squidDefFKA = parseInt(mwdata["squid_defender_final_kills"]) + parseInt(mwdata["squid_defender_final_assists"]);
                             } else {
-                                squidDefFKA = parseInt(mwdata[skinPaths[i]]);
+                                squidDefFKA = parseInt(mwdata["squid_defender_final_kills"]);
                             }
                         } else {
-                            if (mwdata[extraPaths[0]] != undefined){
-                                squidDefFKA = parseInt(mwdata[extraPaths[0]]);
+                            if (mwdata["squid_defender_final_assists"] != undefined){
+                                squidDefFKA = parseInt(mwdata["squid_defender_final_assists"]);
                             } else {
                                 squidDefFKA = 0;
                             }
@@ -824,32 +813,32 @@
 
                         if (squidDefFKA >= 10) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", squidDefFKA, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", squidDefFKA.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i, "✓");
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinPack, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", squidDefFKA, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", squidDefFKA.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                         }
                         
-                    } else if (skinPaths[i] == "spider_a_kills") {
+                    } else if (skinPack[i].path == "spider_a_kills") {
                         var totalleapkills = 0;
-                        if (mwdata[skinPaths[i]] != undefined) {
-                            if (mwdata[extraPaths[2]] != undefined){
-                                totalleapkills = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[2]]);
+                        if (mwdata["spider_a_kills"] != undefined) {
+                            if (mwdata["spider_a_final_kills"] != undefined){
+                                totalleapkills = parseInt(mwdata["spider_a_kills"]) + parseInt(mwdata["spider_a_final_kills"]);
                             } else {
-                                totalleapkills = parseInt(mwdata[skinPaths[i]]);
+                                totalleapkills = parseInt(mwdata["spider_a_kills"]);
                             }
                         } else {
-                            if (mwdata[extraPaths[2]] != undefined){
-                                totalleapkills = parseInt(mwdata[extraPaths[2]]);
+                            if (mwdata["spider_a_final_kills"] != undefined){
+                                totalleapkills = parseInt(mwdata["spider_a_final_kills"]);
                             } else {
                                 totalleapkills = 0;
                             }
@@ -857,60 +846,60 @@
 
                         if (totalleapkills >= 250) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", totalleapkills, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", totalleapkills.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i, "✓");
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinPack, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", totalleapkills, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", totalleapkills.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                         }
                         
-                    } else if (skinPaths[i] == "final_assists_after_final_killed") {
+                    } else if (skinPack[i].path == "final_assists_after_final_killed") {
                         var deadFKA = 0;
-                        if (mwdata[skinPaths[i]] != undefined) {
-                            if (mwdata[extraPaths[1]] != undefined){
-                                deadFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata[extraPaths[1]]);
+                        if (mwdata["final_assists_after_final_killed"] != undefined) {
+                            if (mwdata["final_kills_after_final_killed"] != undefined){
+                                deadFKA = parseInt(mwdata["final_assists_after_final_killed"]) + parseInt(mwdata["final_kills_after_final_killed"]);
                             } else {
-                                deadFKA = parseInt(mwdata[skinPaths[i]]);
+                                deadFKA = parseInt(mwdata["final_assists_after_final_killed"]);
                             }
                         } else {
-                            if (mwdata[extraPaths[1]] != undefined){
-                                deadFKA = parseInt(mwdata[extraPaths[0]]);
+                            if (mwdata["final_kills_after_final_killed"] != undefined){
+                                deadFKA = parseInt(mwdata["final_kills_after_final_killed"]);
                             } else {
                                 deadFKA = 0;
                             }
                         }
                         if (deadFKA >= 15) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", deadFKA, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", deadFKA.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i, "✓");
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinPack, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", deadFKA, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", deadFKA.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                         }
                         
-                    } else if (skinPaths[i] == "force_of_nature_final_kills") {
+                    } else if (skinPack[i].path == "force_of_nature_final_kills") {
                         var fonFKA = 0;
-                        if (mwdata[skinPaths[i]] != undefined) {
+                        if (mwdata["force_of_nature_final_kills"] != undefined) {
                             if (mwdata["force_of_nature_final_assists"] != undefined){
-                                fonFKA = parseInt(mwdata[skinPaths[i]]) + parseInt(mwdata["force_of_nature_final_assists"]);
+                                fonFKA = parseInt(mwdata["force_of_nature_final_kills"]) + parseInt(mwdata["force_of_nature_final_assists"]);
                             } else {
-                                fonFKA = parseInt(mwdata[skinPaths[i]]);
+                                fonFKA = parseInt(mwdata["force_of_nature_final_kills"]);
                             }
                         } else {
                             if (mwdata["force_of_nature_final_assists"] != undefined){
@@ -922,46 +911,46 @@
 
                         if (fonFKA >= 50) {
                             makeTooltipObject(tip.id, "", "Unlocked! (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", fonFKA, "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", fonFKA.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i, "✓");
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinPack, i, "✓");
                         } else {
                             makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", fonFKA, "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", fonFKA.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                            makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                            makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#ff5555", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                         }
                         
                     } else {
                         //try {
-                        if (data.player.achievementsOneTime.includes(skinPaths_onetime[i])){
+                        if (data.player.achievementsOneTime.includes(skinPack[i].backup)){
                             makeTooltipObject(tip.id, "", "Unlocked! (Legacy) (", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", mwdata[skinPack[i].path].toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", "/", "12px", "#55ff55", false);
-                            makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#55ff55", false);
+                            makeTooltipObject(tip.id, "", parseInt(skinPack[i].req).toLocaleString(), "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", ")", "12px", "#55ff55", false);
-                            document.getElementById(skinNames[i] + "_box").style.borderColor = "#22aa22";
-                            addCheck(skinNames, i, "✱");
+                            document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
+                            addCheck(skinPack, i, "✱");
                         } else {
                             
                         //} catch (TypeError){
-                            if (mwdata[skinPaths[i]] != undefined){
+                            if (mwdata[skinPack[i].path] != undefined){
                                 makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", mwdata[skinPaths[i]].toLocaleString(), "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", mwdata[skinPack[i].path].toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", "/", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", parseInt(skinPack[i].req).toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                                document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                                document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                             } else {
                                 makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
-                                makeTooltipObject(tip.id, "", parseInt(skinReqs[i]).toLocaleString(), "12px", "#ff5555", false);
+                                makeTooltipObject(tip.id, "", parseInt(skinPack[i].req).toLocaleString(), "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                                document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                                document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                             }
                         }
                         //}
@@ -969,9 +958,9 @@
                     }
                 } catch (TypeError) {
                     makeTooltipObject(tip.id, "", "Locked (0/", "12px", "#ff5555", false);
-                    makeTooltipObject(tip.id, "", skinReqs[i], "12px", "#ff5555", false);
+                    makeTooltipObject(tip.id, "", skinPack[i].req.toLocaleString(), "12px", "#ff5555", false);
                     makeTooltipObject(tip.id, "", ")", "12px", "#ff5555", false);
-                    document.getElementById(skinNames[i] + "_box").style.borderColor = "#ff5555";
+                    document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                 }
             }
             
