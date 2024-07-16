@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Harp</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Melodic simulation for Hypixel SkyBlock">
+      <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+    </head>
+  <body onload="updatePage()">
+  
+      <script>
+      $(function(){
+        $("#nav").load("nav.html", function() { setWord(); }); 
+      });
+      </script>
+  <div style = "text-align:center; margin: auto"> 
+    <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>The Harp</span><br>
+  </div>
+
+  <section class = "flex_box_index">
+    <div class = "flex_index_row" id = "row1">
+
+    </div>
+    <div class = "flex_index_row" id = "row2">
+
+    </div>
+    <div class = "flex_index_row" id = "row3">
+
+    </div>
+    <div class = "flex_index_row" id = "row4">
+
+    </div>
+    <div class = "flex_index_row" id = "row5">
+
+    </div>
+    <div class = "flex_index_row" id = "row6">
+
+    </div>
+  </section>
+
+
+
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+  </body>
+  <script>
+    const harpcolors = ["#ff55ff", "#ffaa00", "#ffff55", "#55ff55", "#55ffff", "#5555ff", "#aa00aa"];
+    function updatePage(){
+        setup();
+    }
+    function setup() {
+      for (var i = 1; i <= 6; i++) {
+        document.getElementById("row" + i).innerHTML = "";
+        for (var j = 0; j < 7; j++) {
+          var box = document.createElement("span");
+          box.className = "melodybox";
+          box.id = ("row" + i + "col" + j);
+          box.style.backgroundColor = harpcolors[j];
+          document.getElementById("row" + i).appendChild(box);
+        }
+      }
+    }
+    async function playNote(column) {
+      for (let i = 1; i <= 6; i++) {
+        setTimeout(() => document.getElementById("row" + i + "col" + column).style.backgroundColor = "#c0c0c0", 1000 * i);
+        setTimeout(() => document.getElementById("row" + i + "col" + column).style.backgroundColor = harpcolors[column], 1000 * (i + 1));
+      }
+    }
+  </script>

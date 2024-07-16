@@ -38,3 +38,34 @@ async function getStats(UUID){
   return await apicall.json();
 }
 
+async function updateProfiles(data) {
+  try {
+    console.log("Attempting to set profile ID...");
+    profilelist = (data.profiles);
+    for (var i = 0; i < 5; i++){
+        document.getElementById("profile" + i).innerText = "–––––";
+    }
+    for (var i = 0; i < profilelist.length; i++){
+        document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
+    }
+
+    console.log("Checking new name");
+    var profilenum = 0;
+    lastname = name;
+    for (var i = 0; i < profilelist.length; i++){
+        if (profilelist[i].selected){
+            console.log("Profile ID found: " + profilenum);
+            profilenum = i;
+            break;
+        }
+    }
+    document.getElementById("profileid").value = profilenum;    
+  } catch (TypeError){
+      document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
+      try {
+        reset();
+      } catch {
+        
+      }
+  }
+}

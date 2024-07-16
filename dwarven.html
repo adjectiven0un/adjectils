@@ -11,7 +11,7 @@
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
       <link rel="manifest" href="./favicon/site.webmanifest">
       <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
-      <script src = "getUUID.js"></script>
+      <script src = "apireader.js"></script>
       <script src = "timeToMinutes.js"></script>
       <script src = "dwarvendata.js"></script>
       <script src = "binomials.js"></script>
@@ -198,7 +198,7 @@
           <span class = "switch"></span>
         </label>
       </tr><tr><td style = "padding-right:20px; display:flex">
-        <br>Aquamarine per Crystal obtained:</td><td style = "padding-left: 20px;">
+        <br>Aquamarine Crystal obtained:</td><td style = "padding-left: 20px;">
         <label class = "switchbox" id = "aqua-switch" for = "aqua-crystal">
           <input type = "checkbox"  id = "aqua-crystal" onchange = toggleAqua() aria-labelledby = "aqua-switch" style = "opacity:0">
           <span class = "switch"></span>
@@ -260,7 +260,7 @@
     var eventNotifs = 0;
     var notifPerms = 0;
     
-    function fullReset(){
+    function reset(){
       for (var i = 1; i <= 5; i++){
             document.getElementById("time" + i).innerText = "––:––";
             document.getElementById("finish" + i).innerText = "––:––";
@@ -276,7 +276,7 @@
     var lastname = "";
     
     async function updateForges(name){
-      fullReset();
+      reset();
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -311,29 +311,7 @@
         
         
         var profilelist;
-        try {
-          profilelist = (data.profiles);
-          for (var i = 0; i < 5; i++){
-            document.getElementById("profile" + i).innerText = "–––––";
-          }
-          for (var i = 0; i < profilelist.length; i++){
-            document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
-          }
-          if (lastname != name){
-            var profilenum = 0;
-            for (var i = 0; i < profilelist.length; i++){
-              if (profilelist[i].selected){
-                profilenum = i;
-                console.log("Profile ID found: " + profilenum);
-                
-                break;
-              }
-            }
-            document.getElementById("profileid").value = profilenum;
-          }
-        } catch (TypeError){
-          fullReset();
-        }
+        updateProfiles(data);
         lastname = name;
         
       }
@@ -343,7 +321,7 @@
         try {
           forgelog = (data.profiles[profileid.value].members[UUID].forge.forge_processes.forge_1);
         } catch (TypeError){
-          fullReset();
+          reset();
           forgelog = "Empty";
         }
         var quickforge;

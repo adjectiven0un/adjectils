@@ -11,7 +11,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
         <link rel="manifest" href="./favicon/site.webmanifest">
         <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
-        <script src = "getUUID.js"></script>
+        <script src = "apireader.js"></script>
         <script src = "fishingdata.js"></script>
     </head>
     <body onload="updatePage()">
@@ -239,7 +239,7 @@
 
         //Empty out the rows when resetting them
 
-        function resetFish(){
+        function reset(){
             for (var i = 1; i <= 3; i++){
                 document.getElementById("row" + i).innerHTML = "";
             }
@@ -299,7 +299,7 @@
             } 
             fasttrack = false;
             if (data.profiles == null){
-                resetFish();
+                reset();
                 setFish();
                 addToolTips();
                 document.getElementById("status").innerText = "This player hasn't played on Hypixel!";
@@ -307,32 +307,7 @@
             }
             //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
 
-            try {
-                profilelist = (data.profiles);
-
-                //Set up the dropdown menu.
-
-                for (var i = 0; i < 5; i++){
-                    document.getElementById("profile" + i).innerText = "–––––";
-                }
-                for (var i = 0; i < profilelist.length; i++){
-                    document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
-                }
-
-                //Find selected profile.
-          
-                var profilenum = 0;
-                for (var i = 0; i < profilelist.length; i++){
-                    if (profilelist[i].selected){
-                        profilenum = i;
-                        break;
-                    }
-                }
-                document.getElementById("profileid").value = profilenum;    
-            } catch (TypeError){
-                document.getElementById("profilestatus").innerHTML = "<span class = errored>No profiles found</span>";
-                resetFish();
-            }
+            updateProfiles(data);
 
             //Deactivate fasttrack if applicable, then store the last name and api data in localStorage.
 
@@ -354,7 +329,7 @@
             console.log("Updating fish for " + UUID);
             //Start fresh
 
-            resetFish();
+            reset();
 
             
             try {

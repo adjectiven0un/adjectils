@@ -204,7 +204,7 @@
 
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "hub_block"></div>
   </body>
-  <script src = "getUUID.js"></script>
+  <script src = "apireader.js"></script>
   <script>
     const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000];
     var classes = ["archer", "berserk", "healer", "mage", "tank"];
@@ -288,30 +288,7 @@
             data = await getAPIdata(UUID);
             console.log(data);
         } 
-        try {
-                console.log("Attempting to set profile ID...");
-                profilelist = (data.profiles);
-                for (var i = 0; i < 5; i++){
-                    document.getElementById("profile" + i).innerText = "–––––";
-                }
-                for (var i = 0; i < profilelist.length; i++){
-                    document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
-                }
-          
-                console.log("Checking new name");
-                var profilenum = 0;
-                lastname = name;
-                for (var i = 0; i < profilelist.length; i++){
-                    if (profilelist[i].selected){
-                        console.log("Profile ID found: " + profilenum);
-                        profilenum = i;
-                        break;
-                    }
-                }
-                document.getElementById("profileid").value = profilenum;    
-            } catch (TypeError){
-                document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
-            }
+        updateProfiles(data);
             lastname = name;
             fasttrack = false;
             localStorage.setItem("storedname", name);
