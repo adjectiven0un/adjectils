@@ -286,37 +286,37 @@ const classes = {
                 name: "Treasure",
                 desc: "This octopus stuck its head in a treasure chest and can't get out.",
                 type: "onetime",
-                path: "walls3_great_white", // Alternate path from skinPaths_onetime_2
+                path: "walls3_great_white",
                 backup: "",
                 req: "", 
-                reqdesc: "Cast From the Depths on 7 players at once." // Alternate reqDesc from skinReqDesc_onetime_2
+                reqdesc: "Cast From the Depths on 7 players at once." 
             },
             3: {
                 name: "Devourer",
                 desc: "Devours bone, flesh, and souls.",
                 type: "onetime",
-                path: "walls3_tiger_shark", // Alternate path from skinPaths_onetime_2
+                path: "walls3_tiger_shark",
                 backup: "",
                 req: "", 
-                reqdesc: "Activate Food Hunt 4 times in 30 seconds during Deathmatch." // Alternate reqDesc from skinReqDesc_onetime_2
+                reqdesc: "Activate Food Hunt 4 times in 30 seconds during Deathmatch."
             },
             4: {
                 name: "Wata",
                 desc: "A feral child raised by fishes.",
                 type: "onetime",
-                path: "walls3_bull_shark", // Alternate path from skinPaths_onetime_2
+                path: "walls3_bull_shark", 
                 backup: "",
                 req: "", 
-                reqdesc: "Attack someone while you have your full Blood Rage buff." // Alternate reqDesc from skinReqDesc_onetime_2
+                reqdesc: "Attack someone while you have your full Blood Rage buff." 
             },
             5: {
                 name: "Bblurgbl",
                 desc: "This sailor swam too close to the funky corals.",
                 type: "onetime",
-                path: "walls3_legendary_shark", // Alternate path from skinPaths_onetime_2
+                path: "walls3_legendary_shark",
                 backup: "",
                 req: "", 
-                reqdesc: "Reach 14 FK/A in a single game as Shark." // Alternate reqDesc from skinReqDesc_onetime_2
+                reqdesc: "Reach 14 FK/A in a single game as Shark." 
             },
             6: {
                 name: "Cosmo",
@@ -340,10 +340,10 @@ const classes = {
                 name: "Hammy",
                 desc: "Years of butting heads with his fellow sharks has left him with the smoothest skull around.",
                 type: "purchase",
-                path: "hammy", // Alternate path from skinReqDesc_onetime_2
+                path: "hammy",
                 backup: "",
                 req: "5,000", 
-                reqdesc: "hammy" // Alternate reqDesc from skinReqDesc_onetime_2
+                reqdesc: "hammy"
             },
             9: {
                 name: "Selkie",
@@ -416,28 +416,28 @@ const classes = {
                 name: "Chester",
                 desc: "Space ranger and a brave leader, but at times Chester can also be too impulsive.",
                 type: "onetime",
-                path: "walls3_to_infinity", // Alternate path from skinPaths_onetime_3
+                path: "walls3_to_infinity", 
                 backup: "",
                 req: "",
-                reqdesc: "Kill 3 players without losing Tempest's Speed III buff." // Alternate reqDesc from skinReqDesc_onetime_3
+                reqdesc: "Kill 3 players without losing Tempest's Speed III buff." 
             },
             4: {
                 name: "Byron Boy",
                 desc: "Byron Boy shoots lasers. He also shoots lasers. Did I mention he shoots lasers?",
                 type: "onetime",
-                path: "walls3_laser_precision", // Alternate path from skinPaths_onetime_3
+                path: "walls3_laser_precision", 
                 backup: "",
                 req: "",
-                reqdesc: "Shoot 10 unique players with Arcane Beam in a row without missing a shot." // Alternate reqDesc from skinReqDesc_onetime_3
+                reqdesc: "Shoot 10 unique players with Arcane Beam in a row without missing a shot." 
             },
             5: {
                 name: "Emperor",
                 desc: "Rule your empire in dominating fashion.",
                 type: "onetime",
-                path: "walls3_legendary_arcanist", // Alternate path from skinPaths_onetime_3
+                path: "walls3_legendary_arcanist", 
                 backup: "",
                 req: "",
-                reqdesc: "Reach 14 FK/A in a single game as Arcanist." // Alternate reqDesc from skinReqDesc_onetime_3
+                reqdesc: "Reach 14 FK/A in a single game as Arcanist."
             },
             6: {
                 name: "Archmage",
@@ -452,19 +452,19 @@ const classes = {
                 name: "Arcana",
                 desc: "Don't get on Arcana's bad side – she won't take kindly to it.",
                 type: "onetime",
-                path: "walls3_tripleshot", // Alternate path from skinPaths_onetime_3
+                path: "walls3_tripleshot",
                 backup: "",
                 req: "",
-                reqdesc: "Hit 3 players with the same Arcane Beam." // Alternate reqDesc from skinReqDesc_onetime_3
+                reqdesc: "Hit 3 players with the same Arcane Beam." 
             },
             8: {
                 name: "Isaiah",
                 desc: "Rises above the battlefield with his prismarine-blue armor.",
                 type: "purchase",
-                path: "isaiah", // Alternate path from skinReqDesc_onetime_3
+                path: "isaiah",
                 backup: "",
                 req: "5,000",
-                reqdesc: "isaiah" // Alternate reqDesc from skinReqDesc_onetime_3
+                reqdesc: "isaiah" 
             },
             9: {
                 name: "Crawler",
@@ -1828,9 +1828,9 @@ const classes = {
                 name: "Weaver",
                 desc: "Arr matey! Weaver is out for yer coins!",
                 type: "purchase",
-                path: "",
+                path: "weaver",
                 backup: "",
-                req: "",
+                req: "5,000",
                 reqdesc: "weaver"
             },
             9: {
@@ -3199,10 +3199,10 @@ const classes = {
                 name: "Gus",
                 desc: "This adventurer has ben waiting in the cold for the perfect kill so long that he became one with the snow.",
                 type: "onetime",
-                path: "walls3_chill_sniper", // Alternate path from skinPaths_onetime_26
+                path: "walls3_chill_sniper", 
                 backup: "",
                 req: "", 
-                reqdesc: "Hit 4 players with a single Ice Bolt." // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "Hit 4 players with a single Ice Bolt." 
             },
             2: {
                 name: "Frozen",
@@ -3217,10 +3217,10 @@ const classes = {
                 name: "Abominable",
                 desc: "Mighty Abominable, as powerful as it is annoying.",
                 type: "onetime",
-                path: "walls3_avalanche", // Alternate path from skinPaths_onetime_26
+                path: "walls3_avalanche", 
                 backup: "",
                 req: "", 
-                reqdesc: "Recover 200 energy from Snowman Companion in 40 seconds." // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "Recover 200 energy from Snowman Companion in 40 seconds."
             },
             4: {
                 name: "Ice Bug",
@@ -3235,37 +3235,37 @@ const classes = {
                 name: "Dobu",
                 desc: "Liquid nitrogen flows through its veins.",
                 type: "onetime",
-                path: "walls3_legendary_snowman", // Alternate path from skinPaths_onetime_26
+                path: "walls3_legendary_snowman",
                 backup: "",
                 req: "", 
-                reqdesc: "Reach 14 FK/A in a single game as Snowman." // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "Reach 14 FK/A in a single game as Snowman." 
             },
             6: {
                 name: "Feathers",
                 desc: "Ice cold but loving it.",
                 type: "onetime",
-                path: "walls3_snowball_fight", // Alternate path from skinPaths_onetime_26
+                path: "walls3_snowball_fight",
                 backup: "",
                 req: "", 
-                reqdesc: "Final kill a player as Snowman while holding a snowball." // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "Final kill a player as Snowman while holding a snowball."
             },
             7: {
                 name: "David",
                 desc: "I told my best friend to stop making Bigfoot jokes, Yeti still does.",
                 type: "onetime",
-                path: "walls3_grave_digger", // Alternate path from skinPaths_onetime_26
+                path: "walls3_grave_digger",
                 backup: "",
                 req: "",
-                reqdesc: "Final kill 3 players with your diamond shovel without dying as Snowman." // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "Final kill 3 players with your diamond shovel without dying as Snowman."
             },
             8: {
                 name: "Frozen Alex",
                 desc: "Native to the Jerry Pond until recently, Alex is still adjusting to the new climate.",
                 type: "purchase",
-                path: "frozen alex", // Alternate path from skinReqDesc_onetime_26
+                path: "frozen alex", 
                 backup: "",
                 req: "5,000", 
-                reqdesc: "frozen alex" // Alternate reqDesc from skinReqDesc_onetime_26
+                reqdesc: "frozen alex" 
             },
             9: {
                 name: "Basilisk",
@@ -3297,7 +3297,6 @@ const classes = {
         }
     },
 }
-//"sheep", "skeleton", "spider", "werewolf", "angel", "assassin", "automaton", "moleman", "phoenix", "dragon", "renegade", "snowman"];
 const tagColors = {
     "DARK_GRAY": "#555555",
     "WHITE": "#ffffff",
