@@ -276,7 +276,7 @@
     var lastname = "";
     
     async function updateForges(name){
-      reset();
+      
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -288,6 +288,7 @@
             setTimeout(() => { onCD = false }, 5000);
         }
       }
+      reset();
       var UUID = await getUUIDbyName(name);
       if (UUID == -1) {
         return -1;
