@@ -22,12 +22,17 @@
   <div style = "text-align:center; margin: auto"> 
     <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header style = "color:#40c040">Garden</span><br>
   </div>
-
+  <div style = "text-align:center">
+    <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
+    <span id = "refreshstatus"></span><br>
+    <span id = "status"></span><br>
+    <span id = "otherstatus"></span><br>
+  <div>
 
     <section class = "flex_box_index">
         <div class = "flex_index_row">
             <div class = "flex_index_box">
-                <span class = "header">Collection Tracker</span>
+                
             </div>
         </div>
     </section>
@@ -36,5 +41,39 @@
     <script>
         function updatePage(){
             
+        }
+        function reset(){
+          
+        }
+        async function updateUser(name){
+          reset();
+          console.log("Last name: " + lastname + " New name: " + name);
+          if (onCD == true){
+              document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
+              console.log("On cooldown!");
+              return -1;
+          } else {
+              document.getElementById("refreshstatus").innerText = "";
+              if (!fasttrack){
+                  onCD = true;
+                  setTimeout(() => { onCD = false }, 5000);
+              }
+              
+          }
+          UUID = await getUUIDbyName(name);
+          if (UUID == -1){
+              return -1;
+          }
+          if (!fasttrack){
+              data = await getAPIdata(UUID);
+              console.log(data);
+          } 
+          updateProfiles(data);
+              lastname = name;
+              fasttrack = false;
+              localStorage.setItem("storedname", name);
+              console.log("Set item " + localStorage.getItem("storedname"));
+              localStorage.setItem("storeddata", JSON.stringify(data)); 
+              console.log("Set item " + localStorage.getItem("storeddata"));
         }
     </script>

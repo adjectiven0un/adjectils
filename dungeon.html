@@ -228,7 +228,7 @@
     var onCD = false;
     var profilelist;
     var UUID;
-    function resetStatuses(){
+    function reset(){
       document.getElementById("dailyruns").innerText = "0";
       document.getElementById("dailytoday").innerHTML = "...";
       document.getElementById("status").innerText = "";
@@ -266,7 +266,7 @@
     }
     var fasttrack = false;
     async function updateUser(name){
-        resetStatuses();
+        reset();
         console.log("Last name: " + lastname + " New name: " + name);
         if (onCD == true){
             document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
