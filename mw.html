@@ -417,7 +417,7 @@
                 }
                 else {
                     try {
-                        if (mwdata[skinPack[i].path] >= skinPack[i].req ||  (data.player.achievementsOneTime.includes(skinPack[i].backup))) { 
+                        if (mwdata[skinPack[i].path] >= skinPack[i].req || (data.player.achievementsOneTime.includes(skinPack[i].backup))) { 
                             totalSkins++;
                         } else if (mwdata[skinPack[i].path] != undefined){
                             if (skinPack[i].path == "squid_defender_final_kills") {
@@ -443,7 +443,7 @@
                                     totalSkins++;
                                 }
                                 
-                            } else if (skinPack[i].pack == "spider_a_kills") {
+                            } else if (skinPack[i].path == "spider_a_kills") {
                                 var leapkills = 0;
                                 var leapfinals = 0;
                                 if (mwdata["spider_a_kills"] != undefined) {

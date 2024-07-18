@@ -11,6 +11,9 @@
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
       <link rel="manifest" href="./favicon/site.webmanifest">
       <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "apireader.js"></script>
+      <script src = "gardendata.js"></script>
+      <script src = "timeToMinutes.js"></script>
     </head>
   <body onload="updatePage()">
   
@@ -27,27 +30,46 @@
     <span id = "refreshstatus"></span><br>
     <span id = "status"></span><br>
     <span id = "otherstatus"></span><br>
+    <div>
+      <form action = "#" style = "background-color: #282828;">
+        <label>Profile:
+        <select id = profileid value = 4 onchange = updateUser(nameinput.value)>
+          <option id = profile0 value = 0>–––––</option>
+          <option id = profile1 value = 1>–––––</option>
+          <option id = profile2 value = 2>–––––</option>
+          <option id = profile3 value = 3>–––––</option>
+          <option id = profile4 value = 4>–––––</option>
+        </select>
+        </label>
+      </form>
+    </div>
   <div>
-
+    <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label>
     <section class = "flex_box_index">
-        <div class = "flex_index_row">
-            <div class = "flex_index_box">
-                
-            </div>
+        <div class = "flex_index_row" id = "gardenrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
+            
         </div>
     </section>
     <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
     </body>
     <script>
         function updatePage(){
-            
+            loadElements();
+            if (localStorage.getItem("storedname") != null){
+                console.log("Found a previous name and data! Loading...");
+                document.getElementById("nameinput").value = localStorage.getItem("storedname");
+                data = JSON.parse(localStorage.getItem("storeddata"));
+                fasttrack = true;
+                updateUser(localStorage.getItem("storedname"));
+            }
         }
         function reset(){
-          
+
         }
+        var data;
+        var onCD;
+        var fasttrack = false;
         async function updateUser(name){
-          reset();
-          console.log("Last name: " + lastname + " New name: " + name);
           if (onCD == true){
               document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
               console.log("On cooldown!");
@@ -60,20 +82,109 @@
               }
               
           }
+          reset();
           UUID = await getUUIDbyName(name);
           if (UUID == -1){
               return -1;
           }
           if (!fasttrack){
               data = await getAPIdata(UUID);
-              console.log(data);
           } 
           updateProfiles(data);
-              lastname = name;
-              fasttrack = false;
-              localStorage.setItem("storedname", name);
-              console.log("Set item " + localStorage.getItem("storedname"));
-              localStorage.setItem("storeddata", JSON.stringify(data)); 
-              console.log("Set item " + localStorage.getItem("storeddata"));
+          lastname = name;
+          fasttrack = false;
+          localStorage.setItem("storedname", name);
+          console.log("Set item " + localStorage.getItem("storedname"));
+          localStorage.setItem("storeddata", JSON.stringify(data)); 
+          updateCrops();
         }
+
+        function loadElements() {
+          for (let key in crops) {
+            var box = document.createElement("div");
+            box.id = key + "_box";
+            box.className = "flex_index_box";
+            box.style.width = "40%";
+            var title = document.createElement("span");
+            title.className = "header flex_full_row";
+            title.innerText = crops[key].plaintext;
+            var count = document.createElement("span");
+            count.id = key + "_collection";
+            var fortunelabel = document.createElement("label");
+            fortunelabel.innerText = "Crop fortune: ";
+            var fortune = document.createElement("input");
+            fortune.id = key + "_fortune";
+            fortune.type = "number";
+            fortune.style.width = "80px";
+            fortune.value = 0;
+            fortune.onchange = function() { updateCrop(key) };
+            fortunelabel.appendChild(fortune);
+            var discrepancylabel = document.createElement("label");
+            discrepancylabel.innerText = "Collection diff: ";
+            var discrepancy = document.createElement("input");
+            discrepancy.id = key + "_discrepancy";
+            discrepancy.type = "number";
+            discrepancy.style.width = "80px";
+            discrepancy.value = "0";
+            discrepancy.onchange = function() { updateCrop(key) };
+            discrepancylabel.appendChild(discrepancy);
+            var cps = document.createElement("span");
+            cps.id = key + "_cps";
+            var cph = document.createElement("span");
+            cph.id = key + "_cph";
+            var milestone = document.createElement("span");
+            milestone.style.marginTop = "16px";
+            milestone.className = "flex_full_row";
+            milestone.id = key + "_milestone";
+            var remaining = document.createElement("span");
+            remaining.id = key + "_remaining";
+            var timeremaining = document.createElement("span");
+            timeremaining.id = key + "_timeremaining";
+            box.appendChild(title);
+            box.appendChild(count);
+            box.appendChild(fortunelabel);
+            box.appendChild(discrepancylabel);
+            box.appendChild(cps);
+            box.appendChild(cph);
+            box.appendChild(milestone);
+            box.appendChild(remaining);
+            box.appendChild(timeremaining);
+            gardenrow.appendChild(box);
+          }
+        }
+        function updateCrops() {
+          for (let key in crops) {
+            updateCrop(key);
+          }
+        }
+        function updateCrop(key) {
+            var collection = data.profiles[profileid.value].members[UUID].collection[crops[key].api];
+            if (document.getElementById(key + "_discrepancy").value > collection){
+                document.getElementById(key + "_discrepancy").value = collection;
+            }
+            if (document.getElementById(key + "_discrepancy").value < 0 || isNaN(document.getElementById(key + "_discrepancy").value) || document.getElementById(key + "_discrepancy").value == ""){
+                document.getElementById(key + "_discrepancy").value = 0;
+            }
+            collection -= document.getElementById(key + "_discrepancy").value;
+            document.getElementById(key + "_collection").innerText = "Collection: " + collection.toLocaleString();
+            var cps = (20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100))).toFixed(2);
+            document.getElementById(key + "_cps").innerText = "Crops per second: " + cps.toLocaleString();
+            var cph = (cps * crops[key].coin) * 3600;
+            document.getElementById(key + "_cph").innerText = "Coins per hour: " + cph.toLocaleString();
+            var milestone = 0;
+            while (collection - crops[key].milestones[milestone] > 0 && milestone < 46) {
+              console.log(collection);
+              collection -= crops[key].milestones[milestone];
+              milestone++;
+            }
+            var bonus = "";
+            if (milestone == 46) {
+              collection = 0;
+              bonus = "";
+            }
+            console.log(milestone);
+            document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
+            document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + collection.toLocaleString();
+            document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + timeToMinutes(Math.floor(collection/cps));
+        } 
     </script>
