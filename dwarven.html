@@ -32,6 +32,9 @@
   <div>
   <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
+  <div>
+    <span id = "refresh" style = "background-color: #282828;">0s since last refresh.&nbsp;</span>
+    </div>
   <br>
   <div style = "background-color: #282828;">
     
@@ -237,7 +240,13 @@
     var data;
     async function updatePage(){
       updateSizes();
+      if (localStorage.getItem("lastreset") != null) {
+        var currenttime = Date.now();
+        var secondssince = Math.floor((currenttime - localStorage.getItem("lastreset"))/1000);
+        refresh.innerText = betterTimestamp(secondssince) + " since last refresh.";
+      }
         console.log("Stored a name: " + localStorage.getItem("storedname"));
+        
         if (localStorage.getItem("storedname") != null){
             console.log("Found a previous name and data! Loading...");
             console.log("Previous name: " + localStorage.getItem("storedname"));
@@ -289,6 +298,12 @@
         }
       }
       reset();
+      if (!fasttrack){
+        localStorage.setItem("lastreset", Date.now());
+        console.log("Last reset: " + localStorage.getItem("lastreset"));
+      }
+      
+
       var UUID = await getUUIDbyName(name);
       if (UUID == -1) {
         return -1;
@@ -380,6 +395,11 @@
     }
 
     async function updateTimers(qfm, forgelog){
+
+
+      var currenttime = Date.now();
+      var secondssince = Math.floor((currenttime - localStorage.getItem("lastreset"))/1000);
+      refresh.innerText = betterTimestamp(secondssince) + " since last refresh.";
       var actives = [1, 1, 1, 1, 1];
       if (forgelog == "Empty"){
         for (var i = 1; i <= 5; i++){
@@ -389,7 +409,6 @@
           document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
           document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
         }
-        console.log("No items found");
         clearInterval(intervalID[0]);
         intervalID.length = 0;
       } else {
@@ -474,7 +493,6 @@
     }
     window.addEventListener('resize', updateSizes());
     function updateSizes(){
-        console.log("Current width: " + window.innerWidth);
         if (window.innerWidth >= 768 * (5/3)) {
             console.log("Desktop mode...");
             for (var i = 1; i <= 5; i++){
@@ -626,14 +644,12 @@
         for (var key2 in loottable) {
             totalweight += loottable[key2];
         }
-        console.log("Total weight: " + totalweight);
-        console.log("Chance per roll: " + 3/(totalweight));   
         var rolls5 = binomial(5, (3/totalweight));
         var rolls6 = binomial(6, (3/totalweight));
         var rolls7 = binomial(7, (3/totalweight));
         var rolls8 = binomial(8, (3/totalweight));
         var rolls9 = binomial(9, (3/totalweight));
-        console.log("Locket chance: " + (100 * ((0.2 * rolls5) + (0.25 * rolls6) + (0.25 * rolls7) + (0.25 * rolls8) + (0.05 * rolls9))).toFixed(3) + "%");
+        //console.log("Locket chance: " + (100 * ((0.2 * rolls5) + (0.25 * rolls6) + (0.25 * rolls7) + (0.25 * rolls8) + (0.05 * rolls9))).toFixed(3) + "%");
         for (var key2 in loottable) {
             var tablerow = document.createElement("tr");
             tablerow.style.width = "100%"

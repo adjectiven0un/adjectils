@@ -38,3 +38,27 @@ function convertTimestamp(timestamp){
     return fixTime(stamp.getHours() % 12) + ":" + fixTime(stamp.getMinutes()) + ampm + " " + months[stamp.getMonth()] + " " + stamp.getDate();
     
 }
+
+function betterTimestamp(seconds) {
+    var minutes = Math.floor(seconds/60);
+    var second = seconds % 60;
+    minutes = fixTime(minutes);
+    second = fixTime(second);
+    if (seconds >= 60) {
+        if (minutes >= 60){
+            var hours = Math.floor(minutes / 60);
+            hours = fixTime(hours);
+            minutes -= hours * 60;
+            minutes = fixTime(minutes);
+            if (hours >= 24){
+                var days = Math.floor(hours / 24);
+                hours -= days * 24;
+                hours = fixTime(hours);
+                return (" " + days + "d " + hours + "h " + minutes + "m " + fixTime(Math.floor(second)) + "s");
+            }
+            return(" " + hours + "h " + minutes + "m " + fixTime(Math.floor(second)) + "s");
+        }
+        return (" " + minutes + "m " + fixTime(Math.floor(second)) + "s");
+    }
+    return (fixTime(Math.floor(second)) + "s");
+}
