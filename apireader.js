@@ -37,7 +37,6 @@ async function getStats(UUID){
   }
   return await apicall.json();
 }
-
 async function updateProfiles(data) {
   try {
     console.log("Attempting to set profile ID...");
@@ -51,7 +50,6 @@ async function updateProfiles(data) {
 
     console.log("Checking new name");
     var profilenum = 0;
-    lastname = name;
     for (var i = 0; i < profilelist.length; i++){
         if (profilelist[i].selected){
             console.log("Profile ID found: " + profilenum);

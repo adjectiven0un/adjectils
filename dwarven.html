@@ -312,7 +312,10 @@
         
         
         var profilelist;
-        updateProfiles(data);
+        if (lastname != name) {
+          updateProfiles(data);
+        }
+        
         lastname = name;
         
       }

@@ -271,7 +271,7 @@
             updateLavaTable();
         }
 
-        
+        var lastname;
         async function updateFish(name){
 
             //Rudimentary cooldown to avoid refresh spamming causing rate limits. Fast tracking does not trigger the cooldown.
@@ -306,8 +306,11 @@
                 return -1;
             }
             //Attempt to set the profile ID and list. If none can be found, the TypeError will be caught and an error message will appear.
-
-            updateProfiles(data);
+            if (lastname != name) {
+                updateProfiles(data);
+            }
+            lastname = name;
+            
 
             //Deactivate fasttrack if applicable, then store the last name and api data in localStorage.
 

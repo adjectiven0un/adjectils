@@ -259,15 +259,13 @@
             if (input > 1000000){
                 input = (input / 1000000).toFixed(1) + "M";
             } else {
-                input = (input / 1000000).toFixed(1) + "K";
+                input = (input / 1000).toFixed(1) + "K";
             }
         }
         return input;
     }
     var fasttrack = false;
     async function updateUser(name){
-        reset();
-        console.log("Last name: " + lastname + " New name: " + name);
         if (onCD == true){
             document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
             console.log("On cooldown!");
@@ -280,6 +278,7 @@
             }
             
         }
+        reset();
         UUID = await getUUIDbyName(name);
         if (UUID == -1){
             return -1;
@@ -288,7 +287,9 @@
             data = await getAPIdata(UUID);
             console.log(data);
         } 
-        updateProfiles(data);
+        if (lastname != name){
+            updateProfiles(data);
+        }
             lastname = name;
             fasttrack = false;
             localStorage.setItem("storedname", name);
