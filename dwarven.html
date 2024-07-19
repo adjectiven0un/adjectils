@@ -33,7 +33,7 @@
   <span id = "status" style = "background-color: #282828;">Enter a username to continue.&nbsp;</span>
   </div>
   <div>
-    <span id = "refresh" style = "background-color: #282828;">0s since last refresh.&nbsp;</span>
+    <span id = "refresh" style = "background-color: #282828;">00s since last refresh.&nbsp;</span>
     </div>
   <br>
   <div style = "background-color: #282828;">
@@ -275,6 +275,8 @@
             document.getElementById("time" + i).innerText = "––:––";
             document.getElementById("finish" + i).innerText = "––:––";
             document.getElementById("forgeunmeter" + i).innerText = "";
+            document.getElementById("forgeitem_" + i).innerText = "None";
+            document.getElementById("refresh").innerText = "00s since last refresh.";
             document.getElementById("forgemeter" + i).style.color = "#c0c0c0";
             document.getElementById("forgemeter" + i).innerText = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
             document.getElementById("img" + i).style.opacity = 0;
@@ -287,7 +289,8 @@
     
     async function updateForges(name){
       clearInterval(refreshInterval[0]);
-      
+      clearInterval(intervalID[0]);
+      reset();
       if (onCD == true){
         document.getElementById("refreshstatus").innerText = "Please wait 5 seconds before using this again.";
         console.log("On cooldown!");
@@ -299,7 +302,7 @@
             setTimeout(() => { onCD = false }, 5000);
         }
       }
-      reset();
+      
       if (!fasttrack){
         localStorage.setItem("lastreset", Date.now());
         console.log("Last reset: " + localStorage.getItem("lastreset"));
@@ -325,7 +328,7 @@
 
       
       
-      clearInterval(intervalID[0]);
+      
       
       intervalID.length = 0;
       
