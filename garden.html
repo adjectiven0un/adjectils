@@ -44,7 +44,23 @@
       </form>
     </div>
   <div>
-    <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label>
+    <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>  
+    <label>Armor type:
+      <select id = armor value = 4 onchange = updateCrops()>
+        <option value = 0>Something else</option>
+        <option value = 1>Melon Armor</option>
+        <option value = 2>Cropie Armor</option>
+        <option value = 3>Squash Armor</option>
+        <option value = 4>Fermento Armor</option>
+      </select>
+    </label>
+    <label>Pieces:
+      <select id = pieces value = 4 onchange = updateCrops()>
+        <option value = 2>2</option>
+        <option value = 3>3</option>
+        <option value = 4>4</option>
+      </select>
+    </label>
     <section class = "flex_box_index">
         <div class = "flex_index_row" id = "gardenrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
             
@@ -110,6 +126,7 @@
             title.innerText = crops[key].plaintext;
             var count = document.createElement("span");
             count.id = key + "_collection";
+            count.className = "flex_full_row";
             var fortunelabel = document.createElement("label");
             fortunelabel.innerText = "Crop fortune: ";
             var fortune = document.createElement("input");
@@ -132,6 +149,17 @@
             cps.id = key + "_cps";
             var cph = document.createElement("span");
             cph.id = key + "_cph";
+            cph.className = "flex_full_row";
+            var bountiful = document.createElement("span");
+            bountiful.id = key + "_bountiful";
+            bountiful.style.fontSize = "12px";
+            bountiful.style.color = "#808080";
+            bountiful.className = "flex_full_row";
+            var bonus = document.createElement("span");
+            bonus.id = key + "_bonus";
+            bonus.style.fontSize = "12px";
+            bonus.style.color = "#808080";
+            bonus.className = "flex_full_row";
             var milestone = document.createElement("span");
             milestone.style.marginTop = "16px";
             milestone.className = "flex_full_row";
@@ -146,13 +174,22 @@
             box.appendChild(discrepancylabel);
             box.appendChild(cps);
             box.appendChild(cph);
+            box.appendChild(bountiful);
+            box.appendChild(bonus);
             box.appendChild(milestone);
             box.appendChild(remaining);
             box.appendChild(timeremaining);
+
             gardenrow.appendChild(box);
           }
         }
         function updateCrops() {
+          if (document.getElementById("farmingfortune").value > 4000){
+            document.getElementById("farmingfortune").value = 4000;
+          }
+          if (document.getElementById("farmingfortune").value < 0 || isNaN(document.getElementById("farmingfortune").value) || document.getElementById("farmingfortune").value == ""){
+            document.getElementById("farmingfortune").value = 0;
+          }
           for (let key in crops) {
             updateCrop(key);
           }
@@ -170,7 +207,36 @@
             var cps = (20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100))).toFixed(2);
             document.getElementById(key + "_cps").innerText = "Crops per second: " + cps.toLocaleString();
             var cph = (cps * crops[key].coin) * 3600;
+            var bountifulcoins = (cps * 0.2) * 3600;
+            var specialcoins = 0;
+            console.log(crops[key].bonus);
+            if (crops[key].bonus == "cropie") {
+              var cropiechance = 0;
+              if (armor.value == 1 || armor.value == 4) {
+                cropiechance = 0.0002 + (0.0001 * (pieces.value - 1));
+              }
+              specialcoins = cropiechance * 3600 * 20 * 25000;
+            } else if (crops[key].bonus == "squash") {
+              var squashchance = 0;
+              if (armor.value == 2 || armor.value == 4) {
+                squashchance = (0.0001 * (pieces.value - 1));
+              }
+              specialcoins = squashchance * 3600 * 20 * 75000;
+            } else if (crops[key].bonus == "fermento") {
+              var fermentochance = 0;
+              if (armor.value == 3 || armor.value == 4) {
+                fermentochance = 0.00004 + (0.00001 * (pieces.value - 1));
+                specialcoins = fermentochance * 3600 * 20 * 250000;
+                if (crops[key].double == true) {
+                  specialcoins *= 2;
+                }
+              }
+              
+            }
+
             document.getElementById(key + "_cph").innerText = "Coins per hour: " + cph.toLocaleString();
+            document.getElementById(key + "_bountiful").innerText = " (+" + bountifulcoins.toLocaleString() + " from Bountiful)";
+            document.getElementById(key + "_bonus").innerText = " (+" + specialcoins.toLocaleString() + " from armor bonus)";
             var milestone = 0;
             while (collection - crops[key].milestones[milestone] > 0 && milestone < 46) {
               console.log(collection);

@@ -58,6 +58,7 @@
                         <tr><td><span style = "color:#ff55ff">Wrath of Hades</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_hades">0</span></td><td class = "tdalignright"> <span>&nbsp;(<span id = "weight_hades">0</span> kg record)</span></td></tr>
                         <tr><td><span style = "color:#ffffff">Total</span><span>:&nbsp;</span></td><td class = "tdalignright"> <span id = "caught_total">0</span></td></tr>
                     </table>
+                    <span class = "flex_full_row" style = "margin-top: 20px" id = "totalcaught">Total catches:&nbsp;<span id = "totalcatches"></span></span>
                   </div>
                 <div class = "index_box" style = "width:min(calc(100% - 30px), max(960px, 40%))" id = "calcbox">
                     <span class = "header flex_full_row">Catch Table</span>
@@ -285,6 +286,7 @@
     }
     const mythicals = ["helios", "selene", "nyx", "aphrodite", "zeus", "archimedes", "hades"];
     function updateFish() {  
+        var total = 0;
         try {
             if (environment.value == "individual") {
                 var fish = 0;
@@ -304,12 +306,14 @@
                 } catch (TypeError) {
                 }
                 document.getElementById("caught_fish").innerText = fish.toLocaleString();
+                total += fish;  
             } else {
                 var fish = 0;
                 if (fishingdata.stats.permanent[environment.value]["fish"] != undefined) {
                     fish += fishingdata.stats.permanent[environment.value]["fish"];
                 }
                 document.getElementById("caught_fish").innerText = fish.toLocaleString();
+                total += fish;
             }
         } catch  (TypeError) {
             document.getElementById("caught_fish").innerText = 0;
@@ -333,12 +337,14 @@
                 } catch (TypeError) {
                 }
                 document.getElementById("caught_junk").innerText = fish.toLocaleString();
+                total += fish;
             } else {
                 var fish = 0;
                 if (fishingdata.stats.permanent[environment.value]["junk"] != undefined) {
                     fish += fishingdata.stats.permanent[environment.value]["junk"];
                 }
                 document.getElementById("caught_junk").innerText = fish.toLocaleString();
+                total += fish;
             }
         } catch  (TypeError) {
             document.getElementById("caught_junk").innerText = 0;
@@ -362,12 +368,14 @@
                 } catch (TypeError) {
                 }
                 document.getElementById("caught_treasure").innerText = fish.toLocaleString();
+                total += fish;
             } else {
                 var fish = 0;
                 if (fishingdata.stats.permanent[environment.value]["treasure"] != undefined) {
                     fish += fishingdata.stats.permanent[environment.value]["treasure"];
                 }
                 document.getElementById("caught_treasure").innerText = fish.toLocaleString();
+                total += fish;
             }
         } catch  (TypeError) {
             document.getElementById("caught_treasure").innerText = 0;
@@ -393,9 +401,11 @@
                 
             }
             document.getElementById("caught_total").innerText = totalmythicals.toLocaleString();
+            total += totalmythicals;
         } catch (TypeError){
             console.log("Some failure on mythical fish check?");
         }
+        document.getElementById("totalcatches").innerText = total.toLocaleString();
         var time = new Date();
         var currentyear = time.getFullYear();
         var yearstats = fishingdata.stats[currentyear];
