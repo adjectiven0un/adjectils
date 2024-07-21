@@ -525,5 +525,14 @@ body {
   .fadebox.fade {
       animation: fadeOut 2s forwards;
   }
+  .melodytrack {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    flex-direction:row;
+    width:50px;
+    height:400px;
+  } 
 
   

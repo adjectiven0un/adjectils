@@ -154,6 +154,18 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
+                    <label>Icy Hook:
+                    <select id = icyhook value = "1" onchange = updateWaterTable()>
+                        <option value = "1">0</option>
+                        <option value = "1.02">I</option>
+                        <option value = "1.04">II</option>
+                        <option value = "1.06">III</option>
+                        <option value = "1.08">IV</option>
+                        <option value = "1.1">V</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
                     <label>Drake Piper:
                     <select id = drakepiper value = "1" onchange = updateWaterTable()>
                         <option value = "1">0</option>
@@ -658,6 +670,11 @@
             if (squidhat.value == "1") {
                 for (var i = 0; i < squids.length; i++){
                     waterscweights[squids[i]] = waterscweights[squids[i]] * 2;
+                }
+            }
+            if (icyhook.value != "1") {
+                for (var i = 0; i < winterscs.length; i++){
+                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * icyhook.value;
                 }
             }
             if (drakepiper.value != "1") {

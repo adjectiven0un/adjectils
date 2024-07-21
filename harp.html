@@ -27,21 +27,6 @@
     <div class = "flex_index_row" id = "row1">
 
     </div>
-    <div class = "flex_index_row" id = "row2">
-
-    </div>
-    <div class = "flex_index_row" id = "row3">
-
-    </div>
-    <div class = "flex_index_row" id = "row4">
-
-    </div>
-    <div class = "flex_index_row" id = "row5">
-
-    </div>
-    <div class = "flex_index_row" id = "row6">
-
-    </div>
   </section>
 
 
@@ -54,21 +39,34 @@
         setup();
     }
     function setup() {
-      for (var i = 1; i <= 6; i++) {
-        document.getElementById("row" + i).innerHTML = "";
-        for (var j = 0; j < 7; j++) {
+      document.getElementById("row1").innerHTML = "";
+      for (var i = 0; i <= 6; i++) {
           var box = document.createElement("span");
-          box.className = "melodybox";
-          box.id = ("row" + i + "col" + j);
-          box.style.backgroundColor = harpcolors[j];
-          document.getElementById("row" + i).appendChild(box);
-        }
+          box.className = "melodytrack";
+          box.style.backgroundColor = harpcolors[i];
+          box.id = "col" + i;
+          row1.appendChild(box);
       }
     }
-    async function playNote(column) {
-      for (let i = 1; i <= 6; i++) {
-        setTimeout(() => document.getElementById("row" + i + "col" + column).style.backgroundColor = "#c0c0c0", 1000 * i);
-        setTimeout(() => document.getElementById("row" + i + "col" + column).style.backgroundColor = harpcolors[column], 1000 * (i + 1));
+    async function playNote(column, tempo) {
+      var note = document.createElement("span");
+      let targetX = document.getElementById("col" + column).getBoundingClientRect().left;
+      note.style.position = "absolute";
+      note.style.width = "50px";
+      note.style.height = "50px";
+      note.style.backgroundColor = "#808080";
+      document.getElementById("col" + column).appendChild(note);
+    }
+    async function playTrack(array) {
+      var tempo = array[0];
+      for (let i = 1; i < array.length; i++) {
+        playNote(array[i], tempo);
+        await delay(60000/tempo);
       }
     }
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    var sampletrack = [180, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2];
   </script>
