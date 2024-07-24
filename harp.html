@@ -24,9 +24,12 @@
   </div>
 
   <section class = "flex_box_index">
+    <div id = "buffer1" style = "width:350px; height:50px; background-color: #404040; z-index: 5;"></div>
     <div class = "flex_index_row" id = "row1">
-
+    
     </div>
+    <div id = "buffer2" style = "width:350px; height:50px; background-color: #404040; z-index: 5;"></div>
+    <span id = "scoreboard" style = "color: #55ff55">0</span><span id = "missboard" style = "color:#ff5555">0</span>
   </section>
 
 
@@ -35,32 +38,106 @@
   </body>
   <script>
     const harpcolors = ["#ff55ff", "#ffaa00", "#ffff55", "#55ff55", "#55ffff", "#5555ff", "#aa00aa"];
+    const harpcolorssoft = ["#ff88ff", "#ffcc55", "#ffff88", "#88ff88", "#88ffff", "#8888ff", "#cc55cc"];
+    var score = 0;
+    var miss = 0;
+    var columnstatus = {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+    }
     function updatePage(){
         setup();
     }
     function setup() {
       document.getElementById("row1").innerHTML = "";
-      for (var i = 0; i <= 6; i++) {
-          var box = document.createElement("span");
+      for (let i = 0; i <= 6; i++) {
+          let box = document.createElement("span");
           box.className = "melodytrack";
           box.style.backgroundColor = harpcolors[i];
           box.id = "col" + i;
           row1.appendChild(box);
+          let marker = document.createElement("span");
+          let targetX = document.getElementById("col" + i).getBoundingClientRect().left;
+          marker.style.position = "absolute";
+          marker.style.width = "50px";
+          marker.style.height = "50px";
+          marker.style.transform = "translateY(125px)";
+          marker.style.backgroundColor = harpcolorssoft[i];
+          marker.style.zIndex = 6;
+          marker.onclick = function () {
+            checkScore(i);
+          }
+          document.getElementById("col" + i).appendChild(marker);
       }
     }
-    async function playNote(column, tempo) {
+    async function checkScore(i) {
+      if (columnstatus[i] != 0) {
+        document.getElementById("col" + i).removeChild(document.getElementById("note" + columnstatus[i]));
+        score++;
+        scoreboard.innerText = score;
+        columnstatus[i] = 0;
+        
+      } else {
+        miss++;
+        missboard.innerText = miss;
+      }
+    }
+    async function playNote(column, tempo, i) {
+      if (column == -1) {
+        return;
+      }
       var note = document.createElement("span");
       let targetX = document.getElementById("col" + column).getBoundingClientRect().left;
       note.style.position = "absolute";
       note.style.width = "50px";
       note.style.height = "50px";
+      note.style.transform = "translateY(-50px)";
       note.style.backgroundColor = "#808080";
+      note.id = "note" + i;
       document.getElementById("col" + column).appendChild(note);
+      let start = null;
+      let duration = 480000/tempo; 
+      let initialTop = 0; 
+      let finalTop = 450;
+      let passed = false;
+      function animate(timestamp) {
+          if (!start) start = timestamp;
+          let progress = timestamp - start;
+          let position = Math.min(initialTop + (finalTop * (progress / duration)), finalTop);
+          note.style.top = position + 'px';
+          if (progress < duration) {
+              window.requestAnimationFrame(animate);
+          }
+          if (progress >= duration) {
+            try {
+              document.getElementById("col" + column).removeChild(note);
+              miss++;
+              missboard.innerText = miss;
+            } catch {
+
+            }
+            
+          }
+          if (progress >= duration * 0.66 && progress <= duration * 0.88) {
+            columnstatus[column] = i;
+          } else if (progress > duration * 0.88 && passed == false){
+            columnstatus[column] = 0;
+            passed = true;
+          }
+      }
+
+      window.requestAnimationFrame(animate);
+      
     }
     async function playTrack(array) {
       var tempo = array[0];
       for (let i = 1; i < array.length; i++) {
-        playNote(array[i], tempo);
+        playNote(array[i], tempo, i);
         await delay(60000/tempo);
       }
     }
@@ -68,5 +145,7 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    var sampletrack = [180, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2];
+    var sampletrack = [200, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2];
+    var silly = [1440, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, ];
+    var testtrack1 = [60, 0, -1, 1, -1, 2];
   </script>
