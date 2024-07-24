@@ -154,8 +154,32 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
+                    <label>Spooky Hook:
+                    <select id = spookyhook value = "1" onchange = updateWaterTable()>
+                        <option value = "1">0</option>
+                        <option value = "1.02">I</option>
+                        <option value = "1.04">II</option>
+                        <option value = "1.06">III</option>
+                        <option value = "1.08">IV</option>
+                        <option value = "1.1">V</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
                     <label>Icy Hook:
                     <select id = icyhook value = "1" onchange = updateWaterTable()>
+                        <option value = "1">0</option>
+                        <option value = "1.02">I</option>
+                        <option value = "1.04">II</option>
+                        <option value = "1.06">III</option>
+                        <option value = "1.08">IV</option>
+                        <option value = "1.1">V</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Shark Sonar:
+                    <select id = sharksonar value = "1" onchange = updateWaterTable()>
                         <option value = "1">0</option>
                         <option value = "1.02">I</option>
                         <option value = "1.04">II</option>
@@ -675,6 +699,16 @@
             if (icyhook.value != "1") {
                 for (var i = 0; i < winterscs.length; i++){
                     waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * icyhook.value;
+                }
+            }
+            if (spookyhook.value != "1") {
+                for (var i = 0; i < spookyscs.length; i++){
+                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * spookyhook.value;
+                }
+            }
+            if (sharksonar.value != "1") {
+                for (var i = 0; i < sharkscs.length; i++){
+                    waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * sharksonar.value;
                 }
             }
             if (drakepiper.value != "1") {
