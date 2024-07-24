@@ -134,18 +134,39 @@
       window.requestAnimationFrame(animate);
       
     }
+    var lock = 0;
     async function playTrack(array) {
+      if (lock == 1) {
+        console.log("Song already playing!");
+        return -1;
+      }
+      lock = 1;
       var tempo = array[0];
       for (let i = 1; i < array.length; i++) {
         playNote(array[i], tempo, i);
         await delay(60000/tempo);
+        if (throttle == 1) {
+          console.log("Song interrupted!");
+          break;
+        }
       }
+      lock = 0;
     }
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
+    var throttle = 0;
     var sampletrack = [200, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2];
     var silly = [1440, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, ];
     var testtrack1 = [60, 0, -1, 1, -1, 2];
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+
+    if (isPageVisible) {
+      throttle = 0;
+    } else {
+      // Page is hidden, use setTimeout to keep animation running
+      throttle = 1;
+    }
+});
   </script>
