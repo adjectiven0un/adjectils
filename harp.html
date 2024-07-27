@@ -32,8 +32,6 @@
     <span id = "scoreboard" style = "color: #55ff55">0</span><span id = "missboard" style = "color:#ff5555">0</span>
   </section>
 
-
-
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
   </body>
   <script>
@@ -68,6 +66,7 @@
           marker.style.height = "50px";
           marker.style.transform = "translateY(125px)";
           marker.style.backgroundColor = harpcolorssoft[i];
+          marker.id = "marker" + i;
           marker.style.zIndex = 6;
           marker.onclick = function () {
             checkScore(i);
@@ -75,63 +74,87 @@
           document.getElementById("col" + i).appendChild(marker);
       }
     }
+    function createRipple(column){
+
+      var ripple = document.createElement("div");
+      ripple.className = "ripple";
+      ripple.style.position = "fixed";
+      ripple.id = "ripple" + column;
+      ripple.style.zIndex = 5;
+
+      document.getElementById("marker" + column).appendChild(ripple);
+
+      ripple.classList.add("expanded"); 
+
+      setTimeout(() => { document.getElementById("marker" + column).removeChild(ripple);}, 1000);
+
+    }
     async function checkScore(i) {
-      if (columnstatus[i] != 0) {
-        document.getElementById("col" + i).removeChild(document.getElementById("note" + columnstatus[i]));
-        score++;
-        scoreboard.innerText = score;
-        columnstatus[i] = 0;
-        
-      } else {
-        miss++;
-        missboard.innerText = miss;
-      }
+        if (columnstatus[i] != 0) {
+            try {
+              document.getElementById("col" + i).removeChild(document.getElementById("note" + columnstatus[i]));
+            
+            } catch {
+              console.log("Failed to remove a note, it was probably already removed");
+            }
+            score++;
+            scoreboard.innerText = score;
+            columnstatus[i] = 0;
+            createRipple(i);
+          
+        } else {
+          //playPianoSound("C4");
+          miss++;
+          missboard.innerText = miss;
+        }
     }
     async function playNote(column, tempo, i) {
-      if (column == -1) {
-        return;
-      }
-      var note = document.createElement("span");
-      let targetX = document.getElementById("col" + column).getBoundingClientRect().left;
-      note.style.position = "absolute";
-      note.style.width = "50px";
-      note.style.height = "50px";
-      note.style.transform = "translateY(-50px)";
-      note.style.backgroundColor = "#808080";
-      note.id = "note" + i;
-      document.getElementById("col" + column).appendChild(note);
-      let start = null;
-      let duration = 480000/tempo; 
-      let initialTop = 0; 
-      let finalTop = 450;
-      let passed = false;
-      function animate(timestamp) {
-          if (!start) start = timestamp;
-          let progress = timestamp - start;
-          let position = Math.min(initialTop + (finalTop * (progress / duration)), finalTop);
-          note.style.top = position + 'px';
-          if (progress < duration) {
-              window.requestAnimationFrame(animate);
-          }
-          if (progress >= duration) {
-            try {
-              document.getElementById("col" + column).removeChild(note);
-              miss++;
-              missboard.innerText = miss;
-            } catch {
-
+        if (column == -1) {
+          return;
+        }
+        var note = document.createElement("span");
+        let targetX = document.getElementById("col" + column).getBoundingClientRect().left;
+        note.style.position = "absolute";
+        note.style.width = "50px";
+        note.style.height = "50px";
+        note.style.transform = "translateY(-50px)";
+        note.style.backgroundColor = "#808080";
+        note.id = "note" + i;
+        note.style.zIndex = 4;
+        document.getElementById("col" + column).appendChild(note);
+        let start = null;
+        let duration = 480000/tempo; 
+        let initialTop = 0; 
+        let finalTop = 450;
+        let passed = false;
+        function animate(timestamp) {
+            if (!start) start = timestamp;
+            let progress = timestamp - start;
+            let position = Math.min(initialTop + (finalTop * (progress / duration)), finalTop);
+            note.style.top = position + 'px';
+            if (progress < duration) {
+                window.requestAnimationFrame(animate);
             }
-            
-          }
-          if (progress >= duration * 0.66 && progress <= duration * 0.88) {
-            columnstatus[column] = i;
-          } else if (progress > duration * 0.88 && passed == false){
-            columnstatus[column] = 0;
-            passed = true;
-          }
-      }
+            if (progress >= duration) {
+              try {
+                document.getElementById("col" + column).removeChild(note);
+                //playPianoSound("C4");
+                miss++;
+                missboard.innerText = miss;
+              } catch {
 
-      window.requestAnimationFrame(animate);
+              }
+              
+            }
+            if (progress >= duration * 0.66 && progress <= duration * 0.88) {
+              columnstatus[column] = i;
+            } else if (progress > duration * 0.88 && passed == false){
+              columnstatus[column] = 0;
+              passed = true;
+            }
+        }
+
+        window.requestAnimationFrame(animate);
       
     }
     var lock = 0;
@@ -168,5 +191,7 @@
       // Page is hidden, use setTimeout to keep animation running
       throttle = 1;
     }
+    
 });
+  
   </script>

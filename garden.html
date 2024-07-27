@@ -47,18 +47,18 @@
     <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>  
     <label>Armor type:
       <select id = armor value = 4 onchange = updateCrops()>
-        <option value = 0>Something else</option>
-        <option value = 1>Melon Armor</option>
-        <option value = 2>Cropie Armor</option>
-        <option value = 3>Squash Armor</option>
         <option value = 4>Fermento Armor</option>
+        <option value = 3>Squash Armor</option>
+        <option value = 2>Cropie Armor</option>
+        <option value = 1>Melon Armor</option>
+        <option value = 0>Something else</option>
       </select>
     </label>
     <label>Pieces:
       <select id = pieces value = 4 onchange = updateCrops()>
-        <option value = 2>2</option>
-        <option value = 3>3</option>
         <option value = 4>4</option>
+        <option value = 3>3</option>
+        <option value = 2>2</option>
       </select>
     </label>
     <section class = "flex_box_index">
@@ -83,6 +83,7 @@
 
         }
         var data;
+        var milestonedata;
         var onCD;
         var fasttrack = false;
         async function updateUser(name){
@@ -112,6 +113,17 @@
           localStorage.setItem("storedname", name);
           console.log("Set item " + localStorage.getItem("storedname"));
           localStorage.setItem("storeddata", JSON.stringify(data)); 
+          var profileuuid = data.profiles[profileid.value].profile_id;
+          console.log(profileuuid);
+          console.log("Garden API call attempted");
+          const gardenapicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/v2/skyblock/garden?profile=" + profileuuid);
+          if (!gardenapicall.ok){
+              console.log("Garden API call error");
+              document.getElementById("status").innerHTML = "<span class = errored>No Garden data found</span>";
+              return -1;
+          }
+          milestonedata = await gardenapicall.json();
+          milestonedata = milestonedata.garden.resources_collected;
           updateCrops();
         }
 
@@ -136,15 +148,6 @@
             fortune.value = 0;
             fortune.onchange = function() { updateCrop(key) };
             fortunelabel.appendChild(fortune);
-            var discrepancylabel = document.createElement("label");
-            discrepancylabel.innerText = "Collection diff: ";
-            var discrepancy = document.createElement("input");
-            discrepancy.id = key + "_discrepancy";
-            discrepancy.type = "number";
-            discrepancy.style.width = "80px";
-            discrepancy.value = "0";
-            discrepancy.onchange = function() { updateCrop(key) };
-            discrepancylabel.appendChild(discrepancy);
             var cps = document.createElement("span");
             cps.id = key + "_cps";
             var cph = document.createElement("span");
@@ -171,7 +174,6 @@
             box.appendChild(title);
             box.appendChild(count);
             box.appendChild(fortunelabel);
-            box.appendChild(discrepancylabel);
             box.appendChild(cps);
             box.appendChild(cph);
             box.appendChild(bountiful);
@@ -195,14 +197,8 @@
           }
         }
         function updateCrop(key) {
-            var collection = data.profiles[profileid.value].members[UUID].collection[crops[key].api];
-            if (document.getElementById(key + "_discrepancy").value > collection){
-                document.getElementById(key + "_discrepancy").value = collection;
-            }
-            if (document.getElementById(key + "_discrepancy").value < 0 || isNaN(document.getElementById(key + "_discrepancy").value) || document.getElementById(key + "_discrepancy").value == ""){
-                document.getElementById(key + "_discrepancy").value = 0;
-            }
-            collection -= document.getElementById(key + "_discrepancy").value;
+            
+            var collection = milestonedata[crops[key].api];
             document.getElementById(key + "_collection").innerText = "Collection: " + collection.toLocaleString();
             var cps = (20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100))).toFixed(2);
             document.getElementById(key + "_cps").innerText = "Crops per second: " + cps.toLocaleString();

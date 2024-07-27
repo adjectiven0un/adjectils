@@ -535,4 +535,38 @@ body {
     height:400px;
   } 
 
+  .ripple {
+    width: 40px;
+    height: 40px;
+    border-width: 5px;
+    border-radius: 5px;
+    transition: all 1s ;
+    border-color: #FFBCFF;
+    border-style:solid;
+    margin:auto;
+    z-index:-20;
+    pointer-events: none;
+  }
+  .ripple.expanded {
+    width: 60px;
+    height: 60px;
+    
+    animation: fadeExpand 1s forwards ;
+  }
+  @keyframes fadeExpand {
+    0% {
+        opacity: 1;
+        width:40px;
+        height:40px;
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        width:60px;
+        height:60px;
+        transform: translateX(-10px) translateY(-10px);
+    }
+}
+  
+
   
