@@ -146,9 +146,10 @@
     <div class = "flex_index_row" style = "width:95%; height:20%;">
     <div class = "flex_index_box" style = "width: 100%; height:70%;" id = "">
       <span class = header style = "flex-basis:100%">Election</span>
-      <table id = "electiontable2">
+      <table id = "electiontable2" class = "flex_full_row">
 
       </table>
+      <span style = "color: #808080">Next <span style = "color: ff55ff">special</span> mayor: <span id = "specialmayorname"></span> in <span id = "specialmayortime"></span></span>
     </div>
     </div>
   </div>
@@ -578,6 +579,24 @@
           }
         var notification = new Notification("adjectils",  {body: "Jacob's Farming Contest begins in " + Math.floor(jacobnotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
       }
-
+      
+      var specialcycletime = (now - initial) % (24 * 446400);
+      console.log(specialcycletime);
+      var timetoscorpius = Math.abs(specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen);
+      var timetoderpy = Math.abs(specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen);
+      var timetojerry = Math.abs(specialcycletime - (16 * 446400) - 2 * monthlen - 27 * daylen);
+      var timetospecial = Math.floor(Math.min(timetoscorpius, Math.min(timetoderpy, timetojerry)));
+      if (timetospecial == timetoscorpius) {
+        document.getElementById("specialmayorname").innerText = "Scorpius";
+      }
+      if (timetospecial == timetoderpy) {
+        document.getElementById("specialmayorname").innerText = "Derpy";
+      }
+      if (timetospecial == timetojerry) {
+        document.getElementById("specialmayorname").innerText = "Jerry";
+      }
+      
+      document.getElementById("specialmayortime").innerText = betterTimestamp(timetospecial);
     }
+
 </script>
