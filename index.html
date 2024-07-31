@@ -372,8 +372,16 @@
         var month = monthlist[Math.floor(seasoncycletime / monthlen)];
         document.getElementById("sbmonth").innerText = month;
         var monthcycletime = (seasoncycletime) % monthlen;
-        var day = Math.floor(monthcycletime / daylen);
-        document.getElementById("sbdate").innerText = day + 1;
+        var day = Math.floor(monthcycletime / daylen) + 1;
+        if (day % 10 == 1 && day != 11) {
+          document.getElementById("sbdate").innerText = day + "st";
+        } else if (day % 10 == 2 && day != 12) {
+          document.getElementById("sbdate").innerText = day + "nd";
+        } else if (day % 10 == 3 && day != 13) {
+          document.getElementById("sbdate").innerText = day + "rd";
+        } else {
+          document.getElementById("sbdate").innerText = day + "th";
+        }
         var daycycletime = (monthcycletime) % daylen;
         var segments = Math.floor(daycycletime / tenstep);
         var minutes = segments % 6 + "0";
