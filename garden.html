@@ -44,7 +44,8 @@
       </form>
     </div>
   <div>
-    <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>  
+    <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>
+    <!--<label>Farming Wisdom: <input type = "number" id = "farmingwisdom" value = "50" onchange = updateCrops(value)>&nbsp;</label><br> -->
     <label>Armor type:
       <select id = armor value = 4 onchange = updateCrops()>
         <option value = 4>Fermento Armor</option>
@@ -158,6 +159,11 @@
             bountiful.style.fontSize = "12px";
             bountiful.style.color = "#808080";
             bountiful.className = "flex_full_row";
+            var mooshroom = document.createElement("span");
+            mooshroom.id = key + "_mooshroom";
+            mooshroom.style.fontSize = "12px";
+            mooshroom.style.color = "#808080";
+            mooshroom.className = "flex_full_row";
             var bonus = document.createElement("span");
             bonus.id = key + "_bonus";
             bonus.style.fontSize = "12px";
@@ -171,16 +177,20 @@
             remaining.id = key + "_remaining";
             var timeremaining = document.createElement("span");
             timeremaining.id = key + "_timeremaining";
+            var timeremainingmax = document.createElement("span");
+            timeremainingmax.id = key + "_timeremainingmax";
             box.appendChild(title);
             box.appendChild(count);
             box.appendChild(fortunelabel);
             box.appendChild(cps);
             box.appendChild(cph);
             box.appendChild(bountiful);
+            box.appendChild(mooshroom);
             box.appendChild(bonus);
             box.appendChild(milestone);
             box.appendChild(remaining);
             box.appendChild(timeremaining);
+            box.appendChild(timeremainingmax);
 
             gardenrow.appendChild(box);
           }
@@ -192,6 +202,14 @@
           if (document.getElementById("farmingfortune").value < 0 || isNaN(document.getElementById("farmingfortune").value) || document.getElementById("farmingfortune").value == ""){
             document.getElementById("farmingfortune").value = 0;
           }
+          /*
+          if (document.getElementById("farmingwisdom").value > 200){
+            document.getElementById("farmingwisdom").value = 4000;
+          }
+          if (document.getElementById("farmingwisdom").value < 0 || isNaN(document.getElementById("farmingfortune").value) || document.getElementById("farmingfortune").value == ""){
+            document.getElementById("farmingwisdom").value = 0;
+          }
+          */
           for (let key in crops) {
             updateCrop(key);
           }
@@ -205,6 +223,7 @@
             var cph = (cps * crops[key].coin) * 3600;
             var bountifulcoins = (cps * 0.2) * 3600;
             var specialcoins = 0;
+            var mushroomcoins = 10 * 20 * (crops[key].double + 1) * 3600;
             console.log(crops[key].bonus);
             if (crops[key].bonus == "cropie") {
               var cropiechance = 0;
@@ -223,7 +242,7 @@
               if (armor.value == 3 || armor.value == 4) {
                 fermentochance = 0.00004 + (0.00001 * (pieces.value - 1));
                 specialcoins = fermentochance * 3600 * 20 * 250000;
-                if (crops[key].double == true) {
+                if (crops[key].double == 1) {
                   specialcoins *= 2;
                 }
               }
@@ -233,7 +252,16 @@
             document.getElementById(key + "_cph").innerText = "Coins per hour: " + cph.toLocaleString();
             document.getElementById(key + "_bountiful").innerText = " (+" + bountifulcoins.toLocaleString() + " from Bountiful)";
             document.getElementById(key + "_bonus").innerText = " (+" + specialcoins.toLocaleString() + " from armor bonus)";
+            document.getElementById(key + "_mooshroom").innerText = " (+" + mushroomcoins.toLocaleString() + " from Mooshroom Cow)";
             var milestone = 0;
+            var milestonetotal = 0;
+            for (let i = 0; i < crops[key].milestones.length; i++) {
+              milestonetotal += crops[key].milestones[i];
+            }
+            milestonetotal -= collection;
+            if (milestonetotal < 0) {
+              milestonetotal = 0;
+            }
             while (collection - crops[key].milestones[milestone] > 0 && milestone < 46) {
               console.log(collection);
               collection -= crops[key].milestones[milestone];
@@ -244,9 +272,11 @@
               collection = 0;
               bonus = "";
             }
+            
             console.log(milestone);
             document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
             document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + collection.toLocaleString();
-            document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + timeToMinutes(Math.floor(collection/cps));
+            document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(collection/cps));
+            document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
         } 
     </script>
