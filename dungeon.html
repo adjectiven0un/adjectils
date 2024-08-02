@@ -127,7 +127,15 @@
                             <option value = 1.2>20%</option>
                         </select>
                         </label>
-                        </div>
+                    </div>
+                    <div id = "mayorselectdiv">
+                        <label>Mayor boost:
+                        <select id = "mayor" onchange = updateCata(nameinput.value)>
+                            <option value = 1>0%</option>
+                            <option value = 1.5>Derpy (50%)</option>
+                        </select>
+                        </label>
+                    </div>
                 </form>
             </td></tr>
             </table>
@@ -453,14 +461,15 @@
             var cataperrun = selectedfloor.value * 1.38888888;
             cataperrun *= (1 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value));
             cataperrun *= global.value;
+            cataperrun *= mayor.value;
             cataperrun = Math.ceil(cataperrun);
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
-                arch: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(archboost.value)) * global.value,
-                bers: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(bersboost.value)) * global.value,
-                heal: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(healboost.value)) * global.value,
-                mage: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(mageboost.value)) * global.value,
-                tank: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(tankboost.value)) * global.value,
+                arch: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(archboost.value)) * global.value * mayor.value,
+                bers: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(bersboost.value)) * global.value * mayor.value,
+                heal: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(healboost.value)) * global.value * mayor.value,
+                mage: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(mageboost.value)) * global.value * mayor.value,
+                tank: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(tankboost.value)) * global.value * mayor.value,
             };
             
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
