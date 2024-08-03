@@ -115,6 +115,7 @@
 
     }
     async function checkScore(i) {
+      if (lock == 1) {
         if (columnstatus[i] != 0) {
           var temp = columnstatus[i];
           columnstatus[i] = 0;
@@ -140,6 +141,8 @@
           missboard.innerText = miss;
         }
         accuracyboard.innerText = ((100 * (score / (score + miss))).toFixed(1)) + "%";
+      }
+        
     }
     async function playNote(column, tempo, i, pitch) {
         if (column == -1) {
@@ -202,6 +205,7 @@
       playNoteBlock(23);
       scoreboard.innerText = "0";
       missboard.innerText = "0";
+      accuracyboard.innerText = "0%";
       lock = 1;
       await delay(2000);
       playingsong = song;
