@@ -11,6 +11,7 @@
       <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
       <link rel="manifest" href="./favicon/site.webmanifest">
       <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "harpsongs.js"></script>
     </head>
   <body onload="updatePage()">
   
@@ -29,12 +30,20 @@
     
     </div>
     <div id = "buffer2" style = "width:350px; height:50px; background-color: #404040; z-index: 5;"></div>
-    <span id = "scoreboard" style = "color: #55ff55">0</span><span id = "missboard" style = "color:#ff5555">0</span>
+    <div class = "flex_full_row" style = "margin-top:20px; margin-bottom:20px;"><span id = "scoreboard" style = "color: #55ff55">0</span><span id = "missboard" style = "color:#ff5555; margin-left: 20px; margin-right:20px;">0</span>
+    <span id = "accuracyboard">0%</span></div>
+    <span style = "font-size: 20px; ;">Song selector</span>
+    <div class = "flex_index_row" id = "cassetterack" style = "background-color: #282828; margin-top:20px; margin-bottom:20px">
+      
+    </div>
+    <div class = "flex_full_row"><span id = "playbutton" style = "width:50px; padding-top:15px; padding-bottom: 15px; background-color: #88ff88; text-align: center; color: #282828">▷</span><span id = "stopbutton" style = "width:50px; padding-top:15px; padding-bottom: 15px; background-color: #ff8888; text-align: center; color: #c8c8c8">▢</span></div>
   </section>
+  
 
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
   </body>
   <script>
+    var currentsong = "";
     const harpcolors = ["#ff55ff", "#ffaa00", "#ffff55", "#55ff55", "#55ffff", "#5555ff", "#aa00aa"];
     const harpcolorssoft = ["#ff88ff", "#ffcc55", "#ffff88", "#88ff88", "#88ffff", "#8888ff", "#cc55cc"];
     var score = 0;
@@ -53,6 +62,14 @@
     }
     function setup() {
       document.getElementById("row1").innerHTML = "";
+      var button = document.getElementById("playbutton");
+      button.onclick = function () {
+        playTrack(currentsong);
+      }
+      var button2 = document.getElementById("stopbutton");
+      button2.onclick = function () {
+        stopTrack();
+      }
       for (let i = 0; i <= 6; i++) {
           let box = document.createElement("span");
           box.className = "melodytrack";
@@ -60,8 +77,7 @@
           box.id = "col" + i;
           row1.appendChild(box);
           let marker = document.createElement("span");
-          let targetX = document.getElementById("col" + i).getBoundingClientRect().left;
-          marker.style.position = "absolute";
+          marker.style.position = "static";
           marker.style.width = "50px";
           marker.style.height = "50px";
           marker.style.transform = "translateY(125px)";
@@ -73,47 +89,63 @@
           }
           document.getElementById("col" + i).appendChild(marker);
       }
+      for (let key in availablesongs) {
+        let tape = document.createElement("span");
+        tape.className = "cassette";
+        tape.id = key + "_tape";
+        tape.innerText = availablesongs[key].name;
+        cassetterack.appendChild(tape);
+        tape.onclick = function() {
+          selectSong(key);
+        }
+      }
     }
     function createRipple(column){
 
       var ripple = document.createElement("div");
       ripple.className = "ripple";
-      ripple.style.position = "fixed";
+      ripple.style.position = "absolute";
       ripple.id = "ripple" + column;
-      ripple.style.zIndex = 5;
-
-      document.getElementById("marker" + column).appendChild(ripple);
-
+      ripple.style.zIndex = 10;
+      document.getElementById("col" + column).appendChild(ripple);
+      
       ripple.classList.add("expanded"); 
 
-      setTimeout(() => { document.getElementById("marker" + column).removeChild(ripple);}, 1000);
+      setTimeout(() => { document.getElementById("col" + column).removeChild(ripple);}, 1000);
 
     }
     async function checkScore(i) {
         if (columnstatus[i] != 0) {
+          var temp = columnstatus[i];
+          columnstatus[i] = 0;
+            playNoteBlock(playingsong[temp].pitch);
             try {
-              document.getElementById("col" + i).removeChild(document.getElementById("note" + columnstatus[i]));
-            
+              
+              document.getElementById("col" + i).removeChild(document.getElementById("note" + temp));
+              score++;
+              scoreboard.innerText = score;
+              createRipple(i);
+              
             } catch {
               console.log("Failed to remove a note, it was probably already removed");
             }
-            score++;
-            scoreboard.innerText = score;
-            columnstatus[i] = 0;
-            createRipple(i);
-          
+            
+            
+            
+            
+            
         } else {
-          //playPianoSound("C4");
+          playNoteBlock(0);
           miss++;
           missboard.innerText = miss;
         }
+        accuracyboard.innerText = ((100 * (score / (score + miss))).toFixed(1)) + "%";
     }
-    async function playNote(column, tempo, i) {
+    async function playNote(column, tempo, i, pitch) {
         if (column == -1) {
           return;
         }
         var note = document.createElement("span");
-        let targetX = document.getElementById("col" + column).getBoundingClientRect().left;
         note.style.position = "absolute";
         note.style.width = "50px";
         note.style.height = "50px";
@@ -138,7 +170,6 @@
             if (progress >= duration) {
               try {
                 document.getElementById("col" + column).removeChild(note);
-                //playPianoSound("C4");
                 miss++;
                 missboard.innerText = miss;
               } catch {
@@ -158,30 +189,48 @@
       
     }
     var lock = 0;
-    async function playTrack(array) {
+    var playingsong = "";
+    async function playTrack(name) {
+      
+      console.log(name);
+      var song = availablesongs[name];
+      console.log(song);
       if (lock == 1) {
         console.log("Song already playing!");
         return -1;
       }
+      playNoteBlock(23);
+      scoreboard.innerText = "0";
+      missboard.innerText = "0";
       lock = 1;
-      var tempo = array[0];
-      for (let i = 1; i < array.length; i++) {
-        playNote(array[i], tempo, i);
-        await delay(60000/tempo);
-        if (throttle == 1) {
-          console.log("Song interrupted!");
-          break;
+      await delay(2000);
+      playingsong = song;
+      var tempo = song.tempo;
+      for (let i in song) {
+        if (i != 0) {
+          playNote(song[i].column, tempo, i);
+          await delay(60000/tempo);
+          if (throttle == 1) {
+            console.log("Song interrupted!");
+            break;
+          }
         }
+        
       }
+      await delay(2000);
       lock = 0;
+      playingsong = "";
+      score = 0;
+      miss = 0;
+      throttle = 0;
+    }
+    function stopTrack() {
+      throttle = 1;
     }
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     var throttle = 0;
-    var sampletrack = [200, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2, 1, 2, 3, 2, 3, 4, 5, 2, 5, 3, 4, 2, 3, 4, 3, 2];
-    var silly = [1440, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, ];
-    var testtrack1 = [60, 0, -1, 1, -1, 2];
     document.addEventListener('visibilitychange', () => {
       isPageVisible = !document.hidden;
 
@@ -193,5 +242,76 @@
     }
     
 });
+function playNoteBlock(frequency) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    const noteFrequencies = [
+        92.50, 97.00, 102.83, 108.00, 113.54, 123.47, 129.51, 136.5, 146.83, 155.56,
+        164.81, 174.61, 185.00, 196.00, 207.65, 220.00, 233.08, 246.94, 261.63, 277.18,
+        293.66, 311.13, 329.63, 349.23
+    ];
+
+    fetch('./audio/pling.ogg')
+        .then(response => response.arrayBuffer())
+        .then(data => audioContext.decodeAudioData(data))
+        .then(decodedData => {
+            playPitch(decodedData, noteFrequencies[frequency]/2);
+        });
+
+    function playPitch(buffer, playbackRate) {
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.playbackRate.value = playbackRate / 92.50;
+        source.connect(audioContext.destination);
+        source.start();
+    }
+};
+
+function selectSong(selector) {
+  for (let key in availablesongs) {
+    if (selector == key) {
+      document.getElementById(key + "_tape").style.backgroundColor = "#c0c0c0";
+    } else {
+      document.getElementById(key + "_tape").style.backgroundColor = "#909090";
+    }
+    
+  }
+  currentsong = selector;
+}
+
+
+async function wunkus() {
   
+    playNoteBlock(16);
+    await delay(333);
+    playNoteBlock(14);
+    await delay(333);
+    playNoteBlock(13);
+    await delay(333);
+    playNoteBlock(14);
+    await delay(333);
+    playNoteBlock(13);
+    await delay(333);
+    playNoteBlock(11);
+    await delay(333);
+    playNoteBlock(13);
+    await delay(333);
+    playNoteBlock(11);
+    await delay(333);
+    playNoteBlock(9);
+    await delay(333);
+    playNoteBlock(11);
+    await delay(333);
+    playNoteBlock(9);
+    await delay(333);
+    playNoteBlock(8);
+    await delay(333);
+    playNoteBlock(9);
+    await delay(333);
+    playNoteBlock(8);
+    await delay(333);
+    playNoteBlock(6);
+    await delay(333);
+    
+}
   </script>

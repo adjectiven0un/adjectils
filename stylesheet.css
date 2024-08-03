@@ -558,14 +558,23 @@ body {
         opacity: 1;
         width:40px;
         height:40px;
-        transform: translateX(0px) translateY(0px);
+        transform: translateX(0px) translateY(125px);
     }
     100% {
         opacity: 0;
         width:60px;
         height:60px;
-        transform: translateX(-10px) translateY(-10px);
+        transform: translateX(0px) translateY(125px);
     }
+}
+.cassette{
+  background-color: #e0e0e0; 
+  writing-mode:vertical-lr; 
+  color: #202020;
+  padding: 4px;
+  margin: 0px;
+  border: 2px solid #101010;
+  height: 200px;
 }
   
 
