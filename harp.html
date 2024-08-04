@@ -21,7 +21,7 @@
       });
       </script>
   <div style = "text-align:center; margin: auto"> 
-    <span class = adjheader>adjectils</span><span class = header>&nbsp;|&nbsp;</span><span class = header>The Harp</span><br>
+    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>The Harp</span><br>
   </div>
 
   <section class = "flex_box_index">
@@ -99,6 +99,34 @@
           selectSong(key);
         }
       }
+      // Brooke's modification
+      let header = document.querySelector("body > div:nth-child(2)");
+      header.style.display = "flex";
+      header.style.alignItems = "center";
+      header.style.justifyContent = "center";
+
+      document.querySelector(".adjheader").innerHTML = `adjectils + `
+      document.querySelector(".adjheader").insertAdjacentHTML("afterend", `<a href="https://nadeshiko.io" target="_blank"><img src="https://nadeshiko.io/img/logo_svg.svg"></a>`)
+
+      for (let a = 0; a <= 6; a++) {
+          var marker = document.getElementById("marker" + a);
+          marker.innerText = a + 1;
+          marker.style.display = "flex";
+          marker.style.alignItems = "center";
+          marker.style.justifyContent = "center";
+          marker.style.fontSize = "22px";
+          marker.style.fontWeight = "bold";
+          marker.style.color = "black";
+      }
+
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key >= '1' && event.key <= '7') {
+          let key = Number(event.key);
+          checkScore(key - 1);
+        }
+      });
+      
     }
     function createRipple(column){
 
@@ -279,38 +307,4 @@ function selectSong(selector) {
 }
 
 
-async function wunkus() {
-  
-    playNoteBlock(16);
-    await delay(333);
-    playNoteBlock(14);
-    await delay(333);
-    playNoteBlock(13);
-    await delay(333);
-    playNoteBlock(14);
-    await delay(333);
-    playNoteBlock(13);
-    await delay(333);
-    playNoteBlock(11);
-    await delay(333);
-    playNoteBlock(13);
-    await delay(333);
-    playNoteBlock(11);
-    await delay(333);
-    playNoteBlock(9);
-    await delay(333);
-    playNoteBlock(11);
-    await delay(333);
-    playNoteBlock(9);
-    await delay(333);
-    playNoteBlock(8);
-    await delay(333);
-    playNoteBlock(9);
-    await delay(333);
-    playNoteBlock(8);
-    await delay(333);
-    playNoteBlock(6);
-    await delay(333);
-    
-}
   </script>
