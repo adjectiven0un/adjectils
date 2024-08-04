@@ -576,6 +576,12 @@ body {
   border: 2px solid #101010;
   height: 200px;
 }
+.uninteractable {
+    -webkit-user-select: none;  
+    -moz-user-select: none;   
+    -ms-user-select: none;   
+    user-select: none;
+}
   
 
   
