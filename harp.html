@@ -173,7 +173,7 @@
       }
         
     }
-    async function playNote(column, tempo, i, pitch) {
+    async function playNote(column, tempo, i, pace) {
         if (column == -1) {
           return;
         }
@@ -187,7 +187,8 @@
         note.style.zIndex = 4;
         document.getElementById("col" + column).appendChild(note);
         let start = null;
-        let duration = 480000/tempo; 
+        //pace 
+        let duration = pace/tempo; 
         let initialTop = 0; 
         let finalTop = 450;
         let passed = false;
@@ -238,9 +239,10 @@
       await delay(2000);
       playingsong = song;
       var tempo = availablesongs[name].tempo;
+      var pace = availablesongs[name].pace;
       for (let i = 0; i < song.length; i++) {
         
-          playNote(song[i].column, tempo, i);
+          playNote(song[i].column, tempo, i, pace);
           await delay(60000/tempo);
           if (throttle == 1) {
             console.log("Song interrupted!");

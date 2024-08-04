@@ -17,6 +17,7 @@ var availablesongs = {
     "birthday": {
         name: "Happy Birthday to You",
         tempo: 250,
+        pace: 480000,
         notes: [
             { column: 0, pitch: 1 },
             { column: -1, pitch: 1 },
@@ -112,6 +113,7 @@ var availablesongs = {
     "campfire": {
         name: "Through the Campfire",
         tempo: 210,
+        pace: 480000,
         notes: [
             { column: 1, pitch: 9 },
             { column: 2, pitch: 11 },
@@ -303,9 +305,10 @@ var availablesongs = {
     },
 
     "canada":{ 
-        "name":"O Canada",
-        "tempo":280,
-        "notes":[
+        name :"O Canada",
+        tempo:280,
+        pace: 480000,
+        notes:[
             
             { column: 2 , pitch: 16 },
             { column: -1, pitch: -1},
