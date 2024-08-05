@@ -54,8 +54,15 @@
   <div class = "dwarven_block " style = "width:min(calc(100% - 30px), max(800px, 40%)); margin:auto">
     <span class = minesheader>Forge timers</span><br><br>
     <span class = basictext>Quick Forge level: </span><span class = basictext id = quickforgelevel>0</span><br><br>
-
-    <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%));">
+    <div id = "coleselectdiv">
+      <label>Molten Forge:
+      <select id = "cole" onchange = updateCata(nameinput.value)>
+          <option value = 0>Inactive</option>
+          <option value = 0.25>Active (-25% forge time)</option>
+      </select>
+      </label>
+  </div>
+    <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%)); margin-top:20px">
       <span style = "margin-right:20px">Notify me when forges complete</span>
       <div>
 
@@ -385,7 +392,7 @@
         for (var i = 1; i <= 5; i++){
           try {
             if (forgelog[i].id != undefined){
-              var maxtime = qfm * times[forgelog[i].id];
+              var maxtime = (qfm - cole.value) * times[forgelog[i].id];
               var finaltime = new Date(forgelog[i].startTime + (maxtime*1000));
               document.getElementById("finish" + i).innerText = finaltime.getHours() + ":" + fixTime(finaltime.getMinutes()) + ":" + fixTime(finaltime.getSeconds()) + " – " + months[finaltime.getMonth()] + " " + finaltime.getDate();
             } else {
@@ -397,7 +404,7 @@
           }
           
         }
-        var interval = setInterval(() => updateTimers(qfm, forgelog), 1000);
+        var interval = setInterval(() => updateTimers((qfm - cole.value), forgelog), 1000);
         intervalID.push(interval);
         var refreshint = setInterval(updateRefresh, 1000);
         refreshInterval[0] = refreshint;
@@ -410,9 +417,6 @@
       refresh.innerText = betterTimestamp(secondssince) + " since last refresh.";
     }
     async function updateTimers(qfm, forgelog){
-
-
-      
       var actives = [1, 1, 1, 1, 1];
       if (forgelog == "Empty"){
         for (var i = 1; i <= 5; i++){
