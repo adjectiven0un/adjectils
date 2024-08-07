@@ -146,8 +146,10 @@
     <div class = "flex_index_row" style = "width:95%; height:20%;">
     <div class = "flex_index_box" style = "width: 100%; height:70%;" id = "">
       <span class = header style = "flex-basis:100%">Election</span>
-      <table id = "electiontable2" class = "flex_full_row">
+      <table id = "electiontable2case" class = "flex_full_row">
+        <tbody id = "electiontable2" style = "width:90%">
 
+        </tbody>
       </table>
       <span style = "color: #808080">Next <span style = "color: ff55ff">special</span> mayor: <span id = "specialmayorname"></span> in <span id = "specialmayortime"></span></span>
     </div>
@@ -169,8 +171,6 @@
     if (date.getHours() < 24 && date.getHours() > 19){
       timeofday = "evening";
     }
-    console.log(timeofday);
-    console.log(date.getHours());
     var splashes_morning = ["Since 2024!", "BrookeAFK helped a lot!", "Also play Warlords!", "Distributing binomials!", "Also visit nadeshiko.io!", "Stalking the API!", "NOT playing Skywars!", "Now with 100% more bugs!", "<o/", "Glad you made it!", "0.02% less sugar!", "Entertaining splash texts!", "Coming soon!", "Rise and shine!", "Wait up!", "Finally awake?", "Destiny awaits!", "What do you want to be?", "Greatness begins here!", "Planned everything out?", "Stay alert!", "The early runner gets the loot!", "Wake-up call!", "Another day!"];
     var splashes_afternoon = ["Great weather today!", "Overkill!", "BrookeAFK helped a lot!", "Just add water!", "Alpha tested!", "Admin endorsed!", "About 99% truthful!", "Ok, but when do we get the wave text?", "Not contradictory!", "Side effects include being awesome!", "May cause headaches!", "Ad-free!", "Life-changing!", "Optimized!", "How about a break?", "Meant to be!", "Best of three?", "Heart and soul!", "Reason enough!", "Sudden!", "https://adjectiven0un.github.io/holeinthewall ?", "Tap here to do absolutely nothing!", "Geronimo!", "Until we see the end of time!", "High intensity discharge!"];
     var splashes_evening = ["Better call Paul!", "BrookeAFK helped a lot!", "Can we make that a splash?", "Toasting marshmallows!", "Are we there yet?", "As seen on TV!", "Welcome back!", "Keep calm!", "Not scary!", "Regenerative!", "Treats boredom!", "Brevity!", "Written in notepad!", "Best viewed by candlelight!", "Hello, world?", "Plundering!", "Foraging when?", "Cross my heart and hope to die!", "Watch your step!", "Full of secrets!", "Avoid direct contact!", "But if you close your eyes...", "Your biggest fan!", "Pit reference!", "Into the unknown!"];
@@ -216,7 +216,6 @@
         document.getElementById("danotif").checked = false;
         document.getElementById("jacobnotif").checked = false;
         var splashindex = Math.floor(25 * Math.random());
-        console.log("Chose splash " + splashindex);
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
         updateDate();
         updateEvents();
@@ -276,8 +275,6 @@
             mayornames[i] = curdata.candidates[i].name;
             votes[i] = curdata.candidates[i].votes;
           }
-          console.log(votes);
-          console.log(mayornames);
           for (var i = 1; i < 5; i++){
              var key1 = votes[i];
              var key2 = mayornames[i];
@@ -302,15 +299,16 @@
             votespercent[i] = (100 * (votes[i] / votestotal)).toFixed(1);
           }
           for (var i = 0; i < 5; i++){
-            console.log("Starting process...");
-            var mayorrow1 = document.createElement("table");
-            mayorrow1.style.width = "60%";
+            var mayorrow1 = document.createElement("tr");
+            mayorrow1.style.width = "100%";
+            mayorrow1.className = "flex_full_row";
             var mayorname = document.createElement("td");
             mayorname.style.fontSize = "20px";
             mayorname.innerText = mayornames[i];
             mayorname.style.width = "15%";
             mayorrow1.style.borderBottom = "2px solid #c0c0c0";
             mayorrow1.style.marginTop = "2%";
+            mayorrow1.style.marginBottom = "2%";
             mayorrow1.appendChild(mayorname);
             var mayorvotes = document.createElement("td");
             mayorvotes.style.fontSize = "20px";
@@ -331,6 +329,7 @@
               perkrow1.style.width = "90%";
               var perktd1 = document.createElement("td");
               perktd1.style.width = "25%";
+              perktd1.style.paddingRight = "20px";
               var perktd2 = document.createElement("td");
               perktd1.innerText = curdata.candidates[indexswaps[i]].perks[j].name;
               perktd2.innerText = curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
@@ -343,6 +342,7 @@
             var mayortd2 = document.createElement("td");
             mayortd2.appendChild(mayorperktable);
             mayorrow2.appendChild(mayortd2);
+            mayorrow2.className = "flex_full_row";
             electiontable2.appendChild(mayorrow2);
             
           }
@@ -589,7 +589,6 @@
       }
       
       var specialcycletime = (now - initial) % (24 * 446400);
-      console.log(specialcycletime);
       var timetoscorpius = Math.abs(specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen);
       var timetoderpy = Math.abs(specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen);
       var timetojerry = Math.abs(specialcycletime - (16 * 446400) - 2 * monthlen - 27 * daylen);
