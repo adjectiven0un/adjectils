@@ -67,6 +67,12 @@
             
         </div>
     </section>
+    <span class = "header">Composter</span>
+    <section class = "flex_box_index">
+      <div class = "flex_index_row" id = "composterrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
+        
+      </div>
+    </section>
     <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
     </body>
     <script>
@@ -84,7 +90,7 @@
 
         }
         var data;
-        var milestonedata;
+        var gardenapidata;
         var onCD;
         var fasttrack = false;
         async function updateUser(name){
@@ -123,8 +129,8 @@
               document.getElementById("status").innerHTML = "<span class = errored>No Garden data found</span>";
               return -1;
           }
-          milestonedata = await gardenapicall.json();
-          milestonedata = milestonedata.garden.resources_collected;
+          gardenapidata = await gardenapicall.json();
+          milestonedata = gardenapidata.garden.resources_collected;
           updateCrops();
         }
 
@@ -194,6 +200,62 @@
 
             gardenrow.appendChild(box);
           }
+          for (let key in upgrades) {
+            var upgradediv = document.createElement("div");
+            upgradediv.className = "flex_index_box";
+            var upgradetitle = document.createElement("span");
+            upgradetitle.innerText = upgrades[key].title;
+            upgradetitle.className = "header flex_full_row";
+            upgradediv.appendChild(upgradetitle);
+            composterrow.appendChild(upgradediv);
+            let text = document.createElement("span");
+            text.className = "flex_full_row";
+            text.innerText = "Level: ";
+            let text2 = document.createElement("span");
+            text2.id = key + "_level";
+            text2.style.paddingLeft = "10px";
+            text2.innerText = "";
+            text.appendChild(text2);
+            upgradediv.appendChild(text);
+            let text3 = document.createElement("span");
+            text3.className = "flex_full_row";
+            text3.innerText = "To next level: ";
+            let text4 = document.createElement("span");
+            text4.id = key + "_next_cost";
+            text4.style.paddingLeft = "10px";
+            text4.innerText = "";
+            text3.appendChild(text4);
+            upgradediv.appendChild(text3);
+            let text5 = document.createElement("span");
+            text5.className = "flex_full_row fineprint";
+            text5.innerText = "NPC price to next: ";
+            let text6 = document.createElement("span");
+            text6.id = key + "_next_cost_npc";
+            text6.style.paddingLeft = "10px";
+            text6.innerText = "";
+            text5.appendChild(text6);
+            upgradediv.appendChild(text5);
+            let text7 = document.createElement("span");
+            text7.className = "flex_full_row";
+            text7.innerText = "To max level: ";
+            let text8 = document.createElement("span");
+            text8.id = key + "_max_cost";
+            text8.style.paddingLeft = "10px";
+            text8.innerText = "";
+            text7.appendChild(text8);
+            upgradediv.appendChild(text7);
+            let text9 = document.createElement("span");
+            text9.className = "flex_full_row fineprint";
+            text9.innerText = "NPC price to max: ";
+            let text10 = document.createElement("span");
+            text10.id = key + "_max_cost_npc";
+            text10.style.paddingLeft = "10px";
+            text10.innerText = "";
+            text9.appendChild(text10);
+            upgradediv.appendChild(text9);
+          }
+          
+
         }
         function updateCrops() {
           if (document.getElementById("farmingfortune").value > 4000){
@@ -212,6 +274,9 @@
           */
           for (let key in crops) {
             updateCrop(key);
+          }
+          for (let key in upgrades) {
+            updateComposter(key);
           }
         }
         function updateCrop(key) {
@@ -279,4 +344,39 @@
             document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(collection/cps));
             document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
         } 
+        function updateComposter(key) {
+          var upgradelevel = gardenapidata.garden.composter_data.upgrades[key];
+          if (upgradelevel == undefined) {
+            upgradelevel = 0;
+          }
+          document.getElementById(key + "_level").innerText = upgradelevel;
+          if (upgradelevel >= 7 && upgradelevel < 25) {
+            var coststring = upgrades[key].counts[upgradelevel] + "× " + upgrades[key][upgrades[key].items[upgradelevel]].name + ", " + upgradesuniversal[upgradelevel + 1].count + "× " + (upgradesuniversal[upgradelevel + 1].crop + ", " + upgradesuniversal[upgradelevel + 1].copper + " Copper");
+          } else if (upgradelevel < 7) {
+              var coststring = (upgradesuniversal[upgradelevel + 1].copper + " Copper");
+          } else {
+            var coststring = "None";
+          }
+          
+          document.getElementById(key + "_next_cost").innerText = coststring;
+          try {
+            if (upgradelevel < 25) {
+              console.log(upgrades[key][upgrades[key].items[upgradelevel]].cost);
+              console.log(upgrades[key].counts[upgradelevel + 1]);
+
+              var npccost = upgrades[key][upgrades[key].items[upgradelevel]].cost * upgrades[key].counts[upgradelevel];
+              if (upgradelevel >= 7) {
+                npccost += upgradesuniversal[upgradelevel + 1].count * upgradesuniversal[upgradelevel + 1].cost;
+              }
+              document.getElementById(key + "_next_cost_npc").innerText = npccost.toLocaleString() + " coins";
+            } else {
+              document.getElementById(key + "_next_cost_npc").innerText = "0 coins";
+            }
+            
+          } catch {
+            document.getElementById(key + "_next_cost_npc").innerText = "0 coins";
+          }
+          document.getElementById(key + "_max_cost").innerText = "Coming soon!";
+          document.getElementById(key + "_max_cost_npc").innerText = "Coming soon!";
+        }
     </script>
