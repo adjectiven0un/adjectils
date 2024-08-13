@@ -140,14 +140,17 @@ var upgrades = {
         "a": {
             "name": "Enchanted Hay Bale",
             "cost": 7776,
+            "target": "enchanted_hay_bale",
         },
         "b": {
             "name": "Enchanted Golden Carrot",
             "cost": 61440,
+            "target": "enchanted_golden_carrot",
         },
         "c": {
             "name": "Tightly-Tied Hay Bale",
             "cost": 1119744,  
+            "target": "tightly_tied_hay_bale",
         },
     },
     "multi_drop": 
@@ -158,14 +161,17 @@ var upgrades = {
         "a": {
             "name": "Enchanted Baked Potato",
             "cost": 76800,
+            "target": "enchanted_baked_potato",
         },
         "b": {
             "name": "Enchanted Pumpkin",
             "cost": 1600,
+            "target": "enchanted_pumpkin",
         },
         "c": {
             "name": "Polished Pumpkin",
             "cost": 256000,  
+            "target": "polished_pumpkin",
         },
     },
     "fuel_cap": 
@@ -176,10 +182,12 @@ var upgrades = {
         "a": {
             "name": "Enchanted Sugar Cane",
             "cost": 102400,
+            "target": "enchanted_sugar_cane",
         },
         "b": {
             "name": "Enchanted Melon Block",
             "cost": 51200,
+            "target": "enchanted_melon_block",
         },
 
     },
@@ -191,10 +199,12 @@ var upgrades = {
         "a": {
             "name": "Enchanted Cactus",
             "cost": 76800,
+            "target": "enchanted_cactus",
         },
         "b": {
             "name": "Enchanted Cookie",
             "cost": 61500,
+            "target": "enchanted_cookie",
         },
     },
     "cost_reduction": 
@@ -205,18 +215,22 @@ var upgrades = {
         "a": {
             "name": "Enchanted Brown Mushroom",
             "cost": 1600,
+            "target": "enchanted_brown_mushroom",
         },
         "b": {
             "name": "Mutant Nether Wart",
             "cost": 102400,
+            "target": "mutant_nether_wart",
         },
         "c": {
             "name": "Enchanted Red Mushroom Block",
             "cost": 51200,
+            "target": "enchanted_red_mushroom_block",
         },
         "d": {
             "name": "Enchanted Brown Mushroom Block",
             "cost": 51200,
+            "target": "enchanted_brown_mushroom_block",
         },
     },
 
@@ -245,114 +259,134 @@ var upgradesuniversal = {
     },
     8: {
         copper: 500,
-        crop: "Cropie",
+        crop: "cropie",
         count: 3,
         cost: "25000",
     },
     9: {
         copper: 600,
-        crop: "Cropie",
+        crop: "cropie",
         count: 6,
         cost: "25000",
     },
     10: {
         copper: 700,
-        crop: "Cropie",
+        crop: "cropie",
         count: 12,
         cost: "25000",
     },
     11: {
         copper: 800,
-        crop: "Cropie",
+        crop: "cropie",
         count: 32,
         cost: "25000",
     },
     12: {
         copper: 900,
-        crop: "Cropie",
+        crop: "cropie",
         count: 64,
         cost: "25000",
     },
     13: {
         copper: 1000,
-        crop: "Cropie",
+        crop: "cropie",
         count: 128,
         cost: "25000",
     },
     14: {
         copper: 1200,
-        crop: "Squash",
+        crop: "squash",
         count: 3,
         cost: "75000",
     },
     15: {
         copper: 1400,
-        crop: "Squash",
+        crop: "squash",
         count: 6,
         cost: "75000",
     },
     16: {
         copper: 1600,
-        crop: "Squash",
+        crop: "squash",
         count: 12,
         cost: "75000",
     },
     17: {
         copper: 1800,
-        crop: "Squash",
+        crop: "squash",
         count: 32,
         cost: "75000",
     },
     18: {
         copper: 2000,
-        crop: "Squash",
+        crop: "squash",
         count: 64,
         cost: "75000",
     },
     19: {
         copper: 2250,
-        crop: "Squash",
+        crop: "squash",
         count: 128,
         cost: "75000",
     },
     20: {
         copper: 2500,
-        crop: "Fermento",
+        crop: "fermento",
         count: 3,
         cost: "250000",
     },
     21: {
         copper: 2750,
-        crop: "Fermento",
+        crop: "fermento",
         count: 6,
         cost: "250000",
     },
     22: {
         copper: 3000,
-        crop: "Fermento",
+        crop: "fermento",
         count: 12,
         cost: "250000",
     },
     23: {
         copper: 3300,
-        crop: "Condensed Fermento",
+        crop: "condensed_fermento",
         count: 4,
         cost: "2250000",
     },
     24: {
         copper: 3600,
-        crop: "Condensed Fermento",
+        crop: "condensed_fermento",
         count: 7,
         cost: "2250000",
     },
     25: {
         copper: 4000,
-        crop: "Condensed Fermento",
+        crop: "condensed_fermento",
         count: 14,
         cost: "2250000",
     },
 }
-
+var croptranslations = {
+    "enchanted_hay_bale": "Enchanted Hay Bale",
+    "enchanted_golden_carrot": "Enchanted Golden Carrot",
+    "tightly_tied_hay_bale": "Tightly-Tied Hay Bale",
+    "enchanted_baked_potato": "Enchanted Baked Potato",
+    "enchanted_pumpkin": "Enchanted Pumpkin",
+    "polished_pumpkin": "Polished Pumpkin",
+    "enchanted_sugar_cane": "Enchanted Sugar Cane",
+    "enchanted_melon_block": "Enchanted Melon Block",
+    "enchanted_cactus": "Enchanted Cactus",
+    "enchanted_cookie": "Enchanted Cookie",
+    "enchanted_brown_mushroom": "Enchanted Brown Mushroom",
+    "mutant_nether_wart": "Mutant Nether Wart",
+    "enchanted_red_mushroom_block": "Enchanted Red Mushroom Block",
+    "enchanted_brown_mushroom_block": "Enchanted Brown Mushroom Block",
+    "cropie": "Cropie",
+    "squash": "Squash",
+    "fermento": "Fermento",
+    "condensed_fermento": "Condensed Fermento",
+    "copper": "Copper",
+  }
 function sum(array) {
     var total = 0;
     for (var i = 0; i < array.length; i++) {

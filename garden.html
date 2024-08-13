@@ -43,7 +43,9 @@
         </label>
       </form>
     </div>
+    <div class = "header" style = " text-align: center; padding-top: 20px; padding-bottom: 20px;">Milestones</div>
   <div>
+    
     <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>
     <!--<label>Farming Wisdom: <input type = "number" id = "farmingwisdom" value = "50" onchange = updateCrops(value)>&nbsp;</label><br> -->
     <label>Armor type:
@@ -67,7 +69,7 @@
             
         </div>
     </section>
-    <span class = "header">Composter</span>
+    <div class = "header" style = "padding-top: 20px; padding-bottom: 20px;">Composter</div>
     <section class = "flex_box_index">
       <div class = "flex_index_row" id = "composterrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
         
@@ -203,6 +205,7 @@
           for (let key in upgrades) {
             var upgradediv = document.createElement("div");
             upgradediv.className = "flex_index_box";
+            upgradediv.style.width = "100%"
             var upgradetitle = document.createElement("span");
             upgradetitle.innerText = upgrades[key].title;
             upgradetitle.className = "header flex_full_row";
@@ -241,9 +244,11 @@
             let text8 = document.createElement("span");
             text8.id = key + "_max_cost";
             text8.style.paddingLeft = "10px";
+            text8.style.textAlign = "left";
             text8.innerText = "";
-            text7.appendChild(text8);
+            
             upgradediv.appendChild(text7);
+            upgradediv.appendChild(text8);
             let text9 = document.createElement("span");
             text9.className = "flex_full_row fineprint";
             text9.innerText = "NPC price to max: ";
@@ -289,7 +294,6 @@
             var bountifulcoins = (cps * 0.2) * 3600;
             var specialcoins = 0;
             var mushroomcoins = 10 * 20 * (crops[key].double + 1) * 3600;
-            console.log(crops[key].bonus);
             if (crops[key].bonus == "cropie") {
               var cropiechance = 0;
               if (armor.value == 1 || armor.value == 4) {
@@ -328,7 +332,6 @@
               milestonetotal = 0;
             }
             while (collection - crops[key].milestones[milestone] > 0 && milestone < 46) {
-              console.log(collection);
               collection -= crops[key].milestones[milestone];
               milestone++;
             }
@@ -337,8 +340,6 @@
               collection = 0;
               bonus = "";
             }
-            
-            console.log(milestone);
             document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
             document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + collection.toLocaleString();
             document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(collection/cps));
@@ -351,7 +352,7 @@
           }
           document.getElementById(key + "_level").innerText = upgradelevel;
           if (upgradelevel >= 7 && upgradelevel < 25) {
-            var coststring = upgrades[key].counts[upgradelevel] + "× " + upgrades[key][upgrades[key].items[upgradelevel]].name + ", " + upgradesuniversal[upgradelevel + 1].count + "× " + (upgradesuniversal[upgradelevel + 1].crop + ", " + upgradesuniversal[upgradelevel + 1].copper + " Copper");
+            var coststring = upgrades[key].counts[upgradelevel] + "× " + croptranslations[upgrades[key][upgrades[key].items[upgradelevel]].target] + ", " + upgradesuniversal[upgradelevel + 1].count + "× " + (croptranslations[upgradesuniversal[upgradelevel + 1].crop] + ", " + upgradesuniversal[upgradelevel + 1].copper + " Copper");
           } else if (upgradelevel < 7) {
               var coststring = (upgradesuniversal[upgradelevel + 1].copper + " Copper");
           } else {
@@ -361,12 +362,9 @@
           document.getElementById(key + "_next_cost").innerText = coststring;
           try {
             if (upgradelevel < 25) {
-              console.log(upgrades[key][upgrades[key].items[upgradelevel]].cost);
-              console.log(upgrades[key].counts[upgradelevel + 1]);
-
               var npccost = upgrades[key][upgrades[key].items[upgradelevel]].cost * upgrades[key].counts[upgradelevel];
               if (upgradelevel >= 7) {
-                npccost += upgradesuniversal[upgradelevel + 1].count * upgradesuniversal[upgradelevel + 1].cost;
+                npccost += upgradesuniversal[upgradelevel + 1].count * Number(upgradesuniversal[upgradelevel + 1].cost);
               }
               document.getElementById(key + "_next_cost_npc").innerText = npccost.toLocaleString() + " coins";
             } else {
@@ -377,6 +375,62 @@
             document.getElementById(key + "_next_cost_npc").innerText = "0 coins";
           }
           document.getElementById(key + "_max_cost").innerText = "Coming soon!";
-          document.getElementById(key + "_max_cost_npc").innerText = "Coming soon!";
+          
+          let compostermaxcrops = {
+            "enchanted_hay_bale": 0,
+            "enchanted_golden_carrot": 0,
+            "tightly_tied_hay_bale": 0,
+            "enchanted_baked_potato": 0,
+            "enchanted_pumpkin": 0,
+            "polished_pumpkin": 0,
+            "enchanted_sugar_cane": 0,
+            "enchanted_melon_block": 0,
+            "enchanted_cactus": 0,
+            "enchanted_cookie": 0,
+            "enchanted_brown_mushroom": 0,
+            "mutant_nether_wart": 0,
+            "enchanted_red_mushroom_block": 0,
+            "enchanted_brown_mushroom_block": 0,
+          }
+          let composterothercosts = {
+            "cropie": 0,
+            "squash": 0,
+            "fermento": 0,
+            "condensed_fermento": 0,
+            "copper": 0,
+            
+          }
+          var compostermaxnpc = 0
+          for (var i = upgradelevel; i < 25; i++) {
+            compostermaxnpc += upgrades[key][upgrades[key].items[i]].cost * upgrades[key].counts[i];
+            
+            compostermaxcrops[upgrades[key][upgrades[key].items[i]].target] += upgrades[key].counts[i];
+            if (i >= 7 && i != 25) {
+              compostermaxnpc += upgradesuniversal[i + 1].count * Number(upgradesuniversal[i + 1].cost);
+              
+              composterothercosts[upgradesuniversal[i + 1].crop] += upgradesuniversal[i + 1].count;
+              composterothercosts["copper"] += upgradesuniversal[i + 1].copper;
+              
+            }
+            
+          }
+          var finalstring = "";
+          console.log(composterothercosts);
+          console.log(compostermaxcrops);
+          document.getElementById(key + "_max_cost_npc").innerText = compostermaxnpc.toLocaleString() + " coins";
+
+          for (let key in compostermaxcrops) {
+            if (compostermaxcrops[key] != 0) {
+              console.log((compostermaxcrops[key] + "× " + croptranslations[key]));
+                finalstring += compostermaxcrops[key].toLocaleString() + "× " + croptranslations[key] + "\n";
+            }
+          }
+          for (let key in composterothercosts) {
+            if (composterothercosts[key] != 0) {
+              console.log((composterothercosts[key] + "× " + croptranslations[key]));
+                finalstring += composterothercosts[key].toLocaleString() + "× " + croptranslations[key] + "\n";
+            }
+          }
+          document.getElementById(key + "_max_cost").innerText = finalstring;
         }
     </script>
