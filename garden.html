@@ -354,7 +354,7 @@
           if (upgradelevel >= 7 && upgradelevel < 25) {
             var coststring = upgrades[key].counts[upgradelevel] + "× " + croptranslations[upgrades[key][upgrades[key].items[upgradelevel]].target] + ", " + upgradesuniversal[upgradelevel + 1].count + "× " + (croptranslations[upgradesuniversal[upgradelevel + 1].crop] + ", " + (upgradesuniversal[upgradelevel + 1].copper).toLocaleString() + " Copper");
           } else if (upgradelevel < 7) {
-              var coststring = (upgradesuniversal[upgradelevel + 1].copper + " Copper");
+              var coststring = upgrades[key].counts[upgradelevel] + "× " + croptranslations[upgrades[key][upgrades[key].items[upgradelevel]].target] + ", " + (upgradesuniversal[upgradelevel + 1].copper + " Copper");
           } else {
             var coststring = "None";
           }
