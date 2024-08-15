@@ -728,6 +728,7 @@
                 var infotd = document.createElement("td");
                 infotd.innerText = waterscnames[activewaterscs[i]];
                 infotd.style.paddingRight = "60px";
+                infotd.style.color = raritycolors2[scrarities[activewaterscs[i]]];
                 var chancetd = document.createElement("td");
                 if (totalwaterweight != 0){
                     chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(2) + "%";
@@ -803,6 +804,7 @@
                 var infotd = document.createElement("td");
                 infotd.innerText = lavascnames[activelavascs[i]];
                 infotd.style.paddingRight = "60px";
+                infotd.style.color = raritycolors2[scrarities[activelavascs[i]]];
                 var chancetd = document.createElement("td");
                 if (totallavaweight != 0){
                     if (activelavascs[i] == "plhlegblast" && squidhatlava.value == "0") {
