@@ -141,6 +141,39 @@
           minutes before <span style = "color: #ffff55">Jacob's Farming Contest</span>.</label>
         </form> 
       </div>
+      <div style = "padding-top: 20px;">
+        <span class = "header flex_full_row" style = "padding-bottom: 20px;">Special Events</span>
+        <label  class = "flex_full_row" for = "eventmayor" style = "padding-bottom: 20px;" onchange = "generateSchedule()">Mayor: 
+          <select id = "eventmayor" style = "margin-right: 20px;">
+            <option value = "0">Other</option>
+            <option value = "Marina">Marina</option>
+            <option value = "Diaz">Diaz</option>
+            <option value = "Cole">Cole</option>
+            
+          </select></label>
+        <span class = hovertext onclick = "generateSchedule()" id = "hideme" hidden = true>Click to generate schedule...</span>
+        <span class = "flex_full_row" style = "margin-right:20px;">Notify me when Mayor events start.
+            <label class = "switchbox" id = "eventswitch" for = "specnotif" style = "margin-left: 10px;">
+              <input type = "checkbox"  id = "specnotif" aria-labelledby = "eventswitch" style = "opacity:0">
+              <span class = "switch"></span>
+            </label>
+            </span>
+            <label class = "flex_full_row" for = "specnotibefore" style = "padding-bottom:20px;">Notify me
+              <select id = "specnotibefore" style = "margin-left: 10px; margin-right: 10px">
+                <option value = 60>1</option>
+                <option value = 120>2</option>
+                <option value = 180>3</option>
+                <option value = 240>4</option>
+                <option value = 300>5</option>
+              </select>
+              minutes before Mayor Events.</label>
+        <table id = "schedulebox" style = "width:100%">
+
+
+        </table>
+        <span id = "nothingtoseehere" hidden = true>No events for this mayor...</span>
+        <span id = "nothingtoseehere2" hidden = true>No more events for this mayor...</span>
+      </div>
     </div>
     </div>
     <div class = "flex_index_row" style = "width:95%; height:20%;">
@@ -151,7 +184,7 @@
 
         </tbody>
       </table>
-      <span style = "color: #808080">Next <span style = "color: ff55ff">special</span> mayor: <span id = "specialmayorname"></span> in <span id = "specialmayortime"></span></span>
+      <span style = "color: #808080">Next <span style = "color: #ff55ff">special</span> mayor: <span id = "specialmayorname"></span> in <span id = "specialmayortime"></span></span>
     </div>
     </div>
   </div>
@@ -212,6 +245,7 @@
       
     }
     async function updatePage(){
+
         document.getElementById("notify").checked = false;
         document.getElementById("danotif").checked = false;
         document.getElementById("jacobnotif").checked = false;
@@ -219,6 +253,7 @@
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
         updateDate();
         updateEvents();
+        
         setInterval(updateDate, 4167);
         setInterval(updateEvents, 1000);
         setInterval(updateHourlies, 1000);
@@ -232,6 +267,7 @@
           const mayordata = await apicall.json();
           var currentmayor = mayordata.mayor.name;
           document.getElementById("currentmayor").innerText = currentmayor;
+          eventmayor.value = currentmayor;
           for (var i = 0; i < mayordata.mayor.perks.length; i++){
             var perk = document.createElement("span");
             perk.textContent = mayordata.mayor.perks[i].name + ": " + mayordata.mayor.perks[i].description.replace(/§./g, "") + "\n";
@@ -359,11 +395,13 @@
           mayorrow.appendChild(mayortd);
           electiontable2.appendChild(mayorrow);
         }
+        generateSchedule();
         
     }
+    var year = 0;
     function updateDate(){
         currenttime = Math.floor(Date.now() / 1000);
-        var year = Math.floor((currenttime - initial) / yearlen);
+        year = Math.floor((currenttime - initial) / yearlen);
         document.getElementById("sbyear").innerText = year + 1;
         var yearcycletime = (currenttime - initial) % yearlen;
         var season = seasons[Math.floor(yearcycletime / seasonlen)];
@@ -605,5 +643,126 @@
       
       document.getElementById("specialmayortime").innerText = betterTimestamp(timetospecial);
     }
+    var times = [];
+    var activemayor = "none";
+    var eventname = "";
+    function generateSchedule() {
+      clearInterval(events2interval);
+      nothingtoseehere.hidden = true;
+      nothingtoseehere2.hidden = true;
+      schedulebox.innerHTML = "";
+      schedulebox.hidden = false;
+      hideme.hidden = "true";
+      if (eventmayor.value == 0 && activemayor == "none") {
+        activemayor = currentmayor.innerText;
+      } else if (eventmayor.value == 0) {
+        activemayor = "";
+      } else {
+        activemayor = eventmayor.value;
+      }
+      if (activemayor != "Marina" && activemayor != "Diaz" && activemayor != "Cole") {
+        console.log("Tripped failsafe");
+        schedulebox.hidden = true;
+        clearInterval(events2interval);
+        nothingtoseehere.hidden = false;
 
+        return;
+      }
+      if (activemayor == "Marina") {
+        eventname = "Fishing Festival";
+        eventcount = 12;
+        eventduration = 3600000;
+      }
+      if (activemayor == "Diaz") {
+        eventname = "Stonk Exchange";
+        eventcount = 12;
+        eventduration = 0;
+      }
+      if (activemayor == "Cole") {
+        eventname = "Mining Fiesta";
+        eventcount = 5;
+        eventduration = 8400000;
+      }
+      
+      var newyearstamp = 0;
+      if ((Date.now()) - (initial + year * yearlen) * 1000 > (2 * monthlen + 27 * daylen)){
+         newyearstamp = new Date((initial + year * yearlen) * 1000);
+      } else {
+         newyearstamp = new Date((initial + (year - 1) * yearlen) * 1000);
+      }
+      
+      
+      for (let i = 3; i < 15; i++) {
+        times[i - 3] = ((initial + (year * yearlen) + (i * monthlen)) * 1000);
+      }
+      console.log(times);
+      for (let i = 0; i < eventcount; i++) {
+        let eventspan = document.createElement("tr");
+        eventspan.style.width = "100%";
+        eventspan.id = "eventspan" + i;
+        let span1 = document.createElement("td");
+        
+        span1.innerText = eventname + " " + (i + 1) + ": ";
+        span1.style.paddingLeft = "20px";
+        span1.style.textAlign = "left";
+        let datetimespan = document.createElement("td");
+        datetimespan.innerText = convertTimestamp(times[i]/1000);
+        datetimespan.style.paddingLeft = "20px";
+        datetimespan.style.textAlign = "right";
+        let timespan = document.createElement("td");
+        timespan.style.paddingLeft = "20px";
+        timespan.style.textAlign = "right";
+        timespan.id = "timer" + i;
+        eventspan.appendChild(span1);
+        eventspan.appendChild(datetimespan);
+        eventspan.appendChild(timespan);
+        schedulebox.appendChild(eventspan);
+
+      }
+      updateEvents2();
+      events2interval = setInterval(updateEvents2, 1000);
+    }
+    var events2interval;
+    var eventcount = 0;
+    var eventduration = 0;
+    function updateEvents2() {
+      nothingtoseehere2.hidden = true;
+      try {
+        let timething = Date.now();
+        var hiddenevents = 0;
+        for (let i = 0; i < eventcount; i++) {
+
+          let targetspan = document.getElementById("timer" + i);
+          
+          document.getElementById("eventspan" + i).hidden = false;
+          if (i >= eventcount) {
+            document.getElementById("eventspan" + i).hidden = true;
+          }
+          if (times[i] - timething > 0) {
+            targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
+            if (Math.floor((times[i] - timething)/1000) == specnotibefore.value && specnotif.checked == true) {
+              var mingrammar = "minutes";
+              if (specnotibefore.value == 60){
+                mingrammar = "minute";
+              }
+              var notification = new Notification("adjectils",  {body: eventname + " begins in " + Math.floor(specnotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+            }
+          } else if (times[i] - timething > eventduration * -1) {
+            targetspan.innerText = "For " + betterTimestamp(Math.floor(eventduration - (timething - times[i]))/1000);
+          } else {
+            document.getElementById("eventspan" + i).hidden = true;
+            hiddenevents++;
+          }
+          if (hiddenevents == eventcount) {
+            nothingtoseehere2.hidden = false;
+            clearInterval(events2interval);
+            console.log("No more events, cleared interval");
+          }
+        }
+      } catch {
+        clearInterval(events2interval);
+        console.log("Cleared interval");
+      }
+      
+    }
 </script>

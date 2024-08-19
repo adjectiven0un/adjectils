@@ -26,7 +26,7 @@ function fixTime(unit){
 }
 var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
 function convertTimestamp(timestamp){
-    //Timestamp should be in milliseconds.
+    //Timestamp should be in seconds.
     var stamp = new Date((timestamp + 1) * 1000);
     var ampm = "am";
         if (Math.floor(stamp.getHours() / 12) >= 1){
