@@ -288,7 +288,7 @@
             
             var collection = milestonedata[crops[key].api];
             document.getElementById(key + "_collection").innerText = "Collection: " + collection.toLocaleString();
-            var cps = (20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100))).toFixed(2);
+            var cps = Math.floor(20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100)));
             document.getElementById(key + "_cps").innerText = "Crops per second: " + cps.toLocaleString();
             var cph = (cps * crops[key].coin) * 3600;
             var bountifulcoins = (cps * 0.2) * 3600;
