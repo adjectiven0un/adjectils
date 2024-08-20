@@ -646,6 +646,7 @@
     var times = [];
     var activemayor = "none";
     var eventname = "";
+    var targetyear = "";
     function generateSchedule() {
       clearInterval(events2interval);
       nothingtoseehere.hidden = true;
@@ -685,15 +686,17 @@
       }
       
       var newyearstamp = 0;
-      if ((Date.now()) - (initial + year * yearlen) * 1000 > (2 * monthlen + 27 * daylen)){
+      if ((Date.now()) - ((initial + year * yearlen) * 1000) > ((2 * monthlen + 27 * daylen) * 1000)){
          newyearstamp = new Date((initial + year * yearlen) * 1000);
+         targetyear = year;
       } else {
          newyearstamp = new Date((initial + (year - 1) * yearlen) * 1000);
+         targetyear = year - 1;
       }
       
       
       for (let i = 3; i < 15; i++) {
-        times[i - 3] = ((initial + (year * yearlen) + (i * monthlen)) * 1000);
+        times[i - 3] = ((initial + (targetyear * yearlen) + (i * monthlen)) * 1000);
       }
       console.log(times);
       for (let i = 0; i < eventcount; i++) {
