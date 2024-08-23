@@ -297,7 +297,7 @@ var translations_vanguard = {
   refined_umber_2: "Refined Umber ×2",
   refined_tungsten_2: "Refined Tungsten ×2",
   blue_egg_1: "Blue Goblin Egg ×1",
-  blue_egg_2: "Blue Goblin Egg ×1",
+  blue_egg_2: "Blue Goblin Egg ×2",
   book_ice_cold: "Enchanted Book (Ice Cold I)",
   umber_key_1: "Umber Key ×1",
   umber_key_2: "Umber Key ×2",
