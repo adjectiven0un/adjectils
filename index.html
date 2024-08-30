@@ -52,7 +52,7 @@
     <div class = "flex_index_row" style = "width:95%; height:20%;">
     <div class = "flex_index_box" style = "width: 100%; height:70%;" id = "">
       <div style = "display:flex;flex-basis:100%;">
-        <span class = header>Events</span>
+        <span class = header style = "margin-bottom: 20px;">Annual Events</span>
       </div>
       <div style = "display:flex;flex-basis: min(calc(100% - 30px), max(600px, 65%));">
       <span style = "margin-right:20px">Allow event notifications</span>
@@ -92,7 +92,7 @@
         
       </table>
       <div style = "display:flex;flex-basis:100%; margin-top: 10px;">
-        <span class = header>Hourly events</span>
+        <span class = header style = "margin-bottom: 20px;">Recurring events</span>
       </div>
       
       <span class = "flex_full_row">Time until next&nbsp;<span style = "color:#aa00aa">Dark Auction</span>:&nbsp;<span id = "datime"></span></span>
@@ -136,9 +136,33 @@
             <option value = 180>3</option>
             <option value = 240>4</option>
             <option value = 300>5</option>
-            x
+            
           </select>
           minutes before <span style = "color: #ffff55">Jacob's Farming Contest</span>.</label>
+        </form> 
+      </div>
+      <span class = "flex_full_row">Time until next&nbsp;<span style = "color:#22aaaa">Fallen Star Cult meeting</span>:&nbsp;<span id = "startime"> (Coming soon)</span></span>
+      <div class = "flex_full_row">
+        
+        <form action = "#" id = "starnotifs">
+          <div class = "flex_full_row">
+            <span style = "margin-right:20px">Notify me when the <span style = "color:#22aaaa">Cult of the Fallen Star</span> meets.</span>
+              <label class = "switchbox" id = "starswitch" for = "starnotif">
+                <input type = "checkbox"  id = "starnotif" aria-labelledby = "starswitch" style = "opacity:0">
+                <span class = "switch"></span>
+              </label>
+            </div>
+            
+          <label for = "starnotibefore">Notify me
+          <select id = "starnotibefore">
+            <option value = 60>1</option>
+            <option value = 120>2</option>
+            <option value = 180>3</option>
+            <option value = 240>4</option>
+            <option value = 300>5</option>
+            
+          </select>
+          minutes before <span style = "color: #22aaaa">Fallen Star Cult meetings</span>.</label>
         </form> 
       </div>
       <div style = "padding-top: 20px;">
@@ -249,6 +273,7 @@
         document.getElementById("notify").checked = false;
         document.getElementById("danotif").checked = false;
         document.getElementById("jacobnotif").checked = false;
+        document.getElementById("starnotif").checked = false;
         var splashindex = Math.floor(25 * Math.random());
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
         updateDate();
@@ -627,17 +652,26 @@
       }
       
       var specialcycletime = (now - initial) % (24 * 446400);
-      var timetoscorpius = Math.abs(specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen);
-      var timetoderpy = Math.abs(specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen);
-      var timetojerry = Math.abs(specialcycletime - (16 * 446400) - 2 * monthlen - 27 * daylen);
+      var timetoscorpius = -((specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
+      var timetoderpy = -((specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
+      var timetojerry = -((specialcycletime - (16 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
+      if (timetoscorpius <= 0) {
+        timetoscorpius = 2100000000;
+      }
+      if (timetoderpy <= 0) {
+        timetoderpy = 2100000000;
+      }
+      if (timetojerry <= 0) {
+        timetojerry = 2100000000;
+      }
       var timetospecial = Math.floor(Math.min(timetoscorpius, Math.min(timetoderpy, timetojerry)));
-      if (timetospecial == timetoscorpius) {
+      if (timetospecial == Math.floor(timetoscorpius)) {
         document.getElementById("specialmayorname").innerText = "Scorpius";
       }
-      if (timetospecial == timetoderpy) {
+      if (timetospecial == Math.floor(timetoderpy)) {
         document.getElementById("specialmayorname").innerText = "Derpy";
       }
-      if (timetospecial == timetojerry) {
+      if (timetospecial == Math.floor(timetojerry)) {
         document.getElementById("specialmayorname").innerText = "Jerry";
       }
       
