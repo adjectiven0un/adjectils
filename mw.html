@@ -372,6 +372,7 @@
         var totaltotalskins = 0;
         for (var j = 0; j < classcount; j++) {
             var totalSkins = 1;
+            var retire = 1;
             var skinPack = classes[j].skins;
             for (var i = 0; i < classTotalSkins[j]; i++){
                 
@@ -379,6 +380,7 @@
                     try {
                         if (data.player.achievementsOneTime.includes(skinPack[i].path)) {
                             totalSkins++;
+                            retire++;
                         }
                     } catch (TypeError) {
                     }
@@ -403,6 +405,7 @@
                     try {
                         if (mwdata.packages.includes(skinPack[i].path)) {
                             totalSkins++;
+                            retire++;
                         }
                     } catch (TypeError) {
                     }
@@ -419,6 +422,7 @@
                     try {
                         if (mwdata[skinPack[i].path] >= skinPack[i].req || (data.player.achievementsOneTime.includes(skinPack[i].backup))) { 
                             totalSkins++;
+                            retire++;
                         } else if (mwdata[skinPack[i].path] != undefined){
                             if (skinPack[i].path == "squid_defender_final_kills") {
                                 var squidDFK = 0;
@@ -441,6 +445,7 @@
                                     })
                                 } else {
                                     totalSkins++;
+                                    retire++;
                                 }
                                 
                             } else if (skinPack[i].path == "spider_a_kills") {
@@ -464,6 +469,7 @@
                                     })
                                 } else {
                                     totalSkins++;
+                                    retire++;
                                 }
                                 
                             } else if (skinPack[i].path == "final_assists_after_final_killed") {
@@ -488,6 +494,7 @@
                                     
                                 } else {
                                     totalSkins++;
+                                    retire++;
                                 }
                                 
                             } else if (skinPack[i].path == "force_of_nature_final_kills") {
@@ -512,6 +519,7 @@
                                     
                                 } else {
                                     totalSkins++;
+                                    retire++;
                                 }
                                 
                             } else {
@@ -541,6 +549,8 @@
             addIcon(classes[j].id + "_box", totalSkins + "/" + classTotalSkins[j]);
             if (totalSkins == classTotalSkins[j]){
                 document.getElementById("icon_" + classes[j].id + "_box").style.color = "#ffaa00";
+            } else if (retire >= classTotalSkins[j] - 3) {
+                document.getElementById("icon_" + classes[j].id + "_box").style.color = "#ffff00";
             } else {
                 document.getElementById("icon_" + classes[j].id + "_box").style.color = "#c0c0c0";
             }
