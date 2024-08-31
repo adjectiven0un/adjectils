@@ -2297,7 +2297,7 @@ const classes = {
                 path: "walls3_vegetarian",
                 backup: "",
                 req: "",
-                reqdesc: "Win a game as werewolf without eating any steak."
+                reqdesc: "Play a game as Werewolf without eating any steak."
             },
             8: {
                 name: "Pupper",

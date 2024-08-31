@@ -549,7 +549,7 @@
             addIcon(classes[j].id + "_box", totalSkins + "/" + classTotalSkins[j]);
             if (totalSkins == classTotalSkins[j]){
                 document.getElementById("icon_" + classes[j].id + "_box").style.color = "#ffaa00";
-            } else if (retire >= classTotalSkins[j] - 3) {
+            } else if (retire == classTotalSkins[j] - 3) {
                 document.getElementById("icon_" + classes[j].id + "_box").style.color = "#ffff00";
             } else {
                 document.getElementById("icon_" + classes[j].id + "_box").style.color = "#c0c0c0";
