@@ -640,7 +640,6 @@
       var possiblestartimes = [timetomonthend - (4 * daylen), timetomonthend - (11 * daylen), timetomonthend - (18 * daylen), timetomonthend - (25 * daylen)];
       var timetostar = 31 * daylen;
       for (let i = 0; i <= possiblestartimes.length; i++) {
-        console.log("time: " + possiblestartimes[i]);
         if (possiblestartimes[i] < timetostar && possiblestartimes[i] >= 0) {
           timetostar = possiblestartimes[i];
         }
