@@ -635,6 +635,17 @@
       jacobtime.innerText = timeToMinutes(timetojacob);
       var timetoda = Math.abs((3600 - hourcycletime) % 3600);
       datime.innerText = timeToMinutes(timetoda);
+      var monthcycletime = (now - initial) % monthlen;
+      var timetomonthend = Math.abs((monthlen - monthcycletime) % monthlen);
+      var possiblestartimes = [timetomonthend - (4 * daylen), timetomonthend - (11 * daylen), timetomonthend - (18 * daylen), timetomonthend - (25 * daylen)];
+      var timetostar = 31 * daylen;
+      for (let i = 0; i <= possiblestartimes.length; i++) {
+        console.log("time: " + possiblestartimes[i]);
+        if (possiblestartimes[i] < timetostar && possiblestartimes[i] >= 0) {
+          timetostar = possiblestartimes[i];
+        }
+      }
+      startime.innerText = timeToMinutes(timetostar);
       //console.log("DA time: " + timetoda + " EVN: " + eventNotifs + " NP: " + notifPerms + " CN: " + danotif.checked);
       if (timetoda == danotibefore.value && danotif.checked == true){
           var mingrammar = "minutes";
@@ -650,7 +661,13 @@
           }
         var notification = new Notification("adjectils",  {body: "Jacob's Farming Contest begins in " + Math.floor(jacobnotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
       }
-      
+      if (timetostar == starnotibefore.value && starnotif.checked == true){
+          var mingrammar = "minutes";
+          if (starnotibefore.value == 60){
+            mingrammar = "minute";
+          }
+        var notification = new Notification("adjectils",  {body: "Fallen Star Cult meets in " + Math.floor(danotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+      }
       var specialcycletime = (now - initial) % (24 * 446400);
       var timetoscorpius = -((specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
       var timetoderpy = -((specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
