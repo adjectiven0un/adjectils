@@ -265,6 +265,7 @@
             text9.appendChild(text10);
             upgradediv.appendChild(text9);
           }
+          
           var totalbox = document.createElement("div");
           totalbox.id = "total_box";
           totalbox.className = "flex_index_box";
@@ -295,7 +296,6 @@
             text10.innerText = "";
             text9.appendChild(text10);
             totalbox.appendChild(text9);
-          
 
         }
         function updateCrops() {
@@ -516,6 +516,14 @@
               totalnpc += totalNPCCosts[key];
             }
             document.getElementById("total_max_cost_npc").innerText = totalnpc.toLocaleString() + " coins";
+            finalstring2 = "";
+            composterothercoststotal = {
+              "cropie": 0,
+              "squash": 0,
+              "fermento": 0,
+              "condensed_fermento": 0,
+              "copper": 0,
+            }
           }
           
         }
