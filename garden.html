@@ -33,7 +33,7 @@
     <div>
       <form action = "#" style = "background-color: #282828;">
         <label>Profile:
-        <select id = profileid value = 4 onchange = updateUser(nameinput.value)>
+        <select id = profileid value = 4 onchange = updateGardenProfile()>
           <option id = profile0 value = 0>–––––</option>
           <option id = profile1 value = 1>–––––</option>
           <option id = profile2 value = 2>–––––</option>
@@ -122,6 +122,9 @@
           localStorage.setItem("storedname", name);
           console.log("Set item " + localStorage.getItem("storedname"));
           localStorage.setItem("storeddata", JSON.stringify(data)); 
+          updateGardenProfile();
+        }
+        async function updateGardenProfile() {
           var profileuuid = data.profiles[profileid.value].profile_id;
           console.log(profileuuid);
           console.log("Garden API call attempted");
@@ -130,12 +133,13 @@
               console.log("Garden API call error");
               document.getElementById("status").innerHTML = "<span class = errored>No Garden data found</span>";
               return -1;
+          } else {
+            document.getElementById("status").innerHTML = "<span class = success>Found player! Data loaded</span>";
           }
           gardenapidata = await gardenapicall.json();
           milestonedata = gardenapidata.garden.resources_collected;
           updateCrops();
         }
-
         function loadElements() {
           for (let key in crops) {
             var box = document.createElement("div");
@@ -202,6 +206,8 @@
 
             gardenrow.appendChild(box);
           }
+          
+          
           for (let key in upgrades) {
             var upgradediv = document.createElement("div");
             upgradediv.className = "flex_index_box";
@@ -259,6 +265,36 @@
             text9.appendChild(text10);
             upgradediv.appendChild(text9);
           }
+          var totalbox = document.createElement("div");
+          totalbox.id = "total_box";
+          totalbox.className = "flex_index_box";
+          totalbox.style.width = "100%";
+          composterrow.appendChild(totalbox);
+          var upgradetitle = document.createElement("span");
+            upgradetitle.innerText = "Total";
+            upgradetitle.className = "header flex_full_row";
+            totalbox.appendChild(upgradetitle);
+            
+            let text7 = document.createElement("span");
+            text7.className = "flex_full_row";
+            text7.innerText = "To max level: ";
+            let text8 = document.createElement("span");
+            text8.id = "total_max_cost";
+            text8.style.paddingLeft = "10px";
+            text8.style.textAlign = "left";
+            text8.innerText = "";
+            
+            totalbox.appendChild(text7);
+            totalbox.appendChild(text8);
+            let text9 = document.createElement("span");
+            text9.className = "flex_full_row fineprint";
+            text9.innerText = "NPC price to max: ";
+            let text10 = document.createElement("span");
+            text10.id = "total_max_cost_npc";
+            text10.style.paddingLeft = "10px";
+            text10.innerText = "";
+            text9.appendChild(text10);
+            totalbox.appendChild(text9);
           
 
         }
@@ -284,6 +320,37 @@
             updateComposter(key);
           }
         }
+        let compostermaxcropstotal = {
+            "enchanted_hay_bale": 0,
+            "enchanted_golden_carrot": 0,
+            "tightly_tied_hay_bale": 0,
+            "enchanted_baked_potato": 0,
+            "enchanted_pumpkin": 0,
+            "polished_pumpkin": 0,
+            "enchanted_sugar_cane": 0,
+            "enchanted_melon_block": 0,
+            "enchanted_cactus": 0,
+            "enchanted_cookie": 0,
+            "enchanted_brown_mushroom": 0,
+            "mutant_nether_wart": 0,
+            "enchanted_red_mushroom_block": 0,
+            "enchanted_brown_mushroom_block": 0,
+        }
+        let composterothercoststotal = {
+            "cropie": 0,
+            "squash": 0,
+            "fermento": 0,
+            "condensed_fermento": 0,
+            "copper": 0,
+          }
+          let finalstring2 = "";
+          let totalNPCCosts = {
+            "speed": 0,
+            "multi_drop": 0,
+            "fuel_ca[]": 0,
+            "organic_matter_cap": 0,
+            "cost_reduction": 0,
+          }
         function updateCrop(key) {
             
             var collection = milestonedata[crops[key].api];
@@ -398,19 +465,20 @@
             "fermento": 0,
             "condensed_fermento": 0,
             "copper": 0,
-            
           }
           var compostermaxnpc = 0
           for (var i = upgradelevel; i < 25; i++) {
             compostermaxnpc += upgrades[key][upgrades[key].items[i]].cost * upgrades[key].counts[i];
             
             compostermaxcrops[upgrades[key][upgrades[key].items[i]].target] += upgrades[key].counts[i];
+            compostermaxcropstotal[upgrades[key][upgrades[key].items[i]].target] += upgrades[key].counts[i];
             if (i >= 7 && i != 25) {
               compostermaxnpc += upgradesuniversal[i + 1].count * Number(upgradesuniversal[i + 1].cost);
               
               composterothercosts[upgradesuniversal[i + 1].crop] += upgradesuniversal[i + 1].count;
+              composterothercoststotal[upgradesuniversal[i + 1].crop] += upgradesuniversal[i + 1].count;
               composterothercosts["copper"] += upgradesuniversal[i + 1].copper;
-              
+              composterothercoststotal["copper"] += upgradesuniversal[i + 1].copper;
             }
             
           }
@@ -418,11 +486,13 @@
           console.log(composterothercosts);
           console.log(compostermaxcrops);
           document.getElementById(key + "_max_cost_npc").innerText = compostermaxnpc.toLocaleString() + " coins";
+          totalNPCCosts[key] = compostermaxnpc;
 
           for (let key in compostermaxcrops) {
             if (compostermaxcrops[key] != 0) {
               console.log((compostermaxcrops[key] + "× " + croptranslations[key]));
                 finalstring += compostermaxcrops[key].toLocaleString() + "× " + croptranslations[key] + "\n";
+                finalstring2 += compostermaxcrops[key].toLocaleString() + "× " + croptranslations[key] + "\n";
             }
           }
           for (let key in composterothercosts) {
@@ -431,6 +501,22 @@
                 finalstring += composterothercosts[key].toLocaleString() + "× " + croptranslations[key] + "\n";
             }
           }
+          
           document.getElementById(key + "_max_cost").innerText = finalstring;
+          if (key == "cost_reduction") {
+            for (let key in composterothercoststotal) {
+              if (composterothercoststotal[key] != 0) {
+                console.log((composterothercoststotal[key] + "× " + croptranslations[key]));
+                  finalstring2 += composterothercoststotal[key].toLocaleString() + "× " + croptranslations[key] + "\n";
+              }
+            }
+            document.getElementById("total_max_cost").innerText = finalstring2;
+            let totalnpc = 0;
+            for (let key in totalNPCCosts) {
+              totalnpc += totalNPCCosts[key];
+            }
+            document.getElementById("total_max_cost_npc").innerText = totalnpc.toLocaleString() + " coins";
+          }
+          
         }
     </script>
