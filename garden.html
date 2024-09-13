@@ -403,13 +403,22 @@
               milestone++;
             }
             var bonus = "";
+            var remainingcollection = 0;
             if (milestone == 46) {
               collection = 0;
               bonus = "";
+            } else {
+              try {
+                remainingcollection = crops[key].milestones[milestone + 1] - collection;
+              } catch {
+                remainingcollection = 0;
+              }
+              
             }
+            
             document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
-            document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + collection.toLocaleString();
-            document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(collection/cps));
+            document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + remainingcollection.toLocaleString();
+            document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(remainingcollection/cps));
             document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
         } 
         function updateComposter(key) {
