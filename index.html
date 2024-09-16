@@ -750,6 +750,7 @@
       }
       console.log(times);
       for (let i = 0; i < eventcount; i++) {
+        
         let eventspan = document.createElement("tr");
         eventspan.style.width = "100%";
         eventspan.id = "eventspan" + i;
@@ -759,7 +760,12 @@
         span1.style.paddingLeft = "20px";
         span1.style.textAlign = "left";
         let datetimespan = document.createElement("td");
-        datetimespan.innerText = convertTimestamp(times[i]/1000);
+        if (activemayor != "Cole") {
+          datetimespan.innerText = convertTimestamp(times[i]/1000);
+        } else {
+          datetimespan.innerText = convertTimestamp(times[i]/1000 + monthlen);
+        }
+        
         datetimespan.style.paddingLeft = "20px";
         datetimespan.style.textAlign = "right";
         let timespan = document.createElement("td");
@@ -784,7 +790,7 @@
         let timething = Date.now();
         var hiddenevents = 0;
         for (let i = 0; i < eventcount; i++) {
-
+          
           let targetspan = document.getElementById("timer" + i);
           
           document.getElementById("eventspan" + i).hidden = false;
@@ -792,7 +798,12 @@
             document.getElementById("eventspan" + i).hidden = true;
           }
           if (times[i] - timething > 0) {
-            targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
+            if (activemayor != "Cole") {
+              targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
+            } else {
+              targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000) + monthlen);
+            }
+            
             if (Math.floor((times[i] - timething)/1000) == specnotibefore.value && specnotif.checked == true) {
               var mingrammar = "minutes";
               if (specnotibefore.value == 60){
