@@ -59,7 +59,7 @@
       <div>
 
         <label class = "switchbox" id = "notifyswitch" for = "notify">
-          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif() aria-labelledby = "notifyswitch" style = "opacity:0">
+          <input type = "checkbox"  id = "notify" onchange = toggleEventNotif() aria-labelledby = "notifyswitch" style = "visibility:hidden">
           <span class = "switch"></span>
         </label>
       </div>
@@ -101,7 +101,7 @@
           <div class = "flex_full_row">
           <span style = "margin-right:20px">Notify me when <span style = "color:#aa00aa">Dark Auction</span> starts.</span>
             <label class = "switchbox" id = "daswitch" for = "danotif">
-              <input type = "checkbox"  id = "danotif" aria-labelledby = "daswitch" style = "opacity:0">
+              <input type = "checkbox"  id = "danotif" aria-labelledby = "daswitch" style = "visibility:hidden">
               <span class = "switch"></span>
             </label>
           </div>
@@ -124,7 +124,7 @@
           <div class = "flex_full_row">
             <span style = "margin-right:20px">Notify me when <span style = "color:#ffff55">Jacob's Farming Contest</span> starts.</span>
               <label class = "switchbox" id = "jacobswitch" for = "jacobnotif">
-                <input type = "checkbox"  id = "jacobnotif" aria-labelledby = "jacobswitch" style = "opacity:0">
+                <input type = "checkbox"  id = "jacobnotif" aria-labelledby = "jacobswitch" style = "visibility:hidden">
                 <span class = "switch"></span>
               </label>
             </div>
@@ -148,7 +148,7 @@
           <div class = "flex_full_row">
             <span style = "margin-right:20px">Notify me when the <span style = "color:#22aaaa">Cult of the Fallen Star</span> meets.</span>
               <label class = "switchbox" id = "starswitch" for = "starnotif">
-                <input type = "checkbox"  id = "starnotif" aria-labelledby = "starswitch" style = "opacity:0">
+                <input type = "checkbox"  id = "starnotif" aria-labelledby = "starswitch" style = "visibility:hidden">
                 <span class = "switch"></span>
               </label>
             </div>
@@ -178,7 +178,7 @@
         <span class = hovertext onclick = "generateSchedule()" id = "hideme" hidden = true>Click to generate schedule...</span>
         <span class = "flex_full_row" style = "margin-right:20px;">Notify me when Mayor events start.
             <label class = "switchbox" id = "eventswitch" for = "specnotif" style = "margin-left: 10px;">
-              <input type = "checkbox"  id = "specnotif" aria-labelledby = "eventswitch" style = "opacity:0">
+              <input type = "checkbox"  id = "specnotif" aria-labelledby = "eventswitch" style = "visibility:hidden">
               <span class = "switch"></span>
             </label>
             </span>
@@ -579,6 +579,7 @@
           var switchcheck = document.createElement("input");
           switchcheck.type = "checkbox";
           switchcheck.id = indices[i % 9] + "switch";
+          switchcheck.style.visibility = "hidden";
           let name = indices[i % 9];
           switchcheck.onchange = function() {
             updatePerms(name);
