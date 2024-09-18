@@ -216,6 +216,21 @@
   <br>
   <div style = "flex-basis:100%;width:min(calc(100% - 30px), max(800px, 40%)); margin:auto" class = "dwarven_block">
     <span class = minesheader>Corpse Loot</span><br><br>
+    <div style = "margin-bottom: 20px;">
+      <span><span id = "lootedname">Player</span>'s looted corpses:</span>
+      <table style="margin-top: 20px;">
+        <tr>
+          <td>Lapis: </td><td id = "lapislooted" class = "tdalignright">0</td>
+        </tr>
+        <tr>
+          <td>Metal: </td><td id = "metallooted" class = "tdalignright">0</td>
+        </tr>
+        <tr>
+          <td>Vanguard: </td><td id = "vanguardlooted" class = "tdalignright">0</td>
+        </tr>
+      </table>
+      <span class = "fineprint" id = "warningtext">Input a username at the top of the page to view their corpse looting stats.</span>
+    </div>
     <div>
         <label>Corpse:
           <select id = corpsetype value = 0 onchange = updateCorpses()>
@@ -327,6 +342,11 @@
             document.getElementById("img" + i).style.opacity = 0;
             document.getElementById("img" + i).src = "./images/filler.png";
           }
+          lootedname.innerText = "Player";
+          lapislooted.innerText = "0";
+          metallooted.innerText = "0";
+          vanguardlooted.innerText = "0";
+          warningtext.style.visibility = "visible";
           console.log("No active forges");
           
     }
@@ -446,6 +466,24 @@
         intervalID.push(interval);
         var refreshint = setInterval(updateRefresh, 1000);
         refreshInterval[0] = refreshint;
+        var corpsedata;
+        try {
+          corpsedata = (data.profiles[profileid.value].members[UUID].glacite_player_data.corpses_looted);
+          lootedname.innerText = name;
+          lapislooted.innerText = corpsedata.lapis.toLocaleString();
+          metallooted.innerText = (corpsedata.umber + corpsedata.tungsten).toLocaleString();
+          vanguardlooted.innerText = corpsedata.vanguard.toLocaleString();
+          warningtext.style.visibility = "hidden";
+        } catch (TypeError){
+          lootedname.innerText = "Player";
+          lapislooted.innerText = "0";
+          metallooted.innerText = "0";
+          vanguardlooted.innerText = "0";
+          warningtext.style.visibility = "visible";
+
+        }
+
+        
         
       
     }
