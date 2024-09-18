@@ -173,6 +173,44 @@
       </div>
       </div>
     </div>
+    <div id = "item6" class = "flex_forge_box"> 
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img id = "img6" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
+        <span style = "font-size:18px">Slot 6: </span><span id = "forgeitem_6" style = "font-size:16px">None</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter6>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter6></span><span class = meter>]</span>
+      </div>
+      <div id = timers6>
+      <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><br>
+        <span>&nbsp;Completion time:&nbsp;</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span id = time6>&ndash;&ndash;:&ndash;&ndash;</span><br>
+        <span id = finish6>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
+      </div>
+    </div>
+    <div id = "item7" class = "flex_forge_box"> 
+      <div style = "float:left; width:40px; height:40px; margin:5px;">
+        <img id = "img7" style = "width:40px; height:40px; opacity:0" src = "./images/filler.png">
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px; margin-left:10px;">
+        <span style = "font-size:18px">Slot 7: </span><span id = "forgeitem_7" style = "font-size:16px">None</span><br>
+        <span class = meter>[</span><span class = meter id = forgemeter7>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</span><span class = meter id = forgeunmeter7></span><span class = meter>]</span>
+      </div>
+      <div id = timers7>
+      <div style = "display:inline-block; margin:5px; margin-left: 20px; height:40px">
+        <span>&nbsp;Remaining time:&nbsp;</span><br>
+        <span>&nbsp;Completion time:&nbsp;</span>
+      </div>
+      <div style = "display:inline-block; margin:5px; height:40px">
+        <span id = time7>&ndash;&ndash;:&ndash;&ndash;</span><br>
+        <span id = finish7>&ndash;&ndash;:&ndash;&ndash;</span>
+      </div>
+      </div>
+    </div>
       
   </div>
   <br>
@@ -278,7 +316,7 @@
     var notifPerms = 0;
     
     function reset(){
-      for (var i = 1; i <= 5; i++){
+      for (var i = 1; i <= 7; i++){
             document.getElementById("time" + i).innerText = "––:––";
             document.getElementById("finish" + i).innerText = "––:––";
             document.getElementById("forgeunmeter" + i).innerText = "";
@@ -371,7 +409,7 @@
         var qfm = quickforgetimes[quickforge];
         document.getElementById("quickforgelevel").innerText = quickforge;
         
-        for (var i = 1; i <= 5; i++){
+        for (var i = 1; i <= 7; i++){
           try {
             if (forgelog[i].id != undefined){
               document.getElementById("forgeitem_" + i).innerText = translations[forgelog[i].id];
@@ -389,7 +427,7 @@
           }
           
         }
-        for (var i = 1; i <= 5; i++){
+        for (var i = 1; i <= 7; i++){
           try {
             if (forgelog[i].id != undefined){
               var maxtime = (qfm - cole.value) * times[forgelog[i].id];
@@ -419,7 +457,7 @@
     async function updateTimers(qfm, forgelog){
       var actives = [1, 1, 1, 1, 1];
       if (forgelog == "Empty"){
-        for (var i = 1; i <= 5; i++){
+        for (var i = 1; i <= 7; i++){
           document.getElementById("time" + i).innerText = "––:––";
           document.getElementById("finish" + i).innerText = "––:––";
           document.getElementById("forgeunmeter" + i).innerText = "";
@@ -429,7 +467,7 @@
         clearInterval(intervalID[0]);
         intervalID.length = 0;
       } else {
-        for (var i = 1; i <= 5; i++){
+        for (var i = 1; i <= 7; i++){
           try {
             var timeelapsed = ((Date.now() - forgelog[i].startTime)/1000);
             var maxtime = qfm * times[forgelog[i].id];
@@ -512,13 +550,13 @@
     function updateSizes(){
         if (window.innerWidth >= 768 * (5/3)) {
             console.log("Desktop mode...");
-            for (var i = 1; i <= 5; i++){
+            for (var i = 1; i <= 7; i++){
                 document.getElementById("timers" + i).style.flexBasis = "";
             }
       
         } else {
             console.log("Mobile mode...");
-            for (var i = 1; i <= 5; i++){
+            for (var i = 1; i <= 7; i++){
                 document.getElementById("timers" + i).style.flexBasis = "100%";
             }
       
