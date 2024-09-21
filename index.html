@@ -737,7 +737,7 @@
       }
       
       var newyearstamp = 0;
-      if ((Date.now()) - ((initial + year * yearlen) * 1000) > ((2 * monthlen + 27 * daylen) * 1000)){
+      if ((Date.now()) - ((initial + year * yearlen) * 1000) > ((2 * monthlen + 26 * daylen) * 1000)){
          newyearstamp = new Date((initial + year * yearlen) * 1000);
          targetyear = year;
       } else {
