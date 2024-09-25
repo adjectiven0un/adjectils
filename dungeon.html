@@ -219,6 +219,12 @@
 
         </div>
     </div>
+    <!--div class = "flex_index_box" id = "lootbox">
+        hi
+    <div-->
+
+        </div>
+    </div>
   </section>
 
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "hub_block"></div>
@@ -316,31 +322,31 @@
             localStorage.setItem("storeddata", JSON.stringify(data)); 
             console.log("Set item " + localStorage.getItem("storeddata"));
             try {
-                archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.toxophilite) * 0.02;
+                archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.toxophilite) * 0.02;
             } catch {
                 console.log("Toxophilite defaulted");
                 archboost.value = 1;
             }
             try {
-                bersboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.unbridled_rage) * 0.02;
+                bersboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.unbridled_rage) * 0.02;
             } catch {
                 console.log("Unbridled Rage defaulted");
                 bersboost.value = 1;
             }
             try {
-                healboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.heart_of_gold) * 0.02;
+                healboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.heart_of_gold) * 0.02;
             } catch {
                 console.log("Heart of Gold defaulted");
                 healboost.value = 1;
             }
             try {
-                mageboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.cold_efficiency) * 0.02;
+                mageboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.cold_efficiency) * 0.02;
             } catch {
                 console.log("Cold Efficiency defaulted");
                 mageboost.value = 1;
             }
             try {
-                tankboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].perks.diamond_in_the_rough) * 0.02;
+                tankboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.diamond_in_the_rough) * 0.02;
             } catch {
                 console.log("Diamond in the Rough defaulted");
                 tankboost.value = 1;
