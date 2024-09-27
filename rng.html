@@ -40,13 +40,13 @@
                 <option value = 5>V</option>
             </select>
         </label>
-        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;is&nbsp;<span id = "finalchance"></span>%.</span>
+        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname" onchange = "updateCopyText()"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;is&nbsp;<span id = "finalchance"></span>%.</span>
         <button onclick = copyText() style = "width: 50px">Copy!</button><span id = "copynotif" class = "fadebox" style = "opacity:0; justify-content: left;">Copied!&nbsp;</span>
         <span class = "header flex_full_row" style = "margin-bottom: 20px; margin-top: 20px;">Binomial distribution</span>
         <label class = basictext>Item drop chance<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">The chance (after modifiers) to roll the desired outcome.</span></span></sup>: <input type = "number" id = "binomchance" value = "1" min = 0 max = 100 onchange = "(() => updateBinomial())()" value = 1></input>%</label><br>
         <label class = basictext>Number of rolls<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">The number of times the item is rolled for.</span></span></sup>: <input type = "number" id = "rollcount" value = "1" min = 0 max = 1000000000 onchange = "(() => updateBinomial())()" value = 0></input></label><br>
         <label class = basictext>At least<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">Minimum number of successes you want to roll for.</span></span></sup>: <input type = "number" id = "atleast" value = "1" min = 0 max = 1000000000 onchange = "(() => updateBinomial())()" value = 0></input></label><br>
-        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname2"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;at least&nbsp;<span id = "atleasttimes">1</span>&nbsp;<span id = "timegrammar">time</span>&nbsp;is&nbsp;<span id = "finalchancebinom"></span>%.</span>
+        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname2" onchange = "updateCopyText2()"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;at least&nbsp;<span id = "atleasttimes">1</span>&nbsp;<span id = "timegrammar">time</span>&nbsp;is&nbsp;<span id = "finalchancebinom"></span>%.</span>
         <button onclick = copyText2() style = "width: 50px">Copy!</button><span id = "copynotif2" class = "fadebox" style = "opacity:0; justify-content: left;">Copied!&nbsp;</span>
     </div>
 
@@ -128,6 +128,21 @@
             copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
         }
         
+    }
+
+    function updateCopyText() {
+        if (itemname.value != "") {
+            copyabletext = "[adjectils] Your chance to drop " + itemname.value + " is " + calcedchance + "%";
+        } else {
+            copyabletext = "[adjectils] Your chance to drop this item is " + calcedchance + "%";
+        }
+    }
+    function updateCopyText2() {
+        if (itemname2.value != "") {
+            copyabletext2 = "[adjectils] The chance to drop " + itemname2.value + " at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+        } else {
+            copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+        }
     }
     var copyabletext = "";
     var copyabletext2 = "";
