@@ -83,7 +83,7 @@
 
         var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value))).toFixed(5));
         document.getElementById("finalchance").innerText = calcedchance;
-        
+        updateCopyText();
         
     }
     function updateBinomial() {
@@ -119,21 +119,21 @@
             document.getElementById("timegrammar").innerText = "times";
         }
         
-        
+        updateCopyText2();
     }
 
     function updateCopyText() {
         if (itemname.value != "") {
-            copyabletext = "[adjectils] Your chance to drop " + itemname.value + " is " + calcedchance + "%";
+            copyabletext = "[adjectils] Your chance to drop " + itemname.value + " is " + finalchance.innerText + "%";
         } else {
-            copyabletext = "[adjectils] Your chance to drop this item is " + calcedchance + "%";
+            copyabletext = "[adjectils] Your chance to drop this item is " + finalchance.innerText + "%";
         }
     }
     function updateCopyText2() {
         if (itemname2.value != "") {
-            copyabletext2 = "[adjectils] The chance to drop " + itemname2.value + " at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+            copyabletext2 = "[adjectils] The chance to drop " + itemname2.value + " at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + finalchancebinom.innerText + "%";
         } else {
-            copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+            copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + finalchancebinom.innerText + "%";
         }
     }
     var copyabletext = "";
