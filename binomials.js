@@ -28,13 +28,19 @@ function nCr(n, r){
     return ret;
 }
 //Given trials n and probability p, determine the chance that p occurs at least once.
-function binomial(n, p){
+function binomial(n, p, a){
     var ret = 0;
-    for (var i = 1; i <= parseInt(Math.floor(p * n)) + 100; i++){
-        if (i > n){
+    var cumulativeProb = 0;
+    //var tolerance = 0.00000000000001;
+    for (var i = a; i <= n; i++){
+        var prob = nCr(n, i) * (p ** i) * ((1 - p) ** (n - i));
+        cumulativeProb += prob;
+        /*
+        if (prob < tolerance) {
             break;
         }
-        ret += (nCr(n, i) * (p ** i) * ((1 - p) ** (n - i)));
+        */
+        ret += prob;
     }
     
     return ret;
