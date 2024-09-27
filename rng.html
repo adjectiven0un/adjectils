@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Probability</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Statistical utilities for Hypixel SkyBlock">
+      <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "binomials.js"></script>
+    </head>
+  <body onload="updatePage()">
+  
+      <script>
+      $(function(){
+        $("#nav").load("nav.html", function() { setWord(); }); 
+      });
+      </script>
+    <div style = "text-align:center; margin-bottom: 20px;"> 
+        <a class = adjheader href = "index.html">adjectils</a></span><span class = header>&nbsp;|&nbsp;</span><span class = header style = "color:#88ddff">Probability</span><br>
+    </div>
+
+    <div style = "width:min(calc(100% - 30px), max(800px, 60%)); margin: auto" class = "hub_block">
+        <span class = "header flex_full_row" style = "margin-bottom: 20px;">Standard Individual Item Probability</span>
+        <label class = basictext>Item drop chance<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">Initial drop chance of the item in percent. If the item drops from a Slayer or Ender Dragon, use the calculators on their respective pages instead.</span></span></sup>: <input type = "number" id = "dropchance" value = "1" min = 0 max = 900 onchange = "(() => updateDropChance())()" value = 0></input>%</label><br>
+        <label class = basictext>Magic Find<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Magic Find stat.</span></span></sup>: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDropChance())()" value = 0></input></label><br>
+        <label class = basictext>Pet Luck<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Pet Luck stat. Set this to 0 if the item is not a pet.</span></span></sup>: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 max = 900 onchange = "(() => updateDropChance())()" value = 0></input></label><br>
+
+        <label class = "flex_full_row" for = "looting" style = "padding-bottom:20px;">Looting<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Looting enchantment level. Set this to 0 if the item is a pet.</span></span></sup>: 
+            <select id = "looting" style = "margin-left: 10px; margin-right: 10px" onchange = "updateDropChance()">
+                <option value = 0>0</option>
+                <option value = 1>I</option>
+                <option value = 2>II</option>
+                <option value = 3>III</option>
+                <option value = 4>IV</option>
+                <option value = 5>V</option>
+            </select>
+        </label>
+        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;is&nbsp;<span id = "finalchance"></span>%.</span>
+        <button onclick = copyText() style = "width: 50px">Copy!</button><span id = "copynotif" class = "fadebox" style = "opacity:0; justify-content: left;">Copied!&nbsp;</span>
+        <span class = "header flex_full_row" style = "margin-bottom: 20px; margin-top: 20px;">Binomial distribution</span>
+        <label class = basictext>Item drop chance<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">The chance (after modifiers) to roll the desired outcome.</span></span></sup>: <input type = "number" id = "binomchance" value = "1" min = 0 max = 100 onchange = "(() => updateBinomial())()" value = 1></input>%</label><br>
+        <label class = basictext>Number of rolls<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">The number of times the item is rolled for.</span></span></sup>: <input type = "number" id = "rollcount" value = "1" min = 0 max = 1000000000 onchange = "(() => updateBinomial())()" value = 0></input></label><br>
+        <label class = basictext>At least<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">Minimum number of successes you want to roll for.</span></span></sup>: <input type = "number" id = "atleast" value = "1" min = 0 max = 1000000000 onchange = "(() => updateBinomial())()" value = 0></input></label><br>
+        <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname2"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;at least&nbsp;<span id = "atleasttimes">1</span>&nbsp;<span id = "timegrammar">time</span>&nbsp;is&nbsp;<span id = "finalchancebinom"></span>%.</span>
+        <button onclick = copyText2() style = "width: 50px">Copy!</button><span id = "copynotif2" class = "fadebox" style = "opacity:0; justify-content: left;">Copied!&nbsp;</span>
+    </div>
+
+
+
+    <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block">
+
+    </div>
+  </body>
+  <script>
+    function updatePage(){
+        updateDropChance();
+        updateBinomial();
+    }
+    function updateDropChance() {
+        if (dropchance.value > 100){
+            document.getElementById("dropchance").value = 100;
+        }
+        if (dropchance.value < 0 || isNaN(dropchance.value) || dropchance.value == ""){
+            document.getElementById("dropchance").value = 0;
+        }
+        if (magicfind.value > 900){
+            document.getElementById("magicfind").value = 900;
+        }
+        if (magicfind.value < 0 || isNaN(magicfind.value) || magicfind.value == ""){
+            document.getElementById("magicfind").value = 0;
+        }
+        if (petluck.value > 900){
+            document.getElementById("petluck").value = 900;
+        }
+        if (petluck.value < 0 || isNaN(petluck.value) || petluck.value == ""){
+            document.getElementById("petluck").value = 0;
+        }
+
+        var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value))).toFixed(5));
+        document.getElementById("finalchance").innerText = calcedchance;
+        if (itemname.value != "") {
+            copyabletext = "[adjectils] Your chance to drop " + itemname.value + " is " + calcedchance + "%";
+        } else {
+            copyabletext = "[adjectils] Your chance to drop this item is " + calcedchance + "%";
+        }
+        
+    }
+    function updateBinomial() {
+        if (binomchance.value > 100){
+            document.getElementById("binomchance").value = 100;
+        }
+        if (binomchance.value < 0 || isNaN(binomchance.value) || binomchance.value == ""){
+            document.getElementById("binomchance").value = 0;
+        }
+        if (rollcount.value > 1000000000){
+            document.getElementById("rollcount").value = 1000000000;
+        }
+        if (rollcount.value < 0 || isNaN(rollcount.value) || rollcount.value == ""){
+            document.getElementById("rollcount").value = 0;
+        }
+        if (parseInt(atleast.value) > parseInt(rollcount.value)){
+            document.getElementById("atleast").value = rollcount.value;
+        }
+        if (atleast.value < 0 || isNaN(atleast.value) || atleast.value == ""){
+            document.getElementById("atleast").value = 1;
+        }
+        
+        var calcedchance = parseFloat(100 * (binomial(rollcount.value, binomchance.value/100, atleast.value))).toFixed(5);
+        if (calcedchance > 99.999) {
+            calcedchance = 100;
+        }
+        //console.log(calcedchance);
+        document.getElementById("finalchancebinom").innerText = calcedchance;
+        document.getElementById("atleasttimes").innerText = atleast.value;
+        if (atleast.value == 1) {
+            document.getElementById("timegrammar").innerText = "time";
+        } else {
+            document.getElementById("timegrammar").innerText = "times";
+        }
+        if (itemname2.value != "") {
+            copyabletext2 = "[adjectils] The chance to drop " + itemname2.value + " at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+        } else {
+            copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
+        }
+        
+    }
+    var copyabletext = "";
+    var copyabletext2 = "";
+    function copyText(){
+        var box = document.getElementById("copynotif");
+        box.classList.remove("fade");
+        void box.offsetWidth;
+        if (copyabletext != ""){
+            const textarea = document.createElement("textarea");
+            textarea.value = copyabletext;
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textarea.value);
+        }
+        box.classList.add("fade");
+
+    }
+    function copyText2(){
+        var box = document.getElementById("copynotif2");
+        box.classList.remove("fade");
+        void box.offsetWidth;
+        if (copyabletext2 != ""){
+            const textarea = document.createElement("textarea");
+            textarea.value = copyabletext2;
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textarea.value);
+        }
+        box.classList.add("fade");
+
+    }
+  </script>
