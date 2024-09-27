@@ -83,11 +83,7 @@
 
         var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value))).toFixed(5));
         document.getElementById("finalchance").innerText = calcedchance;
-        if (itemname.value != "") {
-            copyabletext = "[adjectils] Your chance to drop " + itemname.value + " is " + calcedchance + "%";
-        } else {
-            copyabletext = "[adjectils] Your chance to drop this item is " + calcedchance + "%";
-        }
+        
         
     }
     function updateBinomial() {
@@ -122,11 +118,7 @@
         } else {
             document.getElementById("timegrammar").innerText = "times";
         }
-        if (itemname2.value != "") {
-            copyabletext2 = "[adjectils] The chance to drop " + itemname2.value + " at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
-        } else {
-            copyabletext2 = "[adjectils] The chance to drop this item at your drop chance in " + rollcount.value + " rolls at least " + atleast.value + " " + timegrammar.innerText + " is " + calcedchance + "%";
-        }
+        
         
     }
 
