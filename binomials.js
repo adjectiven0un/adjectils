@@ -32,7 +32,7 @@ function binomial(n, p, a){
     var ret = 0;
     var cumulativeProb = 0;
     //var tolerance = 0.00000000000001;
-    for (var i = a; i <= n; i++){
+    for (var i = Number(a); i <= Number(n); i++){
         var prob = nCr(n, i) * (p ** i) * ((1 - p) ** (n - i));
         cumulativeProb += prob;
         /*

@@ -106,11 +106,7 @@
             document.getElementById("atleast").value = 1;
         }
         
-        var calcedchance = parseFloat(100 * (binomial(rollcount.value, binomchance.value/100, atleast.value))).toFixed(5);
-        if (calcedchance > 99.999) {
-            calcedchance = 100;
-        }
-        //console.log(calcedchance);
+        var calcedchance = (100 * (binomial(rollcount.value, binomchance.value/100, atleast.value))).toFixed(5);
         document.getElementById("finalchancebinom").innerText = calcedchance;
         document.getElementById("atleasttimes").innerText = atleast.value;
         if (atleast.value == 1) {
