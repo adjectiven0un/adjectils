@@ -23,6 +23,7 @@
       </script>
   
   <div id = header style = "text-align: center; margin: 20px">
+    <div id = "firework"></div>
   <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
   <span class = "splash" id = "splashtext"></span>
   </div>
@@ -276,6 +277,7 @@
         document.getElementById("starnotif").checked = false;
         var splashindex = Math.floor(25 * Math.random());
         document.getElementById("splashtext").innerText = eval("splashes_" + timeofday)[splashindex];
+        
         updateDate();
         updateEvents();
         
@@ -421,7 +423,19 @@
           electiontable2.appendChild(mayorrow);
         }
         generateSchedule();
-        
+        var currentday = new Date();
+        if (currentday.getMonth() == 9 && currentday.getDate() == 2) {
+          if (Math.random() * 10 < 1) {
+              console.log("oh hey sixth month anniversary");
+              makeFirework();
+          }
+        }
+        if (currentday.getMonth() == 3 && currentday.getDate() == 2) {
+          
+              console.log("oh hey adjectils' anniversary");
+              makeFirework();
+          
+        }
     }
     var year = 0;
     function updateDate(){
@@ -829,5 +843,13 @@
         console.log("Cleared interval");
       }
       
+    }
+    async function makeFirework() {
+      document.getElementById("firework").className = "firework";
+      await delay(2000);
+      document.getElementById("firework").className = "";
+    }
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 </script>
