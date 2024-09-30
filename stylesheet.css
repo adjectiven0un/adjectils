@@ -595,20 +595,20 @@ This code is copied from Alvaro Montoro.
 .firework::before,
 .firework::after
 {
-  --initialSize: 0.5vmin;
-  --finalSize: 45vmin;
-  --particleSize: 0.2vmin;
+  --initialSize: 1.25vmin;
+  --finalSize: 90vmin;
+  --particleSize: 0.4vmin;
   --color1: yellow;
   --color2: khaki;
   --color3: white;
   --color4: lime;
   --color5: gold;
   --color6: mediumseagreen;
-  --y: -30vmin;
+  --y: -45vmin;
   --x: -50%;
   --initialY: 60vmin;
   content: "";
-  animation: firework 2s infinite;
+  animation: firework 2s;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -616,12 +616,6 @@ This code is copied from Alvaro Montoro.
   width: var(--initialSize);
   aspect-ratio: 1;
   background: 
-    /*
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 0%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 0%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 100%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 100%,
-    */
     
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
