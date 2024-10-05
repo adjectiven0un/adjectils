@@ -732,16 +732,16 @@
       corpsetable.innerHTML = "";
       var loottable = eval(`weights_${corpsetype.value}`);
       var loottranslations = eval(`translations_${corpsetype.value}`);
-      
+      console.log(loottable);
       var totalweight = 0;
         for (var key2 in loottable) {
             totalweight += loottable[key2];
         }
-        var rolls5 = binomial(5, (3/totalweight));
-        var rolls6 = binomial(6, (3/totalweight));
-        var rolls7 = binomial(7, (3/totalweight));
-        var rolls8 = binomial(8, (3/totalweight));
-        var rolls9 = binomial(9, (3/totalweight));
+        var rolls5 = binomial(5, (3/totalweight), 1);
+        var rolls6 = binomial(6, (3/totalweight), 1);
+        var rolls7 = binomial(7, (3/totalweight), 1);
+        var rolls8 = binomial(8, (3/totalweight), 1);
+        var rolls9 = binomial(9, (3/totalweight), 1);
         //console.log("Locket chance: " + (100 * ((0.2 * rolls5) + (0.25 * rolls6) + (0.25 * rolls7) + (0.25 * rolls8) + (0.05 * rolls9))).toFixed(3) + "%");
         for (var key2 in loottable) {
             var tablerow = document.createElement("tr");
@@ -753,9 +753,9 @@
             itemchance.style.paddingRight = "20px";
             itemchance.style.textAlign = "right";
             if (corpsetype.value == "vanguard"){
-              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (0.25 * binomial(8, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0005) * binomial(9, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(5, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(6, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(7, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(8, (loottable[key2]/totalweight), 1)) + (((gftd.value) * 0.0005) * binomial(9, (loottable[key2]/totalweight), 1)))).toFixed(3) + "%";
             } else if (corpsetype.value = "metal") {
-              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(4, (loottable[key2]/totalweight))) + (0.25 * binomial(5, (loottable[key2]/totalweight))) + (0.25 * binomial(6, (loottable[key2]/totalweight))) + (0.25 * binomial(7, (loottable[key2]/totalweight))) + (((gftd.value) * 0.0005) * binomial(8, (loottable[key2]/totalweight))))).toFixed(3) + "%";
+              itemchance.innerText = (100 * (((0.2 + ((100 - gftd.value) * 0.0005)) * binomial(4, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(5, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(6, (loottable[key2]/totalweight), 1)) + (0.25 * binomial(7, (loottable[key2]/totalweight), 1)) + (((gftd.value) * 0.0005) * binomial(8, (loottable[key2]/totalweight), 1)))).toFixed(3) + "%";
             }
             
             tablerow.appendChild(itemname);
