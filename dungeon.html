@@ -50,17 +50,17 @@
             <table style = "width:100%">
             <tr><td class = "flex_full_row"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "dailytoday" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td class = "flex_full_row"><span class = "flex_full_row">Catacombs Level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
+            <tr><td class = "flex_full_row"><span class = "flex_full_row">Catacombs level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "catapercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td><span class = "flex_full_row">Archer Level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Archer level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "archpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td><span class = "flex_full_row">Berserk Level: </span></td><td><span id = "berslevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Berserk level: </span></td><td><span id = "berslevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "berspercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td><span class = "flex_full_row">Healer Level: </span></td><td><span id = "heallevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Healer level: </span></td><td><span id = "heallevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "healpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td><span class = "flex_full_row">Mage Level: </span></td><td><span id = "magelevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Mage level: </span></td><td><span id = "magelevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "magepercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td><span class = "flex_full_row">Tank Level: </span></td><td><span id = "tanklevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Tank level: </span></td><td><span id = "tanklevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "tankpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
         </table>
             
@@ -101,7 +101,7 @@
                     </label>
                     </div>
                     <div id = "hecaselectdiv">
-                    <label>Hecatomb Level:
+                    <label>Hecatomb level:
                     <select id = "hecatomb" onchange = updateCata(nameinput.value)>
                         <option value = 0.02>X</option>
                         <option value = 0.0184>IX</option>
@@ -362,6 +362,7 @@
         return input;
         console.log("Something returned undefined.");
     }
+    var overmax = 0;
     async function updateCata(name){
         
         try {
@@ -386,25 +387,28 @@
             }
             var targetcatalevel = targetcata.value;
             var targetcataxp = 0;
-            for (var i = 0; i < 60; i++){
-                cataxp -= classxps[i];
-                if (cataxp <= 0){
-                    cataxp += (classxps[i]);
-                    cataxp = Math.floor(cataxp);
+            if (overmax == 0) {
+                for (var i = 0; i < 60; i++){
+                    cataxp -= classxps[i];
+                    if (cataxp <= 0){
+                        cataxp += (classxps[i]);
+                        cataxp = Math.floor(cataxp);
+                        document.getElementById("catalevel").innerText = i;
+                        document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
+                        break;
+                    }
+                }
+                if (i >= 60){
+                    console.log("Failsafe triggered, congrats on being cata " + i);
+                    document.getElementById("catalevel").innerText = i;
+                    document.getElementById("catapercent").innerText = "Congrats!";
+                } else if (i >= targetcatalevel) {
+                    console.log("Failsafe triggered, congrats on being cata " + i);
                     document.getElementById("catalevel").innerText = i;
                     document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
-                    break;
                 }
             }
-            if (i >= 60){
-                console.log("Failsafe triggered, congrats on being cata " + i);
-                document.getElementById("catalevel").innerText = i;
-                document.getElementById("catapercent").innerText = "Congrats!";
-            } else if (i >= targetcatalevel) {
-                console.log("Failsafe triggered, congrats on being cata " + i);
-                document.getElementById("catalevel").innerText = i;
-                document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
-            }
+            
             //Set the levels of the classes
             
             for (var i = 0; i < 5; i++){
