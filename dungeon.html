@@ -48,9 +48,9 @@
         <div class = "flex_cata_box" style = "width:29%;" id = "levelsbox">
             <span class = header class = "flex_full_row" style = "margin-bottom: 20px;">Current levels</span>
             <table style = "width:100%">
-            <tr><td class = "flex_full_row"><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
-            <tr><td class = "flex_full_row"></td><td><span id = "dailytoday" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
-            <tr><td class = "flex_full_row"><span class = "flex_full_row">Catacombs level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
+            <tr><td><span class = "flex_full_row">Daily runs remaining: </span></td><td><span id = "dailyruns" class = "flex_align_right"></span></td></tr>
+            <tr><td id = "gooutside" class = "flex_full_row" style = "color: #ff4444; font-size:10px; padding-top:3px"></td><td><span id = "dailytoday" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px; align-items: flex-end;">...</span></td></tr>
+            <tr><td ><span class = "flex_full_row">Catacombs level: </span></td><td><span id = "catalevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "catapercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
             <tr><td><span class = "flex_full_row">Archer level: </span></td><td><span id = "archlevel" class = "flex_align_right"></span></td></tr>
             <tr><td class = "flex_full_row"></td><td><span id = "archpercent" class = "flex_align_right" style = "font-size: 10px; margin-bottom: 6px;">...</span></td></tr>
@@ -240,9 +240,9 @@
     function updatePage(){
         updateSizes();
         if (localStorage.getItem("storedname") != null){
-            console.log("Found a previous name and data! Loading...");
-            console.log("Previous name: " + localStorage.getItem("storedname"));
-            console.log("Previous data: " + localStorage.getItem("storeddata"));
+            //console.log("Found a previous name and data! Loading...");
+            //console.log("Previous name: " + localStorage.getItem("storedname"));
+            //console.log("Previous data: " + localStorage.getItem("storeddata"));
             document.getElementById("nameinput").value = localStorage.getItem("storedname");
             data = JSON.parse(localStorage.getItem("storeddata"));
             fasttrack = true;
@@ -277,6 +277,7 @@
       document.getElementById("healpercent").innerText = "...";
       document.getElementById("magepercent").innerText = "...";
       document.getElementById("tankpercent").innerText = "...";
+      document.getElementById("gooutside").innerText = "";
     }
     var lastname = "";
     function abbreviate(input){
@@ -310,7 +311,7 @@
         }
         if (!fasttrack){
             data = await getAPIdata(UUID);
-            console.log(data);
+            //console.log(data);
         } 
         if (lastname != name){
             updateProfiles(data);
@@ -318,9 +319,9 @@
             lastname = name;
             fasttrack = false;
             localStorage.setItem("storedname", name);
-            console.log("Set item " + localStorage.getItem("storedname"));
+            //console.log("Set item " + localStorage.getItem("storedname"));
             localStorage.setItem("storeddata", JSON.stringify(data)); 
-            console.log("Set item " + localStorage.getItem("storeddata"));
+            //console.log("Set item " + localStorage.getItem("storeddata"));
             try {
                 archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.toxophilite) * 0.02;
             } catch {
@@ -362,7 +363,9 @@
         return input;
         console.log("Something returned undefined.");
     }
-    var overmax = 0;
+    //Is advanced mode on?
+    //Note: Always on by default pending review.
+    var overmax = 1;
     async function updateCata(name){
         
         try {
@@ -374,6 +377,9 @@
             if (dungeons.daily_runs.current_day_stamp == realdaystamp){
                 document.getElementById("dailyruns").innerText = Math.max(0, 5 - (dungeons.daily_runs.completed_runs_count));
                 document.getElementById("dailytoday").innerText = "(" + dungeons.daily_runs.completed_runs_count.toLocaleString() + " today)";
+                if (dungeons.daily_runs.completed_runs_count >= 100){
+                    document.getElementById("gooutside").innerText = "(Go outside...)";
+                }
             } else {
                 document.getElementById("dailyruns").innerText = 5;
                 document.getElementById("dailytoday").innerText = "(0 today)";
@@ -407,29 +413,81 @@
                     document.getElementById("catalevel").innerText = i;
                     document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
                 }
+            } else {
+                let i = 0;
+                for (i; i < 50; i++){
+                    cataxp -= classxps[i];
+                    if (cataxp <= 0){
+                        cataxp += (classxps[i]);
+                        cataxp = Math.floor(cataxp);
+                        document.getElementById("catalevel").innerText = i;
+                        document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
+                        break;
+                    }
+                }
+                while (cataxp > 0) {
+                    cataxp -= 200000000;
+                    if (cataxp <= 0){
+                        cataxp += 200000000;
+                        cataxp = Math.floor(cataxp);
+                        document.getElementById("catalevel").innerText = i;
+                        document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(200000000);
+                        break;
+                    }
+                    i++;
+                }
             }
+            
             
             //Set the levels of the classes
             
             for (var i = 0; i < 5; i++){
                 var xp = dungeons.player_classes[classes[i]].experience;
-                for (var j = 0; j < 50; j++){
-                    xp -= classxps[j];
-                    if (xp <= 0){
-                        xp += (classxps[j]);
-                        xp = Math.floor(xp);
-                        //this is to avoid floating point rounding errors
-                        var xppercent = Math.floor((xp/classxps[j]).toFixed(4) * 10000) / 100;
-                        document.getElementById(classesabbrev[i] + "level").innerText = j;
-                        document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
-                        break;
+                if (overmax == 0) {
+                    for (var j = 0; j < 50; j++){
+                        xp -= classxps[j];
+                        if (xp <= 0){
+                            xp += (classxps[j]);
+                            xp = Math.floor(xp);
+                            //this is to avoid floating point rounding errors
+                            var xppercent = Math.floor((xp/classxps[j]).toFixed(4) * 10000) / 100;
+                            document.getElementById(classesabbrev[i] + "level").innerText = j;
+                            document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
+                            break;
+                        }
+                    }
+                    if (j == 50){
+                        console.log("Failsafe triggered, congrats on being " + classesabbrev[i] + " 50");
+                        document.getElementById(classesabbrev[i] + "level").innerText = 50;
+                        document.getElementById(classesabbrev[i] + "percent").innerText = "Congrats!";
+                    }
+                } else {
+                    let j = 0;
+                    for (j; j < 50; j++){
+                        xp -= classxps[j];
+                        if (xp <= 0){
+                            xp += (classxps[j]);
+                            xp = Math.floor(xp);
+                            //this is to avoid floating point rounding errors
+                            var xppercent = Math.floor((xp/classxps[j]).toFixed(4) * 10000) / 100;
+                            document.getElementById(classesabbrev[i] + "level").innerText = j;
+                            document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
+                            break;
+                        }
+                    }
+                    while (xp > 0) {
+                        xp -= 200000000;
+                        if (xp <= 0){
+                            xp += 200000000;
+                            xp = Math.floor(xp);
+                            document.getElementById(classesabbrev[i] + "level").innerText = j;
+                            document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(200000000);
+                            break;
+                        }
+                        j++;
                     }
                 }
-                if (j == 50){
-                    console.log("Failsafe triggered, congrats on being " + classesabbrev[i] + " 50");
-                    document.getElementById(classesabbrev[i] + "level").innerText = 50;
-                    document.getElementById(classesabbrev[i] + "percent").innerText = "Congrats!";
-                }
+                
             }
             //Get remaining xps
             cataxp = dungeons.dungeon_types.catacombs.experience;
