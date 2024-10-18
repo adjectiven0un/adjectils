@@ -231,7 +231,7 @@
   </body>
   <script src = "apireader.js"></script>
   <script>
-    const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000, 200000000];
+    const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000];
     var classes = ["archer", "berserk", "healer", "mage", "tank"];
     var classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
     const totalxp = 569809640;
@@ -259,11 +259,17 @@
       document.getElementById("status").innerText = "";
       document.getElementById("otherstatus").innerText = "";
       document.getElementById("catalevel").innerText = "...";
+      document.getElementById("catalevel").style.color = "#c0c0c0";
       document.getElementById("archlevel").innerText = "...";
+      document.getElementById("archlevel").style.color = "#c0c0c0";
       document.getElementById("berslevel").innerText = "...";
+      document.getElementById("berslevel").style.color = "#c0c0c0";
       document.getElementById("heallevel").innerText = "...";
+      document.getElementById("heallevel").style.color = "#c0c0c0";
       document.getElementById("magelevel").innerText = "...";
+      document.getElementById("magelevel").style.color = "#c0c0c0";
       document.getElementById("tanklevel").innerText = "...";
+      document.getElementById("tanklevel").style.color = "#c0c0c0";
       document.getElementById("cataruns").innerText = "...";
       document.getElementById("archruns").innerText = "...";
       document.getElementById("bersruns").innerText = "...";
@@ -415,7 +421,7 @@
                 }
             } else {
                 let i = 0;
-                for (i; i < 50; i++){
+                for (i; i <= 50; i++){
                     cataxp -= classxps[i];
                     if (cataxp <= 0){
                         cataxp += (classxps[i]);
@@ -426,14 +432,23 @@
                     }
                 }
                 while (cataxp > 0) {
+                    
                     cataxp -= 200000000;
                     if (cataxp <= 0){
+                        
                         cataxp += 200000000;
                         cataxp = Math.floor(cataxp);
                         document.getElementById("catalevel").innerText = i;
-                        document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(200000000);
+                        
+                        if (i >= 50) {
+                            document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(200000000);
+                            document.getElementById("catalevel").style.color = "#ffaa00";
+                        } else {
+                            document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
+                        }
                         break;
                     }
+                    
                     i++;
                 }
             }
@@ -476,15 +491,23 @@
                         }
                     }
                     while (xp > 0) {
+                        
                         xp -= 200000000;
                         if (xp <= 0){
                             xp += 200000000;
                             xp = Math.floor(xp);
                             document.getElementById(classesabbrev[i] + "level").innerText = j;
-                            document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(200000000);
+                            
+                            if (j >= 50) {
+                                document.getElementById(classesabbrev[i] + "level").style.color = "#ffaa00";
+                                document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(200000000);
+                            } else {
+                                document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
+                            }
                             break;
                         }
                         j++;
+                        
                     }
                 }
                 
