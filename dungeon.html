@@ -43,7 +43,7 @@
   </div>
   </div>
   <br>
-  <section class = "flex_box_cata" style = "margin:auto">
+  <section class = "flex_box_cata" style = "margin:auto" id = "allbox">
     <div class = "flex_index_row" style = "width:95%; align-items: stretch;" id = "catarow">
         <div class = "flex_cata_box" style = "width:29%;" id = "levelsbox">
             <span class = header class = "flex_full_row" style = "margin-bottom: 20px;">Current levels</span>
@@ -646,19 +646,26 @@
         box.classList.add("fade");
 
     }
-    window.addEventListener('resize', updateSizes());
+    window.addEventListener('resize', function() {
+        updateSizes();
+    });
+    
     function updateSizes(){
         console.log("Current width: " + window.innerWidth);
         if (window.innerWidth >= 768 * (5/3)) {
             console.log("Desktop mode...");
+            document.getElementById("catarow").style.flexWrap = "nowrap";
             document.getElementById("levelsbox").style.flexBasis = "29%";
             document.getElementById("calcbox").style.flexBasis = "69%";
-            document.getElementById("catarow").style.flexWrap = "no-wrap";
+            document.getElementById("allbox").style.margin = "";
+            document.getElementById("allbox").style.margin = "auto";
         } else {
             console.log("Mobile mode...");
             document.getElementById("levelsbox").style.flexBasis = "100%";
             document.getElementById("calcbox").style.flexBasis = "100%";
             document.getElementById("catarow").style.flexWrap = "wrap";
+            document.getElementById("allbox").style.margin = "";
+            document.getElementById("allbox").style.margin = "auto";
         }
     }
   </script>

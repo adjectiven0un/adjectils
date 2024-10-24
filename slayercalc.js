@@ -69,6 +69,7 @@ function updateChances(weights, extraweights){
         }
     }
     var mfextraweight = standardweight;
+    //console.log("Weight with extra items: " + mfextraweight);
     //Update weights for extra items
     for (var key in extraweights){
         if ( (extraweights[key] / standardweight) < 0.05){
@@ -76,6 +77,7 @@ function updateChances(weights, extraweights){
             extraweights[key] = extraweights[key] * mfc;
         } 
     }
+    //console.log("Modded extra weight: " + mfextraweight);
     //Update chances for extra items
     if (frac.value == 0){
         for (var key in extraweights){

@@ -18,24 +18,56 @@ async function getUUIDbyName(name){
 
 async function getAPIdata(UUID){
   console.log("API call attempted");
-  const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/v2/skyblock/profiles?uuid=" + UUID);
-  if (!apicall.ok){
-      console.log("Api call error");
-      document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-      return -1;
+  const controller = new AbortController();
+  var timeout = setTimeout(() => {
+      controller.abort(); // Abort the request after a timeout
+  }, 5000);
+  try {
+    const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/v2/skyblock/profiles?uuid=" + UUID);
+    clearTimeout(timeout);
+    if (!apicall.ok){
+        console.log("Api call error");
+        document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
+        return -1;
+    }
+    return await apicall.json();
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log("API call timeout");
+      document.getElementById("status").innerHTML = "<span class='errored'>API timed out</span>";
+    } else {
+        console.log("API call error:", error);
+        document.getElementById("status").innerHTML = "<span class='errored'>API error</span>";
+    }
   }
-  return await apicall.json();
+  
 }
 
 async function getStats(UUID){
   console.log("API call attempted");
-  const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/player?uuid=" + UUID);
-  if (!apicall.ok){
-      console.log("Api call error");
-      document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-      return -1;
+  const controller = new AbortController();
+  var timeout = setTimeout(() => {
+      controller.abort(); // Abort the request after a timeout
+  }, 5000);
+  try {
+    const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/player?uuid=" + UUID);
+    if (!apicall.ok){
+        console.log("Api call error");
+        document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
+        return -1;
+    }
+    return await apicall.json();
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log("API call timeout");
+      document.getElementById("status").innerHTML = "<span class='errored'>API timed out</span>";
+    } else {
+        console.log("API call error:", error);
+        document.getElementById("status").innerHTML = "<span class='errored'>API error</span>";
+    }
   }
-  return await apicall.json();
+  
+  
 }
 async function updateProfiles(data) {
   try {
