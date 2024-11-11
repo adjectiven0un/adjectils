@@ -103,6 +103,8 @@
                             <option value = 1>1</option>
                             <option value = 2>2</option>
                             <option value = 3>3</option>
+                            <option value = 4>4</option>
+                            
                         </select>
                     </label>
                     <table>
@@ -117,13 +119,13 @@
               </div>
             </div>
             <div class = "flex_index_row" style = "width:min(calc(100% - 30px), max(960px, 40%))">
-                <div class = "flex_index_box flex_full_row" >
+                <div class = "flex_index_box flex_full_row" id = "mythicalrow">
                     <span class = "header flex_full_row" style = "margin-bottom:10px;">Seasonal Event</span>
                     <span class = "flex_full_row" style = "margin-bottom:10px;">Latest season:&nbsp;<span id = "season"></span></span>
                     <span class = "flex_full_row" style = "padding-bottom: 10px;">Event progress:&nbsp;</span>
                     <span class = "flex_full_row" style = "padding-bottom:10px;">&nbsp;
-                    <div class = "metercase" style = "text-align: center; z-index:0"></div>
-                    <span style = "color:#f0f0f0; z-index: 10; text-align: center; position:absolute; width:400px"><span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
+                    <div class = "metercase" style = "text-align: center; z-index:0" id = "mythicalmetercase"></div>
+                    <span style = "color:#f0f0f0; z-index: 10; text-align: center; position:absolute; width:400px; font-size: 12px" id = mythicalbar><span id = "eventprogress">0</span>/<span id = "eventmax">100</span>&nbsp;Mythical Fish (<span id = "eventpercent"></span>%)</span>
                     <div class = "meterfill" style = "width:0px; background-color: #00ff00; z-index: 5;" id = eventmeter></div>
                 
                         
@@ -148,8 +150,8 @@
                   </select>
                 </label>
                 <span class = "flex_full_row" style = "padding-bottom: 20px; padding-top: 10px;">
-                <div class = "metercase" style = "text-align: center; z-index:0"></div>
-                <span style = "color:#f0f0f0; z-index: 4; text-align: center; position:absolute; width:400px"><span>Found:&nbsp;</span><span id = "currentspecials">0</span>/<span id = "totalspecials">44</span>&nbsp;(<span id = "specialfishpercent">0</span>%)</span>
+                <div class = "metercase" style = "text-align: center; z-index:0" id = "specialmetercase"></div>
+                <span style = "color:#f0f0f0; z-index: 4; text-align: center; position:absolute; width:400px; font-size:12px" id = specialbar><span>Found:&nbsp;</span><span id = "currentspecials">0</span>/<span id = "totalspecials">44</span>&nbsp;(<span id = "specialfishpercent">0</span>%)</span>
                 <div class = "meterfill" style = "width:0px; background-color: #00ff00; z-index: 3; position:absolute" id = specialmeter></div>
                 </span>
                 <div class = "flex_index_row flex_full_row" id = "row0" style = "width:60%; flex-basis:61%; margin:auto; margin-top:10px;">
@@ -220,6 +222,12 @@
         localStorage.setItem("storedmwname", name);
         localStorage.setItem("storedmwdata", JSON.stringify(data)); 
         fresh = 1;
+        try {
+            fishingdata = data.player.stats.MainLobby.fishing;
+        } catch {
+
+        }
+        
         updateSpecialFish();
         updateWeights();
         updateFish();
@@ -227,43 +235,50 @@
     var fresh = 0;
     async function updateWeights() {
         if (fresh == 1) {
-            var enchants = fishingdata.enchants;
             try {
-                if (enchants.lure.toggle) {
-                lure.value = enchants.lure.level;
-                } else {
+                var enchants = fishingdata.enchants;
+                try {
+                    if (enchants.lure.toggle) {
+                    lure.value = enchants.lure.level;
+                    } else {
+                        lure.value = "3";
+                    }
+                } catch (TypeError) {
                     lure.value = "3";
+                }
+                
+                try {
+                    if (enchants.dumpster_diver.toggle) {
+                    dumpster.value = enchants.dumpster_diver.level;
+                    } else {
+                        dumpster.value = "0";
+                    }
+                } catch (TypeError) {
+                    dumpster.value = "0";
+                }
+                try {
+                    if (enchants.luck.toggle) {
+                        lots.value = enchants.luck.level;
+                    } else {
+                        lots.value = "0";
+                    }
+                } catch (TypeError) {
+                    lots.value = "0";
+                }
+                try {
+                    if (enchants.collector.toggle) {
+                        collector.value = enchants.collector.level;
+                    } else {
+                        collector.value = "3";
+                    }
+                } catch (TypeError) {
+                    collector.value = "0";
                 }
             } catch (TypeError) {
                 lure.value = "3";
-            }
-            
-            try {
-                if (enchants.dumpster_diver.toggle) {
-                dumpster.value = enchants.dumpster_diver.level;
-                } else {
-                    dumpster.value = "0";
-                }
-            } catch (TypeError) {
                 dumpster.value = "0";
-            }
-            try {
-                if (enchants.luck.toggle) {
-                    lots.value = enchants.luck.level;
-                } else {
-                    lots.value = "0";
-                }
-            } catch (TypeError) {
                 lots.value = "0";
-            }
-            try {
-                if (enchants.collector.toggle) {
-                    collector.value = enchants.collector.level;
-                } else {
-                    collector.value = "3";
-                }
-            } catch (TypeError) {
-                collector.value = "3";
+                collector.value = "0";
             }
             fresh = 0;
         }
@@ -403,111 +418,115 @@
             document.getElementById("caught_total").innerText = totalmythicals.toLocaleString();
             total += totalmythicals;
         } catch (TypeError){
-            console.log("Some failure on mythical fish check?");
+            //console.log("Some failure on mythical fish check?");
         }
         document.getElementById("totalcatches").innerText = total.toLocaleString();
         var time = new Date();
         var currentyear = time.getFullYear();
-        var yearstats = fishingdata.stats[currentyear];
-        var currentevent = "halloween"; // adj needs to change this manually because hypixel is really inconsistent on the definition of a season
-        var currentmax = 100; // adj needs to change this seasonally as well
-        season.innerText = "Halloween";
-        var seasonstats = yearstats[currentevent];
-        console.log(seasonstats);
-        var seasonmythicals = 0;
         try {
-            seasonmythicals += Number(notUndefined(seasonstats["water"]["orb"]));
-        } catch {
+            var yearstats = fishingdata.stats[currentyear];
+            var currentevent = "halloween"; // adj needs to change this manually because hypixel is really inconsistent on the definition of a season
+            var currentmax = 100; // adj needs to change this seasonally as well
+            season.innerText = "Halloween";
+            var seasonstats = yearstats[currentevent];
+            console.log(seasonstats);
+            var seasonmythicals = 0;
+            try {
+                seasonmythicals += Number(notUndefined(seasonstats["water"]["orb"]));
+            } catch {
 
-        } 
-        try {
-            seasonmythicals += (notUndefined(seasonstats["lava"]["orb"]));
-        } catch {
+            } 
+            try {
+                seasonmythicals += (notUndefined(seasonstats["lava"]["orb"]));
+            } catch {
 
-        }
-        try {
-            seasonmythicals += (notUndefined(seasonstats["ice"]["orb"]));
-        } catch {
+            }
+            try {
+                seasonmythicals += (notUndefined(seasonstats["ice"]["orb"]));
+            } catch {
 
-        }
-        var seasonfish = 0;
-        var seasonjunk = 0;
-        var seasontreasure = 0;
-        try {
-            seasonfish += (notUndefined(seasonstats["water"]["fish"]));
-        } catch {
-        }
-        try {
-            seasonfish += (notUndefined(seasonstats["lava"]["fish"]));
-        } catch {
-        }
-        try {
-            seasonfish += (notUndefined(seasonstats["ice"]["fish"]));
-        } catch {
-        }
-        try {
-            seasonjunk = (notUndefined(seasonstats["water"]["junk"]));
-        } catch {
-        }
-        try {
-            seasonjunk = (notUndefined(seasonstats["lava"]["junk"]));
-        } catch {
-        }
-        try {
-            seasonjunk = (notUndefined(seasonstats["ice"]["junk"]));
-        } catch {
-        }
-        try {
-            seasontreasure = (notUndefined(seasonstats["water"]["treasure"]));
-        } catch {
-        }
-        try {
-            seasontreasure = (notUndefined(seasonstats["lava"]["treasure"]));
-        } catch {
-        }
-        try {
-            seasontreasure = (notUndefined(seasonstats["ice"]["treasure"]));
-        } catch {
-        }
-        eventprogress.innerText = seasonmythicals.toLocaleString();
-        eventfish.innerText = seasonfish.toLocaleString();
-        eventjunk.innerText = seasonjunk.toLocaleString();
-        eventtreasure.innerText = seasontreasure.toLocaleString();
-        eventmax.innerText = currentmax;
-        var text1 = "";
-        var text2 = "";
-        var percent = Math.floor(100 * (seasonmythicals/currentmax));
-        if (percent > 100) {
-            percent = 100;
-        }
-        
-        eventmeter.style.width = percent * 4 + "px";
+            }
+            var seasonfish = 0;
+            var seasonjunk = 0;
+            var seasontreasure = 0;
+            try {
+                seasonfish += (notUndefined(seasonstats["water"]["fish"]));
+            } catch {
+            }
+            try {
+                seasonfish += (notUndefined(seasonstats["lava"]["fish"]));
+            } catch {
+            }
+            try {
+                seasonfish += (notUndefined(seasonstats["ice"]["fish"]));
+            } catch {
+            }
+            try {
+                seasonjunk = (notUndefined(seasonstats["water"]["junk"]));
+            } catch {
+            }
+            try {
+                seasonjunk = (notUndefined(seasonstats["lava"]["junk"]));
+            } catch {
+            }
+            try {
+                seasonjunk = (notUndefined(seasonstats["ice"]["junk"]));
+            } catch {
+            }
+            try {
+                seasontreasure = (notUndefined(seasonstats["water"]["treasure"]));
+            } catch {
+            }
+            try {
+                seasontreasure = (notUndefined(seasonstats["lava"]["treasure"]));
+            } catch {
+            }
+            try {
+                seasontreasure = (notUndefined(seasonstats["ice"]["treasure"]));
+            } catch {
+            }
+            eventprogress.innerText = seasonmythicals.toLocaleString();
+            eventfish.innerText = seasonfish.toLocaleString();
+            eventjunk.innerText = seasonjunk.toLocaleString();
+            eventtreasure.innerText = seasontreasure.toLocaleString();
+            eventmax.innerText = currentmax;
+            var text1 = "";
+            var text2 = "";
+            var percent = Math.floor(100 * (seasonmythicals/currentmax));
+            if (percent > 100) {
+                percent = 100;
+            }
+            
+            eventmeter.style.width = (percent/100 * mythicalbar.clientWidth) + "px";
 
-        var redhex = Math.min(240, Math.floor((100-percent) * 4));
-        var greenhex = Math.min(192, Math.ceil((percent) * 4));
-        if (redhex == 0){
-            redhex = "00";
-        } else if (redhex < 16){
-            redhex = "0" + redhex.toString(16);
-        } else if (redhex % 16 == 0){
-            redhex = redhex.toString(16);
-        } else {
-            redhex = redhex.toString(16);
+            var redhex = Math.min(240, Math.floor((100-percent) * 4));
+            var greenhex = Math.min(192, Math.ceil((percent) * 4));
+            if (redhex == 0){
+                redhex = "00";
+            } else if (redhex < 16){
+                redhex = "0" + redhex.toString(16);
+            } else if (redhex % 16 == 0){
+                redhex = redhex.toString(16);
+            } else {
+                redhex = redhex.toString(16);
+            }
+            
+            if (greenhex == 0){
+                greenhex = "00";
+            } else if (greenhex < 16){
+                greenhex = "0" + greenhex.toString(16);
+            } else if (greenhex % 16 == 0){
+                greenhex = greenhex.toString(16);
+            } else {
+                greenhex = greenhex.toString(16);
+            }
+            var hexcolor = "";
+            hexcolor = "#" + redhex + greenhex + "00";
+            eventmeter.style.backgroundColor = hexcolor;
+            eventpercent.innerText = Math.min(100, ((seasonmythicals/currentmax) * 100).toFixed(1));
+        } catch {
+            season.innerText = "Halloween";
         }
-        
-        if (greenhex == 0){
-            greenhex = "00";
-        } else if (greenhex < 16){
-            greenhex = "0" + greenhex.toString(16);
-        } else if (greenhex % 16 == 0){
-            greenhex = greenhex.toString(16);
-        } else {
-            greenhex = greenhex.toString(16);
-        }
-        var hexcolor = "";
-        hexcolor = "#" + redhex + greenhex + "00";
-        eventmeter.style.backgroundColor = hexcolor;
-        eventpercent.innerText = Math.min(100, ((seasonmythicals/currentmax) * 100).toFixed(1));
     }
     function notUndefined (input) {
         if (input == undefined) {
@@ -526,9 +545,9 @@
         for (var i = 0; i <= 4; i++) {
             document.getElementById("row" + i).innerHTML = "";
         }
-
+        
         try {
-            fishingdata = data.player.stats.MainLobby.fishing;
+            
             var max_j = 5;
             var foundfish = 0;
             var maxfish = 0;
@@ -538,14 +557,18 @@
             var j = 0;
             var fishes = 0;
             for (var key in specialfish){
-              if ((specialfish[key].season == specialcategory.value || specialcategory.value == "all")) {
-                maxfish++;
-              }
-              if (fishingdata.special_fish[key] == true && (specialfish[key].season == specialcategory.value || specialcategory.value == "all")){
-                makeBox(key, fishes, max_j);
-                foundfish++;
-                fishes++;
-              }
+                if ((specialfish[key].season == specialcategory.value || specialcategory.value == "all")) {
+                    maxfish++;
+                }
+                try {
+                    if (fishingdata.special_fish[key] == true && (specialfish[key].season == specialcategory.value || specialcategory.value == "all")){
+                        makeBox(key, fishes, max_j);
+                        foundfish++;
+                        fishes++;
+                    }
+                } catch (TypeError) {
+                    
+                }
             }
             document.getElementById("currentspecials").innerText = foundfish;
             document.getElementById("totalspecials").innerText = maxfish;
@@ -559,7 +582,7 @@
         }
         var percent = Math.min(100, Math.floor(100 * (foundfish/maxfish)));
         
-        specialmeter.style.width = 4 * percent + "px";
+        specialmeter.style.width = (percent/100 * mythicalbar.clientWidth) + "px";
 
         var redhex = Math.min(240, Math.floor((100-percent) * 4));
         var greenhex = Math.min(192, Math.ceil((percent) * 4));
@@ -692,12 +715,13 @@
         lava_box.style.height = `${maxHeight}px`;
         catch_table_row.style.width = `${trophyrect.width}px`;
     }
+    window.addEventListener('resize', updateSize());
     function updateSize(){
       if (window.innerWidth >= 768 * (5/3)) {
           console.log("Desktop mode...");
           for (var i = 0; i <= 4; i++) {
             document.getElementById("row" + i).style.width = "60%";
-            document.getElementById("row" + i).style.flexBasis = "61%";
+            //document.getElementById("row" + i).style.flexBasis = "61%";
           }
           document.getElementById("tablerow").style.flexWrap = "nowrap";
           
@@ -705,9 +729,16 @@
           console.log("Mobile mode...");
           for (var i = 0; i <= 4; i++) {
             document.getElementById("row" + i).style.width = "min(calc(100% - 30px), max(960px, 70%))";
-            document.getElementById("row" + i).style.flexBasis = "min(calc(100% - 30px), max(960px, 70%))";
+            //document.getElementById("row" + i).style.flexBasis = "min(calc(100% - 30px), max(960px, 70%))";
           }
           document.getElementById("tablerow").style.flexWrap = "wrap";
         }
     }
+    
+    document.getElementById("mythicalmetercase").style.width = Math.min(400, document.getElementById("specialfishrow").clientWidth * 0.84) + "px";
+    document.getElementById("specialmetercase").style.width = Math.min(400, document.getElementById("specialfishrow").clientWidth * 0.84) + "px";
+    document.getElementById("mythicalbar").style.width = Math.min(400, document.getElementById("specialfishrow").clientWidth * 0.84) + "px";
+    document.getElementById("specialbar").style.width = Math.min(400, document.getElementById("specialfishrow").clientWidth * 0.84) + "px";
+    console.log("resized things");
+    
 </script>
