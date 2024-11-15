@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Garden</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Botanical utilities for Hypixel SkyBlock">
+      <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "apireader.js"></script>
+    </head>
+  <body onload="updatePage()">
+  
+      <script>
+      $(function(){
+        $("#nav").load("nav.html", function() { setWord(); }); 
+      });
+      </script>
+  <div style = "text-align:center; margin: auto"> 
+    <a class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header style = "color:#40c040">something idk</span><br>
+  </div>
+  <div>
+    <span>This page was never real. </span>
+  </div>
+  <span id = "status">
+
+  </span>
+  
+
+
+
+  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+  </body>
+  <script>
+    var achievementAPIs = [];
+    var percentlist = {
+
+    };
+    async function updatePage(){
+        
+        var names = [
+            "sosal", "Brano", "IRLMAINXKUOLIO", "CowKou", "Rayjer", "Stylee", "Kinderfeest", "recordheat", "Xylim", "Smappy", "mm_dm", "Stuffy", "pumpkan", "CatTech", "SnowmanHaqs", "RAWWWWWRRR", "Gamja_OwO", "Meloby", "nonoooooooo", "Kqnfetka", "alonmario1", "duonk", "gexp", "Cluelesss", "BU1LDERS", "sForce", "nevqr", "irkt", "A0E", "J2J", "adjective_n0un", "Coduhy", "Pomw", "Melongan", "NoHaxJustTaiwan", "SpookyDano", "B3xD", "YSoSalty", "tyelur", "DarkSilent", "Morozhenka", "0HfLUfFIE", "Slime", "Iaan", "Suroz", "Jamesieee", "kipanator", "xRyann_", "Hacks", "zabolec", "Misqu", "ILoveMyDoggo2", "Weaselify", "Woomy", "SeaOtterFan", "o3w", "MacchuPicchu", "animethighs68", "Kilster", "yoyolin2007", "Warido37", "titi2502", "twww", "hentor5", "pehi", "MockBall", "Justin_Jefferson", "KaoriMiyazono", "BleuShot", "G1ovanni", "renneke", "JinxRaider23", "ZERATHIX", "Paczuszka", "oSnapL", "Chqle", "riyako", "GoDed", "avaaidan", "corbr", "justiwn", "gigert", "combatively", "skyxyy", "OLegendaryEnder", "BigSpookPqssible", "Aieuh", "Aitcera", "Outerspacee", "wolseley", "Delirios", "ichhabevape", "Eblok", "swaggirl73", "Khqled", "joeyb_9", "Judging", "75kAP", "BasicallyLouis", "HypixelGods", "Intellectuals", "Saubt", "rvbka", "iMaeve", "Oct_Ocelot", "22charizard", "Valdey", "tcmmie", "78Mooses", "Nirk", "Levier", "Namepire", "Osgod_Clapa", "hotprincee", "TheFifth", "SkeletNestor", "inerdd", "NoClap", "ychat", "Viiksipossu298", "Sir_Cow", "DirtyAvocado", "Shyzer", "ZekyFraise", "King__Baby", "Astele", "Picsou993", "pnos", "zombie_man99", "peaches61", "JULlAN", "BooLocal", "JokeHit", "Tyba", "Sakurazi", "nightlibra", "ShiningTurtle", "Vembzz", "Brendooo", "Taisaka", "trql", "Avoma", "righter", "Lumb", "GoldenWinHog", "l0rrdi", "thehairguy", "Seiizo", "Locowi", "sydneybrooke", "Kimyosa", "Weeknd", "Lopa", "LORDVANTAI", "fdgfdsfsggddg", "Oblivion239", "Postmates", "ToastyOosty", "IDAKOI", "clarm", "mawiek", "Kspook", "JuliusVer", "turtwl", "ciyp", "Velyth", "Rlvr", "foge09", "Ofek", "Dadje", "JipMasterBot", "FrostyCookies", "Constructivenes", "stevcn", "oopsgtg", "Shazuh", "vladstar21", "leonl", "ItzMeFlyer", "Kiryujin", "aamelia", "martinbelike", "craftplaygames", "nekrozma", "JunoIsSolo", "q4f", "Lettucebird1", "QuestCompleted", "TDIHasADumpTruck", "KENQN", "Potatus", "GoodBoyXiann", "poaster", "Arlqx", "Nyamih", "xObsi", "Xijah", "johnush", "MAR00NS", "Gold_Zombie", "AutiGang", "ManILoveFauna", "ooRage", "leonl", "Skex_", "mohtele", "TournamentTokens", "knightndey", "TylertheTurtled", "xBasil", "xOptic", "PumpkinBazinga", "Mason", "lmaowen", "iiris", "Trushi", "Paleodraw", "oMqtt", "Pandaish", "Huvo", "ruby6625", "JustAntonio", "huntz", "Bethel", "supresso", "Aixzer", "7hu", "Yhuvko", "MrRodd", "ontay", "FuyajouRuri", "oHuae", "ghoogle", "SendBleach", "ImSadHuman", "FamousFurryPlat", "ChickenNugg", "Recture", "Wens", "Bypez", "Dosket", "AlgebraHomework", "coencidence", "kirkcatcat", "tomehr", "B0YD", "Sizedoesmater", "kyrabolical", "Huxy", "TimeNow_", "lpk", "jumping5cheese", "Ohhliver", "qtSen", "Eenu", "dewegon", "CookieOscar", "Hu_Tao____", "InvocAtioNS", "DDCMarisaB", "EricBurnsvilleMN", "Cadxn", "telvu", "Boogatomyooga", "ummobear", "Maribor", "eMarry", "LittleAtom", "Bsing", "TheGROUNDeagle", "Karunesh", "Celebre", "Usanic", "Slynn", "_lar", "Lynnsmyprincess", "Veemo", "CanYouHearMe", "Boig", "CHUHG", "StevenR8", "Alyste", "RemoveBooster", "LilFroggy", "xInvisibility", "jenidu", "Shirool", "Alexony_", "iloveghosting", "AquaMLG", "Charlish", "trivya", "MEGAscrub", "gmailol", "BUEY", "Hamaly", "vojtix", "bcrn_", "yungie", "CreeperYuka", "Juwlian", "InInk", "Shiqou", "Sarauh", "Timestamps", "Quincy_", "MrBecky15", "Omerr", "cchrome", "kaerasta", "Bjorb", "Succeedings", "HxPulse", "Traile", "Sonecah", "JthaloTime", "taahw", "Cukrenka", "JollyTNT", "TimeFliesBy", "Dqlight", "levery", "miksy21", "HmmRekt", "Reeedly", "StealBed", "Explossy", "Jyahp", "latehrs", "QS9", "Skillied", "Microwaveable", "oLeafy", "Endderr", "Strawberryjame", "64Melons", "_MasterMeow_", "Colorer", "Redirelia", "gibbgibb", "3Qi", "RaneBow", "oCammy", "AndrewFTW", "Corruptplex", "Jonathannn", "JaydenZA", "NS_Alpha", "Seriuz", "FireLordOzai", "Lucasario", "ZelickExists", "Dungeon", "x_x", "chih", "LowQueue", "Wholsom", "Trtx", "Sunta", "Orbaist", "Impresso", "987654321kaboom", "gravewalkerr", "CostlierKnight", "nathuin", "GunnarKarlsson", "rcwdy", "Anzec", "Hagridden", "SpookyPxnguin", "Thuwunder", "pekk", "asatia", "unisdynasty", "Snowflies", "hdrd", "Bukayo", "Escroquer", "CCard", "Lynx1240", "TNT444", "ElMuch4cho", "pacopepe", "RynoCharge", "Smolda", "DannyDanBoy", "Fooney", "nyaaaaaaaaaaaaa", "swuxx", "domisseus", "COWBOYPARKER", "BWAAAHH", "latesteditions", "H4mmerfall", "LegendJos", "CStep28", "Gunnxa", "ChatIsThisReal", "BotTyler", "The_Red_Sheep_97",
+        ]
+        var totalwithachievement = 0;
+        var totalsuccess = 0;
+        for (let i = 0; i < 300; i++) { 
+            try {
+                let UUID = await getUUIDbyName(names[i]);
+                let stats = await getStats(UUID);
+                achievementAPIs[i] = stats.player.achievementsOneTime;
+                achievementAPIs[i].push(stats.player.displayname);
+                totalsuccess++;
+            } catch (error) {
+                console.log("Error occurred attempting to look up " + names[i] + ".")
+            }   
+        }
+        var aplistproto = await fetch("https://api.hypixel.net/v2/resources/achievements");
+        
+        aplist = await aplistproto.json();
+        aplist = aplist.achievements;
+        console.log(aplist);
+        for (let key in aplist) {
+            for (let key2 in aplist[key]["one_time"]) {
+                percentlist[key2] = {
+                    "sampleWith": 0,
+                    "sampleTotal": 0,
+                    "samplePercent": 0,
+                    "gamePercent": aplist[key]["one_time"][key2]["gamePercentUnlocked"],
+                    "achievementKey": key + "_" + key2.toLowerCase(),
+                    "discrepancy": 0,
+                }
+            }
+        } 
+
+        for (let key in percentlist) {
+            for (let i = 0; i < achievementAPIs.length; i++) {
+                percentlist[key].sampleTotal = percentlist[key].sampleTotal + 1;
+                console.log(i);
+                console.log(achievementAPIs[i]);
+                console.log(percentlist[key].achievementKey);
+                try {
+                    if (achievementAPIs[i].includes(percentlist[key].achievementKey)) {
+                        percentlist[key].sampleWith = percentlist[key].sampleWith + 1;
+                    } else {
+                        console.log(achievementAPIs[i][achievementAPIs[i].length - 1] + " does not have " + percentlist[key].achievementKey);
+                    }
+                } catch (error) {
+                    percentlist[key].sampleTotal = percentlist[key].sampleTotal - 1;
+                }
+                
+            }
+            var percent = 100 * (percentlist[key].sampleWith / percentlist[key].sampleTotal);
+            percentlist[key].samplePercent = percent;
+            var disc = percent - percentlist[key].gamePercent;
+            if (disc > 10) {
+                console.log(key + " has discrepant percentage of " + disc + " (Actual among top: " + percentlist[key].samplePercent + ")");
+            }
+            percentlist[key].discrepancy = disc;
+        }
+        console.log(percentlist);
+        //console.log(totalwithachievement/totalsuccess);
+    }
+  </script>
