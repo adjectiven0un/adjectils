@@ -207,7 +207,7 @@
                 </tr> 
             </table>
             <table style = "width:100%">
-                <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "50" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "10000" style = "width:40px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
@@ -391,8 +391,8 @@
                 document.getElementById("dailytoday").innerText = "(0 today)";
             }
             
-            if (targetcata.value > 60) {
-                targetcata.value = 60;
+            if (targetcata.value > 10000) {
+                targetcata.value = 10000;
             }
             if (targetcata.value < 1) {
                 targetcata.value = 1;
@@ -513,8 +513,11 @@
             }
             //Get remaining xps
             cataxp = dungeons.dungeon_types.catacombs.experience;
-            for (var i = 0; i < targetcatalevel; i++){
+            for (var i = 0; i < 50; i++){
                 targetcataxp += classxps[i];
+            }
+            for (var i = 50; i < targetcatalevel; i++) {
+                targetcataxp += 200000000;
             }
             var cataxpleft = Math.max(targetcataxp - cataxp, 0);
             
@@ -547,7 +550,6 @@
 
             //Solve the class average problem
             //I could probably merge this with the previous loop somehow but im too lazy right now
-            //O(n) solution, there is probably a O(1) solution somewhere but brooke is rushing me right now
             var cataperrun = selectedfloor.value * 1.38888888;
             cataperrun *= (1 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value));
             cataperrun *= global.value;
