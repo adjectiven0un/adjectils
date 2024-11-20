@@ -19,9 +19,8 @@
         $("#nav").load("nav.html", function() { setWord(); }); 
       });
       </script>
-        <div id = header class = "standardwidth" style = "text-align:center">
-            <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = hubheader>SkyBlock Hub</span><br>
-        </div>  
+        <header id = "nav" class = navblock></header>
+        <div style = "margin-bottom: 30px;">&nbsp;</div>
         <div style = "text-align:center">
           <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances()></input></label><br>
           <form action = "#">
@@ -113,9 +112,11 @@
       
       </div>
       </section>
-      <div id = "nav" class = "hub_block standardwidth"></div>
+      <div style = "margin-top:20px">&nbsp;</div>
+      <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
   </body>
   <script>
+    pagedata = ["SkyBlock Hub", "#808080"];
     //Dual calculator means syntaxes must be changed, so I can't just reuse old code
     function updateAllChances(){
             var weightsz = {

@@ -24,9 +24,8 @@
       });
       </script>
   
-  <div id = header class = "standardwidth" style = "text-align:center; background-color: #282828;">
-    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = minesheader>Dwarven Mines</span><br>
-  </div>  
+  <header id = "nav" class = navblock></header>
+  <div style = "margin-bottom: 30px;">&nbsp;</div>
   <div class = "standardwidth" style = "text-align:center">
   <label style = "background-color:#282828">Username: <input type = "text" id = "nameinput" onchange = updateForges(value)>&nbsp;</label><button onclick = updateForges(nameinput.value) style = "width: 80px; height: 24px; text-align:center">Refresh ⟳</button><span>&nbsp;</span><span id = "refreshstatus"></span><br>
   <div>
@@ -293,9 +292,11 @@
 
   </div>
   </section>
-  <div id = "nav" class = "dwarven_block standardwidth"></div>
+  <div style = "margin-top:20px">&nbsp;</div>
+      <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
   </body>
   <script>
+    pagedata = ["Dwarven Mines", "#70c0c0"];
     var fasttrack = false;
     var data;
     async function updatePage(){

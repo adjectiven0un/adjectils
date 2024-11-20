@@ -8,23 +8,55 @@
   </head>
   
   <body onload = "setWord()">
-  <div class = navblock>
-    <hr class = solid>
-    <span>Site Navigation</span>
-    <hr class = solid>
-    <span>Miscellaneous</span><br>
-    <span>&nbsp;•&nbsp;</span><a href = "index.html" style = "color:#808080">Home</a><span>&nbsp;•&nbsp;</span><a href = "hub.html" style = "color:#a0a0a0">SkyBlock Hub</a><span>&nbsp;•&nbsp;</span><a href = "dungeon.html" style = "color:#ab7b60">Dungeons</a><span>&nbsp;•&nbsp;</span><a href = "rift.html" style = "color:#9878cc">The Rift</a><span>&nbsp;•&nbsp;<a href = "fishing.html" style = "color:#78abde">Fishing</a><span>&nbsp;•&nbsp;</span><a href = "garden.html" style = "color:#56ba79">Garden</a><span>&nbsp;•&nbsp;</span>
-    <hr class = solid>
-    <span>Combat</span><br>
-    <span>&nbsp;•&nbsp;</span><a href = "spider.html" style = "color:#c07060">Spider's Den</a><span>&nbsp;•&nbsp;</span><a href = "end.html" style = "color:#9060a0">The End</a><span>&nbsp;•&nbsp;</span><a href = "crimson.html" style = "color:#f08050">Crimson Isle</a><span>&nbsp;•&nbsp;</span>
-    <hr class = solid>
-    <span>Mining</span><br>
-    <span>&nbsp;•&nbsp;</span><a href = "dwarven.html" style = "color:#70c0c0">Dwarven Mines</a><span>&nbsp;•&nbsp;</span><a href = "crystal.html" style = "color:#e070d0">Crystal Hollows</a><span>&nbsp;•&nbsp;</span>
-    <hr class = solid>
-    <span>Other</span><br>
-    <span>&nbsp;•&nbsp;</span><a href = "mw.html" style = "color:#f08080">Mega Walls</a><span>&nbsp;•&nbsp;<a href = "lobbyfishing.html" style = "color:#80d0d0">Main Lobby Fishing</a><span>&nbsp;•&nbsp;</span><a href = "rng.html" style = "color:#80d0f0">Probability</a><span>&nbsp;•&nbsp;</span>
-    <hr class = solid>
-    <span>&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;<br>&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
+  <div>
+      <nav class="main-nav">
+          <ul class="menu">
+              <li class="menu-item" style = "padding-left:10px; flex:0.2"><img src = "./favicon/favicon.ico" style = "width:40px; height:40px;"></li>
+              <li class = "menu-item"><a href = "index.html" style = "font-size:20px; bottom:3.5px; position: relative;">adjectils</a></li>
+              <li class = "menu-item"><span style = "font-size:18px; bottom:2px; position: relative; flex: 1.5" id = "islandname"></span></li>
+              <li class="menu-item">
+                  <a href="#" style = "font-size:16px">Combat</a>
+                  <ul class="dropdown">
+                      <li><a href="hub.html" style = "color: #808080">SkyBlock Hub</a></li>
+                      <li><a href="spider.html" style = "color: #c07060">Spider's Den</a></li>
+                      <li><a href="end.html" style = "color: #9060a0">The End</a></li>
+                      <li><a href="crimson.html" style = "color: #f08050">Crimson Isle</a></li>
+                      <li><a href="dungeon.html" style = "color: #ab7b60">Dungeons</a></li>
+                  </ul>
+              </li>
+              <li class="menu-item">
+                  <a href="#" style = "font-size:16px">Mining</a>
+                  <ul class="dropdown">
+                      <li><a href="dwarven.html" style = "color: #70c0c0">Dwarven Mines</a></li>
+                      <li><a href="crystal.html" style = "color: #e070d0">Crystal Hollows</a></li>
+                  </ul>
+              </li>
+              <li class="menu-item">
+                  <a href="#" style = "font-size:16px">Misc.</a>
+                  <ul class="dropdown">
+                      <li><a href="fishing.html" style = "color: #78abde">Fishing</a></li>
+                      <li><a href="garden.html" style = "color: #56ba79">Garden</a></li>
+                      
+                      <li><a href="rift.html" style = "color: #9878cc">The Rift</a></li>
+                  </ul>
+              </li>
+              <li class="menu-item">
+                <a href="#" style = "font-size:16px">Other</a>
+                <ul class="dropdown">
+                    <li><a href="mw.html" style = "color: #f08080">Mega Walls</a></li>
+                    <li><a href="lobbyfishing.html" style = "color: #80d0d0">Main Lobby Fishing</a></li>
+                    <li><a href="rng.html" style = "color: #80d0f0">Probability</a></li>
+                </ul>
+            </li>
+              
+          </ul>
+      </nav>
+    <!--span>&nbsp;•&nbsp;</span><a href = "index.html" style = "color:#808080">Home</a><span>&nbsp;•&nbsp;</span><a href = "hub.html" style = "color:#a0a0a0">SkyBlock Hub</a><span>&nbsp;•&nbsp;</span><a href = "dungeon.html" style = "color:#ab7b60">Dungeons</a><span>&nbsp;•&nbsp;</span><a href = "rift.html" style = "color:#9878cc">The Rift</a><span>&nbsp;•&nbsp;<a href = "fishing.html" style = "color:#78abde">Fishing</a><span>&nbsp;•&nbsp;</span><a href = "garden.html" style = "color:#56ba79">Garden</a><span>&nbsp;•&nbsp;</span-->
+    
+    <!--span>&nbsp;•&nbsp;</span><a href = "dwarven.html" style = "color:#70c0c0">Dwarven Mines</a><span>&nbsp;•&nbsp;</span><a href = "crystal.html" style = "color:#e070d0">Crystal Hollows</a><span>&nbsp;•&nbsp;</span-->
+    
+    <!--span>&nbsp;•&nbsp;</span><a href = "mw.html" style = "color:#f08080">Mega Walls</a><span>&nbsp;•&nbsp;<a href = "lobbyfishing.html" style = "color:#80d0d0">Main Lobby Fishing</a><span>&nbsp;•&nbsp;</span><a href = "rng.html" style = "color:#80d0f0">Probability</a><span>&nbsp;•&nbsp;</span-->
+    
   </div>
   
   </body>
@@ -33,9 +65,56 @@
     const nouns = ["love", "warmth", "courage", "awesomeness", "pride", "patience", "integrity", "dignity", "hope", "ambition", "spirit",];
     function setWord(){
       document.getElementById("word").innerText = nouns[Math.floor(nouns.length * Math.random())];
+      
       if (Math.floor(Math.random() * 8888) == 8) {
         document.getElementById("word").innerText = "a blessing";
         document.getElementById("word").style.color = "#ffa000";
       } 
+      try {
+        document.getElementById("islandname").innerText = pagedata[0];
+        if (pagedata[0].length > 17) {
+          document.getElementById("islandname").style.fontSize = "14px";
+          document.getElementById("islandname").style.bottom = "0";
+        }
+        else if (pagedata[0].length > 16) {
+          document.getElementById("islandname").style.fontSize = "16px";
+        }
+        else if (pagedata[0].length > 14) {
+          document.getElementById("islandname").style.fontSize = "17px";
+        }
+        
+        document.getElementById("islandname").style.color = pagedata[1];
+      } catch (Error) {
+        console.log("This page doesn't have header data. You should let adj know in the discord.")
+      }
+      window.addEventListener('resize', updateSizesNav());
+    }
+    
+    function updateSizesNav(){
+      console.log("Current width: " + window.innerWidth);
+      if (window.innerWidth >= 768 * (5/3)) {
+        try {
+          document.getElementById("islandname").innerText = pagedata[0];
+          if (pagedata[0].length > 17) {
+            document.getElementById("islandname").style.fontSize = "14px";
+            document.getElementById("islandname").style.bottom = "0";
+          }
+          else if (pagedata[0].length > 16) {
+            document.getElementById("islandname").style.fontSize = "16px";
+          }
+          else if (pagedata[0].length > 14) {
+            document.getElementById("islandname").style.fontSize = "17px";
+          }
+          
+          document.getElementById("islandname").style.color = pagedata[1];
+        } catch (Error) {
+          console.log("This page doesn't have header data. You should let adj know in the discord.")
+        }
+          
+        
+        } else {
+          document.getElementById("islandname").innerText = "";
+          
+        }
     }
   </script>

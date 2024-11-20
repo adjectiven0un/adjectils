@@ -19,9 +19,8 @@
         $("#nav").load("nav.html", function() { setWord(); }); 
       });
       </script>
-<div style = "text-align:center">
-  <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = riftheader>The Rift</span><br>
-</div>
+<header id = "nav" class = navblock></header>
+<div style = "margin-bottom: 30px;">&nbsp;</div>
   <section class = "flex_box_index" style = "flex-basis: min(calc(100% - 30px), max(756px, 70%)); ">
     <div class = "flex_index_row" style = "align-items:stretch;" id = "riftrow1">
         
@@ -99,12 +98,13 @@
     </div>
   </section><br>
 
-
-
-  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+  <div style = "margin-top:20px">&nbsp;</div>
+  <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
+  
   </body>
   <script src = "slayercalc.js"></script>
   <script>
+    pagedata = ["The Rift", "#9878cc"];
     window.addEventListener('resize', updateSizes());
     var weights = {
         "book_quantum": 2000,

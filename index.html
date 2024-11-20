@@ -24,7 +24,9 @@
   
   <div id = header style = "text-align: center; margin: 20px">
     <div id = "firework"></div>
-  <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>Home</span><br>
+
+    <header id = "nav" class = navblock></header>
+  <div style = "margin-bottom: 30px;">&nbsp;</div>
   <span class = "splash" id = "splashtext"></span>
   </div>
   <section class = "flex_box_index">
@@ -223,9 +225,11 @@
   </div>
 </section>
 <br>
-  <div id = "nav" style = "width:min(83.3%, 600px); margin: auto;" class = "hub_block"></div>
+<div style = "margin-top:20px">&nbsp;</div>
+      <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
   </body>
   <script>
+    pagedata = ["Home", "#808080"];
     var date = new Date();
     var timeofday = "morning";
     if (date.getHours() < 5 && date.getHours() > -1){

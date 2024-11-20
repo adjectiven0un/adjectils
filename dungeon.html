@@ -19,9 +19,8 @@
         $("#nav").load("nav.html", function() { setWord(); }); 
       });
       </script>
-  <div style = "text-align:center">
-    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = cataheader>Dungeons</span><br>
-  </div>
+  <header id = "nav" class = navblock></header>
+  <div style = "margin-bottom: 30px;">&nbsp;</div>
   <br>
   <div style = "text-align:center">
   <label>Username: <input type = "text" id = "nameinput" onchange = updateUser(value)>&nbsp;</label><button onclick = updateUser(nameinput.value) style = "width: 80px;  text-align:center">Refresh ⟳</button><br>
@@ -226,11 +225,12 @@
         </div>
     </div>
   </section>
-
-  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin:auto" class = "hub_block"></div>
+  <div style = "margin-top:20px">&nbsp;</div>
+  <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
   </body>
   <script src = "apireader.js"></script>
   <script>
+    pagedata = ["Dungeons", "#896b46"];
     const classxps = [50, 75, 110, 160, 230, 330, 470, 670, 950, 1340, 1890, 2665, 3760, 5260, 7380, 10300, 14400, 20000, 27600, 38000, 52500, 71500, 97000, 132000, 180000, 243000, 328000, 445000, 600000, 800000, 1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000, 19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000, 200000000];
     var classes = ["archer", "berserk", "healer", "mage", "tank"];
     var classesabbrev = ["arch", "bers", "heal", "mage", "tank"];
