@@ -43,12 +43,12 @@ var nucweights = {
     fl_jasper: 5,
     divan_fragment: 6000,
     arma_egg: 5000,
-    oil: 10000,
+    oil: 8000,
     helix: 4000,
     crystal_ruby: 2500,
     crystal_jasper: 2500,
     pick2k: 10000,
-    bombs: 12000,
+    bombs: 10000,
     jaderald: 1450,
     compass: 500,
     treasurite5: 2000,
@@ -61,6 +61,8 @@ var nucweights = {
     quick_claw: 50,
     essence_gold: 750,
     essence_diamond: 750,
+    gemstone_grahams: 1450,
+    alloy: 17,
 }
 
 var totalnucweight = 300745;
