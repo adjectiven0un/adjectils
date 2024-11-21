@@ -49,6 +49,7 @@ var nucweights = {
     crystal_jasper: 2500,
     pick2k: 10000,
     bombs: 10000,
+    book_lapidary: 4000,
     jaderald: 1450,
     compass: 500,
     treasurite5: 2000,
