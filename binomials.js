@@ -40,17 +40,29 @@ function nCr(n, r) {
     }
     return ret;
 }
+function logfactorial(x) {
+    let result = 0;
+    for (let i = 2; i <= x; i++) {
+        result += Math.log(i);
+    }
+    return result;
+}
+
+function lognCr(n, r) {
+    if (r > n) return -Infinity;
+    return logfactorial(n) - logfactorial(r) - logfactorial(n - r);
+}
+
 //Given trials n and probability p, determine the chance that p occurs at least once.
 function binomial(n, p, a){
-    var ret = 0;
-    var cumulativeProb = 0;
-    for (var i = Number(a); i <= Number(n); i++){
-        var prob = nCr(n, i) * (p ** i) * ((1 - p) ** (n - i));
-        cumulativeProb += prob;
-        ret += prob;
+    var ret = -Infinity;
+    var cap = Math.min(n, 999);
+    for (var i = Number(a); i <= Number(cap); i++){
+        var prob = lognCr(n, i) + i * Math.log(p) + (n - i) * Math.log(1 - p);
+        ret = Math.log(Math.exp(ret) + Math.exp(prob));
     }
     
-    return ret;
+    return Math.exp(ret);
 }
 
 //Given trials n and probability p, determine the chance that p occurs between a and b times.
