@@ -7,7 +7,7 @@ function factorial(num){
     return ret;
 }
 //Slightly less than O(n) runtime complexity
-function nCr(n, r){
+function nCrOutdated(n, r){
     if (r > n){
         return -1;
     }
@@ -27,19 +27,26 @@ function nCr(n, r){
     }
     return ret;
 }
+function nCr(n, r) {
+    if (r > n) {
+        console.log("Invalid nCr input!");
+        return 0;
+    }
+    r = Math.min(r, n - r);
+    let ret = 1;
+    for (let i = 0; i < r; i++) {
+        ret *= (n - i);
+        ret /= (i + 1);
+    }
+    return ret;
+}
 //Given trials n and probability p, determine the chance that p occurs at least once.
 function binomial(n, p, a){
     var ret = 0;
     var cumulativeProb = 0;
-    //var tolerance = 0.00000000000001;
     for (var i = Number(a); i <= Number(n); i++){
         var prob = nCr(n, i) * (p ** i) * ((1 - p) ** (n - i));
         cumulativeProb += prob;
-        /*
-        if (prob < tolerance) {
-            break;
-        }
-        */
         ret += prob;
     }
     
