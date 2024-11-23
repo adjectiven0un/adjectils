@@ -186,12 +186,19 @@
             milestone.style.marginTop = "16px";
             milestone.className = "flex_full_row";
             milestone.id = key + "_milestone";
+            
             var remaining = document.createElement("span");
             remaining.id = key + "_remaining";
+            remaining.className = "flex_full_row";
+            var remainingtotal = document.createElement("span");
+            remainingtotal.id = key + "_remainingtotal";
+            remainingtotal.className = "flex_full_row";
             var timeremaining = document.createElement("span");
             timeremaining.id = key + "_timeremaining";
+            timeremaining.className = "flex_full_row";
             var timeremainingmax = document.createElement("span");
             timeremainingmax.id = key + "_timeremainingmax";
+            timeremainingmax.className = "flex_full_row";
             box.appendChild(title);
             box.appendChild(count);
             box.appendChild(fortunelabel);
@@ -202,6 +209,7 @@
             box.appendChild(bonus);
             box.appendChild(milestone);
             box.appendChild(remaining);
+            box.appendChild(remainingtotal);
             box.appendChild(timeremaining);
             box.appendChild(timeremainingmax);
 
@@ -416,9 +424,16 @@
               }
               
             }
+            let tomax = 0;
+            for (let i = 45; i > milestone; i--) {
+              tomax += crops[key].milestones[i];
+              console.log("Milestone count: " + crops[key].milestones[i])
+            }
+            tomax += remainingcollection;
             
             document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
             document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + remainingcollection.toLocaleString();
+            document.getElementById(key + "_remainingtotal").innerText = "Crops to max milestone: " + tomax.toLocaleString();
             document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(remainingcollection/cps));
             document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
         } 
@@ -477,7 +492,7 @@
             "copper": 0,
           }
           var compostermaxnpc = 0
-          for (var i = upgradelevel; i < 25; i++) {
+          for (let i = upgradelevel; i < 25; i++) {
             compostermaxnpc += upgrades[key][upgrades[key].items[i]].cost * upgrades[key].counts[i];
             
             compostermaxcrops[upgrades[key][upgrades[key].items[i]].target] += upgrades[key].counts[i];
