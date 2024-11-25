@@ -207,7 +207,7 @@ var translations = {
     "PERFECT_CHISEL": 86400,
     //guessed
     "DIVAN_PENDANT": 604800,
-    "PERFECT_PLATE": 21600,
+    "PERFECT_PLATE": 1800,
     "SKELETON_KEY": 1800,
     "POWER_RELIC": 28800,
     "FRIGID_HUSK": 36000,
