@@ -177,8 +177,8 @@
       <div style = "padding-top: 20px;">
         <span class = "header flex_full_row" style = "padding-bottom: 20px;">Special Events</span>
         <label  class = "flex_full_row" for = "eventmayor" style = "padding-bottom: 20px;" onchange = "generateSchedule()">Mayor: 
-          <select id = "eventmayor" style = "margin-right: 20px;">
-            <option value = "0">Other</option>
+          <select id = "eventmayor" style = "margin-right: 20px;" >
+            <option value = 0>Other</option>
             <option value = "Marina">Marina</option>
             <option value = "Diaz">Diaz</option>
             <option value = "Cole">Cole</option>
@@ -191,17 +191,22 @@
               <span class = "switch"></span>
             </label>
             </span>
-            <label class = "flex_full_row" for = "specnotibefore" style = "padding-bottom:20px;">Notify me
-              <select id = "specnotibefore" style = "margin-left: 10px; margin-right: 10px">
-                <option value = 60>1</option>
-                <option value = 120>2</option>
-                <option value = 180>3</option>
-                <option value = 240>4</option>
-                <option value = 300>5</option>
-                <option value = 600>10</option>
-                <option value = 900>15</option>
-              </select>
-              minutes before Mayor Events.</label>
+              <label class = "flex_full_row" for = "specnotibefore">Notify me
+                <select id = "specnotibefore" style = "margin-left: 10px; margin-right: 10px">
+                  <option value = 60>1</option>
+                  <option value = 120>2</option>
+                  <option value = 180>3</option>
+                  <option value = 240>4</option>
+                  <option value = 300>5</option>
+                  <option value = 600>10</option>
+                  <option value = 900>15</option>
+                </select>
+                minutes before Mayor Events
+                </label>
+            
+              <label class = "flex_full_row" style = "padding-bottom:20px;">for Year 
+                <input type = "number" style = "margin-left: 10px; display: inline-block" id = mayoryear onchange = "generateSchedule()">
+              .</label>
         <table id = "schedulebox" style = "width:100%">
 
 
@@ -307,6 +312,9 @@
           var currentmayor = mayordata.mayor.name;
           document.getElementById("currentmayor").innerText = currentmayor;
           eventmayor.value = currentmayor;
+          if (eventmayor.value == "") {
+            eventmayor.value = "0";
+          }
           for (var i = 0; i < mayordata.mayor.perks.length; i++){
             var perk = document.createElement("span");
             perk.textContent = mayordata.mayor.perks[i].name + ": " + mayordata.mayor.perks[i].description.replace(/§./g, "") + "\n";
@@ -725,6 +733,14 @@
     var eventname = "";
     var targetyear = "";
     function generateSchedule() {
+      
+      if (mayoryear.value > 10000){
+        document.getElementById("mayoryear").value = 10000;
+      }
+      if (mayoryear.value < year + 1 || isNaN(mayoryear.value) || mayoryear.value == ""){
+          document.getElementById("mayoryear").value = year + 1;
+      }
+      var yeardifference = document.getElementById("mayoryear").value - year;
       clearInterval(events2interval);
       nothingtoseehere.hidden = true;
       nothingtoseehere2.hidden = true;
@@ -763,12 +779,12 @@
       }
       
       var newyearstamp = 0;
-      if ((Date.now()) - ((initial + year * yearlen) * 1000) > ((2 * monthlen + 26 * daylen) * 1000)){
-         newyearstamp = new Date((initial + year * yearlen) * 1000);
-         targetyear = year;
+      if ((Date.now()) - ((initial + (year) * yearlen) * 1000) > ((2 * monthlen + 26 * daylen) * 1000)){
+         newyearstamp = new Date((initial + (year) * yearlen) * 1000);
+         targetyear = (year + yeardifference);
       } else {
-         newyearstamp = new Date((initial + (year - 1) * yearlen) * 1000);
-         targetyear = year - 1;
+         newyearstamp = new Date((initial + ((year) - 1) * yearlen) * 1000);
+         targetyear = (year + yeardifference) - 1;
       }
       
       
