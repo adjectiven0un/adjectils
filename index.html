@@ -317,7 +317,10 @@
           }
           for (var i = 0; i < mayordata.mayor.perks.length; i++){
             var perk = document.createElement("span");
+           
             perk.textContent = mayordata.mayor.perks[i].name + ": " + mayordata.mayor.perks[i].description.replace(/§./g, "") + "\n";
+            
+            
             perk.style.display = "flex";
             perk.style.flexBasis = "100%";
             var electiontd = document.createElement("td");
@@ -328,6 +331,20 @@
             electiontr.appendChild(electiontd);
             electiontable.appendChild(electiontr);
           }
+            var perk = document.createElement("span");
+           
+            perk.textContent = "✰ " + mayordata.mayor.minister.perk.name + ": " + mayordata.mayor.minister.perk.description.replace(/§./g, "") + "\n";
+            
+            
+            perk.style.display = "flex";
+            perk.style.flexBasis = "100%";
+            var electiontd = document.createElement("td");
+            electiontd.appendChild(perk);
+            var electiontr = document.createElement("tr");
+            electiontr.style.display = "flex";
+            electiontr.style.flexBasis = "100%";
+            electiontr.appendChild(electiontd);
+            electiontable.appendChild(electiontr);
           
           
         } catch (NetworkError){
@@ -415,7 +432,12 @@
               perktd1.style.paddingRight = "20px";
               var perktd2 = document.createElement("td");
               perktd1.innerText = curdata.candidates[indexswaps[i]].perks[j].name;
-              perktd2.innerText = curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
+              if (curdata.candidates[indexswaps[i]].perks[j].minister) {
+                perktd2.innerText = "✰ " + curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
+              } else {
+                perktd2.innerText = curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
+              }
+              
               perkrow1.appendChild(perktd1);
               perkrow1.appendChild(perktd2);
               mayorperktable.appendChild(perkrow1);
