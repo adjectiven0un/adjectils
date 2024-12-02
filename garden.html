@@ -443,6 +443,11 @@
             upgradelevel = 0;
           }
           document.getElementById(key + "_level").innerText = upgradelevel;
+          if (upgradelevel == 25) {
+            document.getElementById(key + "_level").style.color = "#ffaa00";
+          } else {
+            document.getElementById(key + "_level").style.color = "#c0c0c0";
+          }
           if (upgradelevel >= 7 && upgradelevel < 25) {
             var coststring = upgrades[key].counts[upgradelevel] + "× " + croptranslations[upgrades[key][upgrades[key].items[upgradelevel]].target] + ", " + upgradesuniversal[upgradelevel + 1].count + "× " + (croptranslations[upgradesuniversal[upgradelevel + 1].crop] + ", " + (upgradesuniversal[upgradelevel + 1].copper).toLocaleString() + " Copper");
           } else if (upgradelevel < 7) {
@@ -526,14 +531,20 @@
                 finalstring += composterothercosts[key].toLocaleString() + "× " + croptranslations[key] + "\n";
             }
           }
-          
+          if (finalstring == "") {
+            finalstring = "(None)";
+          }
           document.getElementById(key + "_max_cost").innerText = finalstring;
+          
           if (key == "cost_reduction") {
             for (let key in composterothercoststotal) {
               if (composterothercoststotal[key] != 0) {
                 console.log((composterothercoststotal[key] + "× " + croptranslations[key]));
                   finalstring2 += composterothercoststotal[key].toLocaleString() + "× " + croptranslations[key] + "\n";
               }
+            }
+            if (finalstring2 == "") {
+              finalstring2 = "(None)";
             }
             document.getElementById("total_max_cost").innerText = finalstring2;
             let totalnpc = 0;
