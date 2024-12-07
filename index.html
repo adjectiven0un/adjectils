@@ -759,8 +759,8 @@
       if (mayoryear.value > 10000){
         document.getElementById("mayoryear").value = 10000;
       }
-      if (mayoryear.value < year + 1 || isNaN(mayoryear.value) || mayoryear.value == ""){
-          document.getElementById("mayoryear").value = year + 1;
+      if (mayoryear.value < year || isNaN(mayoryear.value) || mayoryear.value == ""){
+          document.getElementById("mayoryear").value = year;
       }
       var yeardifference = document.getElementById("mayoryear").value - year;
       clearInterval(events2interval);
