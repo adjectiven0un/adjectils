@@ -760,7 +760,7 @@
         document.getElementById("mayoryear").value = 10000;
       }
       if (mayoryear.value < year || isNaN(mayoryear.value) || mayoryear.value == ""){
-          document.getElementById("mayoryear").value = year;
+          document.getElementById("mayoryear").value = year + 1;
       }
       var yeardifference = document.getElementById("mayoryear").value - year;
       clearInterval(events2interval);
@@ -843,6 +843,11 @@
         schedulebox.appendChild(eventspan);
 
       }
+      if (activemayor == "Cole") {
+          for (let i = 0; i < times.length; i++) {
+            times[i] += 37200000;
+          }
+        }
       updateEvents2();
       events2interval = setInterval(updateEvents2, 1000);
     }
@@ -854,6 +859,7 @@
       try {
         let timething = Date.now();
         var hiddenevents = 0;
+        
         for (let i = 0; i < eventcount; i++) {
           
           let targetspan = document.getElementById("timer" + i);
@@ -862,11 +868,12 @@
           if (i >= eventcount) {
             document.getElementById("eventspan" + i).hidden = true;
           }
+          console.log("Time" + i + ": " + times[i] + " Now: " + timething);
           if (times[i] - timething > 0) {
             if (activemayor != "Cole") {
               targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
             } else {
-              targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000) + monthlen);
+              targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
             }
             
             if (Math.floor((times[i] - timething)/1000) == specnotibefore.value && specnotif.checked == true) {
