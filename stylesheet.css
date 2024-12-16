@@ -818,3 +818,18 @@ header {
 }
 
   
+@keyframes fadeColor {
+  0% {
+    color: #c0c0c0;
+  }
+  50% {
+    color: #ff0000;
+  }
+  100% {
+    color: #c0c0c0;
+  }
+}
+
+.fadeRed {
+  animation: fadeColor 3s infinite;
+}

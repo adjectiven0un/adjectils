@@ -207,20 +207,35 @@
             </table>
             <table style = "width:100%">
                 <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "10000" style = "width:60px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
-                <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
-                <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
-                <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
-                <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
-                <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Archer complete: <sup style = "font-size:8px"><span class = tip id = "archtip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Berserk complete: <sup style = "font-size:8px"><span class = tip id = "berstip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Healer complete: <sup style = "font-size:8px"><span class = tip id = "healtip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "healruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Mage complete: <sup style = "font-size:8px"><span class = tip id = "magetip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "mageruns" class = "flex_align_right"></span></td></tr>
+                <tr><td><span class = "flex_full_row">Until Tank complete: <sup style = "font-size:8px"><span class = tip id = "tanktip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "tankruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until Class Average 50: </span></td><td><span id = "totalruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Copyable text: </span></td><td class = "flex_align_right"><span id = "copynotif" class = "fadebox" style = "opacity:0">Copied!&nbsp;</span><button onclick = copyText() style = "width: 50px">Copy!</button></td></tr>
             </table>
 
         </div>
     </div>
-    <!--div class = "flex_index_box" id = "lootbox">
-        hi
-    <div-->
+    <div class = "flex_index_row" style = "width:95%; align-items: stretch; visibility: hidden  ;" id = "catarow">
+        <div class = "flex_cata_box" id = "floorstatbox" style = "width:105%;">
+            <span class = "header">Floor Stats</span>
+
+            <!--Floor selector goes here -->
+
+            <table style = "align-items:flex-end">
+                <tr><td><span class = "flex_full_row">Personal Best (S+):&nbsp;</span></td><td class = "tdalignright"><span id = "pbsplus">0m 0s</span></td>
+                <tr><td><span class = "flex_full_row">Personal Best (S):&nbsp;</span></td><td class = "tdalignright"><span id = "pbs">0m 0s</span></td>
+                <tr><td><span class = "flex_full_row">Milestone Completions:&nbsp;</span></td><td class = "tdalignright"><span id = "ms">29137819638238468723</span></td>
+                
+                
+                
+            </table>
+            
+
+        <div>
+    </div>
 
         </div>
     </div>
@@ -326,7 +341,12 @@
             fasttrack = false;
             localStorage.setItem("storedname", name);
             //console.log("Set item " + localStorage.getItem("storedname"));
-            localStorage.setItem("storeddata", JSON.stringify(data)); 
+            try {
+                localStorage.setItem("storeddata", JSON.stringify(data.player.profiles[profileid.value])); 
+            } catch {
+                document.getElementById("status").innerText = "Data will not be cached, profile size is too large";
+            }
+            
             //console.log("Set item " + localStorage.getItem("storeddata"));
             try {
                 archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.toxophilite) * 0.02;
@@ -367,7 +387,6 @@
             return 0;
         }
         return input;
-        console.log("Something returned undefined.");
     }
     //Is advanced mode on?
     //Note: Always on by default pending review.
@@ -454,7 +473,7 @@
             
             
             //Set the levels of the classes
-            
+            var classlevels = [0, 0, 0, 0, 0];
             for (var i = 0; i < 5; i++){
                 var xp = dungeons.player_classes[classes[i]].experience;
                 if (overmax == 0) {
@@ -503,6 +522,7 @@
                             } else {
                                 document.getElementById(classesabbrev[i] + "percent").innerText = abbreviate(xp) + "/" + abbreviate(classxps[j]);
                             }
+                            classlevels[i] = j;
                             break;
                         }
                         j++;
@@ -618,6 +638,15 @@
                 runs = runs.toLocaleString();
                 document.getElementById(classesabbrev[i] + "runs").innerText = runs.toLocaleString();
                 total += runstoca50[i];
+                
+                console.log("Testing class level: " + classlevels);
+                console.log("Testing rtca: " + runstoca50);
+                if (runstoca50[i] == 0 && classlevels[i] < 50) {
+                    document.getElementById(classesabbrev[i] + "tip").className = "fadeRed tip";
+                } else {
+                    document.getElementById(classesabbrev[i] + "tip").className = "tip";
+                }
+                
             }
             if (total != 0){
                 document.getElementById("totalruns").innerText = total.toLocaleString();
