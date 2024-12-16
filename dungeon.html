@@ -342,7 +342,7 @@
             localStorage.setItem("storedname", name);
             //console.log("Set item " + localStorage.getItem("storedname"));
             try {
-                localStorage.setItem("storeddata", JSON.stringify(data.player.profiles[profileid.value])); 
+                localStorage.setItem("storeddata", JSON.stringify(data)); 
             } catch {
                 document.getElementById("status").innerText = "Data will not be cached, profile size is too large";
             }
