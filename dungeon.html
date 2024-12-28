@@ -568,9 +568,9 @@
             }
             var cataperrun = 0;
             if (cataexpert.value > 0) {
-                var cataperrun = selectedfloor.value * (1.5 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
+                var cataperrun = selectedfloor.value * ((1 + (0.02 * (maxcomps - 1))) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
             } else {
-                var cataperrun = selectedfloor.value * (1.5 + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
+                var cataperrun = selectedfloor.value * ((1 + (0.02 * (maxcomps - 1)))  + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
             }
             
             cataperrun *= global.value;
@@ -580,11 +580,11 @@
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
-                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(archboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                arch: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                bers: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                heal: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                mage: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                tank: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
             };
             console.log("CLPR: " + classperrun["arch"]);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
