@@ -73,21 +73,21 @@
                     <div id = "floorselectdiv">
                     <label>Floor:
                     <select id = "selectedfloor" onchange = updateCata(nameinput.value)>
-                        <option value = 324000>M7</option>
-                        <option value = 108000>M6</option>
-                        <option value = 75600>M5</option>
-                        <option value = 59400>M4</option>
-                        <option value = 36800>M3</option>
-                        <option value = 21600>M2</option>
-                        <option value = 16200>M1</option>
-                        <option value = 30240>F7</option>
-                        <option value = 5270.4>F6</option>
-                        <option value = 2592>F5</option>
-                        <option value = 1533.6>F4</option>
-                        <option value = 604.8>F3</option>
-                        <option value = 237.6>F2</option>
-                        <option value = 118.8>F1</option>
-                        <option value = 59.4>Entrance</option>
+                        <option value = 300000>M7</option>
+                        <option value = 100000>M6</option>
+                        <option value = 70000>M5</option>
+                        <option value = 55000>M4</option>
+                        <option value = 35000>M3</option>
+                        <option value = 20000>M2</option>
+                        <option value = 15000>M1</option>
+                        <option value = 28000>F7</option>
+                        <option value = 4880>F6</option>
+                        <option value = 2400>F5</option>
+                        <option value = 1420>F4</option>
+                        <option value = 560>F3</option>
+                        <option value = 220>F2</option>
+                        <option value = 110>F1</option>
+                        <option value = 55>Entrance</option>
                     </select>
                     </label>
                     </div>
@@ -116,6 +116,16 @@
                     </select>
                     </label>
                     </div>
+                    <div id = "scarfselectdiv">
+                        <label>Scarf accessory:
+                        <select id = "grimoire" onchange = updateCata(nameinput.value)>
+                            <option value = 0.06>Grimoire (6%)</option>
+                            <option value = 0.04>Thesis (4%)</option>
+                            <option value = 0.02>Studies (2%)</option>
+                            <option value = 0.0>None</option>
+                        </select>
+                        </label>
+                        </div>
                     <div id = "globalselectdiv">
                         <label>Global boost:
                         <select id = "global" onchange = updateCata(nameinput.value)>
@@ -143,12 +153,12 @@
                     <td>
                         <label>Toxophilite (Archer XP Boost):</label></td>
                         <td> <select id = "archboost" value = "1.1" onchange = updateCata(nameinput.value)>
-                            <option value = 1.1>V (10%)</option>
-                            <option value = 1.08>IV (8%)</option>
-                            <option value = 1.06>III (6%)</option>
-                            <option value = 1.04>II (4%)</option>
-                            <option value = 1.02>I (2%)</option>
-                            <option value = 1>0 (0%)</option>
+                            <option value = 0.1>V (10%)</option>
+                            <option value = 0.08>IV (8%)</option>
+                            <option value = 0.06>III (6%)</option>
+                            <option value = 0.04>II (4%)</option>
+                            <option value = 0.02>I (2%)</option>
+                            <option value = 0>0 (0%)</option>
                         </select>
                     </td>
                 </tr>   
@@ -156,12 +166,12 @@
                     <td>
                         <label>Unbridled Rage (Berserk XP Boost):</label></td>
                         <td> <select id = "bersboost" value = "1.1" onchange = updateCata(nameinput.value)>
-                            <option value = 1.1>V (10%)</option>
-                            <option value = 1.08>IV (8%)</option>
-                            <option value = 1.06>III (6%)</option>
-                            <option value = 1.04>II (4%)</option>
-                            <option value = 1.02>I (2%)</option>
-                            <option value = 1>0 (0%)</option>
+                            <option value = 0.1>V (10%)</option>
+                            <option value = 0.08>IV (8%)</option>
+                            <option value = 0.06>III (6%)</option>
+                            <option value = 0.04>II (4%)</option>
+                            <option value = 0.02>I (2%)</option>
+                            <option value = 0>0 (0%)</option>
                         </select>
                     </td>
                 </tr>
@@ -169,12 +179,12 @@
                     <td>
                         <label>Heart of Gold (Healer XP Boost):</label></td>
                         <td> <select id = "healboost" value = "1.1" onchange = updateCata(nameinput.value)>
-                            <option value = 1.1>V (10%)</option>
-                            <option value = 1.08>IV (8%)</option>
-                            <option value = 1.06>III (6%)</option>
-                            <option value = 1.04>II (4%)</option>
-                            <option value = 1.02>I (2%)</option>
-                            <option value = 1>0 (0%)</option>
+                            <option value = 0.1>V (10%)</option>
+                            <option value = 0.08>IV (8%)</option>
+                            <option value = 0.06>III (6%)</option>
+                            <option value = 0.04>II (4%)</option>
+                            <option value = 0.02>I (2%)</option>
+                            <option value = 0>0 (0%)</option>
                         </select>
                     </td>
                 </tr>
@@ -182,12 +192,12 @@
                     <td>
                         <label>Cold Efficiency (Mage XP Boost):</label></td>
                         <td> <select id = "mageboost" value = "1.1" onchange = updateCata(nameinput.value)>
-                            <option value = 1.1>V (10%)</option>
-                            <option value = 1.08>IV (8%)</option>
-                            <option value = 1.06>III (6%)</option>
-                            <option value = 1.04>II (4%)</option>
-                            <option value = 1.02>I (2%)</option>
-                            <option value = 1>0 (0%)</option>
+                            <option value = 0.1>V (10%)</option>
+                            <option value = 0.08>IV (8%)</option>
+                            <option value = 0.06>III (6%)</option>
+                            <option value = 0.04>II (4%)</option>
+                            <option value = 0.02>I (2%)</option>
+                            <option value = 0>0 (0%)</option>
                         </select>
                     </td>
                 </tr> 
@@ -195,12 +205,12 @@
                     <td>
                         <label>Diamond in the Rough (Tank XP Boost):</label></td>
                         <td> <select id = "tankboost" value = "1.1" onchange = updateCata(nameinput.value)>
-                            <option value = 1.1>V (10%)</option>
-                            <option value = 1.08>IV (8%)</option>
-                            <option value = 1.06>III (6%)</option>
-                            <option value = 1.04>II (4%)</option>
-                            <option value = 1.02>I (2%)</option>
-                            <option value = 1>0 (0%)</option>
+                            <option value = 0.1>V (10%)</option>
+                            <option value = 0.08>IV (8%)</option>
+                            <option value = 0.06>III (6%)</option>
+                            <option value = 0.04>II (4%)</option>
+                            <option value = 0.02>I (2%)</option>
+                            <option value = 0>0 (0%)</option>
                         </select>
                     </td>
                 </tr> 
@@ -349,34 +359,34 @@
             
             //console.log("Set item " + localStorage.getItem("storeddata"));
             try {
-                archboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.toxophilite) * 0.02;
+                archboost.value = notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.toxophilite) * 0.02;
             } catch {
                 console.log("Toxophilite defaulted");
-                archboost.value = 1;
+                archboost.value = 0;
             }
             try {
-                bersboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.unbridled_rage) * 0.02;
+                bersboost.value = notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.unbridled_rage) * 0.02;
             } catch {
                 console.log("Unbridled Rage defaulted");
-                bersboost.value = 1;
+                bersboost.value = 0;
             }
             try {
-                healboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.heart_of_gold) * 0.02;
+                healboost.value = notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.heart_of_gold) * 0.02;
             } catch {
                 console.log("Heart of Gold defaulted");
-                healboost.value = 1;
+                healboost.value = 0;
             }
             try {
-                mageboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.cold_efficiency) * 0.02;
+                mageboost.value = notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.cold_efficiency) * 0.02;
             } catch {
                 console.log("Cold Efficiency defaulted");
-                mageboost.value = 1;
+                mageboost.value = 0;
             }
             try {
-                tankboost.value = 1 + notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.diamond_in_the_rough) * 0.02;
+                tankboost.value = notUndefined(data.profiles[profileid.value].members[UUID].player_data.perks.diamond_in_the_rough) * 0.02;
             } catch {
                 console.log("Diamond in the Rough defaulted");
-                tankboost.value = 1;
+                tankboost.value = 0;
             }
             
 
@@ -549,41 +559,34 @@
                 Math.max(569809640 - dungeons.player_classes[classes[3]].experience, 0),
                 Math.max(569809640 - dungeons.player_classes[classes[4]].experience, 0),
             ]   
-            //Sorts arrays into decreasing order - if i ever get back to optimizing this, i'll use this
-            /*
-            for (var i = 1; i < 5; i++){
-                var key1 = classxpsleft[i];
-                var key2 = classesabbrev[i];
-                var key3 = classes[i];
-                var j = i - 1;
-                while (j >= 0 && classxpsleft[j] < key1){
-                    classxpsleft[j + 1] = classxpsleft[j];
-                    classesabbrev[j + 1] = classesabbrev[j];
-                    classes[j + 1] = classes[j];
-                    j--;
-                }
-                classxpsleft[j + 1] = key1;
-                classesabbrev[j + 1] = key2;
-                classes[j + 1] = key3;
+            //I will add integration with the API eventually
+            maxcomps = 76;
+            if (selectedfloor.value == 28000 || selectedfloor.value == 300000) {
+                maxcomps = 26;
+            } else if (selectedfloor.value == 4880) {
+                maxcomps = 51;
             }
-            */
-
-            //Solve the class average problem
-            //I could probably merge this with the previous loop somehow but im too lazy right now
-            var cataperrun = selectedfloor.value * 1.38888888;
-            cataperrun *= (1 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value));
+            var cataperrun = 0;
+            if (cataexpert.value > 0) {
+                var cataperrun = selectedfloor.value * (1.5 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
+            } else {
+                var cataperrun = selectedfloor.value * (1.5 + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
+            }
+            
             cataperrun *= global.value;
             cataperrun *= mayor.value;
             cataperrun = Math.ceil(cataperrun);
+            console.log("CPR: " + cataperrun);
+
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
-                arch: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(archboost.value)) * global.value * mayor.value,
-                bers: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(bersboost.value)) * global.value * mayor.value,
-                heal: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(healboost.value)) * global.value * mayor.value,
-                mage: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(mageboost.value)) * global.value * mayor.value,
-                tank: selectedfloor.value * ((1 + parseFloat(hecatomb.value)/1.98) * parseFloat(tankboost.value)) * global.value * mayor.value,
+                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(archboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value) ) + parseFloat(grimoire.value)) * global.value * mayor.value,
             };
-            
+            console.log("CLPR: " + classperrun["arch"]);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
             /* 
@@ -639,8 +642,6 @@
                 document.getElementById(classesabbrev[i] + "runs").innerText = runs.toLocaleString();
                 total += runstoca50[i];
                 
-                console.log("Testing class level: " + classlevels);
-                console.log("Testing rtca: " + runstoca50);
                 if (runstoca50[i] == 0 && classlevels[i] < 50) {
                     document.getElementById(classesabbrev[i] + "tip").className = "fadeRed tip";
                 } else {
