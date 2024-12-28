@@ -568,9 +568,9 @@
             }
             var cataperrun = 0;
             if (cataexpert.value > 0) {
-                var cataperrun = selectedfloor.value * ((1 + (0.02 * (maxcomps - 1))) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
+                var cataperrun = selectedfloor.value * ((1.1 + (0.02 * (maxcomps - 1))) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
             } else {
-                var cataperrun = selectedfloor.value * ((1 + (0.02 * (maxcomps - 1)))  + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
+                var cataperrun = selectedfloor.value * ((1.1 + (0.02 * (maxcomps - 1)))  + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
             }
             
             cataperrun *= global.value;
