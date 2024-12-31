@@ -331,13 +331,20 @@
             electiontr.appendChild(electiontd);
             electiontable.appendChild(electiontr);
           }
-            var perk = document.createElement("span");
+            try {
+              var perk = document.createElement("span");
            
-            perk.textContent = "✰ " + mayordata.mayor.minister.perk.name + ": " + mayordata.mayor.minister.perk.description.replace(/§./g, "") + "\n";
+              perk.textContent = "✰ " + mayordata.mayor.minister.perk.name + ": " + mayordata.mayor.minister.perk.description.replace(/§./g, "") + "\n";
+              
+              
+              perk.style.display = "flex";
+              perk.style.flexBasis = "100%";
+            } catch {
+              var perk = document.createElement("span");
+              perk.style.display = "flex";
+              perk.style.flexBasis = "100%";
+            }
             
-            
-            perk.style.display = "flex";
-            perk.style.flexBasis = "100%";
             var electiontd = document.createElement("td");
             electiontd.appendChild(perk);
             var electiontr = document.createElement("tr");
