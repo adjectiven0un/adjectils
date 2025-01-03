@@ -567,14 +567,15 @@
                 maxcomps = 51;
             }
             var cataperrun = 0;
-            if (cataexpert.value > 0) {
-                var cataperrun = selectedfloor.value * ((1.1 + (0.02 * (maxcomps - 1)) + (maxcomps - 1)/1000 - 0.05) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50 + 0.002) * (maxcomps - 1)));
+            if (cataexpert.value > 0 && mayor.value > 1) {
+                cataperrun = selectedfloor.value * (1.05 + ((mayor.value - 1) + (maxcomps - 1)/100) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.023 + parseFloat(hecatomb.value)/50))
+            } else if (cataexpert.value > 0) {
+                cataperrun = selectedfloor.value * (1.05 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.023 + parseFloat(hecatomb.value)/50))
             } else {
-                var cataperrun = selectedfloor.value * ((1.1 + (0.02 * (maxcomps - 1)) + (maxcomps - 1)/1000 - 0.05)  + parseFloat(hecatomb.value) + ((parseFloat(hecatomb.value)/50) * (maxcomps - 1)));
+                cataperrun = selectedfloor.value * (1.05 + parseFloat(hecatomb.value) + (maxcomps - 1) * (0.021 + parseFloat(hecatomb.value)/50))
             }
             
             cataperrun *= global.value;
-            cataperrun *= mayor.value;
             cataperrun = Math.ceil(cataperrun);
             console.log("CPR: " + cataperrun);
 
