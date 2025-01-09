@@ -74,8 +74,9 @@
         
       </div>
     </section>
-    <div style = "margin-top:20px">&nbsp;</div>
-      <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
+    <div style = "margin-top:20px;">&nbsp;</div>
+      <span id = "footerspan" style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
+      <span class = "marquee"><span class = "marquee-content" id = "footermarquee" style = "visibility:hidden; position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span></span>
     </body>
     <script>
       pagedata = ["Garden", "#56ba79"];
@@ -215,8 +216,27 @@
 
             gardenrow.appendChild(box);
           }
+          var totalbox = document.createElement("div");
+          totalbox.id = "croptotalbox";
+          totalbox.className = "flex_index_box";
+          totalbox.style.width = "88.5%";
           
-          
+          var title = document.createElement("span");
+          title.className = "header flex_full_row";
+          title.innerText = "Total";
+          totalbox.appendChild(title);
+          var milestone = document.createElement("span");
+            milestone.style.marginTop = "16px";
+            milestone.className = "flex_full_row";
+            milestone.id = "total_milestone";
+          totalbox.appendChild(milestone);
+
+          var timeremainingmax = document.createElement("span");
+            timeremainingmax.id = "total_timeremainingmax";
+            timeremainingmax.className = "flex_full_row";
+          totalbox.appendChild(timeremainingmax);
+
+          gardenrow.appendChild(totalbox);
           for (let key in upgrades) {
             var upgradediv = document.createElement("div");
             upgradediv.className = "flex_index_box";
@@ -307,7 +327,11 @@
             totalbox.appendChild(text9);
 
         }
+        var milestonetotaltotal = 0;
+          var timetotaltotal = 0;
         function updateCrops() {
+          milestonetotaltotal = 0;
+          timetotaltotal = 0;
           if (document.getElementById("farmingfortune").value > 4000){
             document.getElementById("farmingfortune").value = 4000;
           }
@@ -328,6 +352,15 @@
           for (let key in upgrades) {
             updateComposter(key);
           }
+          document.getElementById("total_milestone").innerText = "Total milestones: " + milestonetotaltotal + "/460";
+          if (milestonetotaltotal >= 460) {
+            document.getElementById("total_milestone").style.color = "#ffaa00";
+            document.getElementById("total_timeremainingmax").style.color = "#ffaa00";
+          } else {
+            document.getElementById("total_milestone").style.color = "#c0c0c0";
+            document.getElementById("total_timeremainingmax").style.color = "#c0c0c0";
+          }
+          document.getElementById("total_timeremainingmax").innerText = "Total time to max Garden: " + betterTimestamp(timetotaltotal);
         }
         let compostermaxcropstotal = {
             "enchanted_hay_bale": 0,
@@ -360,6 +393,7 @@
             "organic_matter_cap": 0,
             "cost_reduction": 0,
           }
+          
         function updateCrop(key) {
             
             var collection = milestonedata[crops[key].api];
@@ -407,10 +441,16 @@
             if (milestonetotal < 0) {
               milestonetotal = 0;
             }
+
+            
+
             while (collection - crops[key].milestones[milestone] > 0 && milestone < 46) {
               collection -= crops[key].milestones[milestone];
               milestone++;
             }
+
+            milestonetotaltotal += milestone;
+
             var bonus = "";
             var remainingcollection = 0;
             if (milestone == 46) {
@@ -436,6 +476,9 @@
             document.getElementById(key + "_remainingtotal").innerText = "Crops to max milestone: " + tomax.toLocaleString();
             document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(remainingcollection/cps));
             document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
+
+            timetotaltotal += Math.floor(milestonetotal/cps);
+        
         } 
         function updateComposter(key) {
           var upgradelevel = gardenapidata.garden.composter_data.upgrades[key];
@@ -561,6 +604,24 @@
               "copper": 0,
             }
           }
-          
+          updateSizes();
         }
+
+        window.addEventListener('resize', function() {
+          updateSizes();
+        });
+        function updateSizes(){
+        console.log("Current width: " + window.innerWidth);
+        if (window.innerWidth >= 768 * (5/3)) {
+            console.log("Desktop mode...");
+            document.getElementById("croptotalbox").style.width = "88.5%";
+            document.getElementById("footerspan").style.visibility = "";
+            document.getElementById("footermarquee").style.visibility = "hidden";
+        } else {
+            console.log("Mobile mode...");
+            document.getElementById("croptotalbox").style.width = "40%";
+            document.getElementById("footerspan").style.visibility = "hidden";
+            document.getElementById("footermarquee").style.visibility = "";
+        }
+    }
     </script>
