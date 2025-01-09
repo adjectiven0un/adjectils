@@ -614,14 +614,18 @@
         console.log("Current width: " + window.innerWidth);
         if (window.innerWidth >= 768 * (5/3)) {
             console.log("Desktop mode...");
-            document.getElementById("croptotalbox").style.width = "88.5%";
             document.getElementById("footerspan").style.visibility = "";
             document.getElementById("footermarquee").style.visibility = "hidden";
+            for (let key in crops) {
+              document.getElementById(key + "_box").style.flexBasis = "40%";
+            }
         } else {
             console.log("Mobile mode...");
-            document.getElementById("croptotalbox").style.width = "40%";
             document.getElementById("footerspan").style.visibility = "hidden";
             document.getElementById("footermarquee").style.visibility = "";
+            for (let key in crops) {
+              document.getElementById(key + "_box").style.flexBasis = "100%";
+            }
         }
     }
     </script>

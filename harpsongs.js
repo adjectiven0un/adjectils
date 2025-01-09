@@ -527,13 +527,23 @@ var availablesongs = {
             { column: -1, pitch: -1},
             { column: -1, pitch: -1},
             { column: 6 , pitch: 24 },]
-    }
+    },
 
 
     /*
     "pachelbel": {
         name: "Pachelbel",
     }
-    */
+    
+    "harpbackwards":{ 
+        name :"Campfire (Backwards)",
+        tempo: 180,
+        pace: 480000,
+        notes:[
+            
+            { column: 2 , pitch: 16 },
+        ]
+    },
    
+    */
 };

@@ -14,7 +14,7 @@
         <meta name="image" content="https://adjectils.com/images/mega_walls/embed_image.png">
         <meta name="url" content="https://adjectils.com/mw.html">
         <meta name="type" content="website">
-
+        <!--Trying to figure out how to make the embed work-->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="adjectils – Mega Walls">
         <meta name="twitter:description" content="Sartorial utilities for Mega Walls">
@@ -129,7 +129,7 @@
         }
     }
 
-    // Part of the startup sequence.
+    // Part of the startup sequence. Creates boxes and blank tooltips.
 
     function initClasses() {
         for (let j = 1; j <= 3; j++){
@@ -417,6 +417,7 @@
                     } catch (TypeError) {
                     }
                 }
+                //Tiered skins. Many exceptions apply due to some skins taking multiple stats. Also records the data for percentage ordering.
                 else {
                     try {
                         if (mwdata[skinPack[i].path] >= skinPack[i].req || (data.player.achievementsOneTime.includes(skinPack[i].backup))) { 
@@ -566,7 +567,7 @@
         } catch {
             
         }
-        
+        //Set up the closest progress list. I should have used CSS for this.
         for (var i = 0; i < showmore; i++) {
             if (i >= topSkins.length) {
                 break;
@@ -654,6 +655,7 @@
             closestskintable.appendChild(tablerow);
         }
     }
+    //Adds a check to a target skinbox.
     function addCheck(skinPack, i, text) {
         var checkmark = document.createElement("span");
         checkmark.className = "upperRightIcon";
@@ -661,6 +663,7 @@
         document.getElementById(skinPack[i].name + "_box").appendChild(checkmark);
 
     }
+    //Adds some text similar to the check to any box.
     function addIcon(target, text) {
         try {
             document.getElementById("icon_" + target).remove();
@@ -673,6 +676,7 @@
         document.getElementById(target).appendChild(checkmark);
 
     }
+    //Loads the class skin rows.
     function updateSkinRows() {
         skinrow1.innerHTML = "";
         skinrow2.innerHTML = "";
@@ -803,7 +807,7 @@
                         document.getElementById(skinPack[i].name + "_box").style.borderColor = "#22aa22";
                     } else if (skinPack[i].path == "squid_defender_final_kills") {
                         
-                        // I had to write an entire exception for these stats. Enjoy.
+                        // I had to write an entire exception again for these stats. Enjoy.
 
                         var squidDefFKA = 0;
                         if (mwdata["squid_defender_final_kills"] != undefined) {
@@ -936,7 +940,6 @@
                         }
                         
                     } else {
-                        //try {
                         if (data.player.achievementsOneTime.includes(skinPack[i].backup)){
                             makeTooltipObject(tip.id, "", "Unlocked! (Legacy) (", "12px", "#55ff55", false);
                             makeTooltipObject(tip.id, "", mwdata[skinPack[i].path].toLocaleString(), "12px", "#55ff55", false);
@@ -947,7 +950,6 @@
                             addCheck(skinPack, i, "✱");
                         } else {
                             
-                        //} catch (TypeError){
                             if (mwdata[skinPack[i].path] != undefined){
                                 makeTooltipObject(tip.id, "", "Locked (", "12px", "#ff5555", false);
                                 makeTooltipObject(tip.id, "", mwdata[skinPack[i].path].toLocaleString(), "12px", "#ff5555", false);
@@ -962,7 +964,6 @@
                                 document.getElementById(skinPack[i].name + "_box").style.borderColor = "#ff5555";
                             }
                         }
-                        //}
                         
                     }
                 } catch (TypeError) {
@@ -976,6 +977,8 @@
         }
 
     }
+
+    //Skin selector
     var selectedSkin = "";
     var selectedColor = "";
     function selectSkin(skinName) {
@@ -1017,7 +1020,7 @@
         downloadlink.href = "./images/mega_walls/skins/" + skinName + ".png";
         downloadlink.download = skinName + ".png";
     }
-
+    //Fills the rows on the left.
     function addSkinBox(targetrow, imageName){
         var box = document.createElement("div");
         box.style.position = "relative";
@@ -1060,6 +1063,7 @@
         targetrow.appendChild(box);
     }
     var prevSkin = "";
+    //Renders the skin in the box on the right.
     function makeRender(skinName){
         if (skinName == prevSkin) {
             return;
