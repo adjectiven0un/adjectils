@@ -440,11 +440,9 @@
                     }
                 }
                 if (i >= 60){
-                    console.log("Failsafe triggered, congrats on being cata " + i);
                     document.getElementById("catalevel").innerText = i;
                     document.getElementById("catapercent").innerText = "Congrats!";
                 } else if (i >= targetcatalevel) {
-                    console.log("Failsafe triggered, congrats on being cata " + i);
                     document.getElementById("catalevel").innerText = i;
                     document.getElementById("catapercent").innerText = abbreviate(cataxp) + "/" + abbreviate(classxps[i]);
                 }
@@ -460,6 +458,8 @@
                         break;
                     }
                 }
+                
+                
                 while (cataxp > 0) {
                     cataxp -= 200000000;
                     if (cataxp <= 0){
@@ -543,12 +543,15 @@
             }
             //Get remaining xps
             cataxp = dungeons.dungeon_types.catacombs.experience;
-            for (var i = 0; i < 50; i++){
-                targetcataxp += classxps[i];
+            for (var i = 0; i < targetcatalevel; i++){
+                if (i <= 50) {
+                    targetcataxp += classxps[i];
+                } else {
+                    targetcataxp += 200000000;
+                }
+                
             }
-            for (var i = 50; i < targetcatalevel; i++) {
-                targetcataxp += 200000000;
-            }
+            
             var cataxpleft = Math.max(targetcataxp - cataxp, 0);
             
             //a, b, h, m, t
@@ -577,7 +580,8 @@
             
             cataperrun *= global.value;
             cataperrun = Math.ceil(cataperrun);
-            console.log("CPR: " + cataperrun);
+            console.log("Cata xp left: " + cataxpleft);
+            console.log("Per run: " + cataperrun);
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
@@ -587,7 +591,6 @@
                 mage: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
                 tank: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
             };
-            console.log("CLPR: " + classperrun["arch"]);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
             /* 
