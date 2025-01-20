@@ -352,8 +352,104 @@
             electiontr.style.flexBasis = "100%";
             electiontr.appendChild(electiontd);
             electiontable.appendChild(electiontr);
-          
-          
+          try {
+            const curdata = mayordata.current;
+            var mayornames = ["", "", "", "", ""];
+            var votes = ["", "", "", "", ""];
+            var indexswaps = ["0", "1", "2", "3", "4"];
+            for (var i = 0; i < 5; i++){
+              mayornames[i] = curdata.candidates[i].name;
+              votes[i] = curdata.candidates[i].votes;
+            }
+            for (var i = 1; i < 5; i++){
+              var key1 = votes[i];
+              var key2 = mayornames[i];
+              var key3 = indexswaps[i];
+              var j = i - 1;
+              while (j >= 0 && votes[j] < key1){
+                votes[j + 1] = votes[j];
+                mayornames[j + 1] = mayornames[j];
+                indexswaps[j + 1] = indexswaps[j];
+                j--;
+              }
+              votes[j + 1] = key1;
+              mayornames[j + 1] = key2;
+              indexswaps[j + 1] = key3;
+            }
+            var votespercent = ["", "", "", "", ""];
+            var votestotal = 0;
+            for (var i = 0; i < 5; i++){
+              votestotal += votes[i];
+            }
+            for (var i = 0; i < 5; i++){
+              votespercent[i] = (100 * (votes[i] / votestotal)).toFixed(1);
+            }
+            for (var i = 0; i < 5; i++){
+              var mayorrow1 = document.createElement("tr");
+              mayorrow1.style.width = "100%";
+              mayorrow1.className = "flex_full_row";
+              var mayorname = document.createElement("td");
+              mayorname.style.fontSize = "20px";
+              mayorname.innerText = mayornames[i];
+              mayorname.style.width = "15%";
+              mayorrow1.style.borderBottom = "2px solid #c0c0c0";
+              mayorrow1.style.marginTop = "2%";
+              mayorrow1.style.marginBottom = "2%";
+              mayorrow1.appendChild(mayorname);
+              var mayorvotes = document.createElement("td");
+              mayorvotes.style.fontSize = "20px";
+              mayorvotes.innerText = votes[i].toLocaleString() + " votes ";
+              mayorvotes.style.width = "20%";
+              mayorvotes.style.textAlign = "right";
+              mayorrow1.appendChild(mayorvotes);
+              var mayorpercent = document.createElement("td");
+              mayorpercent.style.fontSize = "20px";
+              mayorpercent.innerText = votespercent[i] + "%";
+              mayorpercent.style.width = "20%";
+              mayorpercent.style.textAlign = "right";
+              mayorrow1.appendChild(mayorpercent);
+              var mayorperktable = document.createElement("table");
+              mayorperktable.style.width = "90%";
+              for (var j = 0; j < curdata.candidates[indexswaps[i]].perks.length; j++){
+                var perkrow1 = document.createElement("tr");
+                perkrow1.style.width = "90%";
+                var perktd1 = document.createElement("td");
+                perktd1.style.width = "25%";
+                perktd1.style.paddingRight = "20px";
+                var perktd2 = document.createElement("td");
+                perktd1.innerText = curdata.candidates[indexswaps[i]].perks[j].name;
+                if (curdata.candidates[indexswaps[i]].perks[j].minister) {
+                  perktd2.innerText = "✰ " + curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
+                } else {
+                  perktd2.innerText = curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
+                }
+                
+                perkrow1.appendChild(perktd1);
+                perkrow1.appendChild(perktd2);
+                mayorperktable.appendChild(perkrow1);
+              }
+              electiontable2.appendChild(mayorrow1);
+              var mayorrow2 = document.createElement("tr");
+              var mayortd2 = document.createElement("td");
+              mayortd2.appendChild(mayorperktable);
+              mayorrow2.appendChild(mayortd2);
+              mayorrow2.className = "flex_full_row";
+              electiontable2.appendChild(mayorrow2);
+              
+            }
+            
+          } catch (TypeError){
+            console.log("Mayor election is not on right now");
+            var mayorrow = document.createElement("tr");
+            var mayortd = document.createElement("td");
+            var mayorname= document.createElement("div");
+            mayorname.style.fontSize = "16px";
+            mayorname.style.flexBasis = "100%";
+            mayorname.innerText = "The election booth is closed right now. Come back later!";
+            mayortd.appendChild(mayorname);
+            mayorrow.appendChild(mayortd);
+            electiontable2.appendChild(mayorrow);
+          }
         } catch (NetworkError){
           document.getElementById("currentmayor").innerText = "Couldn't connect to API!";
           console.log("Couldn't find the current mayor! Is the API down?");
@@ -366,111 +462,7 @@
         } catch (Error) {
           console.log("Error making timer...");
         }
-        try {
-          const apicall = await fetch("https://api.hypixel.net/resources/skyblock/election");
-          if (!apicall.ok){
-            console.log("Api call error");
-            //document.getElementById("status").innerHTML = "<span class = errored>API error - come back later</span>";
-            return -1;
-          }
-          const mayordata = await apicall.json();
-          const curdata = mayordata.current;
-          var mayornames = ["", "", "", "", ""];
-          var votes = ["", "", "", "", ""];
-          var indexswaps = ["0", "1", "2", "3", "4"];
-          for (var i = 0; i < 5; i++){
-            mayornames[i] = curdata.candidates[i].name;
-            votes[i] = curdata.candidates[i].votes;
-          }
-          for (var i = 1; i < 5; i++){
-             var key1 = votes[i];
-             var key2 = mayornames[i];
-             var key3 = indexswaps[i];
-             var j = i - 1;
-             while (j >= 0 && votes[j] < key1){
-              votes[j + 1] = votes[j];
-              mayornames[j + 1] = mayornames[j];
-              indexswaps[j + 1] = indexswaps[j];
-              j--;
-             }
-             votes[j + 1] = key1;
-             mayornames[j + 1] = key2;
-             indexswaps[j + 1] = key3;
-          }
-          var votespercent = ["", "", "", "", ""];
-          var votestotal = 0;
-          for (var i = 0; i < 5; i++){
-            votestotal += votes[i];
-          }
-          for (var i = 0; i < 5; i++){
-            votespercent[i] = (100 * (votes[i] / votestotal)).toFixed(1);
-          }
-          for (var i = 0; i < 5; i++){
-            var mayorrow1 = document.createElement("tr");
-            mayorrow1.style.width = "100%";
-            mayorrow1.className = "flex_full_row";
-            var mayorname = document.createElement("td");
-            mayorname.style.fontSize = "20px";
-            mayorname.innerText = mayornames[i];
-            mayorname.style.width = "15%";
-            mayorrow1.style.borderBottom = "2px solid #c0c0c0";
-            mayorrow1.style.marginTop = "2%";
-            mayorrow1.style.marginBottom = "2%";
-            mayorrow1.appendChild(mayorname);
-            var mayorvotes = document.createElement("td");
-            mayorvotes.style.fontSize = "20px";
-            mayorvotes.innerText = votes[i].toLocaleString() + " votes ";
-            mayorvotes.style.width = "20%";
-            mayorvotes.style.textAlign = "right";
-            mayorrow1.appendChild(mayorvotes);
-            var mayorpercent = document.createElement("td");
-            mayorpercent.style.fontSize = "20px";
-            mayorpercent.innerText = votespercent[i] + "%";
-            mayorpercent.style.width = "20%";
-            mayorpercent.style.textAlign = "right";
-            mayorrow1.appendChild(mayorpercent);
-            var mayorperktable = document.createElement("table");
-            mayorperktable.style.width = "90%";
-            for (var j = 0; j < curdata.candidates[indexswaps[i]].perks.length; j++){
-              var perkrow1 = document.createElement("tr");
-              perkrow1.style.width = "90%";
-              var perktd1 = document.createElement("td");
-              perktd1.style.width = "25%";
-              perktd1.style.paddingRight = "20px";
-              var perktd2 = document.createElement("td");
-              perktd1.innerText = curdata.candidates[indexswaps[i]].perks[j].name;
-              if (curdata.candidates[indexswaps[i]].perks[j].minister) {
-                perktd2.innerText = "✰ " + curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
-              } else {
-                perktd2.innerText = curdata.candidates[indexswaps[i]].perks[j].description.replace(/§./g, "") + "\n";
-              }
-              
-              perkrow1.appendChild(perktd1);
-              perkrow1.appendChild(perktd2);
-              mayorperktable.appendChild(perkrow1);
-            }
-            electiontable2.appendChild(mayorrow1);
-            var mayorrow2 = document.createElement("tr");
-            var mayortd2 = document.createElement("td");
-            mayortd2.appendChild(mayorperktable);
-            mayorrow2.appendChild(mayortd2);
-            mayorrow2.className = "flex_full_row";
-            electiontable2.appendChild(mayorrow2);
-            
-          }
-          
-        } catch (TypeError){
-          console.log("Mayor election is not on right now");
-          var mayorrow = document.createElement("tr");
-          var mayortd = document.createElement("td");
-          var mayorname= document.createElement("div");
-          mayorname.style.fontSize = "16px";
-          mayorname.style.flexBasis = "100%";
-          mayorname.innerText = "The election booth is closed right now. Come back later!";
-          mayortd.appendChild(mayorname);
-          mayorrow.appendChild(mayortd);
-          electiontable2.appendChild(mayorrow);
-        }
+        
         generateSchedule();
         var currentday = new Date();
         if (currentday.getMonth() == 9 && currentday.getDate() == 2) {
