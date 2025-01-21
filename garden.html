@@ -276,6 +276,7 @@
             let text7 = document.createElement("span");
             text7.className = "flex_full_row";
             text7.innerText = "To max level: ";
+            text7.id = key + "_string_container";
             let text8 = document.createElement("span");
             text8.id = key + "_max_cost";
             text8.style.paddingLeft = "10px";
@@ -308,6 +309,7 @@
             let text7 = document.createElement("span");
             text7.className = "flex_full_row";
             text7.innerText = "To max level: ";
+            text7.id = "total_string_container";
             let text8 = document.createElement("span");
             text8.id = "total_max_cost";
             text8.style.paddingLeft = "10px";
@@ -398,6 +400,12 @@
             
             var collection = milestonedata[crops[key].api];
             document.getElementById(key + "_collection").innerText = "Collection: " + collection.toLocaleString();
+            if (document.getElementById(key + "_fortune").value < 0 || isNaN(document.getElementById(key + "_fortune").value)) {
+              document.getElementById(key + "_fortune").value = 0;
+            }
+            if (document.getElementById(key + "_fortune").value > 1000) {
+              document.getElementById(key + "_fortune").value = 1000;
+            }
             var cps = Math.floor(20 * crops[key].mult * (1 + ((Number(farmingfortune.value) + Number(document.getElementById(key + "_fortune").value)) / 100)));
             document.getElementById(key + "_cps").innerText = "Crops per second: " + cps.toLocaleString();
             var cph = (cps * crops[key].coin) * 3600;
@@ -471,13 +479,25 @@
             }
             tomax += remainingcollection;
             
-            document.getElementById(key + "_milestone").innerText = "Milestone: " + milestone + " " + bonus;
+            document.getElementById(key + "_milestone").innerText = "Milestone: ";
+            var addthis = document.createElement("span");
+            addthis.id = key + "_milestone_number";
+            addthis.innerText = " " + milestone + "/46";
+            addthis.style.marginLeft = "10px";
+            document.getElementById(key + "_milestone").appendChild(addthis);
+
             document.getElementById(key + "_remaining").innerText = "Crops to next milestone: " + remainingcollection.toLocaleString();
             document.getElementById(key + "_remainingtotal").innerText = "Crops to max milestone: " + tomax.toLocaleString();
             document.getElementById(key + "_timeremaining").innerText = "Est. time to next milestone: " + betterTimestamp(Math.floor(remainingcollection/cps));
             document.getElementById(key + "_timeremainingmax").innerText = "Est. time to max milestone: " + betterTimestamp(Math.floor(milestonetotal/cps));
 
             timetotaltotal += Math.floor(milestonetotal/cps);
+
+            if (milestone == 46) {
+              document.getElementById(key + "_milestone_number").style.color = "#ffaa00";
+            } else {
+              document.getElementById(key + "_milestone_number").style.color = "#c0c0c0";
+            }
         
         } 
         function updateComposter(key) {
@@ -574,8 +594,13 @@
                 finalstring += composterothercosts[key].toLocaleString() + "× " + croptranslations[key] + "\n";
             }
           }
+          document.getElementById(key + "_string_container").innerText = "To max level: ";
           if (finalstring == "") {
-            finalstring = "(None)";
+              document.getElementById(key + "_max_cost").visibility = "hidden";
+              document.getElementById(key + "_string_container").innerText += " None";
+          } else {
+              document.getElementById(key + "_max_cost").visibility = "";
+              document.getElementById("total_string_container").innerText += " \n";
           }
           document.getElementById(key + "_max_cost").innerText = finalstring;
           
@@ -586,8 +611,13 @@
                   finalstring2 += composterothercoststotal[key].toLocaleString() + "× " + croptranslations[key] + "\n";
               }
             }
+            document.getElementById("total_string_container").innerText = "To max level: ";
             if (finalstring2 == "") {
-              finalstring2 = "(None)";
+              document.getElementById("total_max_cost").visibility = "hidden";
+              document.getElementById("total_string_container").innerText += " None";
+            } else {
+              document.getElementById("total_max_cost").visibility = "";
+              document.getElementById("total_string_container").innerText += " \n";
             }
             document.getElementById("total_max_cost").innerText = finalstring2;
             let totalnpc = 0;

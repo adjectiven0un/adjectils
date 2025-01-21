@@ -75,9 +75,11 @@ async function updateProfiles(data) {
     profilelist = (data.profiles);
     for (var i = 0; i < 5; i++){
         document.getElementById("profile" + i).innerText = "–––––";
+        document.getElementById("profile" + i).disabled = "true";
     }
     for (var i = 0; i < profilelist.length; i++){
         document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
+        document.getElementById("profile" + i).disabled = "";
     }
 
     console.log("Checking new name");
