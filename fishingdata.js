@@ -23,6 +23,7 @@ const waterscnames = {
     "sea_emperor": "Sea Emperor",
     "oasis_rabbit": "Oasis Rabbit",
     "oasis_sheep": "Oasis Sheep",
+    "mithril_grubber": "Mithril Grubber",
     "water_worm": "Water Worm",
     "poisoned_water_worm": "Poisoned Water Worm",
     "abyssal_miner": "Abyssal Miner",
@@ -76,6 +77,7 @@ var scrarities = {
     "sea_emperor": "legendary",
     "oasis_rabbit": "uncommon",
     "oasis_sheep": "uncommon",
+    "mithril_grubber": "uncommon",
     "water_worm": "rare",
     "poisoned_water_worm": "rare",
     "abyssal_miner": "legendary",
@@ -120,6 +122,7 @@ const normalwaterscs = ["squid", "sea_walker", "sea_guardian", "sea_witch", "sea
 const spookyscs = ["scarecrow", "nightmare", "werewolf", "phantom_fisher", "grim_reaper"];
 const sharkscs = ["nurse_shark", "blue_shark", "tiger_shark", "great_white_shark"];
 const winterscs = ["frozen_steve", "frosty", "nutcracker", "grinch", "yeti", "reindrake"];
+const minesscs = ["mithril_grubber"];
 const squids = ["squid", "night_squid"];
 const oasisscs = ["oasis_rabbit", "oasis_sheep"];
 const goblinscs = ["abyssal_miner", "water_worm", "poisoned_water_worm"];

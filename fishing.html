@@ -94,6 +94,7 @@
                         <option value = "3">Oasis</option>
                         <option value = "4">Crystal Hollows</option>
                         <option value = "5">Goblin Holdout</option>
+                        <option value = "6">Abandoned Quarry</option>
                     </select>
                     </label>
                 </form>
@@ -124,7 +125,7 @@
                 <form action = "#" class = "flex_full_row">
                     <label>Bait:
                     <select id = bait value = "None" onchange = updateWaterTable()>
-                        <option value = "None">No bait</option>
+                        <option value = "None">Other</option>
                         <option value = "Carrot">Carrot Bait</option>
                         <option value = "Spooky">Spooky Bait</option>
                         <option value = "Shark">Shark Bait</option>
@@ -561,6 +562,7 @@ pagedata = ["Fishing", "#78abde"];
                 "sea_emperor": 10,
                 "oasis_rabbit": 300,
                 "oasis_sheep": 700,
+                "mithril_grubber": 700,
                 "water_worm": 300,
                 "poisoned_water_worm": 300,
                 "abyssal_miner": 90,
@@ -612,6 +614,11 @@ pagedata = ["Fishing", "#78abde"];
             if (locationwater.value == "5"){
                 for (var i = 0; i < goblinscs.length; i++){
                     activewaterscs.push(goblinscs[i]);
+                }
+            }
+            if (locationwater.value == "6"){
+                for (var i = 0; i < minesscs.length; i++){
+                    activewaterscs.push(minesscs[i]);
                 }
             }
             if (spookyfest.value == "1"){
