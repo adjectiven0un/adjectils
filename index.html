@@ -224,7 +224,14 @@
 
         </tbody>
       </table>
-      <span style = "color: #808080">Next <span style = "color: #ff55ff">special</span> mayor: <span id = "specialmayorname"></span> in <span id = "specialmayortime"></span></span>
+      <span style = "color: #808080">Next <span style = "color: #ff55ff">special</span> mayors:
+      <table>
+
+        <tr><td><span id = "specialmayorname1"></span></td> <td style = "padding-left: 10px; padding-right:20px;">in</td> <td class = "tdalignright"><span id = "specialmayortime1"></span></td></tr>
+        <tr><td><span id = "specialmayorname2"></span></td> <td style = "padding-left: 10px; padding-right:20px;">in</td> <td class = "tdalignright"><span id = "specialmayortime2"></span></td></tr>
+        <tr><td><span id = "specialmayorname3"></span></td> <td style = "padding-left: 10px; padding-right:20px;">in</td> <td class = "tdalignright"><span id = "specialmayortime3"></span></td></tr>
+      </table>
+      </span>
     </div>
     </div>
   </div>
@@ -723,31 +730,42 @@
           }
         var notification = new Notification("adjectils",  {body: "Fallen Star Cult meets in " + Math.floor(danotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
       }
-      var specialcycletime = (now - initial) % (24 * 446400);
-      var timetoscorpius = -((specialcycletime - (24 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
-      var timetoderpy = -((specialcycletime - (8 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
-      var timetojerry = -((specialcycletime - (16 * 446400) - 2 * monthlen - 27 * daylen) % (24 * 446400));
-      if (timetoscorpius <= 0) {
-        timetoscorpius = 2100000000;
+      var specialcycletime = (((now - (initial + (2 * monthlen + 26 * daylen))) % (24 * 446400)) + (24 * 446400)) % (24 * 446400);
+
+      //console.log(betterTimestamp(specialcycletime) + " into cycle");
+      var timetoscorpius = (24 * 446400) - specialcycletime;
+      //console.log("Time to Scorpius: " + betterTimestamp(timetoscorpius) + " (equal to " + convertTimestamp(now + timetoscorpius) + ")");
+
+      var timetoderpy = ((32 * 446400) - specialcycletime) % (24 * 446400);
+      //console.log("Time to Derpy: " + betterTimestamp(timetoderpy) + " (equal to " + convertTimestamp(now + timetoderpy) + ")");
+
+      var timetojerry = ((40 * 446400) - specialcycletime) % (24 * 446400);
+      //console.log("Time to Jerry: " + betterTimestamp(timetojerry) + " (equal to " + convertTimestamp(now + timetojerry) + ")");
+      
+      //If another special mayor is added adj will have to make this dynamic :(
+      var specialmayornames = ["Scorpius", "Derpy", "Jerry"];
+      var specialtimes = [timetoscorpius, timetoderpy, timetojerry];
+      specialtimes.sort((a, b) => a - b);
+
+      if (specialtimes[0] == Math.floor(timetoscorpius)) {
+        document.getElementById("specialmayorname1").innerText = "Scorpius";
+        document.getElementById("specialmayorname2").innerText = "Derpy";
+        document.getElementById("specialmayorname3").innerText = "Jerry";
       }
-      if (timetoderpy <= 0) {
-        timetoderpy = 2100000000;
+      if (specialtimes[0] == Math.floor(timetoderpy)) {
+        document.getElementById("specialmayorname1").innerText = "Derpy";
+        document.getElementById("specialmayorname2").innerText = "Jerry";
+        document.getElementById("specialmayorname3").innerText = "Scorpius";
       }
-      if (timetojerry <= 0) {
-        timetojerry = 2100000000;
-      }
-      var timetospecial = Math.floor(Math.min(timetoscorpius, Math.min(timetoderpy, timetojerry)));
-      if (timetospecial == Math.floor(timetoscorpius)) {
-        document.getElementById("specialmayorname").innerText = "Scorpius";
-      }
-      if (timetospecial == Math.floor(timetoderpy)) {
-        document.getElementById("specialmayorname").innerText = "Derpy";
-      }
-      if (timetospecial == Math.floor(timetojerry)) {
-        document.getElementById("specialmayorname").innerText = "Jerry";
+      if (specialtimes[0] == Math.floor(timetojerry)) {
+        document.getElementById("specialmayorname1").innerText = "Jerry";
+        document.getElementById("specialmayorname2").innerText = "Scorpius";
+        document.getElementById("specialmayorname3").innerText = "Derpy";
       }
       
-      document.getElementById("specialmayortime").innerText = betterTimestamp(timetospecial);
+      document.getElementById("specialmayortime1").innerText = betterTimestamp(specialtimes[0]);
+      document.getElementById("specialmayortime2").innerText = betterTimestamp(specialtimes[1]);
+      document.getElementById("specialmayortime3").innerText = betterTimestamp(specialtimes[2]);
     }
     var times = [];
     var activemayor = "none";
@@ -812,7 +830,7 @@
       for (let i = 3; i < 15; i++) {
         times[i - 3] = ((initial + (targetyear * yearlen) + (i * monthlen)) * 1000);
       }
-      console.log(times);
+      //console.log(times);
       for (let i = 0; i < eventcount; i++) {
         
         let eventspan = document.createElement("tr");
@@ -867,7 +885,7 @@
           if (i >= eventcount) {
             document.getElementById("eventspan" + i).hidden = true;
           }
-          console.log("Time" + i + ": " + times[i] + " Now: " + timething);
+          //console.log("Time" + i + ": " + times[i] + " Now: " + timething);
           if (times[i] - timething > 0) {
             if (activemayor != "Cole") {
               targetspan.innerText = "In " + betterTimestamp(Math.floor((times[i] - timething)/1000));
