@@ -442,7 +442,7 @@
             document.getElementById(key + "_mooshroom").innerText = " (+" + mushroomcoins.toLocaleString() + " from Mooshroom Cow)";
             var milestone = 0;
             var milestonetotal = 0;
-            for (let i = 0; i < crops[key].milestones.length; i++) {
+            for (let i = 0; i < crops[key].milestones.length - 1; i++) {
               milestonetotal += crops[key].milestones[i];
             }
             milestonetotal -= collection;
