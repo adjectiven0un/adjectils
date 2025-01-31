@@ -69,13 +69,14 @@
             
         </div>
     </section>
+    
     <div class = "header" style = "padding-top: 20px; padding-bottom: 20px;">Composter</div>
     <section class = "flex_box_index">
       <div class = "flex_index_row" id = "composterrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
         
       </div>
     </section>
-    <span id = footer></span>
+    <span id = footer style = "text-align:left"></span>
     </body>
     <script>
       pagedata = ["Garden", "#56ba79"];
@@ -643,15 +644,12 @@
         console.log("Current width: " + window.innerWidth);
         if (window.innerWidth >= 768 * (5/3)) {
             console.log("Desktop mode...");
-            document.getElementById("footerspan").style.visibility = "";
-            document.getElementById("footermarquee").style.visibility = "hidden";
+            
             for (let key in crops) {
               document.getElementById(key + "_box").style.flexBasis = "40%";
             }
         } else {
             console.log("Mobile mode...");
-            document.getElementById("footerspan").style.visibility = "hidden";
-            document.getElementById("footermarquee").style.visibility = "";
             for (let key in crops) {
               document.getElementById(key + "_box").style.flexBasis = "100%";
             }
