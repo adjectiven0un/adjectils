@@ -17,7 +17,8 @@
   <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
       <script>
       $(function(){
-        $("#nav").load("nav.html", function() { setWord(); }); 
+        $("#nav").load("nav.html"); 
+        $("#footer").load("footer.html", function() { setWord(); }); 
       });
       </script>
    <header id = "nav" class = navblock></header>
@@ -63,10 +64,11 @@
           </select>
           </label>
         </form>
-        <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
+        <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span><br>
+        <span class = "fineprint fadeRed">Profit calculator is a work-in-progress! Check back soon!</span>   
         <table id = loottable_blaze>
         <tr><td><hr class = solid></td></tr>
-        <tr><td><span class = basictext>Chance of Bundle of Magma Arrows: </span></td><td><span style = "text-align: right" class = basictext id = chance_arrows_magma></span></td></tr>
+        <!--<tr><td><span class = basictext>Chance of Bundle of Magma Arrows: </span></td><td><span style = "text-align: right" class = basictext id = chance_arrows_magma></span></td></tr>
         <tr><td><span class = basictext>Chance of Gabagool Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_gool></span></td></tr>
         <tr><td><span class = basictext>Chance of Mana Disintegrator: </span></td><td><span style = "text-align: right" class = basictext id = chance_disintegrator></span></td></tr>
         <tr><td><span class = basictext>Chance of Blaze Rod Distillate: </span></td><td><span style = "text-align: right" class = basictext id = chance_distillate_blaze></span></td></tr>
@@ -89,47 +91,224 @@
         <tr><td><span class = basictext>Chance of Lavatears Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_tears></span></td></tr>
         <tr><td><span class = basictext>Chance of High Class Archfiend Dice: </span></td><td><span style = "text-align: right" class = basictext id = chance_dice_high></span></td></tr>
         <tr><td><span class = basictext>Chance of Fiery Burst Rune I: </span></td><td><span style = "text-align: right" class = basictext id = chance_rune_burst></span></td></tr>
-        <tr><td><hr class = solid></td></tr>
+        <tr><td><hr class = solid></td></tr>-->
         </table>
       </div>
-      <div style = "margin-top:20px">&nbsp;</div>
-      <span style = "position: fixed; bottom: 0; left: 0; background-color: #282828; width: 100%; height:20px;">&nbsp;•&nbsp;made with <span id = "word">love</span> by <a href = "https://github.com/adjectiven0un" style = "color:#808080">adjective_noun</a> with help from <a href = "https://brookie.dev" style = "color:#f6adc6 ">BrookeAFK</a> </a>&nbsp;•&nbsp;&nbsp;•&nbsp;have feedback? visit my <a href = "https://discord.gg/NvQTDDrnSd" style = "color:#808080">discord</a>&nbsp;•&nbsp;</span>
+      <span id = "footer"></span>
       </section>
       </body>
       
       <script>
-        pagedata = ["Crimson Isle", "#f0a040"];
-        function updateAllChances(){
-            var weights = {
-                "arrows_magma": 1500,
-                "distillate_gool": 840,
-                "disintegrator": 700,
-                "distillate_blaze": 840,
-                "distillate_glowstone": 840,
-                "distillate_magma": 840,
-                "distillate_wart": 840,
-                "scorched_crystal": 600,
-                "gemstone_opal": 550,
-                "wisp_water": 500,
-                "inverter_kelvin": 500,
-                "scorched_books": 400,
-                "book_reiterate": 350,
-                "book_fire": 250,
-                "dice_archfiend": 200,
-                "wilsons": 17,
-                "inverter_subzero": 17,
-            }
-            var extraweights = {
+        var weights = {
+            "arrows_magma": 1500,
+            "distillate_gool": 840,
+            "disintegrator": 700,
+            //"distillate_blaze": 840,
+            //"distillate_glowstone": 840,
+            //"distillate_magma": 840,
+            //"distillate_wart": 840,
+            "scorched_crystal": 600,
+            "gemstone_opal": 550,
+            "wisp_water": 500,
+            "inverter_kelvin": 500,
+            "scorched_books": 400,
+            "book_reiterate": 350,
+            "book_fire": 250,
+            "dice_archfiend": 200,
+            "wilsons": 17,
+            "inverter_subzero": 17,
+        }
+        var extraweights = {
                 "powder": 2700,
                 "rune_tears": 450,
                 "dice_high": 50,
                 "rune_burst": 40,
             }
+        pagedata = ["Crimson Isle", "#f0a040"];
+        function initializeTable() {
+            var plainnames = {
+              "arrows_magma": "Bundle of Magma Arrows",
+                "distillate_gool": "Gabagool Distillate",
+                "disintegrator": "Mana Disintegrator",
+                //"distillate_blaze": 840,
+                //"distillate_glowstone": 840,
+                //"distillate_magma": 840,
+                //"distillate_wart": 840,
+                "scorched_crystal": "Scorched Power Crystal",
+                "gemstone_opal": "Flawed Opal Gemstones",
+                "wisp_water": "Wisp's Ice-Flavored Water",
+                "inverter_kelvin": "Kelvin Inverter",
+                "scorched_books": "Scorched Books",
+                "book_reiterate": "Enchanted Book (Duplex I)",
+                "book_fire": "Enchanted Book (Fire Aspect III)",
+                "dice_archfiend": "Archfiend Dice",
+                "wilsons": "Wilson's Engineering Plans",
+                "inverter_subzero": "Subzero Inverter",
+                "powder": "Enchanted Blaze Powder",
+                "rune_tears": "Lavatears Rune I",
+                "dice_high": "High Class Archfiend Dice",
+                "rune_burst": "Fiery Burst Rune I",
+            }
+            var ahbz = {
+                "arrows_magma": "bz",
+                "distillate_gool": "bz",
+                "disintegrator": "bz",
+                //"distillate_blaze": 840,
+                //"distillate_glowstone": 840,
+                //"distillate_magma": 840,
+                //"distillate_wart": 840,
+                "scorched_crystal": "bz",
+                "gemstone_opal": "bz",
+                "wisp_water": "ah",
+                "inverter_kelvin": "bz",
+                "scorched_books": "bz",
+                "book_reiterate": "bz",
+                "book_fire": "bz",
+                "dice_archfiend": "ah",
+                "wilsons": "ah",
+                "inverter_subzero": "bz",
+                "powder": "bz",
+                "rune_tears": "ah",
+                "dice_high": "ah",
+                "rune_burst": "ah",
+            }
+            
+            for (let key in weights) {
+              let row = document.createElement("tr");
+              let itemname = document.createElement("td");
+              let itemchance = document.createElement("td");
+              let itemsellselect = document.createElement("td");
+              let itemcpk = document.createElement("td");
+              itemchance.className = "tdalignright";
+              itemchance.style.textAlign = "right";
+              
+              itemname.innerText = "Chance of " + plainnames[key] + ": "
+              itemchance.id = "chance_" + key;
+              
+              let sellselector = document.createElement("select");
+              sellselector.id = key + "_sell_method";
+              sellselector.style.width = "145px"; 
+              if (ahbz[key] == "bz") {
+                let optioninsta = document.createElement("option");
+                optioninsta.value = "insta";
+                optioninsta.innerText = "Bazaar Insta-sell";
+                let optionorder = document.createElement("option");
+                optionorder.value = "order";
+                optionorder.innerText = "Bazaar Sell Order";
+                sellselector.appendChild(optioninsta);
+                sellselector.appendChild(optionorder);
+              } else if (ahbz[key] = 'ah') {
+                let optionah = document.createElement("option");
+                optionah.value = "ah";
+                optionah.innerText = "Auction House LBIN";
+                sellselector.appendChild(optionah);
+              }
+              
+              let optionnpc = document.createElement("option");
+              optionnpc.value = "npc";
+              optionnpc.innerText = "Sell to NPC";
+              
+              sellselector.appendChild(optionnpc);
+              //itemsellselect.innerText = "Sell method: "
+              itemsellselect.style.paddingLeft = "10px";
+              itemsellselect.appendChild(sellselector);
+
+              itemcpk.style.paddingLeft = "10px"; 
+              itemcpk.innerText = "0.0 coins (+0.0 coins/kill)";
+
+              row.appendChild(itemname);
+              row.appendChild(itemchance);
+              row.appendChild(itemsellselect);
+              row.appendChild(itemcpk);
+              loottable_blaze.appendChild(row);
+            }
+            let divider = document.createElement("tr");
+              let dividertd = document.createElement("td");
+              let dividertdd = document.createElement("td");
+              let dividerhr = document.createElement("hr");
+              dividerhr.class = "solid";
+              dividertd.appendChild(dividerhr);
+              divider.appendChild(dividertd);
+              divider.appendChild(dividertdd);
+              loottable_blaze.appendChild(divider);
+              let divider2 = document.createElement("tr");
+              let dividertd2 = document.createElement("td");
+              let dividerspan = document.createElement("span");
+              dividerspan.className = "fineprint";
+              dividerspan.innerText = "The following drops may be obtained in addition to the primary drop.";
+              dividertd2.appendChild(dividerspan);
+              divider2.appendChild(dividertd2);
+              loottable_blaze.appendChild(divider2);
+
+
+
+
+            for (let key in extraweights) {
+              let row = document.createElement("tr");
+              let itemname = document.createElement("td");
+              let itemchance = document.createElement("td");
+              let itemsellselect = document.createElement("td");
+              let itemcpk = document.createElement("td");
+              itemchance.className = "tdalignright";
+              itemchance.style.textAlign = "right";
+              
+              itemname.innerText = "Chance of " + plainnames[key] + ": "
+              itemchance.id = "chance_" + key;
+              
+              let sellselector = document.createElement("select");
+              sellselector.id = key + "_sell_method";
+              sellselector.style.width = "145px"; 
+              if (ahbz[key] == "bz") {
+                let optioninsta = document.createElement("option");
+                optioninsta.value = "insta";
+                optioninsta.innerText = "Bazaar Insta-sell";
+                let optionorder = document.createElement("option");
+                optionorder.value = "order";
+                optionorder.innerText = "Bazaar Sell Order";
+                sellselector.appendChild(optioninsta);
+                sellselector.appendChild(optionorder);
+              } else if (ahbz[key] = 'ah') {
+                let optionah = document.createElement("option");
+                optionah.value = "ah";
+                optionah.innerText = "Auction House LBIN";
+                sellselector.appendChild(optionah);
+              }
+              
+              let optionnpc = document.createElement("option");
+              optionnpc.value = "npc";
+              optionnpc.innerText = "Sell to NPC";
+              
+              sellselector.appendChild(optionnpc);
+              //itemsellselect.innerText = "Sell method: "
+              itemsellselect.style.paddingLeft = "10px";
+              itemsellselect.appendChild(sellselector);
+
+              itemcpk.style.paddingLeft = "10px"; 
+              itemcpk.innerText = "0.0 coins (+0.0 coins/kill)";
+
+              row.appendChild(itemname);
+              row.appendChild(itemchance);
+              row.appendChild(itemsellselect);
+              row.appendChild(itemcpk);
+              loottable_blaze.appendChild(row);
+            }
+            let divider3 = document.createElement("tr");
+              let dividertd3 = document.createElement("td");
+              let dividerhr2 = document.createElement("hr");
+              dividerhr2.className = "solid";
+              
+              dividertd3.appendChild(dividerhr2);
+              divider3.appendChild(dividertd3);
+              loottable_blaze.appendChild(divider3);
+        }
+        function updateAllChances(){
+          
             //see slayercalc.js
             updateChances(weights, extraweights);
         }
         function updatePage(){
             console.log("Initializing...");
+            initializeTable();
             updateAllChances();
         }
 

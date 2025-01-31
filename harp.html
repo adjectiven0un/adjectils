@@ -17,7 +17,8 @@
   
       <script>
       $(function(){
-        $("#nav").load("nav.html", function() { setWord(); }); 
+        $("#nav").load("nav.html"); 
+        $("#footer").load("footer.html", function() { setWord(); }); 
       });
       </script>
       <!-- Will change this to use the new header later!!! -->
@@ -42,6 +43,7 @@
   
 
   <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
+  <div id = footer></div>
   </body>
   <script>
     var currentsong = "";

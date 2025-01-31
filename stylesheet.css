@@ -82,7 +82,7 @@ body {
     margin: 5px;
     border-spacing: 5px;
     padding: 10px;
-    width:min(calc(100% - 30px), max(600px, 40%));
+    width:min(calc(100% - 30px), max(960px, 60%));
   }
   .hub_block{
     background-color: #404040;
@@ -760,6 +760,7 @@ header {
   flex: 1; /* Equal width for each menu item */
   text-align: center;
   width:200%;
+  z-index:99997;
 }
 
 .menu-item a {
