@@ -23,11 +23,11 @@ function updateChances(weights, extraweights){
     //Calculate total standard weight
     for (var key in weights){
         if (key != selecteddrop.value){
-            standardweight += weights[key];
+            standardweight = standardweight + weights[key];
             document.getElementById("chance_" + key).className = "basictext";
         } else {
             weights[key] = weights[key] * rmc;
-            standardweight += weights[key];
+            standardweight = standardweight + weights[key];
             document.getElementById("chance_" + key).className = "metereditem";
         }
     }
@@ -36,7 +36,7 @@ function updateChances(weights, extraweights){
     //Update weights for standard items
     for (var key in weights){
         if (weights[key] / standardweight < 0.05){
-        mfweight += (weights[key] * mfc) - weights[key];
+        mfweight = mfweight + (weights[key] * mfc) - weights[key];
         weights[key] = weights[key] * mfc;
         } 
     }
@@ -45,11 +45,13 @@ function updateChances(weights, extraweights){
     if (frac.value == 0){
         for (var key in weights){
             var chance = (weights[key] / mfweight) * 100;
+            chances[key] = weights[key]/mfweight;
             document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
         }
     } else {
         for (var key in weights){
             var chance = (weights[key] / mfweight);
+            chances[key] = weights[key]/mfweight;
             var denom = Math.ceil(1/chance);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
@@ -58,13 +60,13 @@ function updateChances(weights, extraweights){
     //Update standard weight with extra weights
     for (var key in extraweights){
         if (key != selecteddrop.value){
-            standardweight += extraweights[key];
-            mfweight += extraweights[key];
+            standardweight = standardweight + extraweights[key];
+            mfweight = mfweight + extraweights[key];
             document.getElementById("chance_" + key).className = "basictext";
         } else {
             extraweights[key] = extraweights[key] * rmc;
-            standardweight += extraweights[key];
-            mfweight += extraweights[key];
+            standardweight = standardweight + extraweights[key];
+            mfweight = mfweight + extraweights[key];
             document.getElementById("chance_" + key).className = "metereditem";
         }
     }
@@ -73,7 +75,7 @@ function updateChances(weights, extraweights){
     //Update weights for extra items
     for (var key in extraweights){
         if ( (extraweights[key] / standardweight) < 0.05){
-            mfextraweight += (extraweights[key] * mfc) - extraweights[key];
+            mfextraweight = mfextraweight + (extraweights[key] * mfc) - extraweights[key];
             extraweights[key] = extraweights[key] * mfc;
         } 
     }
@@ -82,11 +84,13 @@ function updateChances(weights, extraweights){
     if (frac.value == 0){
         for (var key in extraweights){
             var chance = (extraweights[key] / mfextraweight) * 100;
+            chances[key] = extraweights[key]/mfweight;
             document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
         }
     } else {
         for (var key in extraweights){
             var chance = (extraweights[key] / mfextraweight);
+            chances[key] = extraweights[key]/mfweight;
             var denom = Math.ceil(1/chance);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
