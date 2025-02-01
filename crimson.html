@@ -494,7 +494,7 @@
               
               /*
                 The general idea here is that, to prevent outliers from messing up the data, 
-                I will only use the lowest BIN within 20% of the average of the 5 lowest BINs.
+                I only use the lowest BIN within 80% of the average of the 5 lowest BINs.
               */
               
               let productcheck = await fetch("https://sky.coflnet.com/api/auctions/tag/" + key + "/active/bin");
@@ -511,9 +511,9 @@
               }
               productaverage /= 5;
 
-              console.log("Average for " + key + " is " + productaverage);
+              //console.log("Average for " + key + " is " + productaverage);
               let j = 0;
-              console.log(prices);
+             // console.log(prices);
               while (prices[j] < 0.8 * productaverage) {
                 if (prices[j] < 0.8 * productaverage) {
                   j++; 
