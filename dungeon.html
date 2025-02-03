@@ -612,11 +612,11 @@
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
-                arch: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                bers: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                heal: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                mage: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                tank: selectedfloor.value * (1.1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
             };
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
