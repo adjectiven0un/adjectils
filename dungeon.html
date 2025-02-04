@@ -598,11 +598,11 @@
             }
             var cataperrun = 0;
             if (cataexpert.value > 0 && mayor.value > 1) {
-                cataperrun = selectedfloor.value * (1.05 + ((mayor.value - 1) + (maxcomps - 1)/100) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.023 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + ((mayor.value - 1) + (maxcomps - 1)/100) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50))
             } else if (cataexpert.value > 0) {
-                cataperrun = selectedfloor.value * (1.05 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.023 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50))
             } else {
-                cataperrun = selectedfloor.value * (1.05 + parseFloat(hecatomb.value) + (maxcomps - 1) * (0.021 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + parseFloat(hecatomb.value) + (maxcomps - 1) * (0.022 + parseFloat(hecatomb.value)/50))
             }
             
             cataperrun *= global.value;
@@ -618,6 +618,7 @@
                 mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
                 tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
             };
+            console.log(classperrun);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
             /* 
