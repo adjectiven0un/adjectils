@@ -14,35 +14,32 @@
       <script src = "harpsongs.js"></script>
     </head>
   <body onload="updatePage()">
-  
+    <header id="nav" class="navblock"></header>
+    <div style = "margin-bottom: 30px;">&nbsp;</div>
+
       <script>
       $(function(){
-        $("#nav").load("nav.html"); 
-        $("#footer").load("footer.html", function() { setWord(); }); 
+        $("#nav").load("nav.html");
+        $("#footer").load("footer.html", function() { setWord(); });
       });
       </script>
       <!-- Will change this to use the new header later!!! -->
-  <div style = "text-align:center; margin: auto"> 
-    <a href = "index.html" class = adjheader>adjectils</a><span class = header>&nbsp;|&nbsp;</span><span class = header>The Harp</span><br>
-  </div>
 
   <section class = "flex_box_index">
     <div id = "buffer1" style = "width:350px; height:50px; background-color: #404040; z-index: 5;"></div>
     <div class = "flex_index_row" id = "row1">
-    
+
     </div>
     <div id = "buffer2" style = "width:350px; height:50px; background-color: #404040; z-index: 5;"></div>
     <div class = "flex_full_row" style = "margin-top:20px; margin-bottom:20px;"><span id = "scoreboard" style = "color: #55ff55">0</span><span id = "missboard" style = "color:#ff5555; margin-left: 20px; margin-right:20px;">0</span>
     <span id = "accuracyboard">0%</span></div>
     <span style = "font-size: 20px; ;">Song selector</span>
     <div class = "flex_index_row" id = "cassetterack" style = "background-color: #282828; margin-top:20px; margin-bottom:20px">
-      
+
     </div>
     <div class = "flex_full_row"><span id = "playbutton" style = "width:50px; padding-top:15px; padding-bottom: 15px; background-color: #88ff88; text-align: center; color: #282828">▷</span><span id = "stopbutton" style = "width:50px; padding-top:15px; padding-bottom: 15px; background-color: #ff8888; text-align: center; color: #c8c8c8">▢</span></div>
   </section>
-  
 
-  <div id = "nav" style = "width:min(calc(100% - 30px), max(600px, 40%)); margin: auto" class = "hub_block"></div>
   <div id = footer></div>
   </body>
   <script>
@@ -102,14 +99,26 @@
           selectSong(key);
         }
       }
-      // Brooke's modification
-      let header = document.querySelector("body > div:nth-child(2)");
-      header.style.display = "flex";
-      header.style.alignItems = "center";
-      header.style.justifyContent = "center";
 
-      document.querySelector(".adjheader").innerHTML = `adjectils + `
-      document.querySelector(".adjheader").insertAdjacentHTML("afterend", `<a href="https://nadeshiko.io" target="_blank"><img src="https://nadeshiko.io/img/logo_svg.svg"></a>`)
+      // Brooke's modification
+
+      const header = document.getElementById("nav");
+      const config = { childList: true };
+
+      const callback = function(mutationsList, observer) { // Testing to see if the header loaded in
+        const adjHeader = document.querySelector("li.menu-item:nth-child(2) > a:nth-child(1)");
+
+        if (adjHeader) {
+          adjHeader.innerHTML = `<div style="display: flex; text-wrap: nowrap; align-items: center">adjectils&nbsp;+&nbsp;<a href="https://nadeshiko.io" target="_blank" style="all: unset"><img src="https://nadeshiko.io/img/logo_svg.svg" height=30></a></div>`;
+        } // add nadeshiko credit to the header
+      };
+
+      const observer = new MutationObserver(callback); // observe the header
+      observer.observe(header, config); // yeah im watching you buddy
+
+ /*
+        */
+
 
       for (let a = 0; a <= 6; a++) {
           var marker = document.getElementById("marker" + a);
@@ -130,7 +139,7 @@
           checkScore(key - 1);
         }
       });
-      
+
     }
     function createRipple(column){
 
@@ -140,8 +149,8 @@
       ripple.id = "ripple" + column;
       ripple.style.zIndex = 10;
       document.getElementById("col" + column).appendChild(ripple);
-      
-      ripple.classList.add("expanded"); 
+
+      ripple.classList.add("expanded");
 
       setTimeout(() => { document.getElementById("col" + column).removeChild(ripple);}, 1000);
 
@@ -153,20 +162,20 @@
           columnstatus[i] = -1;
             playNoteBlock(playingsong[temp].pitch);
             try {
-              
+
               document.getElementById("col" + i).removeChild(document.getElementById("note" + temp));
               score++;
               scoreboard.innerText = score;
               createRipple(i);
-              
+
             } catch {
               console.log("Failed to remove a note, it was probably already removed");
             }
-            
-            
-            
-            
-            
+
+
+
+
+
         } else {
           playNoteBlock(0);
           miss++;
@@ -174,7 +183,7 @@
         }
         accuracyboard.innerText = ((100 * (score / (score + miss))).toFixed(1)) + "%";
       }
-        
+
     }
     async function playNote(column, tempo, i, pace) {
         if (column == -1) {
@@ -190,9 +199,9 @@
         note.style.zIndex = 4;
         document.getElementById("col" + column).appendChild(note);
         let start = null;
-        //pace 
-        let duration = pace/tempo; 
-        let initialTop = 0; 
+        //pace
+        let duration = pace/tempo;
+        let initialTop = 0;
         let finalTop = 450;
         let passed = false;
         function animate(timestamp) {
@@ -211,7 +220,7 @@
               } catch {
 
               }
-              
+
             }
             if (progress >= duration * 0.66 && progress <= duration * 0.88) {
               columnstatus[column] = i;
@@ -222,13 +231,13 @@
         }
 
         window.requestAnimationFrame(animate);
-      
+
     }
     var lock = 0;
     var playingsong = "";
     async function playTrack(name) {
-      
-      
+
+
       var song = availablesongs[name].notes;
       if (lock == 1) {
         console.log("Song already playing!");
@@ -244,15 +253,15 @@
       var tempo = availablesongs[name].tempo;
       var pace = availablesongs[name].pace;
       for (let i = 0; i < song.length; i++) {
-        
+
           playNote(song[i].column, tempo, i, pace);
           await delay(60000/tempo);
           if (throttle == 1) {
             console.log("Song interrupted!");
             break;
           }
-        
-        
+
+
       }
       await delay(2000);
       lock = 0;
@@ -277,7 +286,7 @@
       // Page is hidden, use setTimeout to keep animation running
       throttle = 1;
     }
-    
+
 });
 function playNoteBlock(frequency) {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -307,7 +316,7 @@ function selectSong(selector) {
     } else {
       document.getElementById(key + "_tape").style.backgroundColor = "#909090";
     }
-    
+
   }
   currentsong = selector;
 }
