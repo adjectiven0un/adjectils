@@ -856,3 +856,22 @@ header {
         transform: translateX(-200%);
     }
 }
+
+.minionbox {
+    display: inline-block;
+    border: solid 2px;
+    width: 22.5%
+  
+}
+
+.selectorspan {
+  display:flex;
+  flex-basis:100%;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .minionbox {
+    width: 45%;
+  }
+}
