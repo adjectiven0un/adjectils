@@ -48,7 +48,7 @@ body {
   .cataheader {
     font-size:24px;
     color: #704030;
-  } 
+  }
   .riftheader {
     font-size:24px;
     color: #6832c0;
@@ -93,7 +93,7 @@ body {
     padding: 10px;
   }
   .navblock {
-    z-index:3;
+    z-index:100;
     position:fixed;
     left:50%;
     transform: translateX(-50%);
@@ -243,7 +243,7 @@ body {
     background-color:#606060;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    
+
   }
   .switch:before {
     position: absolute;
@@ -279,7 +279,7 @@ body {
     flex-direction:column;
     margin:auto;
     width: min(calc(100% - 30px), max(960px, 70%));
-    
+
   }
   .flex_index_row{
     /*
@@ -292,7 +292,7 @@ body {
     align-items:center;
     justify-content: space-evenly;
     flex-direction:row;
-    
+
   }
   .fishbox{
     position:relative;
@@ -320,7 +320,7 @@ body {
     margin-left: 200px;
     border-width: 400px;
     border-style: solid;
-    border-color: #282828;  
+    border-color: #282828;
   }
   .fishbox:hover .fishboxtext {
     visibility: visible;
@@ -382,7 +382,7 @@ body {
     flex-direction:column;
     margin:auto;
     width: min(calc(100% - 30px), max(600px, 70%));
-    
+
   }
   .flex_cata_box{
     min-height:280px;
@@ -430,7 +430,7 @@ body {
     border-bottom: 1px dotted #ffffff88;
     cursor: help;
   }
-  
+
   .tip .tiptext {
     visibility: hidden;
     word-wrap: break-word;
@@ -463,7 +463,7 @@ body {
   .tip:hover .tiptext, .tip:active .tiptext {
     visibility: visible;
   }
-  
+
   .tip:hover .tiptext {
     opacity: 1;
   }
@@ -506,18 +506,18 @@ body {
     text-shadow: 0px 0px 5px black, 0px 0px 5px black;
   }
   .tdalignright {
-    text-align: right; 
+    text-align: right;
     align-items: right;
   }
   .metercase {
-    width:400px; 
-    height: 16px; 
+    width:400px;
+    height: 16px;
     background-color: #808080;
-    border-radius: 4px; 
+    border-radius: 4px;
     position: absolute;
   }
   .meterfill {
-    height:16px; 
+    height:16px;
     border-radius: 4px;
     position: absolute;
   }
@@ -548,7 +548,7 @@ body {
     flex-direction:row;
     width:50px;
     height:400px;
-  } 
+  }
 
   .ripple {
     width: 40px;
@@ -565,7 +565,7 @@ body {
   .ripple.expanded {
     width: 60px;
     height: 60px;
-    
+
     animation: fadeExpand 1s forwards ;
   }
   @keyframes fadeExpand {
@@ -583,8 +583,8 @@ body {
     }
 }
 .cassette{
-  background-color: #e0e0e0; 
-  writing-mode:vertical-lr; 
+  background-color: #e0e0e0;
+  writing-mode:vertical-rl;
   color: #202020;
   padding: 4px;
   margin: 0px;
@@ -592,9 +592,9 @@ body {
   height: 200px;
 }
 .uninteractable {
-    -webkit-user-select: none;  
-    -moz-user-select: none;   
-    -ms-user-select: none;   
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 /*
@@ -630,13 +630,13 @@ This code is copied from Alvaro Montoro.
   transform: translate(-50%, var(--y));
   width: var(--initialSize);
   aspect-ratio: 1;
-  background: 
-    
+  background:
+
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
-    
+
     /* bottom right */
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
@@ -644,7 +644,7 @@ This code is copied from Alvaro Montoro.
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%,
-    
+
     /* bottom left */
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 22% 90%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 45% 90%,
@@ -653,7 +653,7 @@ This code is copied from Alvaro Montoro.
     radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 31% 80%,
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 28% 77%,
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 13% 72%,
-    
+
     /* top left */
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 80% 10%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 95% 14%,
@@ -662,7 +662,7 @@ This code is copied from Alvaro Montoro.
     radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 85% 27%,
     radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 77% 37%,
     radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 60% 7%,
-    
+
     /* top right */
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 22% 14%,
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 45% 20%,
@@ -706,7 +706,7 @@ This code is copied from Alvaro Montoro.
   --color3: fuchsia;
   --color4: orchid;
   --color5: plum;
-  --color6: lavender;  
+  --color6: lavender;
   --finalSize: 40vmin;
   left: 30%;
   top: 60%;
@@ -732,7 +732,7 @@ This code is copied from Alvaro Montoro.
   top: 60%;
   animation-delay: -0.4s;
 }
-  
+
 
 header {
   background-color: #303030; /* Dark background */
@@ -744,7 +744,7 @@ header {
 .main-nav {
   display: flex;
   justify-content: left; /* Center the menu in the header */
-  
+
 }
 
 .menu {
@@ -769,7 +769,7 @@ header {
   text-decoration: none;
   color: #c0c0c0;
   font-size: 12px;
-  
+
 }
 .menu-item span {
   display: block;
@@ -777,7 +777,7 @@ header {
   text-decoration: none;
   color: #c0c0c0;
   font-size: 18px;
-  
+
 }
 
 .menu-item a:hover {
@@ -815,10 +815,10 @@ header {
 }
 
 .menu-item:hover .dropdown {
-  display: block; 
+  display: block;
 }
 
-  
+
 @keyframes fadeColor {
   0% {
     color: #c0c0c0;
