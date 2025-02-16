@@ -136,11 +136,11 @@ var upgrades = {
     {
         "title": "Composter Speed",
         "items": ['a', 'b', 'a', 'b', 'a', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c'],
-        "counts": [16, 2, 32, 4, 64, 8, 1, 16, 2, 32, 3, 48, 4, 64, 6, 96, 8, 128, 10, 192, 13, 256, 16, 320, 20],
+        "counts": [128, 2, 256, 4, 512, 8, 8, 16, 16, 32, 24, 48, 32, 64, 48, 96, 64, 128, 80, 192, 104, 256, 128, 320, 160],
         "a": {
-            "name": "Enchanted Hay Bale",
-            "cost": 7776,
-            "target": "enchanted_hay_bale",
+            "name": "Enchanted Wheat",
+            "cost": 960,
+            "target": "enchanted_wheat",
         },
         "b": {
             "name": "Enchanted Golden Carrot",
@@ -148,9 +148,9 @@ var upgrades = {
             "target": "enchanted_golden_carrot",
         },
         "c": {
-            "name": "Tightly-Tied Hay Bale",
-            "cost": 1119744,  
-            "target": "tightly_tied_hay_bale",
+            "name": "Enchanted Hay Bale",
+            "cost": 153600,  
+            "target": "enchanted_hay_bale",
         },
     },
     "multi_drop": 
