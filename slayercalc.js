@@ -45,13 +45,21 @@ function updateChances(weights, extraweights){
     if (frac.value == 0){
         for (var key in weights){
             var chance = (weights[key] / mfweight) * 100;
-            chances[key] = weights[key]/mfweight;
+            try {
+                chances[key] = weights[key]/mfweight;
+            } catch {
+
+            }
             document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
         }
     } else {
         for (var key in weights){
             var chance = (weights[key] / mfweight);
-            chances[key] = weights[key]/mfweight;
+            try {
+                chances[key] = weights[key]/mfweight;
+            } catch {
+
+            }
             var denom = Math.ceil(1/chance);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
@@ -84,13 +92,21 @@ function updateChances(weights, extraweights){
     if (frac.value == 0){
         for (var key in extraweights){
             var chance = (extraweights[key] / mfextraweight) * 100;
-            chances[key] = extraweights[key]/mfweight;
+            try {
+                chances[key] = extraweights[key]/mfweight;
+            } catch {
+
+            }
             document.getElementById("chance_" + key).innerText = chance.toFixed(3) + "%";
         }
     } else {
         for (var key in extraweights){
             var chance = (extraweights[key] / mfextraweight);
-            chances[key] = extraweights[key]/mfweight;
+            try {
+                chances[key] = extraweights[key]/mfweight;
+            } catch {
+
+            }
             var denom = Math.ceil(1/chance);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
