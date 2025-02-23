@@ -818,6 +818,10 @@ header {
   display: block;
 }
 
+td:has(> span.basictext):nth-child(2) {
+  text-align: right;
+}
+
 
 @keyframes fadeColor {
   0% {
@@ -861,7 +865,7 @@ header {
     display: inline-block;
     border: solid 2px;
     width: 22.5%
-  
+
 }
 
 .selectorspan {
