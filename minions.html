@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+  <html lang = "en">
+    <head>
+      <title>adjectils - Garden</title>
+      <link rel="stylesheet" href="stylesheet.css">
+      <meta name = "description" content = "Botanical utilities for Hypixel SkyBlock">
+      <meta name = "author" content = "adjective_n0un">
+      <meta name = "viewport" content="width=device-width, initial-scale=0.6">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+      <link rel="manifest" href="./favicon/site.webmanifest">
+      <script type="text/javascript" src="/jquery-3.6.3.min.js"></script>
+      <script src = "miniondata.js"></script>
+    </head>
+  <body onload="updatePage()">
+  
+      <script>
+      $(function(){
+        $("#nav").load("nav.html"); 
+        $("#footer").load("footer.html", function() { setWord(); }); 
+      });
+      </script>
+  <header id = "nav" class = navblock></header>
+  <div style = "margin-bottom: 30px;">&nbsp;</div>
+      <div class = "fadeRed">This page is a work-in-progress and does not currently function.</div>
+      <div id = globalupgrades style = "margin:10px;padding:10px;">
+        
+      </div>
+    <table id = "miniontable" style = "width:min(calc(100% - 30px), max(1200px, 70%))">
+      
+    </table>
+    <button style = "width:80px;" onclick = "pasteall()">Paste All</button>
+
+       
+
+  <span id = "footer"></span>
+  </body>
+  <script>
+    pagedata = ["Minions", "#d0a040"];
+    function updatePage(){
+
+        initializeTable();
+
+        addSelectorSpan(globalupgrades, "beacon", "Beacon boost: ", "");
+        addSelectorSpan(globalupgrades, "crystal", "Crystal active: ", "");
+        addSelectorSpan(globalupgrades, "postcard", "Postcard: ", "");
+        addSelectorSpan(globalupgrades, "mayor", "Mayor: ", "");
+        addSelectorSpan(globalupgrades, "pet", "Pet: ", "");
+        let beaconselector = document.getElementById('beacon');
+        if (beaconselector) {
+            beaconselector.replaceChildren();
+            for (let i = 0; i <= 11; i++) {
+              if (i != 1) {
+                let option = document.createElement("option");
+                let text = i + "%";
+                option.innerText = text;
+                option.value = i/100;
+                beaconselector.appendChild(option);
+              }
+                
+            }
+        }
+        let crystalselector = document.getElementById('crystal');
+        if (crystalselector) {
+          crystalselector.replaceChildren();
+            for (let i = 0; i < crystals.length; i++) {
+                let option = document.createElement("option");
+                let text = crystals[i];
+                option.innerText = text;
+                option.value = crystals[i];
+                crystalselector.appendChild(option);
+            }
+        }
+        let postcardselector = document.getElementById('postcard');
+        if (postcardselector) {
+          postcardselector.replaceChildren();
+            let option = document.createElement("option");
+            option.innerText = "No";
+            option.value = 0;
+            postcardselector.appendChild(option);
+            let option2 = document.createElement("option");
+            option2.innerText = "Yes";
+            option2.value = 0.05;
+            postcardselector.appendChild(option2);
+        }
+        let mayorselector = document.getElementById('mayor');
+        if (mayorselector) {
+          mayorselector.replaceChildren();
+            let option = document.createElement("option");
+            option.innerText = "None";
+            option.value = 0;
+            mayorselector.appendChild(option);
+            let option2 = document.createElement("option");
+            option2.innerText = "Cole";
+            option2.value = "cole";
+            mayorselector.appendChild(option2);
+            let option3 = document.createElement("option");
+            option3.innerText = "Derpy";
+            option3.value = "derpy";
+            mayorselector.appendChild(option3);
+        }
+        let petselector = document.getElementById('pet');
+        if (petselector) {
+          petselector.replaceChildren();
+            for (let i = 0; i < pets.length; i++) {
+                let option = document.createElement("option");
+                let text = pets[i];
+                option.innerText = text;
+                option.value = pets[i];
+                petselector.appendChild(option);
+            }
+        }
+    }
+
+    function initializeTable() {
+      //clears the table
+      document.getElementById("miniontable").innerHTML = "";
+
+      for (let i = 0; i < 31; i++) {
+        let box = document.createElement("div");
+        box.className = "minionbox";
+        box.id = "minion" + i;
+        box.style.padding = "5px";
+        box.style.margin = "5px";
+
+        let minionname = document.createElement("span");
+        minionname.innerText = "Acacia Minion I";
+        minionname.style.fontSize = "18px";
+        minionname.style.paddingBottom = "5px";
+        minionname.style.marginBottom = "5px";
+        minionname.id = "name" + i;
+        box.appendChild(minionname);
+
+        addSelectorSpan(box, "type", "Minion Type: ", i);
+        addSelectorSpan(box, "tier", "Minion Tier: ", i);
+        addSelectorSpan(box, "fuel", "Active Fuel: ", i);
+        addSelectorSpan(box, "up1", "Upgrade 1: ", i);
+        addSelectorSpan(box, "up2", "Upgrade 2: ", i);
+        addSelectorSpan(box, "auto", "Auto-sell: ", i);     
+        addSelectorSpan(box, "freewill", "Free Will: ", i);    
+        addSelectorSpan(box, "infusion", "Mithril Infusion: ", i); 
+        
+        let copybutton = document.createElement("button");
+        copybutton.onclick = function() {
+            copyminion(i);
+        };
+        copybutton.style.width = "80px";
+        copybutton.innerText = "Copy";
+        box.appendChild(copybutton);
+        let pastebutton = document.createElement("button");
+        pastebutton.onclick = function() {
+            pasteminion(i);
+        };
+        pastebutton.style.width = "80px";
+        pastebutton.innerText = "Paste";
+        box.appendChild(pastebutton);
+
+        miniontable.appendChild(box); 
+      } 
+      
+      for (let i = 0; i < 31; i++) {
+        
+        let selector = document.getElementById(`type${i}`);
+        if (selector) {
+          selector.replaceChildren();
+            
+            // Add new options
+            for (let key in miniondata) {
+              let option = document.createElement("option");
+              let name = key.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+              option.innerText = name;
+              option.value = key;
+              selector.appendChild(option);
+            }
+            
+        
+        }
+        let tierselector = document.getElementById(`tier${i}`);
+        if (tierselector) {
+            tierselector.replaceChildren();
+            //Note to self: Make t12 option appear when applicable
+            for (let i = 1; i <= 11; i++) {
+                let option = document.createElement("option");
+                let text = romanNumeral(i);
+                option.innerText = text;
+                option.value = i;
+                tierselector.appendChild(option);
+            }
+        }
+        let autosellselector = document.getElementById(`auto${i}`);
+        if (autosellselector) {
+            autosellselector.replaceChildren();
+            let option = document.createElement("option");
+            option.innerText = "None";
+            option.value = 0;
+            autosellselector.appendChild(option);
+            option = document.createElement("option");
+            option.innerText = "Budget Hopper";
+            option.value = 0.5;
+            autosellselector.appendChild(option);
+            option = document.createElement("option");
+            option.innerText = "Enchanted Hopper";
+            option.value = 0.9;
+            autosellselector.appendChild(option);
+        }
+        let willselector = document.getElementById(`freewill${i}`);
+        if (willselector) {
+            willselector.replaceChildren();
+            let option = document.createElement("option");
+            option.innerText = "Yes";
+            option.value = 0;
+            willselector.appendChild(option);
+            option = document.createElement("option");
+            option.innerText = "No";
+            option.value = 0.1;
+            willselector.appendChild(option);
+        }
+        let infusionselector = document.getElementById(`infusion${i}`);
+        if (infusionselector) {
+            infusionselector.replaceChildren();
+            let option = document.createElement("option");
+            option.innerText = "Yes";
+            option.value = 0;
+            infusionselector.appendChild(option);
+            option = document.createElement("option");
+            option.innerText = "No";
+            option.value = 0.1;
+            infusionselector.appendChild(option);
+        }
+        let up1selector = document.getElementById(`up1${i}`);
+        if (up1selector) {
+            up1selector.replaceChildren();
+            for (let i = 0; i < upgradelist.length; i++) {
+                let option = document.createElement("option");
+                let text = upgradelist[i];
+                option.innerText = text;
+                option.value = upgradelist[i];
+                up1selector.appendChild(option);
+            }
+        }
+        let up2selector = document.getElementById(`up2${i}`);
+        if (up2selector) {
+            up2selector.replaceChildren();
+            for (let i = 0; i < upgradelist.length; i++) {
+                let option = document.createElement("option");
+                let text = upgradelist[i];
+                option.innerText = text;
+                option.value = upgradelist[i];
+                up2selector.appendChild(option);
+            }
+        }
+        let fuelselector = document.getElementById(`fuel${i}`);
+        if (fuelselector) {
+          fuelselector.replaceChildren();
+            for (let key in fuels) {
+                let option = document.createElement("option");
+                let text = fuels[key].plaintext;
+                option.innerText = text;
+                option.value = key;
+                fuelselector.appendChild(option);
+            }
+        }
+
+
+        
+        
+      }
+      
+
+      
+    }
+
+    function addSelectorSpan(box, name, text, i) {
+        let entry = document.createElement("span");
+        entry.innerText = text;
+        entry.className = "selectorspan";
+        let selector = document.createElement("select");
+        selector.id = name + i;
+        selector.addEventListener("change", function() {
+          updateMinion(i);
+        });
+        entry.appendChild(selector);
+        
+        box.appendChild(entry);
+    }
+    function romanNumeral(num) {
+        var conversions = {
+            1000: "M",
+            900: "CM",
+            500: "D",
+            400: "CD",
+            100: "C",
+            90: "XC",
+            50: "L",
+            40: "XL",
+            10: "X",
+            9: "IX",
+            5: "V",
+            4: "IV",
+            1: "I",
+        };
+
+        let result = "";
+        var keys = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        for (var i = 0; i < keys.length; i++) {
+            while (num >= keys[i]) {
+                result += conversions[keys[i]];
+                num -= keys[i];
+            }
+        }
+        return result;
+    }
+
+    function updateMinion(number) {
+      console.log("Called on number " + number);
+      
+      try {
+        var test = document.getElementById("beacon").value;
+      } catch (Error) {
+        return -1;
+      }
+      document.getElementById("name" + number).innerText = document.getElementById("type" + number).value.toLowerCase().replace(/\b\w/g, char => char.toUpperCase()) + " Minion " + romanNumeral(document.getElementById("tier" + number).value)
+      var totalboost = 0.0;
+      totalboost += Number(beacon.value);
+      totalboost += Number(postcard.value);
+      totalboost += Number(fuels[document.getElementById("fuel" + number).value].boost);
+
+      console.log(totalboost);
+
+    }
+
+    function copyminion(number) {
+        console.log("type" + number);
+        pastedata["type"] = document.getElementById("type" + number).value;
+        pastedata["tier"] = document.getElementById("tier" + number).value;
+        pastedata["fuel"] = document.getElementById("fuel" + number).value;
+        pastedata["autosell"] = document.getElementById("auto" + number).value;
+        pastedata["up1"] = document.getElementById("up1" + number).value;
+        pastedata["up2"] = document.getElementById("up2" + number).value;
+        pastedata["freewill"] = document.getElementById("freewill" + number).value;
+        pastedata["infusion"] = document.getElementById("infusion" + number).value;
+    }
+    function pasteminion(number) {
+
+      if (pastedata["type"] == "") {
+        return -1;
+      }
+      document.getElementById("type" + number).value = pastedata["type"];
+      document.getElementById("tier" + number).value = pastedata["tier"];
+      document.getElementById("fuel" + number).value = pastedata["fuel"];
+      document.getElementById("auto" + number).value = pastedata["autosell"];
+      document.getElementById("up1" + number).value = pastedata["up1"];
+      document.getElementById("up2" + number).value = pastedata["up2"];
+      document.getElementById("freewill" + number).value = pastedata["freewill"];
+      document.getElementById("infusion" + number).value = pastedata["infusion"];
+      updateMinion(number);
+    }
+    function pasteall() {
+      if (pastedata["type"] != ""){
+        for (let i = 0; i < 31; i++) {
+          pasteminion(i);
+        }
+      }
+      
+    }
+
+
+    var pastedata = {
+      "type": "",
+      "tier": "",
+      "fuel": "",
+      "autosell": "",
+      "up1": "",
+      "up2": "",
+      "freewill": "",
+      "infusion": "",
+    }
+
+  </script>

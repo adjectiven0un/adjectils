@@ -18,9 +18,11 @@ var miniondata = {
                 "quantity": 4,
                 "price": 2
             }
-        }
+        },
+        "type": "foraging",
     },
     "BIRCH": {
+        "type": "foraging",
         "tiers": [
             48,
             48,
@@ -42,6 +44,7 @@ var miniondata = {
         }
     },
     "BLAZE": {
+        "type": "combat",
         "tiers": [
             33,
             33,
@@ -64,6 +67,7 @@ var miniondata = {
         }
     },
     "CACTUS": {
+        "type": "farming",
         "tiers": [
             27,
             27,
@@ -86,6 +90,7 @@ var miniondata = {
         }
     },
     "CARROT": {
+        "type": "farming",
         "tiers": [
             20,
             20,
@@ -108,6 +113,7 @@ var miniondata = {
         }
     },
     "CAVE SPIDER": {
+        "type": "combat",
         "tiers": [
             26,
             26,
@@ -133,6 +139,7 @@ var miniondata = {
         }
     },
     "CHICKEN": {
+        "type": "farming",
         "tiers": [
             26,
             26,
@@ -163,6 +170,7 @@ var miniondata = {
         }
     },
     "CLAY": {
+        "type": "fishing",
         "tiers": [
             32,
             32,
@@ -184,6 +192,7 @@ var miniondata = {
         }
     },
     "COAL": {
+        "type": "mining",
         "tiers": [
             15,
             15,
@@ -206,6 +215,7 @@ var miniondata = {
         }
     },
     "COBBLESTONE": {
+        "type": "mining",
         "tiers": [
             14,
             14,
@@ -228,6 +238,7 @@ var miniondata = {
         }
     },
     "COCOA BEANS": {
+        "type": "farming",
         "tiers": [
             27,
             27,
@@ -250,6 +261,7 @@ var miniondata = {
         }
     },
     "COW": {
+        "type": "farming",
         "tiers": [
             26,
             26,
@@ -276,6 +288,7 @@ var miniondata = {
         }
     },
     "CREEPER": {
+        "type": "combat",
         "tiers": [
             27,
             27,
@@ -297,6 +310,7 @@ var miniondata = {
         }
     },
     "DARK OAK": {
+        "type": "foraging",
         "tiers": [
             48,
             48,
@@ -318,6 +332,7 @@ var miniondata = {
         }
     },
     "DIAMOND": {
+        "type": "mining",
         "tiers": [
             29,
             29,
@@ -340,6 +355,7 @@ var miniondata = {
         }
     },
     "EMERALD": {
+        "type": "mining",
         "tiers": [
             28,
             28,
@@ -362,6 +378,7 @@ var miniondata = {
         }
     },
     "END STONE": {
+        "type": "mining",
         "tiers": [
             26,
             26,
@@ -383,6 +400,7 @@ var miniondata = {
         }
     },
     "ENDERMAN": {
+        "type": "combat",
         "tiers": [
             32,
             32,
@@ -404,6 +422,7 @@ var miniondata = {
         }
     },
     "FISHING": {
+        "type": "fishing",
         "tiers": [
             78,
             75,
@@ -449,6 +468,7 @@ var miniondata = {
         }
     },
     "FLOWER": {
+        "type": "foraging",
         "tiers": [
             30,
             29,
@@ -471,6 +491,7 @@ var miniondata = {
         }
     },
     "GHAST": {
+        "type": "combat",
         "tiers": [
             50,
             50,
@@ -493,6 +514,7 @@ var miniondata = {
         }
     },
     "GLOWSTONE": {
+        "type": "mining",
         "tiers": [
             25,
             25,
@@ -515,6 +537,7 @@ var miniondata = {
         }
     },
     "GOLD": {
+        "type": "mining",
         "tiers": [
             22,
             22,
@@ -537,6 +560,7 @@ var miniondata = {
         }
     },
     "GRAVEL": {
+        "type": "mining",
         "tiers": [
             26,
             26,
@@ -562,6 +586,7 @@ var miniondata = {
         }
     },
     "HARD STONE": {
+        "type": "mining",
         "tiers": [
             14,
             14,
@@ -584,6 +609,8 @@ var miniondata = {
         }
     },
     "ICE": {
+        "type": "mining",
+        "cold": true,
         "tiers": [
             14,
             14,
@@ -606,6 +633,7 @@ var miniondata = {
         }
     },
     "INFERNO": {
+        "type": "combat",
         "tiers": [
             1102,
             1068,
@@ -627,6 +655,7 @@ var miniondata = {
         }
     },
     "IRON": {
+        "type": "mining",
         "tiers": [
             17,
             17,
@@ -649,6 +678,7 @@ var miniondata = {
         }
     },
     "JUNGLE": {
+        "type": "foraging",
         "tiers": [
             48,
             48,
@@ -670,6 +700,7 @@ var miniondata = {
         }
     },
     "LAPIS": {
+        "type": "mining",
         "tiers": [
             29,
             29,
@@ -692,6 +723,7 @@ var miniondata = {
         }
     },
     "MAGMA CUBE": {
+        "type": "combat",
         "tiers": [
             32,
             32,
@@ -714,6 +746,7 @@ var miniondata = {
         }
     },
     "MELON": {
+        "type": "farming",   
         "tiers": [
             24,
             24,
@@ -736,6 +769,7 @@ var miniondata = {
         }
     },
     "MITHRIL": {
+        "type": "mining",
         "tiers": [
             80,
             80,
@@ -758,6 +792,7 @@ var miniondata = {
         }
     },
     "MUSHROOM": {
+        "type": "farming",
         "tiers": [
             30,
             30,
@@ -784,6 +819,7 @@ var miniondata = {
         }
     },
     "MYCELIUM": {
+        "type": "mining",
         "tiers": [
             26,
             25,
@@ -806,6 +842,7 @@ var miniondata = {
         }
     },
     "NETHER WART": {
+        "type": "farming",
         "tiers": [
             50,
             50,
@@ -828,6 +865,7 @@ var miniondata = {
         }
     },
     "OAK": {
+        "type": "foraging",
         "tiers": [
             48,
             48,
@@ -849,6 +887,7 @@ var miniondata = {
         }
     },
     "OBSIDIAN": {
+        "type": "mining",
         "tiers": [
             45,
             45,
@@ -871,6 +910,7 @@ var miniondata = {
         }
     },
     "PIG": {
+        "type": "farming",
         "tiers": [
             26,
             26,
@@ -893,6 +933,7 @@ var miniondata = {
         }
     },
     "POTATO": {
+        "type": "farming",
         "tiers": [
             20,
             20,
@@ -915,6 +956,7 @@ var miniondata = {
         }
     },
     "PUMPKIN": {
+        "type": "farming",
         "tiers": [
             32,
             32,
@@ -937,6 +979,7 @@ var miniondata = {
         }
     },
     "QUARTZ": {
+        "type": "mining",
         "tiers": [
             22.5,
             22.5,
@@ -959,6 +1002,7 @@ var miniondata = {
         }
     },
     "RABBIT": {
+        "type": "farming",
         "tiers": [
             26,
             26,
@@ -989,6 +1033,7 @@ var miniondata = {
         }
     },
     "RED SAND": {
+        "type": "mining",
         "tiers": [
             26,
             25,
@@ -1011,6 +1056,7 @@ var miniondata = {
         }
     },
     "REDSTONE": {
+        "type": "mining",
         "tiers": [
             29,
             29,
@@ -1033,6 +1079,7 @@ var miniondata = {
         }
     },
     "REVENANT": {
+        "type": "combat",
         "tiers": [
             29,
             29,
@@ -1059,6 +1106,7 @@ var miniondata = {
         }
     },
     "SAND": {
+        "type": "mining",
         "tiers": [
             26,
             26,
@@ -1080,6 +1128,7 @@ var miniondata = {
         }
     },
     "SHEEP": {
+        "type": "farming",
         "tiers": [
             24,
             24,
@@ -1106,6 +1155,7 @@ var miniondata = {
         }
     },
     "SKELETON": {
+        "type": "combat",
         "tiers": [
             26,
             26,
@@ -1127,6 +1177,7 @@ var miniondata = {
         }
     },
     "SLIME": {
+        "type": "combat",
         "tiers": [
             26,
             26,
@@ -1148,6 +1199,8 @@ var miniondata = {
         }
     },
     "SNOW": {
+        "type": "mining",
+        "cold": true,
         "tiers": [
             13,
             13,
@@ -1170,6 +1223,7 @@ var miniondata = {
         }
     },
     "SPIDER": {
+        "type": "combat",
         "tiers": [
             26,
             26,
@@ -1195,6 +1249,7 @@ var miniondata = {
         }
     },
     "SPRUCE": {
+        "type": "foraging",
         "tiers": [
             48,
             48,
@@ -1216,6 +1271,7 @@ var miniondata = {
         }
     },
     "SUGAR CANE": {
+        "type": "farming",
         "tiers": [
             22,
             22,
@@ -1238,6 +1294,7 @@ var miniondata = {
         }
     },
     "TARANTULA": {
+        "type": "combat",
         "tiers": [
             29,
             29,
@@ -1267,6 +1324,7 @@ var miniondata = {
         }
     },
     "VOIDLING": {
+        "type": "combat",
         "tiers": [
             45,
             45,
@@ -1292,6 +1350,7 @@ var miniondata = {
         }
     },
     "WHEAT": {
+        "type": "farming",
         "tiers": [
             15,
             15,
@@ -1318,6 +1377,7 @@ var miniondata = {
         }
     },
     "ZOMBIE": {
+        "type": "combat",
         "tiers": [
             26,
             26,
@@ -1350,4 +1410,132 @@ var miniondata = {
             }
         }
     }
+}
+
+var upgradelist = ["None", "Flycatcher", "Minion Expander", "Berberis Injector", "Diamond Spreading", "Enchanted Egg", "Lesser Soulflow Engine", "Soulflow Engine", "Krampus Helmet", "Potato Spreading", "Sleepy Hollow"];
+var crystals = ["None", "Mining", "Farm", "Woodcutting", "Winter"];
+var pets = ["None", "Chicken", "Magma Cube", "Mooshroom Cow", "Ocelot", "Pigman", "Rabbit", "Snail", "Spider"];
+var upgradedata = {
+    "Flycatcher": {
+        boost: 0.2,
+        target: "all",
+    },  
+    "Minion Expander": {
+        boost: 0.05,
+        target: "all",
+    },
+    "Berberis Injector": {
+        boost: 0.15,
+        target: "farming",
+    },
+
+}
+var crystaldata = {
+    "Mining": {
+        boost: 0.10,
+        target: "mining",
+    },
+    "Farm": {
+        boost: 0.10,
+        target: "farming",
+    },
+    "Woodcutting": {
+        boost: 0.10,
+        target: "foraging",
+        
+    },
+    "Winter": {
+        boost: 0.05,
+        target: "cold",
+    }
+}
+
+var fuels = {
+    "NONE": {
+        plaintext: "None",
+        boost: 0,
+        duration: Infinity,
+    },
+    "ENCHANTED_LAVA_BUCKET": {
+        plaintext: "Ench. Lava Bucket",
+        boost: 0.25,
+        duration: Infinity,
+    },
+    "MAGMA_BUCKET": {
+        plaintext: "Magma Bucket",
+        boost: 0.30,
+        duration: Infinity,
+    },
+    "PLASMA_BUCKET": {
+        plaintext: "Plasma Bucket",
+        boost: 0.35,
+        duration: Infinity,
+    },
+    "EVERBURNING_FLAME": {
+        plaintext: "Everburning Flame",
+        boost: 0.35,
+        duration: 10800,
+    },
+    "HYPER_CATALYST": {
+        plaintext: "Hyper Catalyst",
+        boost: 3,
+        duration: 21600,
+    },
+    "CATALYST": {
+        plaintext: "Catalyst",
+        boost: 2,
+        duration: 10800,
+    },
+    "TASTY_CHEESE": {
+        plaintext: "Tasty Cheese",
+        boost: 1,
+        duration: 3600,
+    },
+    "FOUL_FLESH": {
+        plaintext: "Foul Flesh",
+        boost: 0.9,
+        duration: 18000,
+    },
+    "HAMSTER_WHEEL": {
+        plaintext: "Hamster Wheel",
+        boost: 0.5,
+        duration: 86400,
+    },
+    "ENCHANTED_CHARCOAL": {
+        plaintext: "Enchanted Charcoal",
+        boost: 0.25,
+        duration: 129600,
+    },
+    "SOLAR_PANEL": {
+        plaintext: "Solar Panel",
+        boost: 0.125,
+        duration: Infinity,
+    },
+    "CATALYST": {
+        plaintext: "Catalyst",
+        boost: 2,
+        duration: 10800,
+    },
+    "ENCHANTED_COAL": {
+        plaintext: "Enchanted Coal",
+        boost: 0.1,
+        duration: 86400,
+    },
+    "ENCHANTED_BREAD": {
+        plaintext: "Enchanted Bread",
+        boost: 0.05,
+        duration: 43200,
+    },
+    "COAL_BLOCK": {
+        plaintext: "Block of Coal",
+        boost: 0.05,
+        duration: 18000,
+    },
+    "COAL": {
+        plaintext: "Coal",
+        boost: 0.05,
+        duration: 1800,
+    },
+    
+    
 }
