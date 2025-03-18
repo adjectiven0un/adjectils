@@ -95,6 +95,15 @@
                         <option value = "4">Crystal Hollows</option>
                         <option value = "5">Goblin Holdout</option>
                         <option value = "6">Abandoned Quarry</option>
+                        <option value = "7">Backwater Bayou</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Hotspot active:
+                    <select id = hotspot value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Not active</option>
+                        <option value = "1">Active</option>
                     </select>
                     </label>
                 </form>
@@ -133,15 +142,26 @@
                         <option value = "Frozen">Frozen Bait</option>
                         <option value = "Worm">Worm Bait</option>
                         <option value = "Whale">Whale Bait</option>
+                        <option value = "Hotspot">Hotspot Bait</option>
                     </select>
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
-                    <label>Rod:
-                    <select id = rod value = "Other" onchange = updateWaterTable()>
-                        <option value = "Other">Other</option>
-                        <option value = "Yeti">Yeti Rod</option>
-                        <option value = "Auger">Auger Rod</option>
+                    <label>Hook:
+                    <select id = hook value = "None" onchange = updateWaterTable()>
+                        <option value = "None">None</option>
+                        <option value = "Common">Common Hook</option>
+                        <option value = "Phantom">Phantom Hook</option>
+                        <option value = "Oasis">Oasis Hook</option>
+                        <option value = "Hotspot">Hotspot Hook</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Sinker:
+                    <select id = sinker value = "None" onchange = updateWaterTable()>
+                        <option value = "None">None</option>
+                        <option value = "Icy">Icy Sinker</option>
                     </select>
                     </label>
                 </form>
@@ -208,6 +228,7 @@
                         <option value = "0">Something else</option>
                         <option value = "1">Mythic Bat</option>
                         <option value = "2">Legendary Megalodon</option>
+                        <option value = "3">Mythic Hermit Crab</option>
                     </select>
                     Level: <input type = "number" id = "petlevel" value = "100" style = "height:16px;width:48px" onchange = updateWaterTable()></label>
                 </form>
@@ -230,10 +251,27 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
+                    <label>Hotspot active:
+                    <select id = lavahotspot value = "0" onchange = updateLavaTable()>
+                        <option value = "0">Not active</option>
+                        <option value = "1">Active</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
                     <label>Bait:
                     <select id = lavabait value = "None" onchange = updateLavaTable()>
                         <option value = "None">No bait</option>
                         <option value = "Whale">Whale Bait</option>
+                        <option value = "Hotspot">Hotspot Bait</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Hook:
+                    <select id = lavahook value = "None" onchange = updateLavaTable()>
+                        <option value = "None">No hook</option>
+                        <option value = "Hotspot">Hotspot Hook</option>
                     </select>
                     </label>
                 </form>
@@ -252,6 +290,14 @@
                         <option value = "1">Equipped</option>
                     </select>
                     </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
+                    <label>Pet:
+                    <select id = lavapetselected value = "0" onchange = updateLavaTable()>
+                        <option value = "0">Something else</option>
+                        <option value = "1">Mythic Hermit Crab</option>
+                    </select>
+                    Level: <input type = "number" id = "lavapetlevel" value = "100" style = "height:16px;width:48px" onchange = updateWaterTable()></label>
                 </form>
                 <table id = "lavatable" style = "border-width:1px; margin-top:10px;">
 
@@ -544,7 +590,7 @@ pagedata = ["Fishing", "#78abde"];
 
             watertable.innerHTML = "";
 
-            const waterscweights = {
+            var waterscweights = {
                 "squid": 1200,
                 "agarimoo": 950,
                 "sea_walker": 800,
@@ -581,6 +627,16 @@ pagedata = ["Fishing", "#78abde"];
                 "blue_shark": 550,
                 "tiger_shark": 300,
                 "great_white_shark": 150,
+                "trash_gobbler": 750,
+                "dumpster_diver": 500,
+                "banshee": 300,
+                "bayou_sludge": 100,
+                "alligator": 25,
+                "titanoboa": 10,
+                "frog_man": 1000,
+                "snapping_turtle": 250,
+                "blue_ringed_octopus": 25,
+                "wiki_tiki": 5,
                 "None": 0,
             }
 
@@ -621,6 +677,17 @@ pagedata = ["Fishing", "#78abde"];
                     activewaterscs.push(minesscs[i]);
                 }
             }
+            if (locationwater.value == "7"){
+                for (var i = 0; i < bayouscs.length; i++){
+                    activewaterscs.push(bayouscs[i]);
+                }
+                if (hotspot.value == "1") {
+                    for (var i = 0; i < bayouhotspotscs.length; i++) {
+                        activewaterscs.push(bayouhotspotscs[i]);
+                    }
+                }
+            }
+            
             if (spookyfest.value == "1"){
                 for (var i = 0; i < spookyscs.length; i++){
                     activewaterscs.push(spookyscs[i]);
@@ -646,6 +713,7 @@ pagedata = ["Fishing", "#78abde"];
                 
             }
             
+            
 
             
 
@@ -662,6 +730,12 @@ pagedata = ["Fishing", "#78abde"];
             if (petselected.value == 2){
                 for (var i = 0; i < sharkscs.length; i++){
                     waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * (1.1 + (parseFloat(petlevel.value) * 0.001));
+                }
+                
+            }
+            if (petselected.value == 3){
+                for (var i = 0; i < bayouhotspotscs.length; i++){
+                    waterscweights[bayouhotspotscs[i]] = waterscweights[bayouhotspotscs[i]] * (1 + (parseFloat(petlevel.value) * 0.002));
                 }
                 
             }
@@ -687,16 +761,38 @@ pagedata = ["Fishing", "#78abde"];
                     }
                 }
             }
-            if (rod.value == "Yeti") {
-                for (var i = 0; i < winterscs.length; i++){
-                    waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 2;
+            if (bait.value == "Hotspot") {
+                for (var i = 0; i < bayouhotspotscs.length; i++){
+                    waterscweights[bayouhotspotscs[i]] = waterscweights[bayouhotspotscs[i]] * 1.5;
                 }
             }
-            if (rod.value == "Auger") {
+            if (hook.value == "Common") {
+                for (var i = 0; i < activewaterscs.length; i++){
+                    console.log(scrarities[activewaterscs[i]]);
+                    if (scrarities[activewaterscs[i]] == "common") {
+                        waterscweights[activewaterscs[i]] *= 1.25;
+                    }
+                }
+            }
+            if (hook.value == "Phantom") {
+                for (var i = 0; i < spookyscs.length; i++){
+                    waterscweights[spookyscs[i]] = waterscweights[spookyscs[i]] * 1.35;
+                }
+            }
+            if (hook.value == "Hotspot") {
+                for (var i = 0; i < bayouhotspotscs.length; i++){
+                    waterscweights[bayouhotspotscs[i]] = waterscweights[bayouhotspotscs[i]] * 2;
+                }
+            }
+            if (hook.value == "Oasis") {
+                //Oasis hook does nothing as of right now
+            }
+            if (sinker.value == "Icy") {
                 for (var i = 0; i < winterscs.length; i++){
                     waterscweights[winterscs[i]] = waterscweights[winterscs[i]] * 3;
                 }
             }
+            
             if (squidhat.value == "1") {
                 for (var i = 0; i < squids.length; i++){
                     waterscweights[squids[i]] = waterscweights[squids[i]] * 2;
@@ -737,7 +833,7 @@ pagedata = ["Fishing", "#78abde"];
                 infotd.style.color = raritycolors2[scrarities[activewaterscs[i]]];
                 var chancetd = document.createElement("td");
                 if (totalwaterweight != 0){
-                    chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(2) + "%";
+                    chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(3) + "%";
                 } else {
                     chancetd.innerText = "100%";
                     infotd.innerText = "None";
@@ -756,17 +852,21 @@ pagedata = ["Fishing", "#78abde"];
             // Initialization
 
             lavatable.innerHTML = "";
-            const lavascweights = {
+            var lavascweights = {
                 "magma_slug": 1600,
                 "moogma": 1200,
+                "fried_chicken": 1000,
                 "lava_leech": 600,
                 "pyroclastic_worm": 400,
                 "lava_flame": 360,
                 "fire_eel": 280,
+                "fireproof_witch": 250,
                 "taurus": 160,
+                "fiery_scuttler": 25,
                 "plhlegblast": 0,
                 "thunder": 40,
                 "lord_jawbus": 8,
+                "ragnarok": 5,
                 "flaming_worm": 180,
                 "lava_blaze": 36,
                 "lava_pigman": 36,
@@ -785,10 +885,25 @@ pagedata = ["Fishing", "#78abde"];
                 activelavascs = precursorscs;
             }
             if (locationlava.value == "3") {
-                activelavascs = crimsonscs;
+                if (lavahotspot.value == "1") {
+                    for (var i = 0; i < lavahotspotscs.length; i++) {
+                        activelavascs.push(lavahotspotscs[i]);
+                    }
+                }
+                for (var i = 0; i < crimsonscs.length; i++) {
+                    activelavascs.push(crimsonscs[i]);
+                }
+                
             }
             if (locationlava.value == "4") {
-                activelavascs = plhlegblastscs;
+                if (lavahotspot.value == "1") {
+                    for (var i = 0; i < lavahotspotscs.length; i++) {
+                        activelavascs.push(lavahotspotscs[i]);
+                    }
+                }
+                for (var i = 0; i < plhlegblastscs.length; i++) {
+                    activelavascs.push(plhlegblastscs[i]);
+                }
             }
             if (lavabait.value == "Whale") {
                 for (var i = 0; i < activelavascs.length; i++){
@@ -797,8 +912,25 @@ pagedata = ["Fishing", "#78abde"];
                     }
                 }
             }
+            if (lavabait.value == "Hotspot") {
+                for (var i = 0; i < lavahotspotscs.length; i++){
+                    lavascweights[lavahotspotscs[i]] = lavascweights[lavahotspotscs[i]] * 1.5;
+                }
+            }
+            if (lavahook.value == "Hotspot") {
+                for (var i = 0; i < lavahotspotscs.length; i++){
+                    lavascweights[lavahotspotscs[i]] = lavascweights[lavahotspotscs[i]] * 2;
+                }
+            }
+            if (lavapetselected.value == 1){
+                for (var i = 0; i < lavahotspotscs.length; i++){
+                    lavascweights[lavahotspotscs[i]] = lavascweights[lavahotspotscs[i]] * (1 + (parseFloat(petlevel.value) * 0.002));
+                }
+                
+            }
             if (es9.value == "1") {
                 lavascweights["lord_jawbus"] = lavascweights["lord_jawbus"] * 1.15;
+                lavascweights["ragnarok"] = lavascweights["ragnarok"] * 1.15;
             }
             var totallavaweight = 0;
             for (var i = 0; i < activelavascs.length; i++){
@@ -820,7 +952,7 @@ pagedata = ["Fishing", "#78abde"];
                         lavascweights["plhlegblast"] = 1/499 * totallavaweight;
                         totallavaweight *= 500/499;
                     }
-                    chancetd.innerText = (100 * (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(2) + "%";
+                    chancetd.innerText = (100 * (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(3) + "%";
                 } else {
                     chancetd.innerText = "100%";
                     infotd.innerText = "None";

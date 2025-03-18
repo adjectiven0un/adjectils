@@ -42,19 +42,33 @@ const waterscnames = {
     "blue_shark": "Blue Shark",
     "tiger_shark": "Tiger Shark",
     "great_white_shark": "Great White Shark",
+    "trash_gobbler": "Trash Gobbler",
+    "dumpster_diver": "Dumpster Diver",
+    "banshee": "Banshee",
+    "bayou_sludge": "Bayou Sludge",
+    "alligator": "Alligator",
+    "titanoboa": "Titanoboa",
+    "frog_man": "Frog Man",
+    "snapping_turtle": "Snapping Turtle",
+    "blue_ringed_octopus": "Blue Ringed Octopus",
+    "wiki_tiki": "Wiki Tiki",
     "None": 0,
 }
 const lavascnames = {
     "magma_slug": "Magma Slug",
     "moogma": "Moogma",
+    "fried_chicken": "Fried Chicken",
     "lava_leech": "Lava Leech",
     "pyroclastic_worm": "Pyroclastic Worm",
     "lava_flame": "Lava Flame",
     "fire_eel": "Fire Eel",
+    "fireproof_witch": "Fireproof Witch",
     "taurus": "Taurus",
     "plhlegblast": "Plhlegblast",
+    "fiery_scuttler": "Fiery Scuttler",
     "thunder": "Thunder",
     "lord_jawbus": "Lord Jawbus",
+    "ragnarok": "Ragnarok",
     "flaming_worm": "Flaming Worm",
     "lava_blaze": "Lava Blaze",
     "lava_pigman": "Lava Pigman",
@@ -109,6 +123,20 @@ var scrarities = {
     "flaming_worm": "rare",
     "lava_blaze": "uncommon",
     "lava_pigman": "uncommon",
+    "fried_chicken": "uncommon",
+    "fiery_scuttler": "legendary",
+    "ragnarok": "mythic",
+    "fireproof_witch": "rare",
+    "trash_gobbler": "common",
+    "dumpster_diver": "uncommon",
+    "banshee": "rare",
+    "bayou_sludge": "epic",
+    "alligator": "rare",
+    "titanoboa": "mythic",
+    "frog_man": "common",
+    "snapping_turtle": "rare",
+    "blue_ringed_octopus": "legendary",
+    "wiki_tiki": "mythic",
 }
 var raritycolors2 = {
     "common": "#c0c0c0",
@@ -127,6 +155,9 @@ const squids = ["squid", "night_squid"];
 const oasisscs = ["oasis_rabbit", "oasis_sheep"];
 const goblinscs = ["abyssal_miner", "water_worm", "poisoned_water_worm"];
 const precursorscs = ["flaming_worm"];
+const bayouscs = ["trash_gobbler", "dumpster_diver", "banshee", "bayou_sludge", "alligator", "titanoboa"];
+const bayouhotspotscs = ["frog_man", "snapping_turtle", "blue_ringed_octopus", "wiki_tiki"];
 const magmascs = ["lava_blaze", "lava_pigman"];
-const crimsonscs = ["magma_slug", "moogma", "lava_leech", "pyroclastic_worm", "lava_flame", "fire_eel", "taurus", "thunder", "lord_jawbus"];
+const crimsonscs = ["magma_slug", "moogma", "lava_leech", "pyroclastic_worm", "lava_flame", "fire_eel", "taurus", "thunder", "lord_jawbus",];
+const lavahotspotscs = ["fried_chicken", "fireproof_witch", "fiery_scuttler", "ragnarok"];
 const plhlegblastscs = ["magma_slug", "moogma", "lava_leech", "pyroclastic_worm", "lava_flame", "fire_eel", "taurus", "thunder", "lord_jawbus", "plhlegblast"];
