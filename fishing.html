@@ -221,7 +221,14 @@
                     </select>
                     </label>
                 </form>
-
+                <form action = "#" class = "flex_full_row">
+                    <label>Enderman Slayer Lv9:
+                    <select id = es9water value = "0" onchange = updateWaterTable()>
+                        <option value = "0">No</option>
+                        <option value = "1">Yes</option>
+                    </select>
+                    </label>
+                </form>
                 <form action = "#" class = "flex_full_row">
                     <label>Pet:
                     <select id = petselected value = "0" onchange = updateWaterTable()>
@@ -815,6 +822,14 @@ pagedata = ["Fishing", "#78abde"];
             }
             if (drakepiper.value != "1") {
                 waterscweights["reindrake"] = waterscweights["reindrake"] * parseFloat(drakepiper.value);
+            }
+            if (es9water.value == "1") {
+                for (var i = 0; i < activewaterscs.length; i++){
+                    console.log(scrarities[activewaterscs[i]]);
+                    if (scrarities[activewaterscs[i]] == "mythic") {
+                        waterscweights[activewaterscs[i]] *= 1.15;
+                    }
+                }
             }
 
             // Fill in the water table.
