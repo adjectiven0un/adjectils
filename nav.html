@@ -7,12 +7,13 @@
     <meta name = "author" content = "adjective_n0un">
   </head>
   
-  <body onload = "setWord()">
+  <body onload = "setWord(); afd()">
   <div style = "z-index: 99998">
       <nav class="main-nav">
+        <div class="logo" style = "padding-left:10px; flex:0.2" id = "logobox"><img id = "logo" src = "./favicon/favicon.ico" style = "width:40px; height:40px;"></div>
           <ul class="menu">
-              <li class="menu-item" style = "padding-left:10px; flex:0.2"><img src = "./favicon/favicon.ico" style = "width:40px; height:40px;"></li>
-              <li class = "menu-item"><a href = "index.html" style = "font-size:20px; bottom:3.5px; position: relative;">adjectils</a></li>
+              
+              <li class = "menu-item"><a href = "index.html" id = "homelink" style = "font-size:20px; bottom:3.5px; position: relative;">adjectils</a></li>
               <li class = "menu-item"><span style = "font-size:18px; bottom:2px; position: relative; flex: 1.5" id = "islandname"></span></li>
               <li class="menu-item">
                   <a href="#" style = "font-size:16px">Combat</a>
@@ -117,4 +118,36 @@
           
         }
     }
+
+    var date = new Date();
+    console.log("Month: " + date.getMonth() + " Day: " + date.getDate());
+    if (date.getMonth() == 3 && date.getDate() == 1) {
+      console.log("It's April Fools Day!!!") 
+      const header = document.getElementById("homelink");
+      const config = { childList: true };
+
+      
+      header.innerHTML = `<div style="display: flex; text-wrap: nowrap; align-items: center"><a href="./index.html" target="_blank" style="all: unset"><img src="https://nadeshiko.io/img/logo_svg.svg" height=40; style = "transform:translateY(-5px)"></a></div>`;
+      document.getElementById("logo").src = "./images/info.png";
+      var tooltip = document.createElement("div");
+      tooltip.className = "logotext";
+      var title = document.createElement("span");
+      title.style.fontSize = "20px";
+      title.style.color = "#c0c0c0";
+      title.innerText = "Notice: NadeshikoStats has acquired adjectils";
+
+      var afdtext = document.createElement("span");
+      afdtext.style.fontSize = "16px";
+      afdtext.innerText = "The service formerly known as adjectils has been formally acquired by the development team of NadeshikoStats.\n\nIn the immediate future, there will be no changes to the website's operations. However, the NadeshikoStats team has informed me that multiple subtle visual changes will be made.\n\nI sincerely appreciate all of your support and hope you continue to enjoy using the site!\n\n-adjective_noun";
+
+      tooltip.appendChild(title);
+      tooltip.appendChild(document.createElement("br"));
+      tooltip.appendChild(document.createElement("br"));
+      tooltip.appendChild(afdtext);
+      document.getElementById("logobox").appendChild(tooltip);
+
+      
+      
+    }
+
   </script>

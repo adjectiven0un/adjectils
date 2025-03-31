@@ -879,3 +879,31 @@ td:has(> span.basictext):nth-child(2) {
     width: 45%;
   }
 }
+
+.logo{
+  align-items:center;
+  justify-content: space-evenly;
+  flex-direction:row;
+}
+.logo .logotext {
+  visibility:hidden;
+  transform:translateY(330px);
+  background-color: #282828;
+  width: min(calc(600%), max(600px, 40%));
+  padding: 10px;
+  position: absolute;
+  z-index: 9999999999999;
+  bottom: 125%;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.logo .logotext::after {
+  margin-left: 200px;
+  border-width: 400px;
+  border-style: solid;
+  border-color: #282828;
+}
+.logo:hover .logotext {
+  visibility: visible;
+  opacity: 1;
+}
