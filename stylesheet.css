@@ -4,6 +4,7 @@ body {
     background-color: #282828;
     color: #c0c0c0;
     overflow-x: hidden;
+    font-variant-numeric: tabular-nums;
     /*
     background-attachment: fixed;
     background-image: url("images/background.png");

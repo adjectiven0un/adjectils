@@ -1,0 +1,86 @@
+
+@font-face {
+    font-family: 'InterVariable';
+    src: url('images/InterVariable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'InterVariable', monospace !important;
+    background-color: #f090b0 !important;     
+    font-variant-numeric: tabular-nums !important;
+    backdrop-filter: blur(8px);
+    background-image: url("images/afdbackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: fixed; 
+}
+.flex_index_box {
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;
+}
+.end_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.spider_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.blaze_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.hub_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.dwarven_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.crystal_block{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.flex_cata_box{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.index_box{
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: #ffb0b0;
+    opacity: 80%;    
+}
+.navblock {
+    transform: translateX(-50%) translateY(0px) !important;
+}
+.menu-item {
+    transform:translateY(-5px);
+}
