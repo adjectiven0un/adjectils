@@ -1037,18 +1037,20 @@
         bg.style.backgroundPositionY = "-8px";
         bg.style.position = "absolute";
         box.appendChild(bg);
-        var fringe = document.createElement("span");
-        fringe.id = imageName + "_span";
-        fringe.style.height = "8px"; 
-        fringe.style.width = "8px";
-        fringe.style.transform = "scale(5)";
-        fringe.style.imageRendering = "pixelated";
-        fringe.style.backgroundImage = "url('./images/mega_walls/skins/" + imageName + ".png')";
-        fringe.style.backgroundRepeat = "no-repeat";
-        fringe.style.backgroundPositionX = "-40px";
-        fringe.style.backgroundPositionY = "-8px";
-        fringe.style.position = "absolute";
-        box.appendChild(fringe);
+        if (imageName != "Super Pig") {
+            var fringe = document.createElement("span");
+            fringe.id = imageName + "_span";
+            fringe.style.height = "8px"; 
+            fringe.style.width = "8px";
+            fringe.style.transform = "scale(5)";
+            fringe.style.imageRendering = "pixelated";
+            fringe.style.backgroundImage = "url('./images/mega_walls/skins/" + imageName + ".png')";
+            fringe.style.backgroundRepeat = "no-repeat";
+            fringe.style.backgroundPositionX = "-40px";
+            fringe.style.backgroundPositionY = "-8px";
+            fringe.style.position = "absolute";
+            box.appendChild(fringe);
+        }
         var tooltip = document.createElement("div");
         tooltip.className = "fishboxtext";
         tooltip.id = (imageName + "_tiptext");
