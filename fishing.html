@@ -942,8 +942,12 @@ pagedata = ["Fishing", "#78abde"];
                 
             }
             if (es9.value == "1") {
-                lavascweights["lord_jawbus"] = lavascweights["lord_jawbus"] * 1.15;
-                lavascweights["ragnarok"] = lavascweights["ragnarok"] * 1.15;
+                for (var i = 0; i < activelavascs.length; i++){
+                    console.log(scrarities[activelavascs[i]]);
+                    if (scrarities[activelavascs[i]] == "mythic") {
+                        lavascweights[activelavascs[i]] *= 1.15;
+                    }
+                }
             }
             var totallavaweight = 0;
             for (var i = 0; i < activelavascs.length; i++){
