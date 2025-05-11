@@ -161,7 +161,7 @@
             fortune.type = "number";
             fortune.style.width = "80px";
             fortune.value = 0;
-            fortune.onchange = function() { updateCrop(key) };
+            fortune.onchange = function() { updateCrop(key); updateCrops() };
             fortunelabel.appendChild(fortune);
             var cps = document.createElement("span");
             cps.id = key + "_cps";
