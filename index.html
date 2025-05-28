@@ -729,7 +729,7 @@
           if (starnotibefore.value == 60){
             mingrammar = "minute";
           }
-        var notification = new Notification("adjectils",  {body: "Fallen Star Cult meets in " + Math.floor(danotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
+        var notification = new Notification("adjectils",  {body: "Fallen Star Cult meets in " + Math.floor(starnotibefore.value/60) + " " + mingrammar, icon: "./favicon/favicon.ico"});
       }
       var specialcycletime = (((now - (initial + (2 * monthlen + 26 * daylen))) % (24 * 446400)) + (24 * 446400)) % (24 * 446400);
 
