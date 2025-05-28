@@ -60,7 +60,7 @@ function updateChances(weights, extraweights){
             } catch {
 
             }
-            var denom = Math.ceil(1/chance);
+            var denom = (1/chance).toFixed(1);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
     }
@@ -107,7 +107,7 @@ function updateChances(weights, extraweights){
             } catch {
 
             }
-            var denom = Math.ceil(1/chance);
+            var denom = (1/chance).toFixed(1);
             document.getElementById("chance_" + key).innerText = "1/" + denom;
         }
     }

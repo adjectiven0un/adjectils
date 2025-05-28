@@ -240,7 +240,14 @@
                     </select>
                     Level: <input type = "number" id = "petlevel" value = "100" style = "height:16px;width:48px" onchange = updateWaterTable()></label>
                 </form>
-                
+                <form action = "#" class = "flex_full_row" style = "margin-top:20px">
+                    <label>Display:
+                    <select id = displaywater value = "0" onchange = updateWaterTable()>
+                        <option value = "0">Percentage</option>
+                        <option value = "1">Fraction</option>
+                    </select>
+                    </label>
+                </form>
                 <table id = "watertable" style = "border-width:1px; margin-top:10px;">
 
                 </table>
@@ -307,6 +314,16 @@
                     </select>
                     Level: <input type = "number" id = "lavapetlevel" value = "100" style = "height:16px;width:48px" onchange = updateWaterTable()></label>
                 </form>
+                
+                <form action = "#" class = "flex_full_row" style = "margin-top:20px">
+                    <label>Display:
+                    <select id = displaylava value = "0" onchange = updateLavaTable()>
+                        <option value = "0">Percentage</option>
+                        <option value = "1">Fraction</option>
+                    </select>
+                    </label>
+                </form>
+
                 <table id = "lavatable" style = "border-width:1px; margin-top:10px;">
 
                 </table>
@@ -846,7 +863,11 @@ pagedata = ["Fishing", "#78abde"];
                 infotd.style.color = raritycolors2[scrarities[activewaterscs[i]]];
                 var chancetd = document.createElement("td");
                 if (totalwaterweight != 0){
-                    chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(3) + "%";
+                    if (displaywater.value == 0) {
+                        chancetd.innerText = (100 * (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(3) + "%";
+                    } else {
+                        chancetd.innerText = ("1/" + (1 / (waterscweights[activewaterscs[i]] / totalwaterweight)).toFixed(1));
+                    }
                 } else {
                     chancetd.innerText = "100%";
                     infotd.innerText = "None";
@@ -969,7 +990,12 @@ pagedata = ["Fishing", "#78abde"];
                         lavascweights["plhlegblast"] = 1/499 * totallavaweight;
                         totallavaweight *= 500/499;
                     }
-                    chancetd.innerText = (100 * (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(3) + "%";
+                    if (displaylava.value == 0) {
+                        chancetd.innerText = (100 * (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(3) + "%";
+                    } else {
+                        chancetd.innerText = ("1/" + (1 / (lavascweights[activelavascs[i]] / totallavaweight)).toFixed(1));
+                    }
+                    
                 } else {
                     chancetd.innerText = "100%";
                     infotd.innerText = "None";
