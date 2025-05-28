@@ -223,6 +223,16 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
+                    <label>Shark Scale Armor:
+                    <select id = festfisher value = "1" onchange = updateWaterTable()>
+                        <option value = "1">0-1 pieces</option>
+                        <option value = "1.15">2 pieces</option>
+                        <option value = "1.2">3 pieces</option>
+                        <option value = "1.25">4 pieces</option>
+                    </select>
+                    </label>
+                </form>
+                <form action = "#" class = "flex_full_row">
                     <label>Enderman Slayer Lv9:
                     <select id = es9water value = "0" onchange = updateWaterTable()>
                         <option value = "0">No</option>
@@ -837,6 +847,11 @@ pagedata = ["Fishing", "#78abde"];
             }
             if (drakepiper.value != "1") {
                 waterscweights["reindrake"] = waterscweights["reindrake"] * parseFloat(drakepiper.value);
+            }
+            if (festfisher.value != "1") {
+                for (var i = 0; i < sharkscs.length; i++){
+                    waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * festfisher.value;
+                }
             }
             if (es9water.value == "1") {
                 for (var i = 0; i < activewaterscs.length; i++){
