@@ -140,12 +140,12 @@
         
     }
     
-    
-    var weight_rune_esnake = 800;
-    var weight_rune_end = 100;
-    var weight_skin_void = 25;
-    var weight_rune_enchant = 7;
-    //var totalweight = weight_twilight + weight_eye + weight_book_mana + weight_tuner + weight_atom + weight_hazmat + weight_depresso + weight_book_intel + weight_chalice + weight_dice + weight_longname + weight_merger + weight_core + weight_book_ender + weight_rune_esnake + weight_rune_end + weight_skin_void + weight_rune_enchant;
+    async function updatePage(){
+        
+        updateDragonChance(124, 30, 4);
+        updateAllChances(120);
+        console.log("Page updated. Chances reset");
+    }
     
     async function updateAllChances(){
       await initializeTable();
@@ -164,12 +164,7 @@
     }
     
 
-    async function updatePage(){
-        
-        updateDragonChance(124, 30, 4);
-        updateAllChances(120);
-        console.log("Page updated. Chances reset");
-    }
+    
 
     function initializeTable () {
       //<tr><td><span>"Chance of" </span></td><td><span id = chance_book_ender></span><br></td></tr>
@@ -194,6 +189,51 @@
           row.appendChild(lefttd);
           row.appendChild(righttd);
           document.getElementById("loottable_seraph").appendChild(row);
+
+
+        }
+
+        let divider = document.createElement("tr");
+        let dividertd = document.createElement("td");
+        let dividertdd = document.createElement("td");
+        let dividerhr = document.createElement("hr");
+        dividerhr.class = "solid";
+        dividertd.appendChild(dividerhr);
+        divider.appendChild(dividertd);
+        divider.appendChild(dividertdd);
+        loottable_seraph.appendChild(divider);
+        let divider2 = document.createElement("tr");
+        let dividertd2 = document.createElement("td");
+        let dividerspan = document.createElement("span");
+        dividerspan.className = "fineprint";
+        dividerspan.innerText = "The following drops may be obtained in addition to the primary drop.";
+        dividertd2.appendChild(dividerspan);
+        divider2.appendChild(dividertd2);
+        loottable_seraph.appendChild(divider2);
+
+        for (let key in itemdata["extra"]) {
+          let row = document.createElement("tr");
+          let lefttd = document.createElement("td");
+          let itemname = document.createElement("span");
+          let righttd = document.createElement("td");
+          
+
+          //set up left side of table
+          lefttd.innerText = "Chance of ";
+          itemname.innerText = itemdata["extra"][key]["plaintext"];
+          lefttd.appendChild(itemname);
+
+          //right side setup
+          righttd.id = "chance_" + key;
+          righttd.className = "tdalignright"; 
+          righttd.style.textAlign = "right";
+          righttd.style.paddingLeft = "40px";
+
+          row.appendChild(lefttd);
+          row.appendChild(righttd);
+          document.getElementById("loottable_seraph").appendChild(row);
+
+
         }
         return 0;
     }
