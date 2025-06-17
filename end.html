@@ -143,12 +143,13 @@
     async function updatePage(){
         
         updateDragonChance(124, 30, 4);
-        updateAllChances(120);
+        updateAllChances();
         console.log("Page updated. Chances reset");
     }
     
     async function updateAllChances(){
       await initializeTable();
+      
       //Create weight tables to pass to slayercalc
       var weights = {};
       for (let key in itemdata["main"]) {
@@ -168,6 +169,9 @@
 
     function initializeTable () {
       //<tr><td><span>"Chance of" </span></td><td><span id = chance_book_ender></span><br></td></tr>
+      if (document.getElementById("chance_TWILIGHT_ARROW_POISON") != undefined) {
+        return 0;
+      }
         for (let key in itemdata["main"]) {
           let row = document.createElement("tr");
           let lefttd = document.createElement("td");
