@@ -27,25 +27,25 @@
   <section class = "flex_box_index">
   <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box1">
     <span class = voidheader>Dragons & Golems</span><br>  
-    <label class = basictext>User's Magic Find: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input></label><br>
-    <label class = basictext>User's Pet Luck: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input></label><br>
-    <label class = basictext>Eyes placed: </span><input type = "number" inputmode = "numeric" id = "summoningeye" min = 0 max = 8 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 4></input></label><br>
+    <label >User's Magic Find: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input></label><br>
+    <label >User's Pet Luck: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input></label><br>
+    <label >Eyes placed: </span><input type = "number" inputmode = "numeric" id = "summoningeye" min = 0 max = 8 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 4></input></label><br>
     <br>
     <table style = "width:400px">
-      <tr><td><span class = basictext>Chance of Dragon Claw: </span></td><td style = "display:flex; align-items:flex-end"><span id = "clawoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
-      <tr><td><span class = basictext>Chance of Legendary Ender Dragon Pet: </span></td><td style = "display:flex; align-items: flex-end;"><span id = "legpetoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
-      <tr><td><span class = basictext>Chance of Epic Ender Dragon Pet: </span></td><td style = "display:flex; align-items: flex-end;"><span id = "epicpetoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Dragon Claw: </span></td><td style = "display:flex; align-items:flex-end"><span id = "clawoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Legendary Ender Dragon Pet: </span></td><td style = "display:flex; align-items: flex-end;"><span id = "legpetoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Epic Ender Dragon Pet: </span></td><td style = "display:flex; align-items: flex-end;"><span id = "epicpetoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
       <tr><td><br></td></tr>
-      <tr><td><span class = basictext>Chance of Tier Boost Core: </span></td><td style = "display:flex; align-items:flex-end"><span id = "tbcoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
-      <tr><td><span class = basictext>Chance of Legendary Golem Pet: </span></td><td style = "display:flex; align-items:flex-end"><span id = "leggolemoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
-      <tr><td><span class = basictext>Chance of Epic Golem Pet: </span></td><td style = "display:flex; align-items:flex-end"><span id = "epicgolemoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Tier Boost Core: </span></td><td style = "display:flex; align-items:flex-end"><span id = "tbcoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Legendary Golem Pet: </span></td><td style = "display:flex; align-items:flex-end"><span id = "leggolemoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
+      <tr><td><span >Chance of Epic Golem Pet: </span></td><td style = "display:flex; align-items:flex-end"><span id = "epicgolemoutput" style = "text-align:right; width:64px">0.000%</span><br></td></tr>
     </table>
 
   </div>
   <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box2">
     <span class = voidheader>Voidgloom Seraph</span><br>
-    <label class = basictext>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input></label><br>
-    <label class = basictext>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input>%</label><br>
+    <label>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input></label><br>
+    <label>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input>%</label><br>
     <form action = "#">
       <label>Selected meter item: 
       <select id = selecteddrop onchange = updateAllChances(slayermagicfind.value)>
@@ -81,29 +81,7 @@
     </form>
     <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>
     <table id = loottable_seraph>
-    <tr><td><hr class = solid></td></tr>
-    <tr><td><span class = basictext>Chance of Twilight Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_twilight></span></td><br></tr>
-    <tr><td><span class = basictext>Chance of Null Atom: </span></td><td><span style = "text-align: right" class = basictext id = chance_atom></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Mana Steal I book: </span></td><td><span class = basictext id = chance_book_mana></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Transmission Tuner: </span></td><td><span class = basictext id = chance_tuner></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Smarty Pants I book: </span></td><td><span class = basictext id = chance_book_intel></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Hazmat Enderman: </span></td><td><span class = basictext id = chance_hazmat></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Summoning Eye: </span></td><td><span class = basictext id = chance_eye></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Sinful Dice: </span></td><td><span class = basictext id = chance_dice></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Etherwarp Merger: </span></td><td><span class = basictext id = chance_merger></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Pocket Espresso Machine: </span></td><td><span class = basictext id = chance_depresso></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Handy Blood Chalice: </span></td><td><span class = basictext id = chance_chalice></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Judgement Core: </span></td><td><span class = basictext id = chance_core></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Exceedingly Rare Ender Artifact Upgrader: </span></td><td><span class = basictext id = chance_longname></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Ender Slayer VII book: </span></td><td><span class = basictext id = chance_book_ender></span><br></td></tr>
-    
-    <tr><td><hr class = solid></td></tr>
-    <tr><td><span class = fineprint>One of the following items may be obtained in addition to the primary drop.</span></td></tr>
-    <tr><td><span class = basictext>Chance of Endersnake Rune I: </span></td><td><span class = basictext id = chance_rune_esnake></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of End Rune I: </span></td><td><span class = basictext id = chance_rune_end></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Void Conqueror Enderman Skin: </span></td><td><span class = basictext id = chance_skin_void></span><br></td></tr>
-    <tr><td><span class = basictext>Chance of Enchant Rune I: </span></td><td><span class = basictext id = chance_rune_enchant></span><br></td></tr>
-    <tr><td><hr class = solid></td></tr>
+      
     </table>
   </div>
   </div>
@@ -169,37 +147,235 @@
     var weight_rune_enchant = 7;
     //var totalweight = weight_twilight + weight_eye + weight_book_mana + weight_tuner + weight_atom + weight_hazmat + weight_depresso + weight_book_intel + weight_chalice + weight_dice + weight_longname + weight_merger + weight_core + weight_book_ender + weight_rune_esnake + weight_rune_end + weight_skin_void + weight_rune_enchant;
     
-    function updateAllChances(){
-      var weights = {
-        "twilight": 1800,
-        "eye": 80,
-        "book_mana": 600,
-        "tuner": 300,
-        "atom": 700,
-        "hazmat": 220,
-        "depresso": 55,
-        "book_intel": 250,
-        "chalice": 25,
-        "dice": 65,
-        "longname": 4,
-        "merger": 60,
-        "core": 8,
-        "book_ender": 2,
+    async function updateAllChances(){
+      await initializeTable();
+      //Create weight tables to pass to slayercalc
+      var weights = {};
+      for (let key in itemdata["main"]) {
+        weights[key] = itemdata["main"][key]["weight"]
       }
-      var extraweights = {
-        "rune_esnake": 800,
-        "rune_end": 100,
-        "skin_void": 25,
-        "rune_enchant": 7,
+      console.log(weights);
+      var extraweights = {};
+      for (let key in itemdata["extra"]) {
+        extraweights[key] = itemdata["extra"][key]["weight"]
       }
       //see slayercalc.js
       updateChances(weights, extraweights);
     }
     
 
-    function updatePage(){
+    async function updatePage(){
+        
         updateDragonChance(124, 30, 4);
         updateAllChances(120);
         console.log("Page updated. Chances reset");
     }
+
+    function initializeTable () {
+      //<tr><td><span>"Chance of" </span></td><td><span id = chance_book_ender></span><br></td></tr>
+        for (let key in itemdata["main"]) {
+          let row = document.createElement("tr");
+          let lefttd = document.createElement("td");
+          let itemname = document.createElement("span");
+          let righttd = document.createElement("td");
+          
+
+          //set up left side of table
+          lefttd.innerText = "Chance of ";
+          itemname.innerText = itemdata["main"][key]["plaintext"];
+          lefttd.appendChild(itemname);
+
+          //right side setup
+          righttd.id = "chance_" + key;
+          righttd.className = "tdalignright"; 
+          righttd.style.textAlign = "right";
+          righttd.style.paddingLeft = "40px";
+
+          row.appendChild(lefttd);
+          row.appendChild(righttd);
+          document.getElementById("loottable_seraph").appendChild(row);
+        }
+        return 0;
+    }
+
+
+  var itemdata = {
+    "main": {
+      "TWILIGHT_ARROW_POISON": {
+        "weight": 1800,
+        "quantity": 62,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 650,
+        "plaintext": "Twilight Arrow Poison",
+      },
+      "SUMMONING_EYE": {
+        "weight": 80,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 1000,
+        "plaintext": "Summoning Eye",
+      },
+      "ENCHANTMENT_MANA_STEAL_1": {
+        "weight": 600,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 0,
+        "plaintext": "Enchanted Book (Mana Steal I)",
+      },
+      "TRANSMISSION_TUNER": {
+        "weight": 300,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 45000,
+        "plaintext": "Transmission Tuner",
+      },
+      "NULL_ATOM": {
+        "weight": 700,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 33333,
+        "plaintext": "Null Atom",
+      },
+      "HAZMAT_ENDERMAN": {
+        "weight": 220,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 1,
+        "plaintext": "Hazmat Enderman",
+      },
+      "POCKET_ESPRESSO_MACHINE": {
+        "weight": 55,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Pocket Espresso Machine",
+      },
+      "ENCHANTMENT_SMARTY_PANTS_1": {
+        "weight": 250,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 0,
+        "plaintext": "Enchanted Book (Smarty Pants I)",
+      },
+      "HANDY_BLOOD_CHALICE": {
+        "weight": 25,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Handy Blood Chalice",
+      },
+      "SINFUL_DICE": {
+        "weight": 65,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 1,
+        "plaintext": "Sinful Dice",
+      },
+      "EXCEEDINGLY_RARE_ENDER_ARTIFACT_UPGRADER": {
+        "weight": 4,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Exceedingly Rare Ender Artifact Upgrader",
+      },
+      "ETHERWARP_MERGER": {
+        "weight": 60,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Etherwarp Merger",
+      },
+      "JUDGEMENT_CORE": {
+        "weight": 8,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Judgement Core",
+      },
+      "ENCHANTMENT_ENDER_SLAYER_7": {
+        "weight": 2,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "bz",
+        "npcsell": 0,
+        "plaintext": "Enchanted Book (Ender Slayer VII)",
+      },
+    },
+    "extra": {
+      "RUNE_ENDERSNAKE": {
+        "weight": 800,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 1,
+        "plaintext": "Endersnake Rune I",
+      },
+      "RUNE_DRAGON": {
+        "weight": 100,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 1,
+        "plaintext": "End Rune I",
+      },
+      "PET_SKIN_ENDERMAN_SLAYER": {
+        "weight": 25,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 0,
+        "plaintext": "Void Conquerer Enderman Skin",
+      },
+      "RUNE_ENCHANT": {
+        "weight": 7,
+        "quantity": 1,
+        "chance": 0,
+        "ahbz": "ah",
+        "npcsell": 1,
+        "plaintext": "Enchant Rune I",
+      },
+    },
+
+  }
+
+  /*
+  
+    <tr><td><hr class = solid></td></tr>
+    <tr><td><span class = basictext>Chance of Twilight Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_twilight></span></td><br></tr>
+    <tr><td><span class = basictext>Chance of Null Atom: </span></td><td><span style = "text-align: right" class = basictext id = chance_atom></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Mana Steal I book: </span></td><td><span class = basictext id = chance_book_mana></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Transmission Tuner: </span></td><td><span class = basictext id = chance_tuner></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Smarty Pants I book: </span></td><td><span class = basictext id = chance_book_intel></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Hazmat Enderman: </span></td><td><span class = basictext id = chance_hazmat></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Summoning Eye: </span></td><td><span class = basictext id = chance_eye></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Sinful Dice: </span></td><td><span class = basictext id = chance_dice></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Etherwarp Merger: </span></td><td><span class = basictext id = chance_merger></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Pocket Espresso Machine: </span></td><td><span class = basictext id = chance_depresso></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Handy Blood Chalice: </span></td><td><span class = basictext id = chance_chalice></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Judgement Core: </span></td><td><span class = basictext id = chance_core></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Exceedingly Rare Ender Artifact Upgrader: </span></td><td><span class = basictext id = chance_longname></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Ender Slayer VII book: </span></td><td><span class = basictext id = chance_book_ender></span><br></td></tr>
+    
+    <tr><td><hr class = solid></td></tr>
+    <tr><td><span class = fineprint>One of the following items may be obtained in addition to the primary drop.</span></td></tr>
+    <tr><td><span class = basictext>Chance of Endersnake Rune I: </span></td><td><span class = basictext id = chance_rune_esnake></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of End Rune I: </span></td><td><span class = basictext id = chance_rune_end></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Void Conqueror Enderman Skin: </span></td><td><span class = basictext id = chance_skin_void></span><br></td></tr>
+    <tr><td><span class = basictext>Chance of Enchant Rune I: </span></td><td><span class = basictext id = chance_rune_enchant></span><br></td></tr>
+    <tr><td><hr class = solid></td></tr>
+    */
+  
   </script>

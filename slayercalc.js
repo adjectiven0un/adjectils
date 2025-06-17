@@ -1,4 +1,4 @@
-function updateChances(weights, extraweights){
+async function updateChances(weights, extraweights){
     if (slayermagicfind.value > 900){
         mf = 900;
         document.getElementById("slayermagicfind").value = 900;

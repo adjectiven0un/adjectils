@@ -1067,7 +1067,7 @@ const classes = {
                 desc: "Once a soft toy, Furbie always watched over the child who purchased him. Now thrown away and forgotten, Furbie has developed a taste for revenge. And brains too.",
                 type: "",
                 path: "zombie_healed_low_teammates",
-                backup: "",
+                backup: "walls3_mr_clutcherson",
                 req: "100",
                 reqdesc: "Heal teammates who are below 10 HP 100 times as Zombie."
             },
