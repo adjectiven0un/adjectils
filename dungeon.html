@@ -691,7 +691,27 @@
             }
             if (total != 0){
                 document.getElementById("totalruns").innerText = total.toLocaleString();
-                copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (" + runstoca50[0].toLocaleString() + " Archer, " + runstoca50[1].toLocaleString() + " Berserk, "  + runstoca50[2].toLocaleString() + " Healer, " + runstoca50[3].toLocaleString() + " Mage, " + runstoca50[4].toLocaleString() + " Tank)";
+                copyabletext = "[adjectils] It will take " + total.toLocaleString() + " " + selectedfloor.options[selectedfloor.selectedIndex].text + " runs for " + name + " to reach Class Average 50 (";
+                if (runstoca50[0] != 0) {
+                    copyabletext = copyabletext.concat(runstoca50[0].toLocaleString() + " Archer, ")
+                } 
+                if (runstoca50[1] != 0) {
+                    copyabletext = copyabletext.concat(runstoca50[1].toLocaleString() + " Berserk, ")
+                } 
+                if (runstoca50[2] != 0) {
+                    copyabletext = copyabletext.concat(runstoca50[2].toLocaleString() + " Healer, ")
+                } 
+                if (runstoca50[3] != 0) {
+                    copyabletext = copyabletext.concat(runstoca50[3].toLocaleString() + " Mage, ")
+                }
+                if (runstoca50[4] != 0) {
+                    copyabletext = copyabletext.concat(runstoca50[4].toLocaleString() + " Tank, ")
+                } 
+
+                copyabletext = copyabletext.slice(0, -2);
+                copyabletext = copyabletext.concat(")");
+                console.log(copyabletext);
+                
             } else {
                 document.getElementById("totalruns").innerText = "0, gg :)";
                 copyabletext = "[adjectils] " + name + " is Class Average 50, gg :)";
