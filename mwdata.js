@@ -2642,7 +2642,7 @@ const classes = {
                 path: "walls3_configuration",
                 backup: "",
                 req: "",
-                reqdesc: "Win a game having final killed exactly 3 players from one team, 2 from another, and 1 from the last."
+                reqdesc: "Finish a game having final killed exactly 3 players from one team, 2 from another, and 1 from the last."
             },
             7: {
                 name: "Soldier",
