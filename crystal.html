@@ -54,6 +54,11 @@
                     <input type = "checkbox" id = "hasmole" onchange = updateMole() aria-labelledby = "moleswitch" style = "visibility:hidden">
                     <span class = "switch"></span></label>
                 </td></tr>
+            <tr><td><span> Hideoncave percent: </span></td>
+                <td>
+                    <input type = "number" id = "hideoncave" min = "0" max = "80" onchange = updateHOC()>
+                    
+                </td></tr>
         </table>
         <br>
         <table>
@@ -162,6 +167,7 @@
     var hasruby = 0;
     var hasjasper = 0;
     var onCD = false;
+    var HOC = 0;
     var data;
     var purchasetime;
     var fasttrack = false;
@@ -264,6 +270,17 @@
         hr = Math.abs(hr - 1);
         updateChances();
     }
+    function updateHOC() {
+        if (hideoncave.value > 65){
+            document.getElementById("hideoncave").value = 65;
+        }
+        else if (hideoncave.value < 0 || isNaN(hideoncave.value) || hideoncave.value == ""){
+            document.getElementById("hideoncave").value = 0;
+        }
+        HOC = 0.01 * hideoncave.value;
+        console.log(HOC + " HOC");
+        updateChances();
+    }
     function updateChances(){
         if (hasruby == 1){
             console.log("User has Ruby Crystal");
@@ -287,6 +304,15 @@
                 for (var j = 14 + hr + mole; j <= 20 + hr + mole; j++){
                     //console.log("J: " + j + " nucweights[key]: " + nucweights[key] + " Total nuc weight: " + totalweight + " Drop chance: " + (nucweights[key] / totalweight));
                     apxdropchance += ((1/7) * binomial(j, nucweights[key]/totalweight, 1));
+                }
+                if (HOC > 0) {
+                    var simdropchance = 0;
+                    for (var j = 15 + hr + mole; j <= 21 + hr + mole; j++){
+                        //console.log("J: " + j + " nucweights[key]: " + nucweights[key] + " Total nuc weight: " + totalweight + " Drop chance: " + (nucweights[key] / totalweight));
+                        simdropchance += ((1/7) * binomial(j, nucweights[key]/totalweight, 1));
+                    }
+                    apxdropchance = (HOC * simdropchance) + ((1 - HOC) * apxdropchance);
+
                 }
                 document.getElementById("chance_" + key).innerText = (apxdropchance * 100).toFixed(3) + "%";
                 //console.log((apxdropchance * 100).toFixed(3) + "%");
