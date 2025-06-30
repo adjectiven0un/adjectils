@@ -2010,7 +2010,7 @@ const classes = {
                 path: "walls3_bow_down",
                 backup: "",
                 req: "",
-                reqdesc: "Final kill 7 players in one game without using your bow as Skeleton."
+                reqdesc: "Final kill 7 players in one game without using your bow for the final hit as Skeleton."
             },
             3: {
                 name: "Trick",
