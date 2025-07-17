@@ -36,7 +36,7 @@ const classes = {
                 path: "bucket_barriers_broken",
                 backup: "walls3_moo_brawl",
                 req: "600",
-                reqdesc: "Let 500 buckets from Bucket Barrier break protecting you.",
+                reqdesc: "Let 600 buckets from Bucket Barrier break protecting you.",
             },
             3: {
                 name: "Skelly Moo",
@@ -2149,7 +2149,7 @@ const classes = {
                 path: "walls3_feels_bad",
                 backup: "",
                 req: "",
-                reqdesc: "Final kill 2 players with one Leap."
+                reqdesc: "Final kill 2 players with the impact damage from one Leap."
             },
             5: {
                 name: "Shade",
