@@ -20,7 +20,7 @@ const waterscnames = {
     "guardian_defender": "Guardian Defender",
     "deep_sea_protector": "Deep Sea Protector",
     "water_hydra": "Water Hydra",
-    "sea_emperor": "Sea Emperor",
+    "sea_emperor": "Loch Emperor",
     "oasis_rabbit": "Oasis Rabbit",
     "oasis_sheep": "Oasis Sheep",
     "mithril_grubber": "Mithril Grubber",
