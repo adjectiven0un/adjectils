@@ -97,6 +97,7 @@
                         <option value = "5">Goblin Holdout</option>
                         <option value = "6">Abandoned Quarry</option>
                         <option value = "7">Backwater Bayou</option>
+                        <option value = "8">Galatea</option>
                     </select>
                     </label>
                 </form>
@@ -637,7 +638,7 @@ pagedata = ["Fishing", "#78abde"];
                 "guardian_defender": 130,
                 "deep_sea_protector": 88,
                 "water_hydra": 18,
-                "sea_emperor": 10,
+                "sea_emperor": 100,
                 "oasis_rabbit": 300,
                 "oasis_sheep": 700,
                 "mithril_grubber": 700,
@@ -669,6 +670,9 @@ pagedata = ["Fishing", "#78abde"];
                 "snapping_turtle": 250,
                 "blue_ringed_octopus": 25,
                 "wiki_tiki": 5,
+                "wetwing": 2875,
+                "tadgang": 1500,
+                "ent": 500,
                 "None": 0,
             }
 
@@ -712,6 +716,12 @@ pagedata = ["Fishing", "#78abde"];
             if (locationwater.value == "7"){
                 for (var i = 0; i < bayouscs.length; i++){
                     activewaterscs.push(bayouscs[i]);
+                }
+                
+            }
+            if (locationwater.value == "8"){
+                for (var i = 0; i < galateascs.length; i++){
+                    activewaterscs.push(galateascs[i]);
                 }
                 
             }
