@@ -53,18 +53,25 @@
             </select>
             </label>
           </form>
-        <span class = fineprint>Note: This calculator only provides the chances for tier IV.</span>   
+        <span class = fineprint>Note: This calculator only provides the chances for tier V.</span>   
         <table id = loottable_spider>
         <tr><td><hr class = solid></td></tr>
-        <tr><td><span class = basictext>Chance of Toxic Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_toxic></span></td><br></tr>
-        <tr><td><span class = basictext>Chance of Spider Catalyst: </span></td><td><span class = basictext id = chance_catalyst_spider></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Toxic Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_TOXIC_ARROW_POISON></span></td><br></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Silk: </span></td><td><span class = basictext id = chance_TARANTULA_SILK></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Catalyst: </span></td><td><span class = basictext id = chance_TARANTULA_CATALYST></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Spider Catalyst: </span></td><td><span class = basictext id = chance_SPIDER_CATALYST></span><br></td></tr>
         <tr><td><span class = basictext>Chance of Bane of Arthropods VI book: </span></td><td><span class = basictext id = chance_book_bane></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Fly Swatter: </span></td><td><span class = basictext id = chance_swatter></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Tarantula Talisman: </span></td><td><span class = basictext id = chance_tarantali></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Digested Mosquito: </span></td><td><span class = basictext id = chance_mosquito></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Fly Swatter: </span></td><td><span class = basictext id = chance_FLY_SWATTER></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Talisman: </span></td><td><span class = basictext id = chance_TARANTULA_TALISMAN></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Vial of Venom: </span></td><td><span class = basictext id = chance_VIAL_OF_VENOM></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Digested Mosquito: </span></td><td><span class = basictext id = chance_DIGESTED_MOSQUITO></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Shriveled Wasp: </span></td><td><span class = basictext id = chance_SHRIVELED_WASP></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Ensnared Snail: </span></td><td><span class = basictext id = chance_ENSNARED_SNAIL></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Primordial Eye: </span></td><td><span class = basictext id = chance_PRIMORDIAL_EYE></span><br></td></tr>
         <tr><td><hr class = solid></td></tr>
         <tr><td><span class = fineprint>The following drops may be obtained in addition to the primary drop.</span></td></tr>
         <tr><td><span class = basictext>Chance of Bite Rune I: </span></td><td><span class = basictext id = chance_rune_bite></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Darkness Within Rune I: </span></td><td><span class = basictext id = chance_rune_dark></span><br></td></tr>
         <tr><td><hr class = solid></td></tr>
         </table>
         
@@ -91,15 +98,22 @@
         pagedata = ["Spider's Den", "#904040"];
         function updateAllChances(){
             var weights = {
-                "toxic": 1800,
-                "catalyst_spider": 75,
-                "book_bane": 100,
-                "swatter": 20,
-                "tarantali": 20,
-                "mosquito": 7,
+                "TOXIC_ARROW_POISON": 1800,
+                "TARANTULA_SILK": 1750,
+                "TARANTULA_CATALYST": 60,
+                "SPIDER_CATALYST": 25,
+                "book_bane": 50,
+                "FLY_SWATTER": 30,
+                "TARANTULA_TALISMAN": 30,
+                "VIAL_OF_VENOM": 20,
+                "DIGESTED_MOSQUITO": 10,
+                "SHRIVELED_WASP": 10,
+                "ENSNARED_SNAIL": 6,
+                "PRIMORDIAL_EYE": 2,
             }
             var extraweights = {
                 "rune_bite": 833,
+                "rune_dark": 100,
             }
             //see slayercalc.js
             updateChances(weights, extraweights);
