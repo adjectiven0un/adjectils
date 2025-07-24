@@ -35,13 +35,20 @@
             <label>Selected meter item: 
             <select id = selecteddrop onchange = updateAllChances()>
                 <option value = null>None</option>
-                <option value = toxic>Toxic Arrow Poison</option>
-                <option value = catalyst_spider>Spider Catalyst</option>
+                <option value = TOXIC_ARROW_POISON>Toxic Arrow Poison</option>
+                <option value = TARANTULA_SILK>Tarantula Silk</option>
+                <option value = TARANTULA_CATALYST>Tarantula Catalyst</option>
+                <option value = SPIDER_CATALYST>Spider Catalyst</option>
                 <option value = book_bane>Bane of Arthropods VI book</option>
-                <option value = swatter>Fly Swatter</option>
-                <option value = tarantali>Tarantula Talisman</option>
-                <option value = mosquito>Digested Mosquito</option>
+                <option value = FLY_SWATTER>Fly Swatter</option>
+                <option value = TARANTULA_TALISMAN>Tarantula Talisman</option>
+                <option value = VIAL_OF_VENOM>Vial of Venom</option>
+                <option value = DIGESTED_MOSQUITO>Digested Mosquito</option>
+                <option value = SHRIVELED_WASP>Shriveled Wasp</option>
+                <option value = ENSNARED_SNAIL>Ensnared Snail</option>
+                <option value = PRIMORDIAL_EYE>Primordial Eye</option>
                 <option value = rune_bite>Bite Rune</option>
+                <option value = rune_dark>Darkness Within Rune</option>
             </select>
             </label>
         </form>
@@ -56,18 +63,18 @@
         <span class = fineprint>Note: This calculator only provides the chances for tier V.</span>   
         <table id = loottable_spider>
         <tr><td><hr class = solid></td></tr>
-        <tr><td><span class = basictext>Chance of Toxic Arrow Poison: </span></td><td><span style = "text-align: right" class = basictext id = chance_TOXIC_ARROW_POISON></span></td><br></tr>
-        <tr><td><span class = basictext>Chance of Tarantula Silk: </span></td><td><span class = basictext id = chance_TARANTULA_SILK></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Tarantula Catalyst: </span></td><td><span class = basictext id = chance_TARANTULA_CATALYST></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Spider Catalyst: </span></td><td><span class = basictext id = chance_SPIDER_CATALYST></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Bane of Arthropods VI book: </span></td><td><span class = basictext id = chance_book_bane></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Fly Swatter: </span></td><td><span class = basictext id = chance_FLY_SWATTER></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Tarantula Talisman: </span></td><td><span class = basictext id = chance_TARANTULA_TALISMAN></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Vial of Venom: </span></td><td><span class = basictext id = chance_VIAL_OF_VENOM></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Digested Mosquito: </span></td><td><span class = basictext id = chance_DIGESTED_MOSQUITO></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Shriveled Wasp: </span></td><td><span class = basictext id = chance_SHRIVELED_WASP></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Ensnared Snail: </span></td><td><span class = basictext id = chance_ENSNARED_SNAIL></span><br></td></tr>
-        <tr><td><span class = basictext>Chance of Primordial Eye: </span></td><td><span class = basictext id = chance_PRIMORDIAL_EYE></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Toxic Arrow Poison: </span></td><td class = "tdalignright"><span style = "text-align: right" class = basictext id = chance_TOXIC_ARROW_POISON></span></td><br></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Silk: </span></td><td class = "tdalignright"><span class = basictext id = chance_TARANTULA_SILK></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Catalyst: </span></td><td class = "tdalignright"><span class = basictext id = chance_TARANTULA_CATALYST></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Spider Catalyst: </span></td><td class = "tdalignright"><span class = basictext id = chance_SPIDER_CATALYST></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Bane of Arthropods VI book: </span></td><td class = "tdalignright"><span class = basictext id = chance_book_bane></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Fly Swatter: </span></td><td class = "tdalignright"><span class = basictext id = chance_FLY_SWATTER></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Tarantula Talisman: </span></td><td class = "tdalignright"><span class = basictext id = chance_TARANTULA_TALISMAN></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Vial of Venom: </span></td><td class = "tdalignright"><span class = basictext id = chance_VIAL_OF_VENOM></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Digested Mosquito: </span></td><td class = "tdalignright"><span class = basictext id = chance_DIGESTED_MOSQUITO></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Shriveled Wasp: </span></td><td class = "tdalignright"><span class = basictext id = chance_SHRIVELED_WASP></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Ensnared Snail: </span></td><td class = "tdalignright"><span class = basictext id = chance_ENSNARED_SNAIL></span><br></td></tr>
+        <tr><td><span class = basictext>Chance of Primordial Eye: </span></td><td class = "tdalignright"><span class = basictext id = chance_PRIMORDIAL_EYE></span><br></td></tr>
         <tr><td><hr class = solid></td></tr>
         <tr><td><span class = fineprint>The following drops may be obtained in addition to the primary drop.</span></td></tr>
         <tr><td><span class = basictext>Chance of Bite Rune I: </span></td><td><span class = basictext id = chance_rune_bite></span><br></td></tr>
