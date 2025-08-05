@@ -55,6 +55,7 @@ const waterscnames = {
     "wetwing": "Wetwing",
     "ent": "Ent",
     "tadgang": "Tadgang",
+    "bogged": "Bogged",
     "None": 0,
 }
 const lavascnames = {
@@ -143,6 +144,7 @@ var scrarities = {
     "wetwing": "uncommon",
     "tadgang": "rare",
     "ent": "epic",
+    "bogged": "common",
 }
 var raritycolors2 = {
     "common": "#c0c0c0",
@@ -157,7 +159,7 @@ const spookyscs = ["scarecrow", "nightmare", "werewolf", "phantom_fisher", "grim
 const sharkscs = ["nurse_shark", "blue_shark", "tiger_shark", "great_white_shark"];
 const winterscs = ["frozen_steve", "frosty", "nutcracker", "grinch", "yeti", "reindrake"];
 const minesscs = ["mithril_grubber"];
-const galateascs = ["wetwing", "tadgang", "ent", "sea_emperor"];
+const galateascs = ["bogged", "wetwing", "tadgang", "ent", "sea_emperor"];
 const squids = ["squid", "night_squid"];
 const oasisscs = ["oasis_rabbit", "oasis_sheep"];
 const goblinscs = ["abyssal_miner", "water_worm", "poisoned_water_worm"];

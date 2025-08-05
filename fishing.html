@@ -673,6 +673,7 @@ pagedata = ["Fishing", "#78abde"];
                 "wetwing": 2875,
                 "tadgang": 1500,
                 "ent": 500,
+                "bogged": 5000,
                 "None": 0,
             }
 
@@ -720,40 +721,43 @@ pagedata = ["Fishing", "#78abde"];
                 
             }
             if (locationwater.value == "8"){
+                activewaterscs = [];
                 for (var i = 0; i < galateascs.length; i++){
                     activewaterscs.push(galateascs[i]);
                 }
                 
-            }
-            if (hotspot.value == "1") {
-                for (var i = 0; i < bayouhotspotscs.length; i++) {
-                    activewaterscs.push(bayouhotspotscs[i]);
+            } else {
+                if (hotspot.value == "1") {
+                    for (var i = 0; i < bayouhotspotscs.length; i++) {
+                        activewaterscs.push(bayouhotspotscs[i]);
+                    }
+                }
+                if (spookyfest.value == "1"){
+                    for (var i = 0; i < spookyscs.length; i++){
+                        activewaterscs.push(spookyscs[i]);
+                    }
+                }
+                if (marinafest.value == "1"){
+                    for (var i = 0; i < sharkscs.length; i++){
+                        activewaterscs.push(sharkscs[i]);
+                    }
+                }
+                for (var i = 0; i < normalwaterscs.length; i++){
+                    activewaterscs.push(normalwaterscs[i]);
+                }
+                if (bait.value == "Carrot") {
+                    activewaterscs.push("carrot_king");
+                }
+                if (bait.value == "Worm") {
+                    if (locationwater.value == "5") {
+                        activewaterscs = ["water_worm", "poisoned_water_worm"];
+                    } else {
+                        activewaterscs = ["None"];
+                    }
+                    
                 }
             }
-            if (spookyfest.value == "1"){
-                for (var i = 0; i < spookyscs.length; i++){
-                    activewaterscs.push(spookyscs[i]);
-                }
-            }
-            if (marinafest.value == "1"){
-                for (var i = 0; i < sharkscs.length; i++){
-                    activewaterscs.push(sharkscs[i]);
-                }
-            }
-            for (var i = 0; i < normalwaterscs.length; i++){
-                activewaterscs.push(normalwaterscs[i]);
-            }
-            if (bait.value == "Carrot") {
-                activewaterscs.push("carrot_king");
-            }
-            if (bait.value == "Worm") {
-                if (locationwater.value == "5") {
-                    activewaterscs = ["water_worm", "poisoned_water_worm"];
-                } else {
-                    activewaterscs = ["None"];
-                }
-                
-            }
+            
             
             
 
