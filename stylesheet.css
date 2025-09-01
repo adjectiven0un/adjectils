@@ -328,6 +328,26 @@ body {
     opacity: 1;
   }
 
+  .fishbox.none {
+    border: dashed #555;
+  }
+
+  .fishbox.bronze {
+    border: solid #555;
+  }
+
+  .fishbox.silver {
+    border: solid #aaa;
+  }
+
+  .fishbox.gold {
+    border: solid #fa0;
+  }
+
+  .fishbox.diamond {
+    border: solid #5ff;
+  }
+
   .flex_index_box{
     background-color: #404040;
     border-style: solid;

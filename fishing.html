@@ -500,6 +500,11 @@ pagedata = ["Fishing", "#78abde"];
                         box.style.opacity = "0%";
                     } else {
                         var fishimage = document.createElement("img");
+                        if (fishdata[fishnames[i]] > 0) {
+                            box.classList.add(rarities[i]);
+                        } else {
+                            box.classList.add("none");
+                        }
                         fishimage.src = "./images/trophy_fish/" + fishnames[i] + "_" + rarities[i] + ".png";
                         fishimage.style.height = "80%"; 
                         fishimage.style.width = "80%";
