@@ -148,6 +148,23 @@
                         </select>
                         </label>
                     </div>
+                    <div id = "scarfshardselectdiv">
+                        <label>Catacombs Graduate level:
+                        <select id = "scarfshardlevel" onchange = updateCata(nameinput.value)>
+                            <option value = 1>0 (0%)</option>
+                            <option value = 1.02>I (2%)</option>
+                            <option value = 1.04>II (4%)</option>
+                            <option value = 1.06>III (6%)</option>
+                            <option value = 1.08>IV (8%)</option>
+                            <option value = 1.1>V (10%)</option>
+                            <option value = 1.12>VI (12%)</option>
+                            <option value = 1.14>VII (14%)</option>
+                            <option value = 1.16>VIII (16%)</option>
+                            <option value = 1.18>IX (18%)</option>
+                            <option value = 1.2>X (20%)</option>
+                        </select>
+                        </label>
+                    </div>
                 </form>
             </td></tr>
             </table>
@@ -621,11 +638,11 @@
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             var classperrun = {
-                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
-                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value)) * global.value * mayor.value,
+                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
+                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
+                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
+                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
+                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
             };
             console.log(classperrun);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
