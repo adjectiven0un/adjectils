@@ -250,6 +250,7 @@ var translations = {
 var weights_vanguard = {
   shattered_locket: 3,
   skeleton_key: 6,
+  frozen_scute: 10,
   umber_plate: 50,
   tungsten_plate: 50,
   mithril_plate: 30,
@@ -289,6 +290,7 @@ var weights_vanguard = {
 }
 var translations_vanguard = {
   shattered_locket: "Shattered Locket",
+  frozen_scute: "Frozen Scute",
   skeleton_key: "Skeleton Key",
   mithril_plate: "Mithril Plate",
   umber_plate: "Umber Plate",
