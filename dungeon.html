@@ -442,6 +442,13 @@
                 tankboost.value = 0;
             }
             
+            try {
+                scarfshardlevel.value = 0.2 /*notUndefined(data.profiles[profileid.value].members[UUID].player_data  insert route here when they release it) */;
+            } catch {
+                console.log("Catacombs Graduate defaulted");
+                scarfshardlevel.value = 0;
+            }
+            
 
             updateCata(name);
     }
