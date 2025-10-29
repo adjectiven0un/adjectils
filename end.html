@@ -25,7 +25,7 @@
   <header id = "nav" class = navblock></header>
   <div style = "margin-bottom: 30px;">&nbsp;</div>
   <section class = "flex_box_index">
-  <div class = "end_block" style = "width:min(calc(100% - 30px), max(900px, 70%));", id = "box1">
+  <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box1">
     <span class = voidheader>Dragons & Golems</span><br>  
     <label >User's Magic Find: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 124></input></label><br>
     <label >User's Pet Luck: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 onchange = "(() => updateDragonChance(magicfind.value, petluck.value, summoningeye.value))()" value = 30></input></label><br>
@@ -42,7 +42,7 @@
     </table>
 
   </div>
-  <div class = "end_block" style = "width:min(calc(100% - 30px), max(900px, 70%));", id = "box2">
+  <div class = "end_block" style = "width:min(calc(100% - 30px), max(600px, 40%));", id = "box2">
     <span class = voidheader>Voidgloom Seraph</span><br>
     <label>User's Magic Find: <input type = "number" inputmode = "numeric" id = slayermagicfind value = 120 min = 0 max = 900 onchange = updateAllChances(slayermagicfind.value)></input></label><br>
     <label>RNG meter percent: <input type = "number" inputmode = "numeric" id = rngmeterpercent value = 0 min = 0 max = 100 onchange = updateAllChances(slayermagicfind.value)></input>%</label><br>
@@ -164,61 +164,7 @@
       updateChances(weights, extraweights);
     }
     
-    function appendRow(key, type) {
-          let row = document.createElement("tr");
-          let itemname = document.createElement("td");
-          let itemchance = document.createElement("td");
-          let itemsellselect = document.createElement("td");
-          let itemcpk = document.createElement("td");
-          itemchance.className = "tdalignright";
-          itemchance.style.textAlign = "right";
-          itemcpk.className = "tdalignright";
-          itemcpk.style.textAlign = "right";
-          
-          itemname.innerText = "Chance of " + itemdata[type][key]["plaintext"] + ": "
-          itemchance.id = "chance_" + key;
-          //Makes the dropdown.
-          let sellselector = document.createElement("select");
-          sellselector.id = key + "_sell_method";
-          sellselector.onchange = () => updateProfit(key);
-          
-          sellselector.style.width = "145px"; 
-          if (itemdata[type][key]["ahbz"] == "bz") {
-            let optioninsta = document.createElement("option");
-            optioninsta.value = "insta";
-            optioninsta.innerText = "Bazaar Insta-sell";
-            let optionorder = document.createElement("option");
-            optionorder.value = "order";
-            optionorder.innerText = "Bazaar Sell Order";
-            sellselector.appendChild(optioninsta);
-            sellselector.appendChild(optionorder);
-          } else if (itemdata[type][key]["ahbz"] == 'ah') {
-            let optionah = document.createElement("option");
-            optionah.value = "ah";
-            optionah.innerText = "Auction House LBIN";
-            sellselector.appendChild(optionah);
-          }
-          
-          let optionnpc = document.createElement("option");
-          optionnpc.value = "npc";
-          optionnpc.innerText = "Sell to NPC";
-          
-          sellselector.appendChild(optionnpc);
-          //itemsellselect.innerText = "Sell method: "
-          itemsellselect.style.paddingLeft = "10px";
-          itemsellselect.appendChild(sellselector);
 
-          itemcpk.id = key + "_cpk";
-          itemcpk.style.paddingLeft = "10px"; 
-          itemcpk.innerText = "0 coins (+0 c/k)";
-
-          row.appendChild(itemname);
-          row.appendChild(itemchance);
-          row.appendChild(itemsellselect);
-          row.appendChild(itemcpk);
-          loottable_seraph.appendChild(row);
-          
-        }
     
 
     function initializeTable () {
@@ -227,26 +173,28 @@
         return 0;
       }
         for (let key in itemdata["main"]) {
-          appendRow(key, "main");
-
+          let row = document.createElement("tr");
+          let lefttd = document.createElement("td");
+          let itemname = document.createElement("span");
+          let righttd = document.createElement("td");
           
 
-          //document.getElementById("loottable_seraph").appendChild(row);
-          /* Creates the Null Sphere profit calculator. (Do I even need this?)
-          let sellselector = document.createElement("select");
-          sellselector.id = "NULL_SPHERE_sell_method";
-          sellselector.onchange = () => updateProfit("NULL_SPHERE");
-          
-          sellselector.style.width = "145px"; 
-          let optioninsta = document.createElement("option");
-          optioninsta.value = "insta";
-          optioninsta.innerText = "Bazaar Insta-sell";
-          let optionorder = document.createElement("option");
-          optionorder.value = "order";
-          optionorder.innerText = "Bazaar Sell Order";
-          sellselector.appendChild(optioninsta);
-          sellselector.appendChild(optionorder);
-          */
+          //set up left side of table
+          lefttd.innerText = "Chance of ";
+          itemname.innerText = itemdata["main"][key]["plaintext"];
+          lefttd.appendChild(itemname);
+
+          //right side setup
+          righttd.id = "chance_" + key;
+          righttd.className = "tdalignright"; 
+          righttd.style.textAlign = "right";
+          righttd.style.paddingLeft = "40px";
+
+          row.appendChild(lefttd);
+          row.appendChild(righttd);
+          document.getElementById("loottable_seraph").appendChild(row);
+
+
         }
 
         let divider = document.createElement("tr");
@@ -268,7 +216,6 @@
         loottable_seraph.appendChild(divider2);
 
         for (let key in itemdata["extra"]) {
-          /*
           let row = document.createElement("tr");
           let lefttd = document.createElement("td");
           let itemname = document.createElement("span");
@@ -288,12 +235,9 @@
 
           row.appendChild(lefttd);
           row.appendChild(righttd);
-          
-
-          
           document.getElementById("loottable_seraph").appendChild(row);
-          */
-          appendRow(key, "extra");
+
+
         }
         return 0;
     }
