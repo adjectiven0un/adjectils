@@ -280,11 +280,9 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
-                    <label>Enderman Slayer Lv9:
-                    <select id = es9water value = "0" onchange = updateWaterTable()>
-                        <option value = "0">No</option>
-                        <option value = "1">Yes</option>
-                    </select>
+                    <label>Tracking:
+                    
+                    <input id = trackingwater value = "0" min = "0" max = "100" onchange=updateWaterTable()>
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
@@ -348,11 +346,8 @@
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
-                    <label>Enderman Slayer Lv9:
-                    <select id = es9 value = "0" onchange = updateLavaTable()>
-                        <option value = "0">No</option>
-                        <option value = "1">Yes</option>
-                    </select>
+                    <label>Tracking:
+                    <input id = trackinglava value = "0" min = "0" max = "100" onchange=updateLavaTable()>
                     </label>
                 </form>
                 <form action = "#" class = "flex_full_row">
@@ -921,11 +916,17 @@ pagedata = ["Fishing", "#78abde"];
                     waterscweights[sharkscs[i]] = waterscweights[sharkscs[i]] * festfisher.value;
                 }
             }
-            if (es9water.value == "1") {
+            if (trackingwater.value != "0") {
+                if (trackingwater.value < 0) {
+                    trackingwater.value = 0;
+                }
+                if (trackingwater.value > 100) {
+                    trackingwater.value = 100;
+                }
                 for (var i = 0; i < activewaterscs.length; i++){
                     console.log(scrarities[activewaterscs[i]]);
                     if (scrarities[activewaterscs[i]] == "mythic") {
-                        waterscweights[activewaterscs[i]] *= 1.15;
+                        waterscweights[activewaterscs[i]] *= (1 + trackingwater.value/100);
                     }
                 }
             }
@@ -1045,11 +1046,17 @@ pagedata = ["Fishing", "#78abde"];
                 }
                 
             }
-            if (es9.value == "1") {
+            if (trackinglava.value != "0") {
+                if (trackinglava.value < 0) {
+                    trackinglava.value = 0;
+                }
+                if (trackinglava.value > 100) {
+                    trackinglava.value = 100;
+                }
                 for (var i = 0; i < activelavascs.length; i++){
                     console.log(scrarities[activelavascs[i]]);
                     if (scrarities[activelavascs[i]] == "mythic") {
-                        lavascweights[activelavascs[i]] *= 1.15;
+                        lavascweights[activelavascs[i]] *= (1 + trackinglava.value/100);
                     }
                 }
             }
