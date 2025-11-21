@@ -237,6 +237,11 @@
                 </tr> 
             </table>
             <table style = "width:100%">
+                <tr><td>Projected Catacombs XP per run: </td><td class = tdalignright id = "displaycataperrun">0</td></tr>
+                <tr><td>Projected Class XP per run (selected class)<sup style = "font-size:8px"><span class = tip id = "archtip">🛈<span class = tiptext style = "font-size: 12px;">0.2× xp for non-selected classes, assuming the party has no duplicate classes. This displays the AVERAGE of projected XP for all classes, which will be the same unless the user has varying levels of essence XP boosts.</span></span></sup>: </td><td class = tdalignright id = "displayclassperrun">0</td></tr>
+
+            </table>
+            <table style = "width:100%">
                 <tr><td><label>Runs until Catacombs <input id = "targetcata" type = "number" min = "1" max = "10000" style = "width:60px;" value = "50" onchange = updateCata(nameinput.value)></label></td></td><td><span id = "cataruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until <span style = "color:#ff8888; padding-right: 8px; padding-left: 8px;">Archer</span> complete: <sup style = "font-size:8px"><span class = tip id = "archtip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "archruns" class = "flex_align_right"></span></td></tr>
                 <tr><td><span class = "flex_full_row">Until <span style = "color:#ffbb88; padding-right: 8px; padding-left: 8px;">Berserk</span> complete: <sup style = "font-size:8px"><span class = tip id = "berstip">🛈<span class = tiptext style = "font-size: 12px;">"Completing" a class is defined as having the minimum amount of XP required to reach Class Average 50 by finishing a minimal number of runs using the other four classes.</span></span></sup></td><td><span id = "bersruns" class = "flex_align_right"></span></td></tr>
@@ -645,6 +650,8 @@
             console.log("Per run: " + cataperrun);
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
+            document.getElementById("displaycataperrun").innerText = cataperrun.toLocaleString();
+
             var classperrun = {
                 arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
                 bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
@@ -652,6 +659,15 @@
                 mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
                 tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
             };
+
+            var averageclassperrun = 0;
+
+            for (let key in classperrun) {
+                averageclassperrun = Number(classperrun[key]);
+            }
+
+            document.getElementById("displayclassperrun").innerText = averageclassperrun.toLocaleString();
+
             console.log(classperrun);
             document.getElementById("cataruns").innerText = catarunsleft.toLocaleString();
             var runstoca50 = [0, 0, 0, 0, 0];  
