@@ -45,7 +45,6 @@
     </div>
     <div class = "header" style = " text-align: center; padding-top: 20px; padding-bottom: 20px;">Milestones</div>
   <div>
-    <span class = "fadeRed">This page is deprecated and will be updated once I get a list of all new milestone values.</span><br>
     <label>Farming Fortune: <input type = "number" id = "farmingfortune" value = "1000" onchange = updateCrops(value)>&nbsp;</label><br>
     <!--<label>Farming Wisdom: <input type = "number" id = "farmingwisdom" value = "50" onchange = updateCrops(value)>&nbsp;</label><br> -->
     <label>Armor type:
@@ -123,7 +122,12 @@
           fasttrack = false;
           localStorage.setItem("storedname", name);
           console.log("Set item " + localStorage.getItem("storedname"));
-          localStorage.setItem("storeddata", JSON.stringify(data)); 
+          try{
+            localStorage.setItem("storeddata", JSON.stringify(data)); 
+          } catch (e) {
+            console.log(e);
+          }
+          
           updateGardenProfile();
         }
         async function updateGardenProfile() {
@@ -354,8 +358,8 @@
           for (let key in upgrades) {
             updateComposter(key);
           }
-          document.getElementById("total_milestone").innerText = "Total milestones: " + milestonetotaltotal + "/460";
-          if (milestonetotaltotal >= 460) {
+          document.getElementById("total_milestone").innerText = "Total milestones: " + milestonetotaltotal + "/598";
+          if (milestonetotaltotal >= 598) {
             document.getElementById("total_milestone").style.color = "#ffaa00";
             document.getElementById("total_timeremainingmax").style.color = "#ffaa00";
           } else {
@@ -429,6 +433,16 @@
               if (armor.value == 3 || armor.value == 4) {
                 fermentochance = 0.00004 + (0.00001 * (pieces.value - 1));
                 specialcoins = fermentochance * 3600 * 20 * 250000;
+                if (crops[key].double == 1) {
+                  specialcoins *= 2;
+                }
+              }
+              
+            } else if (crops[key].bonus == "helianthus") {
+              var helichance = 0;
+              if (armor.value == 3 || armor.value == 4) {
+                helichance = 0.00002 + (0.00001 * (pieces.value - 1));
+                specialcoins = helichance * 3600 * 20 * 275000;
                 if (crops[key].double == 1) {
                   specialcoins *= 2;
                 }
