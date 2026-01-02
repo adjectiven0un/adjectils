@@ -1,3 +1,16 @@
+/*
+Crops data.
+Plaintext: Self-explanatory.
+Pest: Associated pest.
+api: The name used for this crop in the Hypixel API. Used for lookup purposes.
+mult: Amount of this crop that would be dropped from one harvest with 0 Farming Fortune.
+coin: Base coins received from NPC sale for one harvest with 0 Farming Fortune. Includes price of seeds, if applicable.
+compact: Deprecated. Indicates how many of the item needed to create a compact version. Now always 160.
+scompact: Deprecated. Indicates how many of the item needed to create a super compact version. Now always 25,600.
+bonus: Special crop that may be obtained using farming armors for harvesting this crop.
+double: Indicates whether this crop is 3 blocks tall, meaning it is considered to be harvested twice and rolls for special crops twice per harvest.
+milestones: List of crops required for each milestone.
+*/
 const crops = {
     "wheat": 
     {
@@ -170,6 +183,14 @@ const crops = {
         milestones: [60, 100, 160, 400, 700, 1400, 3000, 5000, 7000, 10000, 13000, 16000, 20000, 40000, 70000, 100000, 150000, 200000, 350000, 500000, 750000, 800000, 900000, 1300000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000, 1600000],
     },
 }
+
+/*
+Composter upgrade requirements.
+Title: Self explanatory.
+Items, Counts, (crops): Feed tape of items used in each upgrade. e.g. items[0] = a, counts[0] = 128, where a indicates the use of Enchanted Wheat, so the first upgrade is 128 Enchanted Wheat.
+I do not recommend using this format in your own works.
+*/
+
 var upgrades = {
     "speed": 
     {
@@ -274,6 +295,8 @@ var upgrades = {
     },
 
 }
+
+//Items used universally across all composter upgrades.
 var upgradesuniversal = {
     1: {
         copper: 100,
@@ -405,6 +428,8 @@ var upgradesuniversal = {
         cost: "2250000",
     },
 }
+
+//Plaintext versions of all crops used.
 var croptranslations = {
     "enchanted_hay_bale": "Enchanted Hay Bale",
     "enchanted_golden_carrot": "Enchanted Golden Carrot",
@@ -427,6 +452,8 @@ var croptranslations = {
     "condensed_fermento": "Condensed Fermento",
     "copper": "Copper",
   }
+
+//Basic sum function.
 function sum(array) {
     var total = 0;
     for (var i = 0; i < array.length; i++) {
@@ -436,3 +463,334 @@ function sum(array) {
 }
 console.log(crops["cocoabeans"].milestones.length);
 sum(crops["cocoabeans"].milestones);
+
+/*
+Mutations data.
+Size: Side length of the square a mutation occupies.
+Req: Itemized list of all crops that must be adjacent to this square in order to spawn this mutation.
+Stages: Number of stages to fully grow one instance of this crop once spawned. (Likely will not be used.)
+*/
+var mutations = {
+    "ashwreath": {
+        "size": 1,
+        "req": {
+            "netherwart": 4,
+            "fire": 4,
+        },
+        "stages": 0,
+    },
+    "choconut": {
+        "size": 1,
+        "req": {
+            "cocoabeans": 4,
+        },
+        "stages": 0,
+    },
+    "dustgrain": {
+        "size": 1,
+        "req": {
+            "wheat": 4,
+        },
+        "stages": 0,
+    },
+    "gloomgourd": {
+        "size": 1,
+        "req": {
+            "pumpkin": 1,
+            "melon": 1,
+        },
+        "stages": 0,
+    },
+    "lonelily": {
+        "size": 1,
+        "req": {
+        },
+        "stages": 0,
+    },
+    "scourroot": {
+        "size": 1,
+        "req": {
+            "potato": 4,
+            "carrot": 4,
+        },
+        "stages": 0,
+    },
+    "shadevine": {
+        "size": 1,
+        "req": {
+            "sugarcane": 2,
+            "cactus": 2,
+        },
+        "stages": 0,
+    },
+    "veilshroom": {
+        "size": 1,
+        "req": {
+            "redmushroom": 2,
+            "brownmushroom": 2,
+        },
+        "stages": 0,
+    },
+    "witherbloom": {
+        "size": 1,
+        "req": {
+            "deadplant": 8,
+        },
+        "stages": 0,
+    },
+    "chocoberry": {
+        "size": 1,
+        "req": {
+            "choconut": 6,
+            "gloomgourd": 2,
+        },
+        "stages": 6,
+    },
+    "cindershade": {
+        "size": 1,
+        "req": {
+            "ashwreath": 4,
+            "witherbloom": 4,
+        },
+        "stages": 8,
+    },
+    "coalroot": {
+        "size": 1,
+        "req": {
+            "scourroot": 3,
+            "ashwreath": 5,
+        },
+        "stages": 8,
+    },
+    "creambloom": {
+        "size": 1,
+        "req": {
+            "chocoberry": 8
+        },
+        "stages": 6,
+    },
+    "duskbloom": {
+        "size": 1,
+        "req": {
+            "moonflower": 2,
+            "sunflower": 2,
+            "shadevine": 2,
+            "dustgrain": 2,
+        },
+        "stages": 8,
+    },
+    "thornshade": {
+        "size": 1,
+        "req": {
+            "wildrose": 4,
+            "veilshroom": 4,
+        },
+        "stages": 8,
+    },
+    "blastberry": {
+        "size": 1,
+        "req": {
+            "ashwreath": 3,
+            "chocoberry": 5,
+        },
+        "stages": 6,
+    },
+    "cheesebite": {
+        "size": 1,
+        "req": {
+            "creambloom": 4,
+            "fermento": 4,
+        },
+        "stages": 10,
+    },
+    "chloronite": {
+        "size": 1,
+        "req": {
+            "coalroot": 6,
+            "thornshade": 2,
+        },
+        "stages": 10,
+    },
+    "donoteatshroom": {
+        "size": 1,
+        "req": {
+            "veilshroom": 4,
+            "scourroot": 4,
+        },
+        "stages": 8,
+    },
+    "fleshtrap": {
+        "size": 1,
+        "req": {
+            "lonelily": 4,
+            "cindershade": 4,
+        },
+        "stages": 14,
+    },
+    "magicjellybean": {
+        "size": 1,
+        "req": {
+            "sugarcane": 5,
+            "duskbloom": 3,
+        },
+        "stages": 120,
+    },
+    "noctilume": {
+        "size": 2,
+        "req": {
+            "duskbloom": 6,
+            "lonelily": 6,
+        },
+        "stages": 4,
+    },
+    "snoozling": {
+        "size": 3,
+        "req": {
+            "dustgrain": 3,
+            "thornshade": 3,
+            "duskbloom": 3,
+            "witherbloom": 3,
+            "creambloom": 4,
+        },
+        "stages": 20,
+    },
+    "soggybud": {
+        "size": 1,
+        "req": {
+            "melon": 8,
+        },
+        "stages": 10,
+    },
+    "chorusfruit": {
+        "size": 1,
+        "req": {
+            "magicjellybean": 3,
+            "chloronite": 5,
+        },
+        "stages": 12,
+    },
+    "plantboyadvance": {
+        "size": 2,
+        "req": {
+            "snoozling": 6,
+            "thunderling": 6,
+        },
+        "stages": 8,
+    },
+    "puffercloud": {
+        "size": 1,
+        "req": {
+            "snoozling": 2,
+            "donoteatshroom": 6,
+        },
+        "stages": 14,
+    },
+    "shellfruit": {
+        "size": 1,
+        "req": {
+            //Don't take these numbers seriously. Shellfruit does not grow naturally.
+            "blastberry": 100,
+            "turtlellini": 100,
+        },
+        "stages": 0,
+    },
+    "startlevine": {
+        "size": 1,
+        "req": {
+            "cheesebite": 4,
+            "blastberry": 4,
+        },
+        "stages": 12,
+    },
+    "stoplightpetal": {
+        "size": 1,
+        "req": {
+            "snoozling": 4,
+            "noctilume": 4,
+        },
+        "stages": 12,
+    },
+    "thunderling": {
+        "size": 1,
+        "req": {
+            "soggybud": 4,
+            "noctilume": 4,
+        },
+        "stages": 16,
+    },
+    "turtlellini": {
+        "size": 1,
+        "req": {
+            "soggybud": 4,
+            "choconut": 4,
+        },
+        "stages": 0,
+    },
+    "zombud": {
+        "size": 1,
+        "req": {
+            "cindershade": 2,
+            "deadplant": 4,
+            "fleshtrap": 2,
+        },
+        "stages": 16,
+    },
+    "allinaloe": {
+        "size": 1,
+        "req": {
+            "magicjellybean": 6,
+            "plantboyadvance": 2,
+        },
+        "stages": 8,
+    },
+    "devourer": {
+        "size": 1,
+        "req": {
+            "puffercloud": 4,
+            "zombud": 4,
+        },
+        "stages": 16,
+    },
+    "glasscorn": {
+        "size": 2,
+        "req": {
+            "chloronite": 6,
+            "startlevine": 6,
+        },
+        "stages": 9,
+    },
+    "cindershade": {
+        "size": 1,
+        "req": {
+            "ashwreath": 4,
+            "witherbloom": 4,
+        },
+        "stages": 8,
+    },
+    /*
+    "godseed": {
+        "size": 3,
+        "req": {
+            This will be worked on later, when effects are added to this list.
+        },
+        "stages": 8,
+    },
+    */
+    "phantomleaf": {
+        "size": 1,
+        "req": {
+            "chorusfruit": 4,
+            "shellfruit": 4,
+        },
+        "stages": 15,
+    },
+    "timestalk": {
+        "size": 1,
+        "req": {
+            "stoplightpetal": 4,
+            "chorusfruit": 2,
+            "shellfruit": 2,
+        },
+        "stages": 14,
+    },
+}
