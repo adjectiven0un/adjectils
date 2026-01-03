@@ -928,3 +928,34 @@ td:has(> span.basictext):nth-child(2) {
   visibility: visible;
   opacity: 1;
 }
+
+.hover-brighten {
+  transition: filter 0.1s ease-in-out;
+}
+
+.hover-brighten:hover {
+  filter: brightness(1.5);
+}
+
+.greenhouserow {
+  display: flex;
+  flex-direction: row;
+}
+.greenhousebox {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    flex-direction:row;
+    width:50px;
+    height:50px;
+    border-style: solid;
+    border-color: #808080;
+}
+
+.boximage {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+}
