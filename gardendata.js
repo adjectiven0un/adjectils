@@ -468,6 +468,7 @@ sum(crops["cocoabeans"].milestones);
 Mutations data.
 Size: Side length of the square a mutation occupies.
 Req: Itemized list of all crops that must be adjacent to this square in order to spawn this mutation.
+Water: 1 if this plant needs water, 0 otherwise.
 Stages: Number of stages to fully grow one instance of this crop once spawned. (Likely will not be used.)
 */
 var mutations = {
@@ -477,6 +478,7 @@ var mutations = {
             "netherwart": 4,
             "fire": 4,
         },
+        "water": 0,
         "stages": 0,
     },
     "choconut": {
@@ -484,6 +486,7 @@ var mutations = {
         "req": {
             "cocoabeans": 4,
         },
+        "water": 0,
         "stages": 0,
     },
     "dustgrain": {
@@ -491,6 +494,7 @@ var mutations = {
         "req": {
             "wheat": 4,
         },
+        "water": 0,
         "stages": 0,
     },
     "gloomgourd": {
@@ -499,12 +503,17 @@ var mutations = {
             "pumpkin": 1,
             "melon": 1,
         },
+        "water": 0,
         "stages": 0,
     },
     "lonelily": {
         "size": 1,
         "req": {
         },
+        "notes": {
+            0: "Grows incredibly rarely in spaces with no adjacent crops.",
+        },
+        "water": 0,
         "stages": 0,
     },
     "scourroot": {
@@ -513,6 +522,7 @@ var mutations = {
             "potato": 2,
             "carrot": 2,
         },
+        "water": 0,
         "stages": 0,
     },
     "shadevine": {
@@ -521,6 +531,7 @@ var mutations = {
             "sugarcane": 2,
             "cactus": 2,
         },
+        "water": 0,
         "stages": 0,
     },
     "veilshroom": {
@@ -529,6 +540,7 @@ var mutations = {
             "redmushroom": 2,
             "brownmushroom": 2,
         },
+        "water": 0,
         "stages": 0,
     },
     "witherbloom": {
@@ -536,6 +548,7 @@ var mutations = {
         "req": {
             "deadplant": 8,
         },
+        "water": 0,
         "stages": 0,
     },
     "chocoberry": {
@@ -544,6 +557,7 @@ var mutations = {
             "choconut": 6,
             "gloomgourd": 2,
         },
+        "water": 1,
         "stages": 6,
     },
     "cindershade": {
@@ -552,6 +566,7 @@ var mutations = {
             "ashwreath": 4,
             "witherbloom": 4,
         },
+        "water": 0,
         "stages": 8,
     },
     "coalroot": {
@@ -560,6 +575,10 @@ var mutations = {
             "scourroot": 3,
             "ashwreath": 5,
         },
+        "notes": {
+            0: "Requires a tool with Breaking Power 1 to harvest.",
+        },
+        "water": 1,
         "stages": 8,
     },
     "creambloom": {
@@ -567,6 +586,7 @@ var mutations = {
         "req": {
             "choconut": 8
         },
+        "water": 1,
         "stages": 6,
     },
     "duskbloom": {
@@ -577,6 +597,7 @@ var mutations = {
             "shadevine": 2,
             "dustgrain": 2,
         },
+        "water": 1,
         "stages": 8,
     },
     "thornshade": {
@@ -585,6 +606,7 @@ var mutations = {
             "wildrose": 4,
             "veilshroom": 4,
         },
+        "water": 1,
         "stages": 8,
     },
     "blastberry": {
@@ -593,6 +615,11 @@ var mutations = {
             "ashwreath": 3,
             "chocoberry": 5,
         },
+        "notes": {
+            0: "Explodes when harvested.",
+            1: "All mutations adjacent except for Turtlellini will be destroyed.",
+        },
+        "water": 1,
         "stages": 6,
     },
     "cheesebite": {
@@ -601,6 +628,11 @@ var mutations = {
             "creambloom": 4,
             "fermento": 4,
         },
+        "notes": {
+            0: "Will be attacked by a Rat at stages 4 and 7, stopping growth.",
+            1: "Use a Vacuum to remove the Rat and resume growth.",
+        },
+        "water": 1,
         "stages": 10,
     },
     "chloronite": {
@@ -609,6 +641,11 @@ var mutations = {
             "coalroot": 6,
             "thornshade": 2,
         },
+        "notes": {
+            0: "Becomes a gemstone when fully grown.",
+            1: "Drops an additional Chloronite per 500 Mining/Gemstone Fortune.",
+        },
+        "water": 1,
         "stages": 10,
     },
     "donoteatshroom": {
@@ -617,6 +654,10 @@ var mutations = {
             "veilshroom": 4,
             "scourroot": 4,
         },
+        "notes": {
+            0: "Causes 4s of Blindness and Nausea when harvested.",
+        },
+        "water": 1,
         "stages": 8,
     },
     "fleshtrap": {
@@ -625,6 +666,12 @@ var mutations = {
             "lonelily": 4,
             "cindershade": 4,
         },
+        "notes": {
+            0: "Must be fed with meat to continue growing.",
+            1: "Starves and stops growing after not being fed for 5 cycles.",
+            2: "If fed at least 5 enchanted meat during its lifetime, drops an additional Fleshtrap when harvested.",
+        },
+        "water": 1,
         "stages": 14,
     },
     "magicjellybean": {
@@ -633,6 +680,11 @@ var mutations = {
             "sugarcane": 5,
             "duskbloom": 3,
         },
+        "notes": {
+            0: "Drops 1 Magic Jellybean every 12 stages it has been alive.",
+            1: "Can be harvested starting from stage 12.",
+        },
+        "water": 1,
         "stages": 120,
     },
     "noctilume": {
@@ -641,6 +693,10 @@ var mutations = {
             "duskbloom": 6,
             "lonelily": 6,
         },
+        "notes": {
+            0: "Will not grow unless time of day has been switched in the previous cycle."
+        },
+        "water": 1,
         "stages": 4,
     },
     "snoozling": {
@@ -652,6 +708,11 @@ var mutations = {
             "witherbloom": 3,
             "creambloom": 4,
         },
+        "notes": {
+            0: "Stops growing every 5 cycles until woken up.",
+            1: "Right-click without a diagnostic tool to wake up.",
+        },
+        "water": 1,
         "stages": 20,
     },
     "soggybud": {
@@ -659,6 +720,11 @@ var mutations = {
         "req": {
             "melon": 8,
         },
+        "notes": {
+            0: "Drains roughly 1.39 water from surrounding Water Retain crops every cycle.",
+            1: "Cannot otherwise be watered.",
+        },
+        "water": 1,
         "stages": 10,
     },
     "chorusfruit": {
@@ -667,6 +733,12 @@ var mutations = {
             "magicjellybean": 3,
             "chloronite": 5,
         },
+        "notes": {
+            0: "Converts a random block in the plot to End Stone every cycle.",
+            1: "Teleports to a random End Stone block every cycle.",
+            2: "If multiple Chorus Fruit teleport to the same End Stone block, all but one are destroyed.",
+        },
+        "water": 0,
         "stages": 12,
     },
     "plantboyadvance": {
@@ -675,6 +747,12 @@ var mutations = {
             "snoozling": 6,
             "thunderling": 6,
         },
+        "notes": {
+            0: "Demands a game of Snake be played before being harvested",
+            1: "The game is won at 8 apples collected.",
+            2: "Failure will result in the regression of several growth states.",
+        },
+        "water": 1,
         "stages": 8,
     },
     "puffercloud": {
@@ -683,6 +761,10 @@ var mutations = {
             "snoozling": 2,
             "donoteatshroom": 6,
         },
+        "notes": {
+            0: "Deals 10% of the player's max health as true damage every second when nearby.",
+        },
+        "water": 1,
         "stages": 14,
     },
     "shellfruit": {
@@ -692,6 +774,7 @@ var mutations = {
             "blastberry": 100,
             "turtlellini": 100,
         },
+        "water": 0,
         "stages": 0,
     },
     "startlevine": {
@@ -700,6 +783,10 @@ var mutations = {
             "cheesebite": 4,
             "blastberry": 4,
         },
+        "notes": {
+            0: "Requires Invisibility to harvest.",
+        },
+        "water": 1,
         "stages": 12,
     },
     "stoplightpetal": {
@@ -708,6 +795,13 @@ var mutations = {
             "snoozling": 4,
             "noctilume": 4,
         },
+        "notes": {
+            0: "Stoplight activates when harvest is attempted.",
+            1: "Click rapidly while the petal is green, and stop when it turns yellow, then red.",
+            2: "At about 100 clicks, visible on the meter above the petal, the petal is harvested.",
+            3: "Clicking while the petal is red destroys the petal.",
+        },
+        "water": 1,
         "stages": 12,
     },
     "thunderling": {
@@ -716,6 +810,12 @@ var mutations = {
             "soggybud": 5,
             "noctilume": 3,
         },
+        "notes": {
+            0: "Generates 2,000 Charge every cycle.",
+            1: "Right-click to discharge, damaging yourself and depleting the charge.",
+            2: "At 14,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
+        },
+        "water": 0,
         "stages": 16,
     },
     "turtlellini": {
@@ -724,6 +824,7 @@ var mutations = {
             "soggybud": 4,
             "choconut": 4,
         },
+        "water": 1,
         "stages": 0,
     },
     "zombud": {
@@ -733,6 +834,11 @@ var mutations = {
             "deadplant": 4,
             "fleshtrap": 2,
         },
+        "notes": {
+            0: "All adjacent Dead Plants are converted to Zombuddy when harvested.",
+            1: "Killed Zombuddies drop 1 Zombud each.",
+        },
+        "water": 0,
         "stages": 16,
     },
     "allinaloe": {
@@ -741,6 +847,11 @@ var mutations = {
             "magicjellybean": 6,
             "plantboyadvance": 2,
         },
+        "notes": {
+            0: "Can be harvested at any growth stage.",
+            1: "Every stage, gains extra drops, but has an increasing chance to reset to 1.",
+        },
+        "water": 1,
         "stages": 8,
     },
     "devourer": {
@@ -749,6 +860,11 @@ var mutations = {
             "puffercloud": 4,
             "zombud": 4,
         },
+        "notes": {
+            0: "Surfaces or crops in the same row or column as self or roots may be converted to Devourer Root.",
+            1: "Devourer Root cannot spawn across empty spaces. Quarantine is recommended.",
+        },
+        "water": 1,
         "stages": 16,
     },
     "glasscorn": {
@@ -757,6 +873,11 @@ var mutations = {
             "chloronite": 6,
             "startlevine": 6,
         },
+        "notes": {
+            0: "Can be harvested at stage 7 or 8.",
+            1: "At stage 9, shatters and regresses to stage 1.",
+        },
+        "water": 1,
         "stages": 9,
     },
     
@@ -765,6 +886,10 @@ var mutations = {
         "req": {
             "to be implemented": 1000
         },
+        "notes": {
+            0: "Spawns in any 3x3 area that is receiving every positive effect, rarely.",
+        },
+        "water": 0,
         "stages": 8,
     },
     
@@ -783,6 +908,12 @@ var mutations = {
             "chorusfruit": 4,
             "shellfruit": 4,
         },
+        "notes": {
+            0: "Hides in a random crop in the plot when harvested. Cannot be harvested if no other crops are in the plot.",
+            1: "A loud heartbeat plays when the selected crop is nearby. The correct crop plays the heartbeat at roughly 5 beats/sec when standing on it.",
+            2: "Breaking the wrong crop or not making an action for 60 seconds destroys the Phantomleaf.",
+        },
+        "water": 1,
         "stages": 15,
     },
     "timestalk": {
@@ -792,6 +923,11 @@ var mutations = {
             "chorusfruit": 2,
             "shellfruit": 2,
         },
+        "notes": {
+            0: "Spawns a clone of the player when harvested.",
+            1: "Drops when the clone is slain.",
+        },
+        "water": 0,
         "stages": 14,
     },
 }
