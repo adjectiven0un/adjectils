@@ -713,8 +713,8 @@ var mutations = {
     "thunderling": {
         "size": 1,
         "req": {
-            "soggybud": 4,
-            "noctilume": 4,
+            "soggybud": 5,
+            "noctilume": 3,
         },
         "stages": 16,
     },
