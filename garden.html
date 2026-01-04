@@ -379,7 +379,7 @@
                 if (cropIDs[boxID] != undefined) {
                     cropimage.src = "./images/garden/" + cropIDs[boxID] + ".png";
                 } else {
-                    cropimage.src = "";
+                    cropimage.src = "./images/garden/empty.png";
                 }
                 
                 cropimage.id = "selectorImage" + boxID;
@@ -401,7 +401,7 @@
                     box.className = "greenhousebox hoverbrighten";
                     var cropimage = document.createElement("img");
                     cropimage.className = "boximage";
-                    cropimage.src = "";
+                    cropimage.src = "./images/garden/empty.png";
                     box.appendChild(cropimage);
 
                     greenhouseRow.appendChild(box);
@@ -445,7 +445,7 @@
                 //internal image
                 var cropimage = document.createElement("img");
                 cropimage.className = "boximage";
-                cropimage.src = "";
+                cropimage.src = "./images/garden/empty.png";
                 cropimage.id = "greenhouseImage" + boxID;
                 
                 box.appendChild(cropimage);
@@ -816,7 +816,7 @@
         
         backgroundTable = {};
         for (let i = 0; i < greenhouseLen ** 2; i++) {
-            document.getElementById("greenhouseImage" + i).src = "";
+            document.getElementById("greenhouseImage" + i).src = "./images/garden/empty.png";
             document.getElementById("greenhouseImage" + i).style.transform = "";
             document.getElementById("greenhouseImage" + i).style.height = "100%";
             document.getElementById("greenhouseImage" + i).style.width = "100%";
@@ -862,7 +862,7 @@
                             }
                             for (let i = 0; i < offsets2.length; i++) {
                                 backgroundTable[tilenum + offsets2[i]] = {"cropname": cropToPlace, "id": placementID,};
-                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).src = "";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).src = "./images/garden/empty.png";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).className = "boximage";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).style.height = "100%";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).style.width = "100%";
@@ -889,7 +889,7 @@
                             }
                             for (let i = 0; i < offsets3.length; i++) {
                                 backgroundTable[tilenum + offsets3[i]] = {"cropname": cropToPlace, "id": placementID,};
-                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).src = "";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).src = "./images/garden/empty.png";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).className = "boximage";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).style.height = "100%";
                                 document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).style.width = "100%";
@@ -922,16 +922,16 @@
                 for (let key in backgroundTable) {
                     if (backgroundTable[key]["id"] == removalID) {
                         delete backgroundTable[key];
-                        document.getElementById("greenhouseImage" + key).src = "";
+                        document.getElementById("greenhouseImage" + key).src = "./images/garden/empty.png";
                         document.getElementById("greenhouseImage" + key).style.transform = "";
                         document.getElementById("greenhouseImage" + key).style.height = "100%";
                         document.getElementById("greenhouseImage" + key).style.width = "100%";
                     }
                 }
 
-                document.getElementById("greenhouseImage" + tilenum).src = ""
-                document.getElementById("greenhouseImage" + tilenum).style.height = "100%"
-                document.getElementById("greenhouseImage" + tilenum).style.width = "100%"
+                document.getElementById("greenhouseImage" + tilenum).src = "./images/garden/empty.png";
+                document.getElementById("greenhouseImage" + tilenum).style.height = "100%";
+                document.getElementById("greenhouseImage" + tilenum).style.width = "100%";
                 document.getElementById("greenhouseImage" + tilenum).style.transform = "translate(0%, 0%)";
                 mutationCheck();
             }
@@ -959,7 +959,7 @@
     function mutationCheck() {
         for (let i = 0; i < (greenhouseLen ** 2); i++) {
             if (backgroundTable[i] == undefined) {
-                document.getElementById("greenhouseImage" + i).src = "";
+                document.getElementById("greenhouseImage" + i).src = "./images/garden/empty.png";
                 document.getElementById("greenhouseImage" + i).className = "boximage";
                 document.getElementById("greenhouseImage" + i).style.height = "100%";
                 document.getElementById("greenhouseImage" + i).style.width = "100%";
