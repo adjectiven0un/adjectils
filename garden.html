@@ -68,16 +68,39 @@
             
         </div>
     </section>
-    
+    <!--Composter info to be filled out-->
     <div class = "header" style = "padding-top: 20px; padding-bottom: 20px;">Composter</div>
     <section class = "flex_box_index">
       <div class = "flex_index_row" id = "composterrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
         
       </div>
     </section>
+    <!--Greenhouse info to be filled out-->
+    <div class = "header" style = "padding-top: 20px; padding-bottom: 20px;">Greenhouse Sandbox</div>
+    <section class = "flex_box_index">
+      <div class = "flex_index_row" id = "greenhouseselectorrow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
+        <table style = "width: 100%; flex-wrap: nowrap; justify-content: center; display: flex;">
+          <tbody id = "greenhouseselector">
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <br><br>
+    <section class = "flex_box_index">
+      <div class = "flex_index_row" id = "greenhousetablerow" style = "width:min(calc(100% - 30px), max(960px, 80%)); flex-wrap:wrap;">
+        <table style = "width: 100%; flex-wrap: nowrap; justify-content: center; display: flex;">
+          <tbody id = "greenhousetable">
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <span id = footer style = "text-align:left"></span>
     </body>
     <script>
+      
       pagedata = ["Garden", "#56ba79"];
         function updatePage(){
             loadElements();
@@ -146,6 +169,7 @@
           milestonedata = gardenapidata.garden.resources_collected;
           updateCrops();
         }
+        greenhouseLen = 10;
         function loadElements() {
           for (let key in crops) {
             var box = document.createElement("div");
@@ -331,6 +355,106 @@
             text10.innerText = "";
             text9.appendChild(text10);
             totalbox.appendChild(text9);
+
+            //Load greenhouse crop selector
+            for (let i = 0; i < 6; i++) {
+              let greenhouseRow = document.createElement("tr");
+              greenhouseRow.style.width = "100%";
+              greenhouseRow.className = "greenhouserow"
+              for (let j = 0; j < 10; j++) {
+
+                //box element
+                let box = document.createElement("td");
+                box.className = "greenhousebox hoverbrighten";
+                let boxID = Number(10 * i + j)
+                box.id = "select" + boxID;
+                
+                box.onclick = function () {
+                    selectMutation(boxID);
+                };
+
+                //internal image
+                var cropimage = document.createElement("img");
+                cropimage.className = "boximage";
+                if (cropIDs[boxID] != undefined) {
+                    cropimage.src = "./images/garden/" + cropIDs[boxID] + ".png";
+                } else {
+                    cropimage.src = "";
+                }
+                
+                cropimage.id = "selectorImage" + boxID;
+                
+                box.appendChild(cropimage);
+
+                greenhouseRow.appendChild(box);
+              }
+              document.getElementById("greenhouseselector").appendChild(greenhouseRow);
+            }
+            for (let i = 0; i < 1; i++) {
+                let greenhouseRow = document.createElement("tr");
+                greenhouseRow.style.width = "100%";
+                greenhouseRow.className = "greenhouserow"
+                for (let j = 0; j < 9; j++) {
+
+                    //box element
+                    let box = document.createElement("td");
+                    box.className = "greenhousebox hoverbrighten";
+                    var cropimage = document.createElement("img");
+                    cropimage.className = "boximage";
+                    cropimage.src = "";
+                    box.appendChild(cropimage);
+
+                    greenhouseRow.appendChild(box);
+                }
+                let resetbox = document.createElement("td");
+                resetbox.className = "greenhousebox hoverbrighten";
+                resetbox.onclick = function () {
+                    resetGreenhouse();
+                };
+
+                //internal image
+                var cropimage = document.createElement("img");
+                cropimage.className = "boximage";
+                cropimage.src = "./images/garden/reset.png";
+                cropimage.style.imageRendering = "pixelated"
+                resetbox.appendChild(cropimage);
+
+                greenhouseRow.appendChild(resetbox);
+                document.getElementById("greenhouseselector").appendChild(greenhouseRow);
+            }
+
+
+
+
+            //Load a greenhouse plot
+            for (let i = 0; i < greenhouseLen; i++) {
+              let greenhouseRow = document.createElement("tr");
+              greenhouseRow.style.width = "100%";
+              greenhouseRow.className = "greenhouserow"
+              for (let j = 0; j < greenhouseLen; j++) {
+
+                //box element
+                let box = document.createElement("td");
+                box.className = "greenhousebox hoverbrighten";
+                let boxID = Number(greenhouseLen * i + j);
+                box.id = "greenhouse" + boxID;
+                box.onclick = function () {
+                  tileUpdate(boxID);
+                };
+
+                //internal image
+                var cropimage = document.createElement("img");
+                cropimage.className = "boximage";
+                cropimage.src = "";
+                cropimage.id = "greenhouseImage" + boxID;
+                
+                box.appendChild(cropimage);
+
+                greenhouseRow.appendChild(box);
+              }
+              document.getElementById("greenhousetable").appendChild(greenhouseRow);
+            }
+            selectMutation(0);
 
         }
         var milestonetotaltotal = 0;
@@ -668,5 +792,309 @@
               document.getElementById(key + "_box").style.flexBasis = "100%";
             }
         }
+    }
+
+    //cropToPlace: currently selected crop.
+    //backgroundTable: array used for skimmer. should match placed crops.
+    var cropToPlace = "";
+    var lastbox = 0;
+    var backgroundTable = {};
+    //Select the mutation you want to place.
+    function selectMutation(id) {
+        cropToPlace = cropIDs[id];
+        document.getElementById("select" + id).style.borderColor = "#eeeeee";
+        document.getElementById("select" + id).classList.remove("hoverbrighten");
+        document.getElementById("select" + id).classList.add("staybright");
+        document.getElementById("select" + lastbox).style.borderColor = "#808080";
+        document.getElementById("select" + lastbox).classList.remove("staybright");
+        document.getElementById("select" + lastbox).classList.add("hoverbrighten");
+        lastbox = id;
+    }
+
+    //Clear the Greenhouse plot and wipe the background table.
+    function resetGreenhouse() {
+        
+        backgroundTable = {};
+        for (let i = 0; i < greenhouseLen ** 2; i++) {
+            document.getElementById("greenhouseImage" + i).src = "";
+            document.getElementById("greenhouseImage" + i).style.transform = "";
+            document.getElementById("greenhouseImage" + i).style.height = "100%";
+            document.getElementById("greenhouseImage" + i).style.width = "100%";
+        }
+    }
+
+    //pertinent tiles for placing mutations
+    var offsets2 = [0, 1, 10, 11];
+    var offsets3 = [-11, -10, -9, -1, 0, 1, 9, 10, 11];
+
+    //Visually update the tiles on the greenhouse "plot", plus modify the background array for skimmer use.
+    var placementID = 0;
+
+    function tileUpdate(tilenum) {
+        if (cropToPlace == "") {
+            return;
+        }
+
+        try {
+            //If there is not already a plant occupying the slot (TO FIX - CHECK IF ALL SLOTS IN SIZE ARE EMPTY)
+            if (backgroundTable[tilenum] == undefined) {
+                
+                try {
+                    if (mutations[cropToPlace]["size"] == 1) {
+                        backgroundTable[tilenum] = {"cropname": cropToPlace, "id": placementID,};
+
+                        document.getElementById("greenhouseImage" + tilenum).src = "./images/garden/" + cropToPlace + ".png";
+                        document.getElementById("greenhouseImage" + tilenum).style.height = "100%";
+                        document.getElementById("greenhouseImage" + tilenum).style.width = "100%";
+                        document.getElementById("greenhouseImage" + tilenum).style.transform = "";
+                        document.getElementById("greenhouseImage" + tilenum).className = "boximage";
+                        placementID++;
+                        mutationCheck();
+                      
+                    }
+                    if (mutations[cropToPlace]["size"] == 2) {
+
+                        try {
+                            //Invalid locations. (Last row or column.)
+                            if (tilenum >= (greenhouseLen * (greenhouseLen - 1)) || tilenum % greenhouseLen == 9 || backgroundTable[tilenum + 1] != undefined || backgroundTable[tilenum + 10] != undefined || backgroundTable[tilenum + 11] != undefined) {
+                                flashRed(document.getElementById("greenhouse" + tilenum));
+                                throw new Error("Can't put that there.");
+                            }
+                            for (let i = 0; i < offsets2.length; i++) {
+                                backgroundTable[tilenum + offsets2[i]] = {"cropname": cropToPlace, "id": placementID,};
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).src = "";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).className = "boximage";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).style.height = "100%";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).style.width = "100%";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets2[i])).style.transform = "";
+                            }
+                            document.getElementById("greenhouseImage" + tilenum).src = "./images/garden/" + cropToPlace + ".png";
+                            document.getElementById("greenhouseImage" + tilenum).style.height = "230%";
+                            document.getElementById("greenhouseImage" + tilenum).style.width = "230%";
+                            document.getElementById("greenhouseImage" + tilenum).style.transform = "translate(24%, 24%)";
+                            document.getElementById("greenhouseImage" + tilenum).className = "boximage";
+                            placementID++;
+                            mutationCheck();
+                        } catch (e) {
+                            console.log(e);
+                        }
+                        
+                    } 
+                    if (mutations[cropToPlace]["size"] == 3) {
+                        try {
+                            //Invalid locations. (Border or something already present in target area.)
+                            if (tilenum % greenhouseLen == 0 || tilenum < greenhouseLen || tilenum >= (greenhouseLen * (greenhouseLen - 1)) || tilenum % greenhouseLen == greenhouseLen - 1 || backgroundTable[tilenum - 11] != undefined || backgroundTable[tilenum - 10] != undefined || backgroundTable[tilenum - 9] != undefined || backgroundTable[tilenum - 1] != undefined || backgroundTable[tilenum + 1] != undefined || backgroundTable[tilenum + 9] != undefined || backgroundTable[tilenum + 10] != undefined || backgroundTable[tilenum + 11] != undefined) {
+                                flashRed(document.getElementById("greenhouse" + tilenum));
+                                throw new Error("Can't put that there.");
+                            }
+                            for (let i = 0; i < offsets3.length; i++) {
+                                backgroundTable[tilenum + offsets3[i]] = {"cropname": cropToPlace, "id": placementID,};
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).src = "";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).className = "boximage";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).style.height = "100%";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).style.width = "100%";
+                                document.getElementById("greenhouseImage" + Number(tilenum + offsets3[i])).style.transform = "";
+                            }
+                            document.getElementById("greenhouseImage" + tilenum).src = "./images/garden/" + cropToPlace + ".png";
+                            document.getElementById("greenhouseImage" + tilenum).style.height = "360%";
+                            document.getElementById("greenhouseImage" + tilenum).style.width = "360%";
+                            document.getElementById("greenhouseImage" + tilenum).className = "boximage";
+                            placementID++;
+                            mutationCheck();
+                        } catch (e) {
+                            console.log(e);
+                        }
+                    }
+                } catch (e) {
+                    backgroundTable[tilenum] = {"cropname": cropToPlace, "id": placementID,};
+                    document.getElementById("greenhouseImage" + tilenum).src = "./images/garden/" + cropToPlace + ".png";
+                    document.getElementById("greenhouseImage" + tilenum).style.height = "100%";
+                    document.getElementById("greenhouseImage" + tilenum).style.width = "100%";
+                    document.getElementById("greenhouseImage" + tilenum).style.transform = "";
+                    document.getElementById("greenhouseImage" + tilenum).className = "boximage";
+                    placementID++;
+                    mutationCheck();
+                }
+                
+            } else {
+                //CLEAR ALL BACKGROUND ARRAY ELEMENTS RELATED TO THE CROP BEING REMOVED
+                removalID = backgroundTable[tilenum]["id"];
+                for (let key in backgroundTable) {
+                    if (backgroundTable[key]["id"] == removalID) {
+                        delete backgroundTable[key];
+                        document.getElementById("greenhouseImage" + key).src = "";
+                        document.getElementById("greenhouseImage" + key).style.transform = "";
+                        document.getElementById("greenhouseImage" + key).style.height = "100%";
+                        document.getElementById("greenhouseImage" + key).style.width = "100%";
+                    }
+                }
+
+                document.getElementById("greenhouseImage" + tilenum).src = ""
+                document.getElementById("greenhouseImage" + tilenum).style.height = "100%"
+                document.getElementById("greenhouseImage" + tilenum).style.width = "100%"
+                document.getElementById("greenhouseImage" + tilenum).style.transform = "translate(0%, 0%)";
+                mutationCheck();
+            }
+        } catch (e) {
+            console.log("Something went wrong.");
+            console.log(e);
+        }
+
+        
+    }
+
+    //Warning trigger for invalid selections.
+    function flashRed(element) {
+        element.classList.remove("flash-red"); 
+        void element.offsetWidth;               
+        element.classList.add("flash-red");
+    }
+
+    //Neighbors to check for a mutation of each size.
+    var size1check = [(-1 * greenhouseLen - 1), (-1 * greenhouseLen), (-1 * greenhouseLen + 1), -1, 1, greenhouseLen - 1, greenhouseLen, greenhouseLen + 1];
+    var size2check = [-11, -10, -9, -8, -1, 2, 9, 12, 19, 20, 21, 22];
+    var size3check = [-22, -21, -20, -19, -18, -12, -8, -2, 2, 8, 12, 18, 19, 20, 21, 22];
+
+    //Check empty spaces' neighbors, then do reqCheck to identify if a mutation can be created.
+    function mutationCheck() {
+        for (let i = 0; i < (greenhouseLen ** 2); i++) {
+            if (backgroundTable[i] == undefined) {
+                document.getElementById("greenhouseImage" + i).src = "";
+                document.getElementById("greenhouseImage" + i).className = "boximage";
+                document.getElementById("greenhouseImage" + i).style.height = "100%";
+                document.getElementById("greenhouseImage" + i).style.width = "100%";
+                document.getElementById("greenhouseImage" + i).style.transform = "";
+                let inventory1 = {};
+
+                // Compute current cell row and column
+                let row = Math.floor(i / greenhouseLen);
+                let col = i % greenhouseLen;
+
+                for (let j = 0; j < size1check.length; j++) {
+                    let neighborIndex = i + size1check[j];
+
+                    if (backgroundTable[neighborIndex] !== undefined) {
+                        let neighborRow = Math.floor(neighborIndex / greenhouseLen);
+                        let neighborCol = neighborIndex % greenhouseLen;
+
+                        if (Math.abs(neighborRow - row) <= 1 && Math.abs(neighborCol - col) <= 1) {
+                            let cropname = backgroundTable[neighborIndex].cropname;
+                            inventory1[cropname] = (inventory1[cropname] ?? 0) + 1;
+                        }
+                    }
+                }
+
+                // Apply mutations
+                for (let key in mutations) {
+                    if (key !== "lonelily" && mutations[key]["size"] === 1) {
+                        if (reqCheck(inventory1, mutations[key].req)) {
+                            // Add the first possible "predicted" mutation
+                            document.getElementById("greenhouseImage" + i).style.height = "100%";
+                            document.getElementById("greenhouseImage" + i).style.width = "100%";
+                            document.getElementById("greenhouseImage" + i).style.transform = "";
+                            document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
+                            document.getElementById("greenhouseImage" + i).className = "boximage projected";
+                            break; 
+                        }
+                    }
+                }
+
+
+                let inventory2 = {};
+
+                let topLeftRow = Math.floor(i / greenhouseLen);
+                let topLeftCol = i % greenhouseLen;
+
+                let blockCells = [i, i + 1, i + greenhouseLen, i + greenhouseLen + 1];
+
+                for (let j = 0; j < size2check.length; j++) {
+                    let neighborIndex = i + size2check[j];
+
+                    if (backgroundTable[neighborIndex] !== undefined) {
+                        let neighborRow = Math.floor(neighborIndex / greenhouseLen);
+                        let neighborCol = neighborIndex % greenhouseLen;
+
+                        let isAdjacent = blockCells.some(cell => {
+                            let cellRow = Math.floor(cell / greenhouseLen);
+                            let cellCol = cell % greenhouseLen;
+                            return Math.abs(neighborRow - cellRow) <= 1 && Math.abs(neighborCol - cellCol) <= 1;
+                        });
+
+                        if (isAdjacent) {
+                            let cropname = backgroundTable[neighborIndex].cropname;
+                            inventory2[cropname] = (inventory2[cropname] ?? 0) + 1;
+                        }
+                    }
+                }
+
+                for (let key in mutations) {
+                    if (mutations[key]["size"] === 2) { 
+                        if (reqCheck(inventory2, mutations[key].req)) {
+                            document.getElementById("greenhouseImage" + i).style.height = "230%";
+                            document.getElementById("greenhouseImage" + i).style.width = "230%";
+                            document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
+                            document.getElementById("greenhouseImage" + i).style.transform = "translate(24%, 24%)";
+                            document.getElementById("greenhouseImage" + i).className = "boximage projected";
+                            break; 
+                        }
+                    }
+                }
+
+
+                let inventory3 = {};
+
+                blockCells = [];
+                for (let r = -1; r < 2; r++) {
+                    for (let c = -1; c < 2; c++) {
+                        blockCells.push(i + r * greenhouseLen + c);
+                    }
+                }
+
+                for (let j = 0; j < size3check.length; j++) {
+                    let neighborIndex = i + size3check[j];
+
+                    if (backgroundTable[neighborIndex] !== undefined) {
+                        let neighborRow = Math.floor(neighborIndex / greenhouseLen);
+                        let neighborCol = neighborIndex % greenhouseLen;
+
+                        let isAdjacent = blockCells.some(cell => {
+                            let cellRow = Math.floor(cell / greenhouseLen);
+                            let cellCol = cell % greenhouseLen;
+                            return Math.abs(neighborRow - cellRow) <= 1 && Math.abs(neighborCol - cellCol) <= 1;
+                        });
+
+                        if (isAdjacent) {
+                            let cropname = backgroundTable[neighborIndex].cropname;
+                            inventory3[cropname] = (inventory3[cropname] ?? 0) + 1;
+                        }
+                    }
+                }
+
+                for (let key in mutations) {
+                    if (mutations[key]["size"] === 3) { 
+                        if (reqCheck(inventory3, mutations[key].req)) {
+                            let img = document.getElementById("greenhouseImage" + i);
+                            img.style.height = "360%";
+                            img.style.width = "360%";
+                            img.src = "./images/garden/" + key + ".png";
+                            img.className = "boximage projected";
+                            break; 
+                        }
+                    }
+                }
+
+            }
+        }
+        
+    }
+
+    //Compares "inventory" and requirement dictionaries, identifies whether the mutation reqs are satisfied.
+    function reqCheck(inventory, req) {
+        for (let [item, requiredQty] of Object.entries(req)) {
+            if ((inventory[item] ?? 0) < requiredQty) {
+              return false;
+            }
+        }
+        return true;
     }
     </script>

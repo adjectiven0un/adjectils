@@ -510,8 +510,8 @@ var mutations = {
     "scourroot": {
         "size": 1,
         "req": {
-            "potato": 4,
-            "carrot": 4,
+            "potato": 2,
+            "carrot": 2,
         },
         "stages": 0,
     },
@@ -565,7 +565,7 @@ var mutations = {
     "creambloom": {
         "size": 1,
         "req": {
-            "chocoberry": 8
+            "choconut": 8
         },
         "stages": 6,
     },
@@ -759,15 +759,15 @@ var mutations = {
         },
         "stages": 9,
     },
-    /*
+    
     "godseed": {
         "size": 3,
         "req": {
-            This will be worked on later, when effects are added to this list.
+            "to be implemented": 1000
         },
         "stages": 8,
     },
-    */
+    
    /*
     "jerryflower": {
         "size": 1,

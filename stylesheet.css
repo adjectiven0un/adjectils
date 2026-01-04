@@ -929,11 +929,11 @@ td:has(> span.basictext):nth-child(2) {
   opacity: 1;
 }
 
-.hover-brighten {
+.hoverbrighten {
   transition: filter 0.1s ease-in-out;
 }
 
-.hover-brighten:hover {
+.hoverbrighten:hover {
   filter: brightness(1.5);
 }
 
@@ -958,4 +958,35 @@ td:has(> span.basictext):nth-child(2) {
   width: 100%;
   position: absolute;
 
+}
+
+.flash-red {
+  animation: flashRed 600ms ease-out;
+}
+
+@keyframes flashRed {
+  0% {
+    background-color: #ff5555;
+  }
+  100% {
+    background-color: inherit;
+  }
+}
+
+.projected {
+    opacity: 0.5;
+    animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        filter: brightness(0.5);
+    }
+    to {
+        filter: brightness(2);
+    }
+}
+
+.staybright {
+    filter: brightness(2);
 }
