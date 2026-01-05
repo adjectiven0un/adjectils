@@ -378,6 +378,15 @@
                 cropimage.className = "boximage";
                 if (cropIDs[boxID] != undefined) {
                     cropimage.src = "./images/garden/" + cropIDs[boxID] + ".png";
+                    var tooltip = document.createElement("div");
+                    tooltip.className = "greenhouseboxtext";
+                    tooltip.id = ("cropTooltip" + Number(10 * i + j));
+                    tooltip.style.opacity = "90%";
+                    tooltip.style.zIndex = "5";
+                    tooltip.style.display = "flex";
+                    tooltip.style.justifyContent = "left";
+                    tooltip.style.flexWrap = "wrap";
+                    box.appendChild(tooltip);
                 } else {
                     cropimage.src = "./images/garden/empty.png";
                 }
@@ -423,6 +432,7 @@
                 document.getElementById("greenhouseselector").appendChild(greenhouseRow);
             }
 
+            initTooltips();
 
 
 
@@ -1096,5 +1106,84 @@
             }
         }
         return true;
+    }
+    // Set up tooltips for each mutation.
+    function initTooltips() {
+        for (var i = 0; i < cropIDs.length; i++){
+            try {
+                makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].plaintext, "20px", "#cccccc", true);
+            } catch (e) {
+                makeTooltipObject("cropTooltip" + i, "", cropIDs[i], "20px", "#cccccc", true);
+            }
+            makeTooltipObject("cropTooltip" + i, "", "\n", "12px", "#cccccc", true);
+            makeTooltipObject("cropTooltip" + i, "", "Needs water: ", "12px", "#5555ff", false);
+            try {
+                if (mutations[cropIDs[i]].water == 1) {
+                    makeTooltipObject("cropTooltip" + i, "", "Yes", "12px", "#55ff55", true);
+                } else {
+                    makeTooltipObject("cropTooltip" + i, "", "No", "12px", "#ff5555", true);
+                }
+            } catch (e) {
+                makeTooltipObject("cropTooltip" + i, "", "No", "12px", "#ff5555", false);
+            }
+            makeTooltipObject("cropTooltip" + i, "", "Growth stages: ", "12px", "#558855", false);
+            try {
+                makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].stages, "12px", "#cccccc", true);
+            } catch (e) {
+                makeTooltipObject("cropTooltip" + i, "", 0, "12px", "#cccccc", true);
+            }
+            makeTooltipObject("cropTooltip" + i, "", "Size: ", "12px", "#cccccc", false);
+            try {
+                makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].size + "×" + mutations[cropIDs[i]].size, "12px", "#cccccc", true);
+            } catch (e) {
+                makeTooltipObject("cropTooltip" + i, "", "1×1", "12px", "#cccccc", true);
+            }
+            makeTooltipObject("cropTooltip" + i, "", "\n", "12px", "#cccccc", true);
+            makeTooltipObject("cropTooltip" + i, "", "Notes: ", "12px", "#cccccc", true);
+            if (mutations[cropIDs[i]].hasOwnProperty("notes")) {
+                for (let key in mutations[cropIDs[i]].notes) {
+                    makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]]["notes"][key], "12px", "#cccccc", true);
+                }
+            } else {
+                makeTooltipObject("cropTooltip" + i, "", "None.", "12px", "#cccccc", true);
+            }
+            makeTooltipObject("cropTooltip" + i, "", "\n", "12px", "#cccccc", true);
+            makeTooltipObject("cropTooltip" + i, "", "Requirements: ", "12px", "#cccccc", true);
+            if (mutations[cropIDs[i]].hasOwnProperty("req")) {
+                for (let key in mutations[cropIDs[i]].req) {
+                    console.log(key);
+                    makeTooltipObject("cropTooltip" + i, "", mutations[key].plaintext, "12px", "#cccccc", false);
+                    makeTooltipObject("cropTooltip" + i, "", "×" + mutations[cropIDs[i]].req[key], "12px", "#cccccc", true);
+                }
+            } else if (mutations[cropIDs[i]].hasOwnProperty("sreq")) {
+                if (mutations[cropIDs[i]].sreq.none == 1) {
+                    makeTooltipObject("cropTooltip" + i, "", "None.", "12px", "#cccccc", true);
+                } else {
+                    makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].sreq.none, "12px", "#cccccc", false);
+                }
+            } else {
+                makeTooltipObject("cropTooltip" + i, "", "None.", "12px", "#cccccc", true);
+            }
+
+        }
+    }
+
+    function makeTooltipObject(target, id, text, fontSize, color, lineBreak){
+        var toInsert = document.createElement("span");
+        toInsert.innerText = text;
+        toInsert.style.fontSize = fontSize;
+        toInsert.style.color = color;
+        toInsert.style.marginRight = "5px";
+        
+        
+        if (id != ""){
+            toInsert.id = id;
+        }
+        document.getElementById(target).appendChild(toInsert);
+        if (lineBreak) {
+            linebreak = document.createElement("span");
+            linebreak.style.flexBasis = "100%";
+            document.getElementById(target).appendChild(linebreak);
+        }
     }
     </script>

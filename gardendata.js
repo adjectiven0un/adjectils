@@ -466,13 +466,176 @@ sum(crops["cocoabeans"].milestones);
 
 /*
 Mutations data.
+Plaintext: Self explanatory.
 Size: Side length of the square a mutation occupies.
 Req: Itemized list of all crops that must be adjacent to this square in order to spawn this mutation.
 Water: 1 if this plant needs water, 0 otherwise.
 Stages: Number of stages to fully grow one instance of this crop once spawned. (Likely will not be used.)
 */
 var mutations = {
+    "wheat": {
+        "plaintext": "Wheat",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 8,
+    },
+    "carrot": {
+        "plaintext": "Carrot",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 8,
+    },
+    "potato": {
+        "plaintext": "Potato",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 8,
+    },
+    "pumpkin": {
+        "plaintext": "Pumpkin",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 11,
+    },
+    "sugarcane": {
+        "plaintext": "Sugar Cane",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 8,
+    },
+    "melon": {
+        "plaintext": "Melon",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 11,
+    },
+    "cactus": {
+        "plaintext": "Cactus",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 0,
+        "stages": 8,
+    },
+    "cocoabeans": {
+        "plaintext": "Cocoa Beans",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 0,
+        "stages": 8,
+    },
+    "redmushroom": {
+        "plaintext": "Red Mushroom",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 0,
+        "stages": 8,
+    },
+    "brownmushroom": {
+        "plaintext": "Brown Mushroom",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 0,
+        "stages": 8,
+    },
+    "netherwart": {
+        "plaintext": "Nether Wart",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 0,
+        "stages": 8,
+    },
+    "sunflower": {
+        "plaintext": "Sunflower",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 15,
+    },
+    "moonflower": {
+        "plaintext": "Moonflower",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 15,
+    },
+    "wildrose": {
+        "plaintext": "Wild Rose",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 15,
+    },
+    "fire": {
+        "plaintext": "Fire",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 0,
+    },
+    "fermento": {
+        "plaintext": "Fermento",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "water": 1,
+        "stages": 0,
+    },
     "ashwreath": {
+        "plaintext": "Ashwreath",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "netherwart": 4,
@@ -482,6 +645,8 @@ var mutations = {
         "stages": 0,
     },
     "choconut": {
+        "plaintext": "Choconut",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "cocoabeans": 4,
@@ -490,6 +655,8 @@ var mutations = {
         "stages": 0,
     },
     "dustgrain": {
+        "plaintext": "Dustgrain",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "wheat": 4,
@@ -498,6 +665,8 @@ var mutations = {
         "stages": 0,
     },
     "gloomgourd": {
+        "plaintext": "Gloomgourd",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "pumpkin": 1,
@@ -507,8 +676,11 @@ var mutations = {
         "stages": 0,
     },
     "lonelily": {
+        "plaintext": "Lonelily",
+        "rarity": "Common",
         "size": 1,
-        "req": {
+        "sreq": {
+            "none": "No adjacent crops.",
         },
         "notes": {
             0: "Grows incredibly rarely in spaces with no adjacent crops.",
@@ -517,6 +689,8 @@ var mutations = {
         "stages": 0,
     },
     "scourroot": {
+        "plaintext": "Scourroot",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "potato": 2,
@@ -526,6 +700,8 @@ var mutations = {
         "stages": 0,
     },
     "shadevine": {
+        "plaintext": "Shadevine",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "sugarcane": 2,
@@ -535,6 +711,8 @@ var mutations = {
         "stages": 0,
     },
     "veilshroom": {
+        "plaintext": "Veilshroom",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "redmushroom": 2,
@@ -544,6 +722,8 @@ var mutations = {
         "stages": 0,
     },
     "witherbloom": {
+        "plaintext": "Witherbloom",
+        "rarity": "Common",
         "size": 1,
         "req": {
             "deadplant": 8,
@@ -552,6 +732,8 @@ var mutations = {
         "stages": 0,
     },
     "chocoberry": {
+        "plaintext": "Chocoberry",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "choconut": 6,
@@ -561,6 +743,8 @@ var mutations = {
         "stages": 6,
     },
     "cindershade": {
+        "plaintext": "Cindershade",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "ashwreath": 4,
@@ -570,6 +754,8 @@ var mutations = {
         "stages": 8,
     },
     "coalroot": {
+        "plaintext": "Coalroot",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "scourroot": 3,
@@ -582,6 +768,8 @@ var mutations = {
         "stages": 8,
     },
     "creambloom": {
+        "plaintext": "Creambloom",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "choconut": 8
@@ -590,6 +778,8 @@ var mutations = {
         "stages": 6,
     },
     "duskbloom": {
+        "plaintext": "Duskbloom",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "moonflower": 2,
@@ -601,6 +791,8 @@ var mutations = {
         "stages": 8,
     },
     "thornshade": {
+        "plaintext": "Thornshade",
+        "rarity": "Uncommon",
         "size": 1,
         "req": {
             "wildrose": 4,
@@ -610,6 +802,8 @@ var mutations = {
         "stages": 8,
     },
     "blastberry": {
+        "plaintext": "Blastberry",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "ashwreath": 3,
@@ -623,6 +817,8 @@ var mutations = {
         "stages": 6,
     },
     "cheesebite": {
+        "plaintext": "Cheesebite",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "creambloom": 4,
@@ -636,6 +832,8 @@ var mutations = {
         "stages": 10,
     },
     "chloronite": {
+        "plaintext": "Chloronite",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "coalroot": 6,
@@ -649,6 +847,8 @@ var mutations = {
         "stages": 10,
     },
     "donoteatshroom": {
+        "plaintext": "Do-not-eat-shroom",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "veilshroom": 4,
@@ -661,6 +861,8 @@ var mutations = {
         "stages": 8,
     },
     "fleshtrap": {
+        "plaintext": "Fleshtrap",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "lonelily": 4,
@@ -675,6 +877,8 @@ var mutations = {
         "stages": 14,
     },
     "magicjellybean": {
+        "plaintext": "Magic Jellybean",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "sugarcane": 5,
@@ -688,6 +892,8 @@ var mutations = {
         "stages": 120,
     },
     "noctilume": {
+        "plaintext": "Noctilume",
+        "rarity": "Rare",
         "size": 2,
         "req": {
             "duskbloom": 6,
@@ -700,6 +906,8 @@ var mutations = {
         "stages": 4,
     },
     "snoozling": {
+        "plaintext": "Snoozling",
+        "rarity": "Rare",
         "size": 3,
         "req": {
             "dustgrain": 3,
@@ -716,18 +924,22 @@ var mutations = {
         "stages": 20,
     },
     "soggybud": {
+        "plaintext": "Soggybud",
+        "rarity": "Rare",
         "size": 1,
         "req": {
             "melon": 8,
         },
         "notes": {
-            0: "Drains roughly 1.39 water from surrounding Water Retain crops every cycle.",
+            0: "Drains roughly 1.39 water from surrounding crops with Water Retain every cycle.",
             1: "Cannot otherwise be watered.",
         },
         "water": 1,
         "stages": 10,
     },
     "chorusfruit": {
+        "plaintext": "Chorus Fruit",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "magicjellybean": 3,
@@ -742,13 +954,15 @@ var mutations = {
         "stages": 12,
     },
     "plantboyadvance": {
+        "plaintext": "PlantBoy Advance",
+        "rarity": "Epic",
         "size": 2,
         "req": {
             "snoozling": 6,
             "thunderling": 6,
         },
         "notes": {
-            0: "Demands a game of Snake be played before being harvested",
+            0: "Demands a game of Snake be played before being harvested.",
             1: "The game is won at 8 apples collected.",
             2: "Failure will result in the regression of several growth states.",
         },
@@ -756,6 +970,8 @@ var mutations = {
         "stages": 8,
     },
     "puffercloud": {
+        "plaintext": "Puffercloud",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "snoozling": 2,
@@ -768,16 +984,21 @@ var mutations = {
         "stages": 14,
     },
     "shellfruit": {
+        "plaintext": "Shellfruit",
+        "rarity": "Epic",
         "size": 1,
-        "req": {
-            //Don't take these numbers seriously. Shellfruit does not grow naturally.
-            "blastberry": 100,
-            "turtlellini": 100,
+        "sreq": {
+            "none": "Shellfruit, at least 2 Blastberry",
+        },
+        "notes": {
+            0: "Created when a Turtlellini is exploded by Blastberry, twice.",
         },
         "water": 0,
         "stages": 0,
     },
     "startlevine": {
+        "plaintext": "Startlevine",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "cheesebite": 4,
@@ -790,6 +1011,8 @@ var mutations = {
         "stages": 12,
     },
     "stoplightpetal": {
+        "plaintext": "Stoplight Petal",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "snoozling": 4,
@@ -805,6 +1028,8 @@ var mutations = {
         "stages": 12,
     },
     "thunderling": {
+        "plaintext": "Thunderling",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "soggybud": 5,
@@ -813,12 +1038,14 @@ var mutations = {
         "notes": {
             0: "Generates 2,000 Charge every cycle.",
             1: "Right-click to discharge, damaging yourself and depleting the charge.",
-            2: "At 14,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
+            2: "At 16,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
         },
         "water": 0,
         "stages": 16,
     },
     "turtlellini": {
+        "plaintext": "Turtlellini",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "soggybud": 4,
@@ -828,6 +1055,8 @@ var mutations = {
         "stages": 0,
     },
     "zombud": {
+        "plaintext": "Zombud",
+        "rarity": "Epic",
         "size": 1,
         "req": {
             "cindershade": 2,
@@ -836,12 +1065,14 @@ var mutations = {
         },
         "notes": {
             0: "All adjacent Dead Plants are converted to Zombuddy when harvested.",
-            1: "Killed Zombuddies drop 1 Zombud each.",
+            1: "Slain Zombuddies drop 1 Zombud each.",
         },
         "water": 0,
         "stages": 16,
     },
     "allinaloe": {
+        "plaintext": "All-in Aloe",
+        "rarity": "Legendary",
         "size": 1,
         "req": {
             "magicjellybean": 6,
@@ -855,6 +1086,8 @@ var mutations = {
         "stages": 8,
     },
     "devourer": {
+        "plaintext": "Devourer",
+        "rarity": "Legendary",
         "size": 1,
         "req": {
             "puffercloud": 4,
@@ -868,6 +1101,8 @@ var mutations = {
         "stages": 16,
     },
     "glasscorn": {
+        "plaintext": "Glasscorn",
+        "rarity": "Legendary",
         "size": 2,
         "req": {
             "chloronite": 6,
@@ -882,9 +1117,11 @@ var mutations = {
     },
     
     "godseed": {
+        "plaintext": "Godseed",
+        "rarity": "Legendary",
         "size": 3,
-        "req": {
-            "to be implemented": 1000
+        "sreq": {
+            "none": 1,
         },
         "notes": {
             0: "Spawns in any 3x3 area that is receiving every positive effect, rarely.",
@@ -903,6 +1140,8 @@ var mutations = {
     },
     */
     "phantomleaf": {
+        "plaintext": "Phantomleaf",
+        "rarity": "Legendary",
         "size": 1,
         "req": {
             "chorusfruit": 4,
@@ -917,6 +1156,8 @@ var mutations = {
         "stages": 15,
     },
     "timestalk": {
+        "plaintext": "Timestalk",
+        "rarity": "Legendary",
         "size": 1,
         "req": {
             "stoplightpetal": 4,
@@ -924,8 +1165,21 @@ var mutations = {
             "shellfruit": 2,
         },
         "notes": {
-            0: "Spawns a clone of the player when harvested.",
-            1: "Drops when the clone is slain.",
+            1: "Spawns a clone of the player when harvested.",
+            2: "Drops when the clone is slain.",
+        },
+        "water": 0,
+        "stages": 14,
+    },
+    "deadplant": {
+        "plaintext": "Dead Plant",
+        "rarity": "Common",
+        "size": 1,
+        "sreq": {
+            "none": 1,
+        },
+        "notes": {
+            0: "Spawns when a plant dies from thirst, or if it has been placed for longer than 72 hours."
         },
         "water": 0,
         "stages": 14,
@@ -988,4 +1242,5 @@ var cropIDs = [
     "fire",
     "fermento",
     "godseed",
+    "deadplant",
 ]

@@ -990,3 +990,28 @@ td:has(> span.basictext):nth-child(2) {
 .staybright {
     filter: brightness(2);
 }
+
+.greenhousebox .greenhouseboxtext {
+    visibility: hidden;
+    background-color: #282828;
+    width: min(calc(600%), max(400px, 30%));
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    opacity:0;
+    transition: opacity 0.1s;
+    text-align: left;      
+    justify-content: flex-start; 
+    align-items: flex-start;
+}
+.greenhousebox .greenhouseboxtext::after {
+    margin-left: 200px;
+    border-width: 400px;
+    border-style: solid;
+    border-color: #282828;
+}
+.greenhousebox:hover .greenhouseboxtext {
+    visibility: visible;
+    opacity: 1;
+}
