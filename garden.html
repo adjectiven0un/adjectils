@@ -997,14 +997,18 @@
                 // Apply mutations
                 for (let key in mutations) {
                     if (key !== "lonelily" && mutations[key]["size"] === 1) {
-                        if (reqCheck(inventory1, mutations[key].req)) {
-                            // Add the first possible "predicted" mutation
-                            document.getElementById("greenhouseImage" + i).style.height = "100%";
-                            document.getElementById("greenhouseImage" + i).style.width = "100%";
-                            document.getElementById("greenhouseImage" + i).style.transform = "";
-                            document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
-                            document.getElementById("greenhouseImage" + i).className = "boximage projected";
-                            break; 
+                        try {
+                            if (reqCheck(inventory1, mutations[key].req)) {
+                                // Add the first possible "predicted" mutation
+                                document.getElementById("greenhouseImage" + i).style.height = "100%";
+                                document.getElementById("greenhouseImage" + i).style.width = "100%";
+                                document.getElementById("greenhouseImage" + i).style.transform = "";
+                                document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
+                                document.getElementById("greenhouseImage" + i).className = "boximage projected";
+                                break; 
+                            }
+                        } catch (e){ 
+                          
                         }
                     }
                 }
@@ -1039,13 +1043,19 @@
 
                 for (let key in mutations) {
                     if (mutations[key]["size"] === 2) { 
-                        if (reqCheck(inventory2, mutations[key].req)) {
-                            document.getElementById("greenhouseImage" + i).style.height = "230%";
-                            document.getElementById("greenhouseImage" + i).style.width = "230%";
-                            document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
-                            document.getElementById("greenhouseImage" + i).style.transform = "translate(24%, 24%)";
-                            document.getElementById("greenhouseImage" + i).className = "boximage projected";
-                            break; 
+                        try {
+
+                        
+                            if (reqCheck(inventory2, mutations[key].req)) {
+                                document.getElementById("greenhouseImage" + i).style.height = "230%";
+                                document.getElementById("greenhouseImage" + i).style.width = "230%";
+                                document.getElementById("greenhouseImage" + i).src = "./images/garden/" + key + ".png";
+                                document.getElementById("greenhouseImage" + i).style.transform = "translate(24%, 24%)";
+                                document.getElementById("greenhouseImage" + i).className = "boximage projected";
+                                break; 
+                            }
+                        } catch (e) {
+
                         }
                     }
                 }
@@ -1082,13 +1092,19 @@
 
                 for (let key in mutations) {
                     if (mutations[key]["size"] === 3) { 
-                        if (reqCheck(inventory3, mutations[key].req)) {
-                            let img = document.getElementById("greenhouseImage" + i);
-                            img.style.height = "360%";
-                            img.style.width = "360%";
-                            img.src = "./images/garden/" + key + ".png";
-                            img.className = "boximage projected";
-                            break; 
+                        try {
+
+                        
+                            if (reqCheck(inventory3, mutations[key].req)) {
+                                let img = document.getElementById("greenhouseImage" + i);
+                                img.style.height = "360%";
+                                img.style.width = "360%";
+                                img.src = "./images/garden/" + key + ".png";
+                                img.className = "boximage projected";
+                                break; 
+                            }
+                        } catch (e) {
+                          
                         }
                     }
                 }

@@ -762,7 +762,7 @@ var mutations = {
             "ashwreath": 5,
         },
         "notes": {
-            0: "Requires a tool with Breaking Power 1 to harvest.",
+            0: "Requires a tool with at least Breaking Power 1 to harvest.",
         },
         "water": 1,
         "stages": 8,
@@ -1171,6 +1171,7 @@ var mutations = {
         "water": 0,
         "stages": 14,
     },
+    
     "deadplant": {
         "plaintext": "Dead Plant",
         "rarity": "Common",
@@ -1182,8 +1183,9 @@ var mutations = {
             0: "Spawns when a plant dies from thirst, or if it has been placed for longer than 72 hours."
         },
         "water": 0,
-        "stages": 14,
+        "stages": 0,
     },
+    
 }
 
 var cropIDs = [
