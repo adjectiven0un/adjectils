@@ -536,7 +536,7 @@
           
         function updateCrop(key) {
             
-            var collection = milestonedata[crops[key].api];
+            var collection = milestonedata[crops[key].api] || 0;
             document.getElementById(key + "_collection").innerText = "Collection: " + collection.toLocaleString();
             if (document.getElementById(key + "_fortune").value < 0 || isNaN(document.getElementById(key + "_fortune").value)) {
               document.getElementById(key + "_fortune").value = 0;
