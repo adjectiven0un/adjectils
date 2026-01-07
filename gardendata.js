@@ -870,7 +870,7 @@ var mutations = {
         },
         "notes": {
             0: "Must be fed with meat to continue growing.",
-            1: "Starves and stops growing after not being fed for 5 cycles.",
+            1: "Hunger meter starts at 60% depletes by roughly 20% per cycle. Enchanted meat fills the meter by about 20%.",
             2: "If fed at least 5 enchanted meat during its lifetime, drops an additional Fleshtrap when harvested.",
         },
         "water": 1,
@@ -887,6 +887,7 @@ var mutations = {
         "notes": {
             0: "Drops 1 Magic Jellybean every 12 stages it has been alive.",
             1: "Can be harvested starting from stage 12.",
+            2: "Number of drops can be visually determined by how tall the Jellybean is.",
         },
         "water": 1,
         "stages": 120,
@@ -917,8 +918,8 @@ var mutations = {
             "creambloom": 4,
         },
         "notes": {
-            0: "Stops growing every 5 cycles until woken up.",
-            1: "Right-click without a diagnostic tool to wake up.",
+            0: "Stops growing on cycles 5, 10, and 15, until woken up.",
+            1: "Right-click to wake up.",
         },
         "water": 1,
         "stages": 20,
@@ -964,7 +965,7 @@ var mutations = {
         "notes": {
             0: "Demands a game of Snake be played before being harvested.",
             1: "The game is won at 8 apples collected.",
-            2: "Failure will result in the regression of several growth states.",
+            2: "Failure will result in the regression of 3 growth states.",
         },
         "water": 1,
         "stages": 8,
@@ -988,7 +989,7 @@ var mutations = {
         "rarity": "Epic",
         "size": 1,
         "sreq": {
-            "none": "Shellfruit, at least 2 Blastberry",
+            "none": "Turtlellini, at least 2 Blastberry",
         },
         "notes": {
             0: "Created when a Turtlellini is exploded by Blastberry, twice.",
@@ -1037,7 +1038,7 @@ var mutations = {
         },
         "notes": {
             0: "Generates 2,000 Charge every cycle.",
-            1: "Right-click to discharge, damaging yourself and depleting the charge.",
+            1: "Right-click to discharge, dealing 30% of your max health as true damage and depleting the charge.",
             2: "At 16,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
         },
         "water": 0,
@@ -1079,11 +1080,13 @@ var mutations = {
             "plantboyadvance": 2,
         },
         "notes": {
-            0: "Can be harvested at any growth stage.",
-            1: "Every stage, gains extra drops, but has an increasing chance to reset to 1.",
+            0: "Can be harvested at any growth stage, but only drops 1 All-in Aloe Fragment.",
+            1: "Every stage, drops multiply by ×1.25, but has a chance to reset to 1.",
+            2: "Reset chance increases by a flat 3% every cycle. Maxes at 81%.",
+            3: "Changes color every cycle that an additional complete All-in Aloe can be harvested from the current state."
         },
-        "water": 1,
-        "stages": 8,
+        "water": 0,
+        "stages": 27,
     },
     "devourer": {
         "plaintext": "Devourer",
@@ -1094,7 +1097,7 @@ var mutations = {
             "zombud": 4,
         },
         "notes": {
-            0: "Surfaces or crops in the same row or column as self or roots may be converted to Devourer Root.",
+            0: "Surfaces or crops nearby may be converted to Devourer Root.",
             1: "Devourer Root cannot spawn across empty spaces. Quarantine is recommended.",
         },
         "water": 1,
@@ -1109,11 +1112,11 @@ var mutations = {
             "startlevine": 6,
         },
         "notes": {
-            0: "Can be harvested at stage 7 or 8.",
+            0: "Can be harvested at stage 7 or 8, visually indicated by the breaking of the glass growing over the stalks.",
             1: "At stage 9, shatters and regresses to stage 1.",
         },
         "water": 1,
-        "stages": 9,
+        "stages": 8,
     },
     
     "godseed": {
@@ -1124,10 +1127,10 @@ var mutations = {
             "none": 1,
         },
         "notes": {
-            0: "Spawns in any 3x3 area that is receiving every positive effect, rarely.",
+            0: "Spawns in any 3x3 area that is simultaneously receiving every positive effect, rarely.",
         },
         "water": 0,
-        "stages": 8,
+        "stages": 40,
     },
     
    /*
@@ -1165,6 +1168,7 @@ var mutations = {
             "shellfruit": 2,
         },
         "notes": {
+            0: "Visually shrinks as it \"grows\".",
             1: "Spawns a clone of the player when harvested.",
             2: "Drops when the clone is slain.",
         },
