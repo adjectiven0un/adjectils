@@ -901,7 +901,8 @@ var mutations = {
             "lonelily": 6,
         },
         "notes": {
-            0: "Will not grow unless time of day has been switched in the previous cycle."
+            0: "Will not grow unless time of day matches the depiction on its flowers.",
+            1: "Flowers switch to the opposite time of day every successful growth cycle.",
         },
         "water": 1,
         "stages": 4,
@@ -1081,7 +1082,7 @@ var mutations = {
         },
         "notes": {
             0: "Can be harvested at any growth stage, but only drops 1 All-in Aloe Fragment.",
-            1: "Every stage, drops multiply by ×1.25, but has a chance to reset to 1.",
+            1: "Every stage, drops multiply by ×1.25 (more info needed), but has a chance to reset to 1.",
             2: "Reset chance increases by a flat 3% every cycle. Maxes at 81%.",
             3: "Changes color every cycle that an additional complete All-in Aloe can be harvested from the current state."
         },
