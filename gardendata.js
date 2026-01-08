@@ -1129,8 +1129,10 @@ var mutations = {
         },
         "notes": {
             0: "Spawns in any 3x3 area that is simultaneously receiving every positive effect, rarely.",
+            1: "Requires an incredibly high amount of water.",
+            2: "Recommended to spawn using Wild Rose, Cocoa Beans, Mushroom (any color), Shadevine, and Sunflower."
         },
-        "water": 0,
+        "water": 1,
         "stages": 40,
     },
     
