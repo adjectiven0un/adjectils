@@ -870,7 +870,7 @@ var mutations = {
         },
         "notes": {
             0: "Must be fed with meat to continue growing.",
-            1: "Hunger meter starts at 60% depletes by roughly 20% per cycle. Enchanted meat fills the meter by about 20%.",
+            1: "Hunger meter starts at 60% and depletes by roughly 20% per cycle. Enchanted meat fills the meter by about 20%.",
             2: "If fed at least 5 enchanted meat during its lifetime, drops an additional Fleshtrap when harvested.",
         },
         "water": 1,
@@ -1039,7 +1039,7 @@ var mutations = {
         },
         "notes": {
             0: "Generates 2,000 Charge every cycle.",
-            1: "Right-click to discharge, dealing 30% of your max health as true damage and depleting the charge.",
+            1: "Right-click to discharge, dealing 25% of your current health as true damage and depleting the charge.",
             2: "At 16,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
         },
         "water": 0,
@@ -1082,8 +1082,9 @@ var mutations = {
         },
         "notes": {
             0: "Can be harvested at any growth stage, but only drops 1 All-in Aloe Fragment.",
-            1: "Every stage, drops multiply by ×1.25 (more info needed), but has a chance to reset to 1.",
-            2: "Reset chance increases by a flat 3% every cycle. Maxes at 81%.",
+            1: "Every stage, drops multiply exponentially by an increasing multiplier (more info needed), but has a chance to reset to 1.",
+            2: "Reset chance increases by a flat 3% every cycle. Maxes at 75%.",
+            3: "9 All-in Aloe Fragment can be crafted into an All-in Aloe.",
             3: "Changes color every cycle that an additional complete All-in Aloe can be harvested from the current state."
         },
         "water": 0,
