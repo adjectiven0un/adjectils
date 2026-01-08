@@ -481,6 +481,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "carrot": {
@@ -491,6 +492,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "potato": {
@@ -501,6 +503,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "pumpkin": {
@@ -511,6 +514,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 11,
     },
     "sugarcane": {
@@ -521,6 +525,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Sand", "Dirt"],
         "stages": 8,
     },
     "melon": {
@@ -531,6 +536,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 11,
     },
     "cactus": {
@@ -541,6 +547,7 @@ var mutations = {
             "none": 1,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "cocoabeans": {
@@ -551,6 +558,7 @@ var mutations = {
             "none": 1,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "redmushroom": {
@@ -561,6 +569,7 @@ var mutations = {
             "none": 1,
         },
         "water": 0,
+        "surface": ["Mycelium"],
         "stages": 8,
     },
     "brownmushroom": {
@@ -571,6 +580,7 @@ var mutations = {
             "none": 1,
         },
         "water": 0,
+        "surface": ["Mycelium"],
         "stages": 8,
     },
     "netherwart": {
@@ -581,6 +591,7 @@ var mutations = {
             "none": 1,
         },
         "water": 0,
+        "surface": ["Soul Sand"],
         "stages": 8,
     },
     "sunflower": {
@@ -591,6 +602,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 15,
     },
     "moonflower": {
@@ -601,6 +613,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 15,
     },
     "wildrose": {
@@ -611,6 +624,7 @@ var mutations = {
             "none": 1,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 15,
     },
     "fire": {
@@ -620,7 +634,8 @@ var mutations = {
         "sreq": {
             "none": 1,
         },
-        "water": 1,
+        "water": 0,
+        "surface": ["Any"],
         "stages": 0,
     },
     "fermento": {
@@ -630,7 +645,8 @@ var mutations = {
         "sreq": {
             "none": 1,
         },
-        "water": 1,
+        "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "ashwreath": {
@@ -642,6 +658,7 @@ var mutations = {
             "fire": 4,
         },
         "water": 0,
+        "surface": ["Soul Sand"],
         "stages": 0,
     },
     "choconut": {
@@ -652,6 +669,7 @@ var mutations = {
             "cocoabeans": 4,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "dustgrain": {
@@ -662,6 +680,7 @@ var mutations = {
             "wheat": 4,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "gloomgourd": {
@@ -673,6 +692,7 @@ var mutations = {
             "melon": 1,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "lonelily": {
@@ -686,6 +706,7 @@ var mutations = {
             0: "Grows incredibly rarely in spaces with no adjacent crops.",
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "scourroot": {
@@ -697,6 +718,7 @@ var mutations = {
             "carrot": 2,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "shadevine": {
@@ -708,6 +730,7 @@ var mutations = {
             "cactus": 2,
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "veilshroom": {
@@ -719,6 +742,7 @@ var mutations = {
             "brownmushroom": 2,
         },
         "water": 0,
+        "surface": ["Mycelium"],
         "stages": 0,
     },
     "witherbloom": {
@@ -729,6 +753,7 @@ var mutations = {
             "deadplant": 8,
         },
         "water": 0,
+        "surface": ["Soul Sand"],
         "stages": 0,
     },
     "chocoberry": {
@@ -740,6 +765,7 @@ var mutations = {
             "gloomgourd": 2,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 6,
     },
     "cindershade": {
@@ -751,6 +777,7 @@ var mutations = {
             "witherbloom": 4,
         },
         "water": 0,
+        "surface": ["Soul Sand"],
         "stages": 8,
     },
     "coalroot": {
@@ -765,6 +792,7 @@ var mutations = {
             0: "Requires a tool with at least Breaking Power 1 to harvest.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "creambloom": {
@@ -775,6 +803,7 @@ var mutations = {
             "choconut": 8
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 6,
     },
     "duskbloom": {
@@ -788,6 +817,7 @@ var mutations = {
             "dustgrain": 2,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "thornshade": {
@@ -799,6 +829,7 @@ var mutations = {
             "veilshroom": 4,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "blastberry": {
@@ -814,6 +845,7 @@ var mutations = {
             1: "All mutations adjacent except for Turtlellini will be destroyed.",
         },
         "water": 1,
+        "surface": ["Sand"],
         "stages": 6,
     },
     "cheesebite": {
@@ -829,6 +861,7 @@ var mutations = {
             1: "Use a Vacuum to remove the Rat and resume growth.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 10,
     },
     "chloronite": {
@@ -844,6 +877,7 @@ var mutations = {
             1: "Drops an additional Chloronite per 500 Mining/Gemstone Fortune.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 10,
     },
     "donoteatshroom": {
@@ -858,6 +892,7 @@ var mutations = {
             0: "Causes 4s of Blindness and Nausea when harvested.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "fleshtrap": {
@@ -874,6 +909,7 @@ var mutations = {
             2: "If fed at least 5 enchanted meat during its lifetime, drops an additional Fleshtrap when harvested.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 14,
     },
     "magicjellybean": {
@@ -890,6 +926,7 @@ var mutations = {
             2: "Number of drops can be visually determined by how tall the Jellybean is.",
         },
         "water": 1,
+        "surface": ["Sand"],
         "stages": 120,
     },
     "noctilume": {
@@ -905,6 +942,7 @@ var mutations = {
             1: "Flowers switch to the opposite time of day every successful growth cycle.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 4,
     },
     "snoozling": {
@@ -923,6 +961,7 @@ var mutations = {
             1: "Right-click to wake up.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 20,
     },
     "soggybud": {
@@ -937,6 +976,7 @@ var mutations = {
             1: "Cannot otherwise be watered.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 10,
     },
     "chorusfruit": {
@@ -953,6 +993,7 @@ var mutations = {
             2: "If multiple Chorus Fruit teleport to the same End Stone block, all but one are destroyed.",
         },
         "water": 0,
+        "surface": ["End Stone"],
         "stages": 12,
     },
     "plantboyadvance": {
@@ -969,6 +1010,7 @@ var mutations = {
             2: "Failure will result in the regression of 3 growth states.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 8,
     },
     "puffercloud": {
@@ -983,6 +1025,7 @@ var mutations = {
             0: "Deals 10% of the player's max health as true damage every second when nearby.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 14,
     },
     "shellfruit": {
@@ -996,6 +1039,7 @@ var mutations = {
             0: "Created when a Turtlellini is exploded by Blastberry, twice.",
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "startlevine": {
@@ -1010,6 +1054,7 @@ var mutations = {
             0: "Requires Invisibility to harvest.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 12,
     },
     "stoplightpetal": {
@@ -1027,6 +1072,7 @@ var mutations = {
             3: "Clicking while the petal is red destroys the petal.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 12,
     },
     "thunderling": {
@@ -1043,6 +1089,7 @@ var mutations = {
             2: "At 16,000 Charge, the Thunderling explodes, destroying itself and all adjacent crops."
         },
         "water": 0,
+        "surface": ["Farmland"],
         "stages": 16,
     },
     "turtlellini": {
@@ -1054,6 +1101,7 @@ var mutations = {
             "choconut": 4,
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 0,
     },
     "zombud": {
@@ -1070,6 +1118,7 @@ var mutations = {
             1: "Slain Zombuddies drop 1 Zombud each.",
         },
         "water": 0,
+        "surface": ["Soul Sand"],
         "stages": 16,
     },
     "allinaloe": {
@@ -1088,6 +1137,7 @@ var mutations = {
             3: "Changes color every cycle that an additional complete All-in Aloe can be harvested from the current state."
         },
         "water": 0,
+        "surface": ["Sand"],
         "stages": 27,
     },
     "devourer": {
@@ -1103,6 +1153,7 @@ var mutations = {
             1: "Devourer Root cannot spawn across empty spaces. Quarantine is recommended.",
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 16,
     },
     "glasscorn": {
@@ -1118,6 +1169,7 @@ var mutations = {
             1: "At stage 9, shatters and regresses to stage 1.",
         },
         "water": 1,
+        "surface": ["Sand"],
         "stages": 8,
     },
     
@@ -1134,6 +1186,7 @@ var mutations = {
             2: "Recommended to spawn using Wild Rose, Cocoa Beans, Mushroom (any color), Shadevine, and Sunflower."
         },
         "water": 1,
+        "surface": ["Farmland"],
         "stages": 40,
     },
     
@@ -1160,6 +1213,7 @@ var mutations = {
             2: "Breaking the wrong crop or not making an action for 60 seconds destroys the Phantomleaf.",
         },
         "water": 1,
+        "surface": ["Soul Sand"],
         "stages": 15,
     },
     "timestalk": {
@@ -1177,6 +1231,7 @@ var mutations = {
             2: "Drops when the clone is slain.",
         },
         "water": 0,
+        "surface": ["End Stone"],
         "stages": 14,
     },
     
@@ -1191,6 +1246,7 @@ var mutations = {
             0: "Spawns when a plant dies from thirst, or if it has been placed for longer than 72 hours."
         },
         "water": 0,
+        "surface": ["Any"],
         "stages": 0,
     },
     

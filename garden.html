@@ -1154,6 +1154,15 @@
             } catch (e) {
                 makeTooltipObject("cropTooltip" + i, "", "1×1", "12px", "#cccccc", true);
             }
+            makeTooltipObject("cropTooltip" + i, "", "Surface: ", "12px", "#cccccc", false);
+            try {
+                for (let j = 0; j < mutations[cropIDs[i]].surface.length - 1; j++) {
+                    makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].surface[j] + ",", "12px", "#cccccc", false);
+                }
+                makeTooltipObject("cropTooltip" + i, "", mutations[cropIDs[i]].surface[mutations[cropIDs[i]].surface.length - 1], "12px", "#cccccc", true);
+            } catch (e) {
+                makeTooltipObject("cropTooltip" + i, "", "Any", "12px", "#cccccc", true);
+            }
             makeTooltipObject("cropTooltip" + i, "", "\n", "12px", "#cccccc", true);
             makeTooltipObject("cropTooltip" + i, "", "Notes: ", "12px", "#cccccc", true);
             if (mutations[cropIDs[i]].hasOwnProperty("notes")) {
