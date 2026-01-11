@@ -651,13 +651,13 @@
 
             catarunsleft = Math.ceil(cataxpleft/cataperrun);
             document.getElementById("displaycataperrun").innerText = cataperrun.toLocaleString();
-
+            //A BUG PROBABLY CAUSED BY AURA CAUSES CONSTANT OFFSET OF 10% IN PLACE OF GLOBAL BONUS. UNCOMMENT GLOBAL BONUS AND REMOVE +0.1 CONSTANT WHEN FIXED.
             var classperrun = {
-                arch: selectedfloor.value * (1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
-                bers: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
-                heal: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
-                mage: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
-                tank: selectedfloor.value * (1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) * global.value * mayor.value,
+                arch: selectedfloor.value * ((1 + (parseFloat(hecatomb.value) * 2) + (parseFloat(archboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) /* * global.value */ * mayor.value + 0.1),
+                bers: selectedfloor.value * ((1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(bersboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) /* * global.value */ * mayor.value + 0.1),
+                heal: selectedfloor.value * ((1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(healboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) /* * global.value */ * mayor.value + 0.1),
+                mage: selectedfloor.value * ((1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(mageboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) /* * global.value */ * mayor.value + 0.1),
+                tank: selectedfloor.value * ((1 + (parseFloat(hecatomb.value)) * 2 + (parseFloat(tankboost.value)) + parseFloat(grimoire.value) + parseFloat(scarfshardlevel.value)) /* * global.value */ * mayor.value + 0.1),
             };
 
             var averageclassperrun = 0;
