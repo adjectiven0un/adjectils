@@ -240,21 +240,11 @@
           </select>
         </label>
         <br>
-        <label>Gifts from the Departed: <input type = "number" id = "gftd" value = 0 min = "0" max = "101" onchange = updateCorpses()>&nbsp;</label>
+        <label>Bonus drop chance: <input type = "number" id = "gftd" value = 0 min = "0" max = "121" onchange = updateCorpses()>%&nbsp;</label>
 
         <table style = "align-items: center; margin-top:20px; margin-bottom: 20px;">
           <tr><td style = "padding-right:20px; display:flex">
-        <br>Jasper Crystal obtained:</td><td style = "padding-left: 20px;">
-        <label class = "switchbox" id = "jasper-switch" for = "jasper-crystal">
-          <input type = "checkbox"  id = "jasper-crystal" onchange = toggleJasper() aria-labelledby = "jasper-switch" style = "opacity:0">
-          <span class = "switch"></span>
-        </label>
-        </tr><tr><td style = "padding-right:20px; display:flex">
-        <br>Ruby Crystal obtained:</td><td style = "padding-left: 20px;">
-        <label class = "switchbox" id = "ruby-switch" for = "ruby-crystal">
-          <input type = "checkbox"  id = "ruby-crystal" onchange = toggleRuby() aria-labelledby = "ruby-switch" style = "opacity:0">
-          <span class = "switch"></span>
-        </label>
+            
       </tr><tr><td style = "padding-right:20px; display:flex">
         <br>Opal Crystal obtained:</td><td style = "padding-left: 20px;">
         <label class = "switchbox" id = "opal-switch" for = "opal-crystal">
@@ -725,8 +715,8 @@
       updateCorpses();
     }
     function updateCorpses() {
-      if (gftd.value > 101){
-          document.getElementById("gftd").value = 101;
+      if (gftd.value > 121){
+          document.getElementById("gftd").value = 121;
       }
       if (gftd.value < 0 || isNaN(gftd.value) || gftd.value == ""){
           document.getElementById("gftd").value = 0;
