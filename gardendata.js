@@ -654,8 +654,8 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "netherwart": 4,
-            "fire": 4,
+            "netherwart": 2,
+            "fire": 2,
         },
         "water": 0,
         "surface": ["Soul Sand"],
@@ -666,7 +666,7 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "cocoabeans": 4,
+            "cocoabeans": 2,
         },
         "water": 0,
         "surface": ["Farmland"],
@@ -677,7 +677,7 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "wheat": 4,
+            "wheat": 2,
         },
         "water": 0,
         "surface": ["Farmland"],
@@ -714,8 +714,8 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "potato": 2,
-            "carrot": 2,
+            "potato": 1,
+            "carrot": 1,
         },
         "water": 0,
         "surface": ["Farmland"],
@@ -726,8 +726,8 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "sugarcane": 2,
-            "cactus": 2,
+            "sugarcane": 1,
+            "cactus": 1,
         },
         "water": 0,
         "surface": ["Farmland"],
@@ -738,19 +738,36 @@ var mutations = {
         "rarity": "Common",
         "size": 1,
         "req": {
-            "redmushroom": 2,
-            "brownmushroom": 2,
+            "redmushroom": 1,
+            "brownmushroom": 1,
         },
         "water": 0,
         "surface": ["Mycelium"],
         "stages": 0,
+    },
+    "zombud": {
+        "plaintext": "Zombud",
+        "rarity": "Epic",
+        "size": 1,
+        "req": {
+            "cindershade": 2,
+            "deadplant": 4,
+            "fleshtrap": 2,
+        },
+        "notes": {
+            0: "All adjacent Dead Plants are converted to Zombuddy when harvested.",
+            1: "Slain Zombuddies drop 1 Zombud each.",
+        },
+        "water": 0,
+        "surface": ["Soul Sand"],
+        "stages": 16,
     },
     "witherbloom": {
         "plaintext": "Witherbloom",
         "rarity": "Common",
         "size": 1,
         "req": {
-            "deadplant": 8,
+            "deadplant": 4,
         },
         "water": 0,
         "surface": ["Soul Sand"],
@@ -969,7 +986,8 @@ var mutations = {
         "rarity": "Rare",
         "size": 1,
         "req": {
-            "melon": 8,
+            "melon": 2,
+            "gloomgourd": 2,
         },
         "notes": {
             0: "Drains roughly 1.39 water from surrounding crops with Water Retain every cycle.",
@@ -990,7 +1008,6 @@ var mutations = {
         "notes": {
             0: "Converts a random block in the plot to End Stone every cycle.",
             1: "Teleports to a random End Stone block every cycle.",
-            2: "If multiple Chorus Fruit teleport to the same End Stone block, all but one are destroyed.",
         },
         "water": 0,
         "surface": ["End Stone"],
@@ -1104,23 +1121,7 @@ var mutations = {
         "surface": ["Farmland"],
         "stages": 0,
     },
-    "zombud": {
-        "plaintext": "Zombud",
-        "rarity": "Epic",
-        "size": 1,
-        "req": {
-            "cindershade": 2,
-            "deadplant": 4,
-            "fleshtrap": 2,
-        },
-        "notes": {
-            0: "All adjacent Dead Plants are converted to Zombuddy when harvested.",
-            1: "Slain Zombuddies drop 1 Zombud each.",
-        },
-        "water": 0,
-        "surface": ["Soul Sand"],
-        "stages": 16,
-    },
+    
     "allinaloe": {
         "plaintext": "All-in Aloe",
         "rarity": "Legendary",
