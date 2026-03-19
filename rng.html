@@ -30,7 +30,7 @@
         <label class = basictext>Magic Find<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Magic Find stat.</span></span></sup>: <input type = "number" id = "magicfind" min = 0 max = 900 onchange = "(() => updateDropChance())()" value = 0></input></label><br>
         <label class = basictext>Pet Luck<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Pet Luck stat. Set this to 0 if the item is not a pet.</span></span></sup>: <input type = "number" inputmode = "numeric" id = "petluck" min = 0 max = 900 onchange = "(() => updateDropChance())()" value = 0></input></label><br>
 
-        <label class = "flex_full_row" for = "looting" style = "padding-bottom:20px;">Looting<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Looting enchantment level. Set this to 0 if the item is a pet.</span></span></sup>: 
+        <label class = "flex_full_row" for = "looting" >Looting<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Looting enchantment level. Set this to 0 if the item is a pet.</span></span></sup>: 
             <select id = "looting" style = "margin-left: 10px; margin-right: 10px" onchange = "updateDropChance()">
                 <option value = 0>0</option>
                 <option value = 1>I</option>
@@ -39,6 +39,21 @@
                 <option value = 4>IV</option>
                 <option value = 5>V</option>
             </select>
+        </label>
+        <label class = "flex_full_row" for = "luck" >Luck<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Luck enchantment level. Set to 0 if the item is not armor.</span></span></sup>: 
+            <select id = "luck" style = "margin-left: 10px; margin-right: 10px" onchange = "updateDropChance()">
+                <option value = 0>0</option>
+                <option value = 1>I</option>
+                <option value = 2>II</option>
+                <option value = 3>III</option>
+                <option value = 4>IV</option>
+                <option value = 5>V</option>
+                <option value = 6>VI</option>
+                <option value = 7>VII</option>
+            </select>
+        </label>
+        <label class = "flex_full_row" for = "hound" style = "padding-bottom:20px;">Hound Pet level<sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">User's Hound Pet level. Set to 0 if the item is not armor.</span></span></sup>: 
+            <input id = "hound" style = "margin-left: 10px; margin-right: 10px" type = "number" onchange = "updateDropChance()">
         </label>
         <span class = "flex_full_row" style = "margin-top:20px; margin-bottom: 20px;">The chance to drop&nbsp;<input type = "text" width = "100px" id = "itemname" onchange = "updateCopyText()"><sup style = "font-size:8px"><span class = tip>🛈<span class = tiptext style = "font-size: 12px;">You can type whatever you want into this box for the purposes of copying. Though I'd appreciate it if you didn't use vulgar phrases. - adj</span></span></sup>&nbsp;is&nbsp;<span id = "finalchance"></span>%.</span>
         <button onclick = copyText() style = "width: 50px">Copy!</button><span id = "copynotif" class = "fadebox" style = "opacity:0; justify-content: left;">Copied!&nbsp;</span>
@@ -81,8 +96,14 @@
         if (petluck.value < 0 || isNaN(petluck.value) || petluck.value == ""){
             document.getElementById("petluck").value = 0;
         }
+        if (hound.value > 100){
+            document.getElementById("hound").value = 100;
+        }
+        if (hound.value < 0 || isNaN(hound.value) || hound.value == ""){
+            document.getElementById("hound").value = 0;
+        }
 
-        var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value))).toFixed(5));
+        var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value + 0.05 * luck.value + 0.003 * hound.value))).toFixed(5));
         document.getElementById("finalchance").innerText = calcedchance;
         updateCopyText();
         
