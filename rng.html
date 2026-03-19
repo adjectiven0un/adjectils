@@ -102,8 +102,13 @@
         if (hound.value < 0 || isNaN(hound.value) || hound.value == ""){
             document.getElementById("hound").value = 0;
         }
-
-        var calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value + 0.05 * luck.value + 0.003 * hound.value))).toFixed(5));
+        var calcedchance = 0;
+        if (parseFloat(dropchance.value * (1 + (0.15 * looting.value + 0.05 * luck.value + 0.003 * hound.value))) > 5) {
+            calcedchance = parseFloat(dropchance.value * (1 + (0.15 * looting.value + 0.05 * luck.value + 0.003 * hound.value)).toFixed(5));
+        } else {
+            calcedchance = parseFloat((dropchance.value * (1 + magicfind.value/100 + petluck.value/100) * (1 + (0.15 * looting.value + 0.05 * luck.value + 0.003 * hound.value))).toFixed(5));
+        }
+        
         document.getElementById("finalchance").innerText = calcedchance;
         updateCopyText();
         
