@@ -1,3 +1,4 @@
+//Converts Minecraft username to UUID. 
 async function getUUIDbyName(name){
   
     document.getElementById("status").innerText = "Checking...";
@@ -15,89 +16,153 @@ async function getUUIDbyName(name){
       document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
     }
 }
+const API_BASE = "https://adjectilsbackend.adjectivenoun3215.workers.dev";
 
-async function getAPIdata(UUID){
-  console.log("API call attempted");
+// Shared fetch wrapper
+async function apiFetch(url) {
   const controller = new AbortController();
-  var timeout = setTimeout(() => {
-      controller.abort(); // Abort the request after a timeout
+
+  const timeout = setTimeout(() => {
+    controller.abort();
   }, 5000);
+
   try {
-    const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/v2/skyblock/profiles?uuid=" + UUID);
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        "X-Timestamp": Date.now().toString(),
+      },
+    });
+
     clearTimeout(timeout);
-    if (!apicall.ok){
-        console.log("Api call error");
-        document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-        return -1;
-    }
-    return await apicall.json();
+    return res;
   } catch (error) {
-    if (error.name === 'AbortError') {
-      console.log("API call timeout");
-      document.getElementById("status").innerHTML = "<span class='errored'>API timed out</span>";
-    } else {
-        console.log("API call error:", error);
-        document.getElementById("status").innerHTML = "<span class='errored'>API error</span>";
-    }
+    clearTimeout(timeout);
+    throw error;
   }
-  
 }
 
-async function getStats(UUID){
+// Profile data
+async function getAPIdata(UUID) {
   console.log("API call attempted");
-  const controller = new AbortController();
-  var timeout = setTimeout(() => {
-      controller.abort(); // Abort the request after a timeout
-  }, 5000);
+
   try {
-    const apicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/player?uuid=" + UUID);
-    if (!apicall.ok){
-        console.log("Api call error");
-        document.getElementById("status").innerHTML = "<span class = errored>Invalid username or API error</span>";
-        return -1;
+    const url =
+      `${API_BASE}/v2/skyblock/profiles?uuid=${encodeURIComponent(UUID)}`;
+
+    const apicall = await apiFetch(url);
+
+    if (!apicall.ok) {
+      console.log("API call error");
+      document.getElementById("status").textContent =
+        "Invalid username or API error";
+      document.getElementById("status").className = "errored";
+      return -1;
     }
+
     return await apicall.json();
   } catch (error) {
-    if (error.name === 'AbortError') {
-      console.log("API call timeout");
-      document.getElementById("status").innerHTML = "<span class='errored'>API timed out</span>";
-    } else {
-        console.log("API call error:", error);
-        document.getElementById("status").innerHTML = "<span class='errored'>API error</span>";
-    }
+    handleApiError(error);
   }
-  
-  
 }
+
+// Player stats
+async function getStats(UUID) {
+  console.log("API call attempted");
+
+  try {
+    const url =
+      `${API_BASE}/player?uuid=${encodeURIComponent(UUID)}`;
+
+    const apicall = await apiFetch(url);
+
+    if (!apicall.ok) {
+      console.log("API call error");
+      document.getElementById("status").textContent =
+        "Invalid username or API error";
+      document.getElementById("status").className = "errored";
+      return -1;
+    }
+
+    return await apicall.json();
+  } catch (error) {
+    handleApiError(error);
+  }
+}
+
+// Profile UI update
 async function updateProfiles(data) {
   try {
     console.log("Attempting to set profile ID...");
-    profilelist = (data.profiles);
-    for (var i = 0; i < 5; i++){
-        document.getElementById("profile" + i).innerText = "–––––";
-        document.getElementById("profile" + i).disabled = "true";
-    }
-    for (var i = 0; i < profilelist.length; i++){
-        document.getElementById("profile" + i).innerText = profilelist[i].cute_name;
-        document.getElementById("profile" + i).disabled = "";
+
+    const profilelist = data?.profiles;
+
+    if (!Array.isArray(profilelist)) {
+      throw new TypeError("Invalid profile data");
     }
 
-    console.log("Checking new name");
-    var profilenum = 0;
-    for (var i = 0; i < profilelist.length; i++){
-        if (profilelist[i].selected){
-            console.log("Profile ID found: " + profilenum);
-            profilenum = i;
-            break;
-        }
+    const statusEl = document.getElementById("status");
+
+    // Reset buttons
+    for (let i = 0; i < 5; i++) {
+      const btn = document.getElementById("profile" + i);
+      if (!btn) continue;
+
+      btn.innerText = "–––––";
+      btn.disabled = true;
     }
-    document.getElementById("profileid").value = profilenum;    
-  } catch (TypeError){
-      document.getElementById("status").innerHTML = "<span class = errored>No profiles found</span>";
-      try {
-        reset();
-      } catch {
-        
+
+    // Populate available profiles
+    const max = Math.min(5, profilelist.length);
+
+    for (let i = 0; i < max; i++) {
+      const btn = document.getElementById("profile" + i);
+      if (!btn) continue;
+
+      btn.innerText = profilelist[i].cute_name;
+      btn.disabled = false;
+    }
+
+    console.log("Checking selected profile");
+
+    let profilenum = 0;
+
+    for (let i = 0; i < profilelist.length; i++) {
+      if (profilelist[i].selected) {
+        profilenum = i;
+        console.log("Profile ID found: " + profilenum);
+        break;
       }
+    }
+
+    const input = document.getElementById("profileid");
+    if (input) {
+      input.value = profilenum;
+    }
+  } catch (error) {
+    document.getElementById("status").textContent =
+      "No profiles found";
+    document.getElementById("status").className = "errored";
+
+    try {
+      reset();
+    } catch (e) {
+      // ignore
+    }
   }
+}
+
+// Centralized error handler
+function handleApiError(error) {
+  if (error.name === "AbortError") {
+    console.log("API call timeout");
+    document.getElementById("status").textContent =
+      "API timed out";
+  } else {
+    console.log("API call error:", error);
+    document.getElementById("status").textContent =
+      "API error";
+  }
+
+  document.getElementById("status").className = "errored";
 }
