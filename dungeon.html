@@ -819,7 +819,7 @@
             if (mastertoggle.value == "master_catacombs" && floorstats.value == "0") {
                 document.getElementById("ms").innerText = "0";
             } else {
-                document.getElementById("ms").innerText = dungeons.dungeon_types[mastertoggle.value].milestone_completions[floorstats.value];
+                document.getElementById("ms").innerText = parseInt(dungeons.dungeon_types[mastertoggle.value].milestone_completions[floorstats.value]).toLocaleString();
             }
         } catch (Error) {
             console.log("Error setting tier comps");
