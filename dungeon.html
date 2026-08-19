@@ -150,6 +150,23 @@
                         </select>
                         </label>
                     </div>
+                    <div id = "bonzoshardselectdiv">
+                        <label>Catacombs Graduate level:
+                        <select id = "bonzoshardlevel" onchange = updateCata(nameinput.value)>
+                            <option value = 0>0 (0%)</option>
+                            <option value = 0.01>I (1%)</option>
+                            <option value = 0.02>II (2%)</option>
+                            <option value = 0.03>III (3%)</option>
+                            <option value = 0.04>IV (4%)</option>
+                            <option value = 0.05>V (5%)</option>
+                            <option value = 0.06>VI (6%)</option>
+                            <option value = 0.07>VII (7%)</option>
+                            <option value = 0.08>VIII (8%)</option>
+                            <option value = 0.09>IX (9%)</option>
+                            <option value = 0.1>X (10%)</option>
+                        </select>
+                        </label>
+                    </div>
                     <div id = "scarfshardselectdiv">
                         <label>Catacombs Graduate level:
                         <select id = "scarfshardlevel" onchange = updateCata(nameinput.value)>
@@ -638,11 +655,11 @@
             }
             var cataperrun = 0;
             if (cataexpert.value > 0 && mayor.value > 1) {
-                cataperrun = selectedfloor.value * (0.95 + ((mayor.value - 1) + (maxcomps - 1)/100) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + ((mayor.value - 1) + (maxcomps - 1)/100) + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50) + parseFloat(bonzoshardlevel.value))
             } else if (cataexpert.value > 0) {
-                cataperrun = selectedfloor.value * (0.95 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + parseFloat(cataexpert.value) + parseFloat(hecatomb.value) +(maxcomps - 1) * (0.024 + parseFloat(hecatomb.value)/50) + parseFloat(bonzoshardlevel.value))
             } else {
-                cataperrun = selectedfloor.value * (0.95 + parseFloat(hecatomb.value) + (maxcomps - 1) * (0.022 + parseFloat(hecatomb.value)/50))
+                cataperrun = selectedfloor.value * (0.95 + parseFloat(hecatomb.value) + (maxcomps - 1) * (0.022 + parseFloat(hecatomb.value)/50) + parseFloat(bonzoshardlevel.value))
             }
             
             cataperrun *= global.value;
