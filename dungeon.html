@@ -472,6 +472,13 @@
                 console.log("Catacombs Graduate defaulted");
                 scarfshardlevel.value = 0;
             }
+
+            try {
+                bonzoshardlevel.value = 0.1 /*notUndefined(data.profiles[profileid.value].members[UUID].player_data  insert route here when they release it) */;
+            } catch {
+                console.log("Catacombs Explorer defaulted");
+                bonzoshardlevel.value = 0;
+            }
             
 
             updateCata(name);
