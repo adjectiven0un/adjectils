@@ -16,7 +16,7 @@ async function getUUIDbyName(name){
       document.getElementById("status").innerHTML = "<span class = errored>Invalid username</span>";
     }
 }
-const API_BASE = "https://adjectilsbackend.adjectivenoun3215.workers.dev";
+const API_BASE = "https://api.adjectils.com";
 
 // Shared fetch wrapper
 async function apiFetch(url) {
