@@ -157,7 +157,7 @@
           var profileuuid = data.profiles[profileid.value].profile_id;
           console.log(profileuuid);
           console.log("Garden API call attempted");
-          const gardenapicall = await fetch("https://adjectilsbackend.adjectivenoun3215.workers.dev/v2/skyblock/garden?profile=" + profileuuid);
+          const gardenapicall = await fetch("https://api.adjectils.com/v2/skyblock/garden?profile=" + profileuuid);
           if (!gardenapicall.ok){
               console.log("Garden API call error");
               document.getElementById("status").innerHTML = "<span class = errored>No Garden data found</span>";
