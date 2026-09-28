@@ -21,27 +21,14 @@ const API_BASE = "https://api.adjectils.com";
 // Shared fetch wrapper
 async function apiFetch(url) {
   const controller = new AbortController();
-
-  const timeout = setTimeout(() => {
-    controller.abort();
-  }, 5000);
+  const timeout = setTimeout(() => controller.abort(), 5000);
 
   try {
-    const res = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        "X-Timestamp": Date.now().toString(),
-      },
-    });
-
+    return await fetch(url, { signal: controller.signal });
+  } finally {
     clearTimeout(timeout);
-    return res;
-  } catch (error) {
-    clearTimeout(timeout);
-    throw error;
   }
 }
-
 // Profile data
 async function getAPIdata(UUID) {
   console.log("API call attempted");
